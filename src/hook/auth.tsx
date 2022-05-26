@@ -6,6 +6,7 @@ interface AuthData {
   error: any;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
+  setUser: () => any;
 }
 
 interface Children {
@@ -31,6 +32,6 @@ export function AuthProvider({ ...children }: Children) {
     await authService.logout();
     setUser(null);
   };
-  const value: AuthData = { user, error, loginWithGoogle, logout };
+  const value: AuthData = { user, error, loginWithGoogle, logout, setUser };
   return <authContext.Provider value={value} {...children} />;
 }

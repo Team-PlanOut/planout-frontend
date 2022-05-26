@@ -1,8 +1,9 @@
 import React from "react";
 import useAuth from "../src/hook/auth";
+import { withPublic } from "../src/hook/route";
 
-export default function Login() {
-  const auth = useAuth();
+function Login({ auth }: any) {
+  auth = useAuth();
   if (auth !== null) {
     const { user, loginWithGoogle, error } = auth;
 
@@ -17,3 +18,5 @@ export default function Login() {
     );
   }
 }
+
+export default withPublic(Login);
