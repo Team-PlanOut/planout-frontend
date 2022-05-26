@@ -43,8 +43,7 @@ export default function Navbar() {
                 href={link.link}
                 className="text-gray-800 hover:text-gray-400 duration-500"
               >
-                {" "}
-                {link.name}{" "}
+                {link.name}
               </a>
             </li>
           ))}

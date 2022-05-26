@@ -3,7 +3,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import useAuth from "../src/hook/auth";
 export default function AuthStateChanged({ children }: any) {
-  const { setUser } = useAuth();
+  const { setUser } = useAuth() as any;
   const [loading, setLoading] = useState<Boolean>(true);
 
   useEffect(() => {

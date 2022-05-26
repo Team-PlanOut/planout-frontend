@@ -6,7 +6,7 @@ interface AuthData {
   error: any;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
-  setUser: () => any;
+  setUser: any;
 }
 
 interface Children {

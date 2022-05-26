@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Navbar from "../components/Navbar";
+import { withProtected } from "../src/hook/route";
 
 const Home: NextPage = () => {
   return (
@@ -18,4 +19,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withProtected(Home);
