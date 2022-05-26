@@ -1,6 +1,7 @@
 import React from "react";
 import useAuth from "../src/hook/auth";
 import { withPublic } from "../src/hook/route";
+// import "tailwindcss/tailwind.css";
 
 function Login({ auth }: any) {
   auth = useAuth();
@@ -8,10 +9,12 @@ function Login({ auth }: any) {
     const { user, loginWithGoogle, error } = auth;
 
     return (
-      <div>
-        {error && <h1>{error}</h1>}
-        <h1 className="text-pink">{user?.uid}</h1>
-        <button className="border-blue-500" onClick={loginWithGoogle}>
+      <div className="flex flex-col justify-center items-center mt-20">
+        <h1>Please login to access your account.</h1>
+        <button
+          className="border  border-red-600 px-10 py-2 mt-2"
+          onClick={loginWithGoogle}
+        >
           Login with Google
         </button>
       </div>

@@ -5,6 +5,7 @@ export default function Navbar() {
     { name: "My Account", link: "/" },
     { name: "Events", link: "/" },
     { name: "Friends", link: "/" },
+    { name: "Logout", link: "/logout" },
   ];
   let [open, setOpen] = useState(false);
   return (
