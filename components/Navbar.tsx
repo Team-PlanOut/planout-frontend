@@ -5,6 +5,7 @@ export default function Navbar() {
     { name: "My Account", link: "/" },
     { name: "Events", link: "/" },
     { name: "Friends", link: "/" },
+    { name: "Logout", link: "/logout" },
   ];
   let [open, setOpen] = useState(false);
   return (
@@ -43,8 +44,7 @@ export default function Navbar() {
                 href={link.link}
                 className="text-gray-800 hover:text-gray-400 duration-500"
               >
-                {" "}
-                {link.name}{" "}
+                {link.name}
               </a>
             </li>
           ))}
