@@ -33,8 +33,6 @@ export function AuthProvider({ ...children }: Children) {
     setUser(null);
   };
   const value: AuthData = { user, error, loginWithGoogle, logout, setUser };
-  console.log(typeof user);
-  console.log(typeof setUser);
 
   return <authContext.Provider value={value} {...children} />;
 }
