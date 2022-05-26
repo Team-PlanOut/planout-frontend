@@ -2,11 +2,11 @@ import { createContext, useContext, useState } from "react";
 import { authService } from "../service/authentication";
 
 interface AuthData {
-  user: any;
-  error: any;
+  user: Object | null;
+  error: Object | null;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
-  setUser: any;
+  setUser: unknown;
 }
 
 interface Children {
@@ -33,5 +33,8 @@ export function AuthProvider({ ...children }: Children) {
     setUser(null);
   };
   const value: AuthData = { user, error, loginWithGoogle, logout, setUser };
+  console.log(typeof user);
+  console.log(typeof setUser);
+
   return <authContext.Provider value={value} {...children} />;
 }
