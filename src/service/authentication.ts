@@ -12,11 +12,7 @@ export const authService = {
         user: userCredential.user,
       };
     } catch (error) {
-      if (typeof error === "object" && error !== null) {
-        console.log(error.toString());
-      } else {
-        console.log("Unexpected error", error);
-      }
+      console.log(error);
     }
   },
 

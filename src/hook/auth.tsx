@@ -17,14 +17,14 @@ const authContext = createContext<AuthData | null>(null);
 export default function useAuth() {
   return useContext(authContext);
 }
-export function AuthProvider({ children }: Children) {
+export function AuthProvider({ ...children }: Children) {
   const [user, setUser] = useState<null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const loginWithGoogle = async () => {
     const { error, user } = await authService.loginWithGoogle();
-    setUser(user ?? null);
     setError(error ?? "");
+    setUser(user ?? null);
   };
 
   const logout = async () => {
@@ -32,7 +32,5 @@ export function AuthProvider({ children }: Children) {
     setUser(null);
   };
   const value: AuthData = { user, error, loginWithGoogle, logout };
-  return (
-    <authContext.Provider value={value}> {children} </authContext.Provider>
-  );
+  return <authContext.Provider value={value} {...children} />;
 }
