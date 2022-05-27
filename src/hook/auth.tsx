@@ -19,7 +19,7 @@ export default function useAuth() {
   return useContext(authContext);
 }
 export function AuthProvider({ ...children }: Children) {
-  const [user, setUser] = useState<null>(null);
+  const [user, setUser] = useState<null | String>(null);
   const [error, setError] = useState<string | null>(null);
 
   const loginWithGoogle = async () => {
