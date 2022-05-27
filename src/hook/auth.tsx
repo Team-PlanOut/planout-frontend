@@ -1,4 +1,4 @@
-import { createContext, SetStateAction, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { authService } from "../service/authentication";
 
 interface AuthData {
@@ -8,6 +8,7 @@ interface AuthData {
   logout: () => Promise<void>;
   setUser: unknown;
   setToken: unknown;
+  token: String | null;
 }
 
 const authContext = createContext<AuthData | null>(null);
@@ -37,6 +38,7 @@ export function AuthProvider(props: any) {
     logout,
     setUser,
     setToken,
+    token,
   };
 
   return (

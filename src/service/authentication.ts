@@ -10,7 +10,7 @@ export const authService = {
       const userCredential = await auth.signInWithPopup(provider);
       console.log(userCredential);
       return {
-        user: userCredential.user,
+        user: userCredential,
       };
     } catch (error) {
       console.log(error);
