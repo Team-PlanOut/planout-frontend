@@ -1,4 +1,3 @@
-import { type } from "os";
 import React from "react";
 import useAuth from "../src/hook/auth";
 import { withPublic } from "../src/hook/route";
