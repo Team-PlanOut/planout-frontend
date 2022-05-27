@@ -13,6 +13,7 @@ export default function AuthStateChanged({ children }: any) {
       setLoading(false);
       user?.getIdToken().then((uniqueToken) => {
         setToken(uniqueToken);
+
       });
     });
     //eslint-disable-next-line
