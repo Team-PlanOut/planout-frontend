@@ -16,6 +16,7 @@ const authContext = createContext<AuthData | null>(null);
 export default function useAuth() {
   return useContext(authContext);
 }
+
 export function AuthProvider(props: any) {
   const [user, setUser] = useState<null | String>(null);
   const [error, setError] = useState<string | null>(null);
