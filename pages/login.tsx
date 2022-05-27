@@ -6,7 +6,6 @@ import { withPublic } from "../src/hook/route";
 
 function Login({ auth }: any) {
   auth = useAuth();
-  console.log(typeof auth);
   if (auth !== null) {
     const { loginWithGoogle } = auth;
 
