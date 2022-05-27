@@ -8,16 +8,23 @@ export default function Dashboard() {
   useEffect(() => {
     if (token) {
       fetchData(token);
+      console.log(token);
     }
   }, [token]);
 
-  const fetchData = async (token: string) => {
+
+  const fetchData = async (token: any) => {
     const response = await axios.get("http://localhost:8080/users", {
       headers: {
         Authorization: "Bearer " + token,
       },
     });
-    console.log(response);
+    console.log("this is respones", response);
   };
-  return <div className="h-3/4 border border-solid w-1/3"></div>;
+  return (
+    <div className="mt-20">
+      This is the dashboard. The token is:{token}
+      <div className="text-black"></div>
+    </div>
+  );
 }
