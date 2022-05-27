@@ -12,6 +12,8 @@ export default function Dashboard() {
   }, [token]);
 
   const fetchData = async (token: string) => {
+    console.log("HELLO??");
+
     const response = await axios.get("http://localhost:8080/users", {
       headers: {
         Authorization: "Bearer " + token,
