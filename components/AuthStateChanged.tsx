@@ -6,12 +6,6 @@ export default function AuthStateChanged({ children }: any) {
   const { setUser, setToken } = useAuth() as any;
   const [loading, setLoading] = useState<Boolean>(true);
 
-  // interface SessionData {
-  //   token: any;
-  // }
-
-  // const sessionContext = createContext<SessionData | null>(null);
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
