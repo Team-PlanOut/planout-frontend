@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import useAuth from "../src/hook/auth";
 export default function AuthStateChanged({ children }: any) {
-  const { setUser } = useAuth() as any;
+  const { setUser, setToken } = useAuth() as any;
   const [loading, setLoading] = useState<Boolean>(true);
-  const [token, setToken] = useState<String | null>("");
+
+  // interface SessionData {
+  //   token: any;
+  // }
+
+  // const sessionContext = createContext<SessionData | null>(null);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -13,7 +18,6 @@ export default function AuthStateChanged({ children }: any) {
       setLoading(false);
       user?.getIdToken().then((uniqueToken) => {
         setToken(uniqueToken);
-
       });
     });
     //eslint-disable-next-line

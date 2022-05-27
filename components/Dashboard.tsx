@@ -1,8 +1,9 @@
-import { executionAsyncResource } from "async_hooks";
 import axios from "axios";
 import React, { useEffect } from "react";
+import useAuth from "../src/hook/auth";
 
-export default function Dashboard({ token }: string) {
+export default function Dashboard({}) {
+  const { token } = useAuth() as any;
   useEffect(() => {
     if (token) {
       fetchData(token);
@@ -17,5 +18,9 @@ export default function Dashboard({ token }: string) {
     });
     console.log(response);
   };
-  return <div className="h-3/4 border border-solid w-1/3"></div>;
+  return (
+    <div className="h-3/4 border border-solid w-1/3">
+      This is the dashboard. The token is: {token}
+    </div>
+  );
 }
