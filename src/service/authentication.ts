@@ -8,7 +8,6 @@ export const authService = {
     try {
       const auth = firebase.auth();
       const userCredential = await auth.signInWithPopup(provider);
-      console.log(userCredential);
       return {
         user: userCredential.user,
       };

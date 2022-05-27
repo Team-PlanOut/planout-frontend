@@ -12,6 +12,7 @@ export default function Dashboard() {
     }
   }, [token]);
 
+
   const fetchData = async (token: any) => {
     const response = await axios.get("http://localhost:8080/users", {
       headers: {
