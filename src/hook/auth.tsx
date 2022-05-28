@@ -2,25 +2,25 @@ import { createContext, useContext, useState } from "react";
 import { authService } from "../service/authentication";
 
 interface AuthData {
-  user: Object | null;
-  error: Object | null;
+  user: object | null;
+  setUser: (user: object | null) => void;
+  token: string | null;
+  setToken: (token: string | null) => void;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
-  setUser: unknown;
-  setToken: unknown;
-  token: String | null;
+  error: object | null;
 }
 
 const authContext = createContext<AuthData | null>(null);
 
 export default function useAuth() {
-  return useContext(authContext);
+  return useContext(authContext) as AuthData;
 }
 
 export function AuthProvider(props: any) {
-  const [user, setUser] = useState<null | String>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [token, setToken] = useState<String | null>("");
+  const [user, setUser] = useState<object | null>(null);
+  const [error, setError] = useState<object | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   const loginWithGoogle = async () => {
     const { error, user } = await authService.loginWithGoogle();
@@ -34,12 +34,12 @@ export function AuthProvider(props: any) {
   };
   const value: AuthData = {
     user,
-    error,
+    setUser,
+    token,
+    setToken,
     loginWithGoogle,
     logout,
-    setUser,
-    setToken,
-    token,
+    error,
   };
 
   return (
