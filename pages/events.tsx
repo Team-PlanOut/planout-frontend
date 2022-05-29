@@ -14,7 +14,7 @@ function Events() {
         <div className="mt-10 text-center text-2xl">Events</div>
         <div>
           {events.map((event) => (
-            <div className="p-4 border-2 md:w-1/2 m-auto mt-10 text-center">
+            <div className="p-4 border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer">
               {" "}
               {event.name}{" "}
             </div>
