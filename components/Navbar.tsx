@@ -123,7 +123,7 @@ export default function Navbar() {
                 className="text-gray-800 hover:text-gray-400 duration-500"
               >
                 <div className="flex flex-row mr-2">
-                  {link.icon}{" "}
+                  {link.icon}
                   <span className="md:hidden ml-2">{link.name}</span>
                 </div>
               </a>
