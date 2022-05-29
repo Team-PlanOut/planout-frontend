@@ -8,18 +8,16 @@ export default function Dashboard() {
   useEffect(() => {
     if (token) {
       fetchData(token);
-      console.log(token);
     }
   }, [token]);
 
-
-  const fetchData = async (token: any) => {
-    const response = await axios.get("http://localhost:8080/users", {
+  const fetchData = async (token: string) => {
+    const response = await axios.get("http://localhost:8080/", {
       headers: {
         Authorization: "Bearer " + token,
       },
     });
-    console.log("this is respones", response);
+    console.log("this is response", response);
   };
   return (
     <div className="mt-20">
