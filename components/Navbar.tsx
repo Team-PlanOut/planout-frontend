@@ -2,8 +2,8 @@ import { useState } from "react";
 
 export default function Navbar() {
   const links: { name: string; link: string }[] = [
-    { name: "My Account", link: "/" },
-    { name: "Events", link: "/" },
+    { name: "My Account", link: "/profile" },
+    { name: "Events", link: "/events" },
     { name: "Friends", link: "/" },
     { name: "Logout", link: "/logout" },
   ];

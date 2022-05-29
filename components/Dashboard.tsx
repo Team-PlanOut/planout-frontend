@@ -20,7 +20,7 @@ export default function Dashboard() {
     console.log("this is response", response);
   };
   return (
-    <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
+    <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border">
       <div className="overflow-hidden m-10">
         {" "}
         <div className="bg-blue-200 rounded-full w-40 h-40 m-auto"></div>
