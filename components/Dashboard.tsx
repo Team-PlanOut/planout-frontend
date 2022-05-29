@@ -25,7 +25,10 @@ export default function Dashboard() {
         {" "}
         <div className="bg-blue-200 rounded-full w-40 h-40 m-auto"></div>
         <div className="text-center mt-5">user's name here</div>
-        <div className="mt-10 text-center text-2xl"> Current Tasks</div>
+        <div className="mt-10 text-center text-4xl font-header">
+          {" "}
+          Current Tasks
+        </div>
       </div>
     </div>
   );

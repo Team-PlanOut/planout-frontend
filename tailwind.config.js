@@ -9,6 +9,8 @@ module.exports = {
     extend: {
       fontFamily: {
         logo: ["Pacifico"],
+        header: ["Rum Raisin"],
+        body: ["Barlow Condensed"],
       },
     },
   },
