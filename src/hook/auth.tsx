@@ -2,25 +2,25 @@ import { createContext, useContext, useState } from "react";
 import { authService } from "../service/authentication";
 
 interface AuthData {
-  user: Object | null;
-  error: Object | null;
+  user: object | null;
+  setUser: (user: object | null) => void;
+  token: string | null;
+  setToken: (token: string | null) => void;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
-  setUser: unknown;
-}
-
-interface Children {
-  children: any;
+  error: object | null;
 }
 
 const authContext = createContext<AuthData | null>(null);
 
 export default function useAuth() {
-  return useContext(authContext);
+  return useContext(authContext) as AuthData;
 }
-export function AuthProvider({ ...children }: Children) {
-  const [user, setUser] = useState<null>(null);
-  const [error, setError] = useState<string | null>(null);
+
+export function AuthProvider(props: any) {
+  const [user, setUser] = useState<object | null>(null);
+  const [error, setError] = useState<object | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   const loginWithGoogle = async () => {
     const { error, user } = await authService.loginWithGoogle();
@@ -32,7 +32,17 @@ export function AuthProvider({ ...children }: Children) {
     await authService.logout();
     setUser(null);
   };
-  const value: AuthData = { user, error, loginWithGoogle, logout, setUser };
+  const value: AuthData = {
+    user,
+    setUser,
+    token,
+    setToken,
+    loginWithGoogle,
+    logout,
+    error,
+  };
 
-  return <authContext.Provider value={value} {...children} />;
+  return (
+    <authContext.Provider value={value}>{props.children}</authContext.Provider>
+  );
 }

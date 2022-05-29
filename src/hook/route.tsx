@@ -3,7 +3,7 @@ import React from "react";
 import useAuth from "./auth";
 
 export function withPublic(Component: any) {
-  return function WithPublic(props: any) {
+  return function WithPublic({ ...props }) {
     const auth = useAuth();
     const router = useRouter();
 
@@ -16,7 +16,7 @@ export function withPublic(Component: any) {
 }
 
 export function withProtected(Component: any) {
-  return function WithProtected(props: any) {
+  return function WithProtected({ ...props }) {
     const auth = useAuth();
     const router = useRouter();
 

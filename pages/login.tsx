@@ -1,4 +1,3 @@
-import { type } from "os";
 import React from "react";
 import useAuth from "../src/hook/auth";
 import { withPublic } from "../src/hook/route";
@@ -6,7 +5,6 @@ import { withPublic } from "../src/hook/route";
 
 function Login({ auth }: any) {
   auth = useAuth();
-  console.log(typeof auth);
   if (auth !== null) {
     const { loginWithGoogle } = auth;
 
