@@ -1,15 +1,21 @@
 import { useRouter } from "next/router";
 import React from "react";
 import useAuth from "./auth";
+import MoonLoader from "react-spinners/MoonLoader";
 
 export function withPublic(Component: any) {
   return function WithPublic({ ...props }) {
     const auth = useAuth();
     const router = useRouter();
+    const color: string = "#3977C7";
 
     if (auth?.user) {
       router.replace("/");
-      return <h1>Loadinggggggg.......</h1>;
+      return (
+        <div className="flex flex-row justify-center mt-32">
+          <MoonLoader color={color} size={150} />
+        </div>
+      );
     }
     return <Component auth={auth} {...props} />;
   };
@@ -19,10 +25,15 @@ export function withProtected(Component: any) {
   return function WithProtected({ ...props }) {
     const auth = useAuth();
     const router = useRouter();
+    const color: string = "#3977C7";
 
     if (!auth?.user) {
       router.replace("/login");
-      return <h1>Loadinggggggg.......</h1>;
+      return (
+        <div className="flex flex-row justify-center mt-32">
+          <MoonLoader color={color} size={100} />
+        </div>
+      );
     }
     return <Component auth={auth} {...props} />;
   };

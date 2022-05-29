@@ -1,16 +1,14 @@
 import React from "react";
-import Dashboard from "../components/Dashboard";
 import { withProtected } from "../src/hook/route";
 import Navbar from "../components/Navbar";
 
-function Profile() {
+function Friends() {
   return (
     <div>
-      {" "}
       <Navbar />
-      <Dashboard />
+      hello friends
     </div>
   );
 }
 
-export default withProtected(Profile);
+export default withProtected(Friends);
