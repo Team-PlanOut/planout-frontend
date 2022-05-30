@@ -1,4 +1,5 @@
 module.exports = {
+  
   mode: "jit",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -17,3 +18,4 @@ module.exports = {
   },
   plugins: [require("flowbite/plugin")],
 };
+

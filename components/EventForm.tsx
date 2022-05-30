@@ -33,7 +33,7 @@ export default function EventForm() {
         data-modal-toggle="authentication-modal"
         onClick={() => setShowModal(true)}
       >
-        Toggle modal
+        Create Event
       </button>
 
       {showModal && <Modal setShowModal={setShowModal} />}
