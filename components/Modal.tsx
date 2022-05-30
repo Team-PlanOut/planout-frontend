@@ -4,12 +4,14 @@ export default function Modal({
   setShowModal,
   setEventName,
   setEventDate,
+  setEventTime,
   setEventBudget,
   createEvent,
 }: {
   setShowModal: any;
   setEventName: any;
   setEventDate: any;
+  setEventTime: any;
   setEventBudget: any;
   createEvent: any;
 }) {
@@ -95,7 +97,7 @@ export default function Modal({
                   name="time"
                   id="time"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  onChange={(e) => setEventDate(e.target.value)}
+                  onChange={(e) => setEventTime(e.target.value)}
                   required
                 />
               </div>

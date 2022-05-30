@@ -4,6 +4,7 @@ import { withProtected } from "../src/hook/route";
 import EventForm from "../components/EventForm";
 
 function Events() {
+  const [events, setEvents] = useState<Event[]>([]);
   interface Event {
     id: number;
     host: string;
@@ -14,7 +15,6 @@ function Events() {
     created_at: number;
     modified: number;
   }
-  const [events, setEvents] = useState<Event[]>([]);
 
   const showEvents = () => {
     try {

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import useAuth from "../src/hook/auth";
 import Modal from "./Modal";
 
 export default function EventForm() {
   const [showModal, setShowModal] = useState(false);
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
+  const [eventTime, setEventTime] = useState("");
   const [eventBudget, setEventBudget] = useState(0);
 
+  const { user } = useAuth() as any;
+
+  // console.log(user.multiFactor.user.email);
   const createEvent = () => {
     try {
       fetch("https://cc26-planout.herokuapp.com/events", {
@@ -16,8 +21,13 @@ export default function EventForm() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          name: eventName,
+          event_name: eventName,
+          hostId: user.uid,
           date: eventDate,
+          // hostFirstName: user.multiFactor.delegate.email,
+          // date: "2022-06-22T00:00:00.000Z",
+
+          // time: eventTime,
           budget: eventBudget,
         }),
       });
@@ -25,7 +35,7 @@ export default function EventForm() {
       console.log(error);
     }
   };
-  console.log(eventName, eventDate, eventBudget);
+  console.log(eventName, eventDate, eventTime, eventBudget);
   return (
     <div>
       <button
@@ -42,6 +52,7 @@ export default function EventForm() {
           setShowModal={setShowModal}
           setEventName={setEventName}
           setEventDate={setEventDate}
+          setEventTime={setEventTime}
           setEventBudget={setEventBudget}
           createEvent={createEvent}
         />
