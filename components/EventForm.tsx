@@ -3,6 +3,9 @@ import Modal from "./Modal";
 
 export default function EventForm() {
   const [showModal, setShowModal] = useState(false);
+  const [eventName, setEventName] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [eventBudget, setEventBudget] = useState(0);
 
   const createEvent = () => {
     fetch("https://cc26-planout.herokuapp.com/events", {
@@ -13,10 +16,9 @@ export default function EventForm() {
       },
       body: JSON.stringify({
         // host: "",
-        name: "",
-        event_name: "",
-        date: "",
-        budget: 0,
+        event_name: eventName,
+        date: eventDate,
+        budget: eventBudget,
       }),
     })
       .then((res) => res.json())
@@ -24,7 +26,7 @@ export default function EventForm() {
         console.log(data);
       });
   };
-
+  console.log(eventName, eventDate, eventBudget);
   return (
     <div>
       <button
@@ -36,7 +38,14 @@ export default function EventForm() {
         Create Event
       </button>
 
-      {showModal && <Modal setShowModal={setShowModal} />}
+      {showModal && (
+        <Modal
+          setShowModal={setShowModal}
+          setEventName={setEventName}
+          setEventDate={setEventDate}
+          setEventBudget={setEventBudget}
+        />
+      )}
     </div>
   );
 }

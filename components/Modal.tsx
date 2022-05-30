@@ -1,6 +1,18 @@
 import React from "react";
 
-export default function Modal({ setShowModal }: { setShowModal: any }) {
+export default function Modal({
+  setShowModal,
+  setEventName,
+  setEventDate,
+  setEventBudget,
+}: {
+  setShowModal: any;
+  setEventName: any;
+  setEventDate: any;
+  setEventBudget: any;
+}) {
+
+
   return (
     <div
       id="authentication-modal"
@@ -46,6 +58,8 @@ export default function Modal({ setShowModal }: { setShowModal: any }) {
                   name="event_name"
                   id="event_name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Enter event name"
+                  onChange={(e) => setEventName(e.target.value)}
                   required
                 />
               </div>
@@ -62,6 +76,7 @@ export default function Modal({ setShowModal }: { setShowModal: any }) {
                   name="date"
                   id="date"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  onChange={(e) => setEventDate(e.target.value)}
                   required
                 />
               </div>
@@ -79,6 +94,7 @@ export default function Modal({ setShowModal }: { setShowModal: any }) {
                   id="budget"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   min="0"
+                  onChange={(e) => setEventBudget(e.target.value)}
                   required
                 />
               </div>
