@@ -1,4 +1,4 @@
-import type { NextPage} from "next";
+import type { NextPage } from "next";
 import { useState } from "react";
 import Head from "next/head";
 import Dashboard from "../components/Dashboard";
@@ -7,8 +7,6 @@ import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 
 const Home: NextPage = () => {
-
-
   return (
     <div>
       <Head>
