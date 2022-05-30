@@ -3,7 +3,17 @@ import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 
 function Events() {
-  const [events, setEvents] = useState<any[]>([]);
+  interface Event {
+    id: number;
+    host: string;
+    name: string;
+    event_name: string;
+    date: Date;
+    budget: number;
+    created_at: number;
+    modified: number;
+  }
+  const [events, setEvents] = useState<Event[]>([]);
 
   const showEvents = () => {
     fetch("http://localhost:8080/events", {
@@ -18,8 +28,6 @@ function Events() {
         setEvents(data);
       });
   };
-
-  console.log(events);
 
   useEffect(() => {
     showEvents();
