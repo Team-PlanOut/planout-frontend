@@ -17,17 +17,21 @@ function Events() {
   const [events, setEvents] = useState<Event[]>([]);
 
   const showEvents = () => {
-    fetch("https://cc26-planout.herokuapp.com/events", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // "x-auth-token": localStorage.getItem("token")
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setEvents(data);
-      });
+    try {
+      fetch("https://cc26-planout.herokuapp.com/events", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // "x-auth-token": localStorage.getItem("token")
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setEvents(data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

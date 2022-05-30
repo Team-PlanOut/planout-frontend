@@ -8,23 +8,22 @@ export default function EventForm() {
   const [eventBudget, setEventBudget] = useState(0);
 
   const createEvent = () => {
-    fetch("https://cc26-planout.herokuapp.com/events", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // "x-auth-token": localStorage.getItem("token")
-      },
-      body: JSON.stringify({
-        // host: "",
-        event_name: eventName,
-        date: eventDate,
-        budget: eventBudget,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+    try {
+      fetch("https://cc26-planout.herokuapp.com/events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: eventName,
+          date: eventDate,
+          budget: eventBudget,
+        }),
       });
+    } catch (error) {
+      console.log(error);
+    }
   };
   console.log(eventName, eventDate, eventBudget);
   return (
@@ -44,6 +43,7 @@ export default function EventForm() {
           setEventName={setEventName}
           setEventDate={setEventDate}
           setEventBudget={setEventBudget}
+          createEvent={createEvent}
         />
       )}
     </div>
