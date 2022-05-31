@@ -33,7 +33,6 @@ function singleEvent() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          // "x-auth-token": localStorage.getItem("token")
         },
       }
     )
@@ -50,7 +49,6 @@ function singleEvent() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          // "x-auth-token": localStorage.getItem("token")
         },
       }
     )
@@ -89,7 +87,7 @@ function singleEvent() {
                   <div key={task.id} className="text-2xl text-center font-body">
                     {task.description}
                   </div>
-                  <div className="mt-5 hover:underline hover:cursor-pointer">
+                  <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     {complete === index ? (
                       <div onClick={() => setComplete(null)}>
                         {" "}
@@ -114,14 +112,6 @@ function singleEvent() {
                       </div>
                     )}
                   </div>
-
-                  {/* <div
-                    className="text-right mt-5 text-xs hover:underline hover:cursor-pointer"
-                    onClick={() => setComplete(true)}
-                  >
-                    {" "}
-                    complete task
-                  </div> */}
                 </div>
               ))}
             </div>
