@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
-import Modal from "./Modal";
+import EventModal from "./EventModal";
 
 export default function EventForm() {
   const [showModal, setShowModal] = useState(false);
@@ -46,7 +46,7 @@ export default function EventForm() {
       </button>
 
       {showModal && (
-        <Modal
+        <EventModal
           setShowModal={setShowModal}
           setEventName={setEventName}
           setEventDate={setEventDate}
