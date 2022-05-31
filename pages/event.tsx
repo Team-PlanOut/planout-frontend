@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 function singleEvent() {
     const router = useRouter()
@@ -48,7 +47,6 @@ function singleEvent() {
           <div>TASKS</div>
         </div>
       </div>
-            {/* <div>{event[0]}</div> */}
         </div>
     )
 }
