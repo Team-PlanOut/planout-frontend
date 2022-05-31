@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import Modal from "./Modal";
@@ -11,7 +12,6 @@ export default function EventForm() {
 
   const { user } = useAuth() as any;
 
-  // console.log(user.multiFactor.user.email);
   const createEvent = () => {
     try {
       fetch("https://cc26-planout.herokuapp.com/events", {
@@ -22,7 +22,7 @@ export default function EventForm() {
         },
         body: JSON.stringify({
           event_name: eventName,
-          hostId: user.uid,
+          host: 1,
           date: eventDate,
           // hostFirstName: user.multiFactor.delegate.email,
           // date: "2022-06-22T00:00:00.000Z",
@@ -30,7 +30,7 @@ export default function EventForm() {
           // time: eventTime,
           budget: eventBudget,
         }),
-      });
+      }).then((res) => console.log(res));
     } catch (error) {
       console.log(error);
     }

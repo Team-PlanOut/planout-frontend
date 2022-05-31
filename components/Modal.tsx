@@ -83,8 +83,6 @@ export default function Modal({
                 />
               </div>
 
-              {/* time picker */}
-
               <div>
                 <label
                   htmlFor="time"
