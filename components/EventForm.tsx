@@ -34,13 +34,6 @@ export default function EventForm() {
     }
   };
 
-  const resetFields = () => {
-    setEventName("");
-    setEventDate("");
-    setEventTime("");
-    setEventBudget(0);
-  };
-
   return (
     <div>
       <button

@@ -124,6 +124,7 @@ export default function Modal({
                 onClick={(e) => {
                   e.preventDefault();
                   createEvent();
+                  setShowModal(false);
                 }}
               >
                 Create event
