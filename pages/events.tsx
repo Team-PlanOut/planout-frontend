@@ -3,8 +3,14 @@ import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import Link from "next/link";
 
+import EventForm from "../components/EventForm";
+
+
+
 
 function Events() {
+  const [events, setEvents] = useState<Event[]>([]);
+
   interface Event {
     id: number;
     host: string;
@@ -15,25 +21,32 @@ function Events() {
     created_at: number;
     modified: number;
   }
-  const [events, setEvents] = useState<Event[]>([]);
 
   const showEvents = () => {
-    fetch("https://cc26-planout.herokuapp.com/events", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // "x-auth-token": localStorage.getItem("token")
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setEvents(data);
-      });
+    try {
+      fetch("https://cc26-planout.herokuapp.com/events", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // "x-auth-token": localStorage.getItem("token")
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setEvents(data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     showEvents();
-  }, []);
+  }, [events]);
+
+  const showOnlyDate = (date: Date) => {
+    return date.toString().slice(0, 10);
+  };
 
   return (
     <div>
@@ -52,13 +65,14 @@ function Events() {
                   pathname: "/event",
                   query: { id: event.id},}}
               >
-                {event.name}
+                  {event.name}
+                  <br />
+                  {showOnlyDate(event.date)}
                 </Link>
                 </li>
-
               </div>
             ))}
-          </div>
+          </div>.
         </div>
       </div>
     </div>
