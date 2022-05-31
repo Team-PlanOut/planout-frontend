@@ -1,3 +1,4 @@
+import router from "next/router";
 import React, { useState } from "react";
 import TaskModal from "../components/TaskModal";
 
@@ -9,7 +10,7 @@ export default function TaskForm() {
 
   const createTask = () => {
     try {
-      fetch("https://cc26-planout.herokuapp.com/task", {
+      fetch("https://cc26-planout.herokuapp.com/tasks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -19,7 +20,8 @@ export default function TaskForm() {
           description: taskDescription,
           status: false,
           points: taskPoints,
-          event_id: 1,
+          event_id: router.query.id,
+          user_id: 2,
           cost: taskCost,
         }),
       });
