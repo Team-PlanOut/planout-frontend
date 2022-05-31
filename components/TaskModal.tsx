@@ -1,20 +1,16 @@
 import React from "react";
 
-export default function Modal({
-  setShowModal,
-  setEventName,
-  setEventDate,
-  setEventTime,
-  setEventBudget,
-  createEvent,
-}: {
-  setShowModal: any;
-  setEventName: any;
-  setEventDate: any;
-  setEventTime: any;
-  setEventBudget: any;
-  createEvent: any;
-}) {
+export default function Task() {
+
+
+
+
+
+
+
+
+
+  
   return (
     <div
       id="authentication-modal"
