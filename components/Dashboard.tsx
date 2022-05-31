@@ -7,7 +7,7 @@ import useAuth from "../src/hook/auth";
 export default function Dashboard() {
   const [tasks, setTasks] = useState<any>([]);
   const { token, user } = useAuth() as any;
-  const [complete, setComplete] = useState<number | null>(null);
+  const [complete, setComplete] = useState<Set<number>>(new Set());
   console.log(user);
   useEffect(() => {
     if (token) {
@@ -30,6 +30,18 @@ export default function Dashboard() {
     return tasks;
   };
 
+  const addComplete = (index: number) => {
+    const newSet = new Set(complete);
+    newSet.add(index);
+    console.log(complete);
+    setComplete(newSet);
+  };
+
+  const removeComplete = (index: number) => {
+    const newSet = new Set(complete);
+    newSet.delete(index);
+    setComplete(newSet);
+  };
   return (
     <div className="container m-auto h-screen mt-20 box-content md:w-1/2 border overflow-y-auto pb-10">
       <div className="overflow-hidden m-10">
@@ -47,18 +59,18 @@ export default function Dashboard() {
       </div>
 
       <div>
-        {tasks.map((task: any, index: null | number) => (
+        {tasks.map((task: any, index: number) => (
           <div
             className={`p-5   border-2 md:w-1/2 m-auto mt-10 ${
-              complete === index ? "bg-green-100" : "bg-red-100"
+              complete.has(index) ? "bg-green-100" : "bg-red-100"
             }`}
           >
             <div key={task.id} className="text-2xl text-center font-body">
               {task.description}
             </div>
             <div className="mt-5 hover:underline hover:cursor-pointer text-right">
-              {complete === index ? (
-                <div onClick={() => setComplete(null)}>
+              {complete.has(index) ? (
+                <div onClick={() => removeComplete(index)}>
                   {" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +88,7 @@ export default function Dashboard() {
                   </svg>
                 </div>
               ) : (
-                <div onClick={() => setComplete(index)}>Complete task</div>
+                <div onClick={() => addComplete(index)}>Complete task</div>
               )}
             </div>
           </div>
