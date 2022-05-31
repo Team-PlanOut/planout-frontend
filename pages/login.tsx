@@ -1,7 +1,6 @@
 import React from "react";
 import useAuth from "../src/hook/auth";
 import { withPublic } from "../src/hook/route";
-// import "tailwindcss/tailwind.css";
 
 function Login({ auth }: any) {
   auth = useAuth();
