@@ -1,26 +1,32 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
+import React, { useState, useEffect } from "react";
+import TaskList from "../pages/TaskList";
 import useAuth from "../src/hook/auth";
 
 export default function Dashboard() {
+  const [tasks, setTasks] = useState<any>([]);
   const { token, user } = useAuth() as any;
   console.log(user);
   useEffect(() => {
     if (token) {
-      fetchData(token);
+      fetchTaskData(token);
     }
   }, []);
 
-  const fetchData = async (token: string) => {
+  const fetchTaskData = async (token: string) => {
     const response = await axios.get(
-      "https://cc26-planout.herokuapp.com/events",
+      "https://cc26-planout.herokuapp.com/tasks",
       {
         headers: {
           Authorization: "Bearer " + token,
         },
       }
     );
+    setTasks(response.data);
+    console.log(typeof response.data);
     console.log("this is response", response);
+    return tasks;
   };
 
   return (
@@ -38,6 +44,9 @@ export default function Dashboard() {
           Current Tasks
         </div>
       </div>
+      {tasks.map((task: any) => (
+        <div key={task.id}> {task.description}</div>
+      ))}
     </div>
   );
 }
