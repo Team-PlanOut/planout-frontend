@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import { useRouter } from "next/router";
+
+import TaskForm from "../components/TaskForm";
 import Link from "next/link";
 
 function singleEvent() {
+  
   const router = useRouter();
   let [complete, setComplete] = useState<number | null>(null);
   const {
@@ -12,7 +15,7 @@ function singleEvent() {
   } = router;
 
   interface Event {
-    id: any;
+    id: number;
     host: string;
     name: string;
     event_name: string;
@@ -33,6 +36,7 @@ function singleEvent() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          // "x-auth-token": localStorage.getItem("token")
         },
       }
     )
@@ -54,18 +58,15 @@ function singleEvent() {
     )
       .then((res) => res.json())
       .then((data) => {
+        setEvents(data);
         setTasks(data);
-        console.log(data);
       });
   };
 
   useEffect(() => {
     showEvents();
-  }, []);
-
-  useEffect(() => {
     showTasks();
-  }, []);
+  }, [events]);
 
   return (
     <div>
@@ -75,6 +76,7 @@ function singleEvent() {
           <div className="mt-10 text-center text-4xl font-header">
             {events.name}
           </div>
+                  <div>TASKS</div>
           <div className="mt-10 text-center text-4xl ">TASKS</div>
           <div className="overflow-hidden m-10">
             <div>
@@ -121,5 +123,6 @@ function singleEvent() {
     </div>
   );
 }
+
 
 export default withProtected(singleEvent);
