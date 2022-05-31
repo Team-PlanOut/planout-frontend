@@ -7,6 +7,7 @@ import useAuth from "../src/hook/auth";
 export default function Dashboard() {
   const [tasks, setTasks] = useState<any>([]);
   const { token, user } = useAuth() as any;
+  const [showTask, setShowTask] = useState<number | null>(null);
   console.log(user);
   useEffect(() => {
     if (token) {
@@ -34,7 +35,7 @@ export default function Dashboard() {
       <div className="overflow-hidden m-10">
         {" "}
         <div>
-          <img src={user.photoURL} className=" m-auto"></img>
+          <img src={user.photoURL} className="m-auto"></img>
         </div>
         <div className="text-center mt-5 font-body text-2xl">
           {user.displayName}
@@ -44,8 +45,20 @@ export default function Dashboard() {
           Current Tasks
         </div>
       </div>
-      {tasks.map((task: any) => (
-        <div key={task.id}> {task.description}</div>
+      {tasks.map((task: any, index: number) => (
+        <div
+          key={task.id}
+          className="p-2 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
+        >
+          {" "}
+          <div>
+            {showTask === index ? (
+              <div onClick={() => setShowTask(null)}> {task.description}</div>
+            ) : (
+              <div onClick={() => setShowTask(index)}> open task</div>
+            )}
+          </div>
+        </div>
       ))}
     </div>
   );
