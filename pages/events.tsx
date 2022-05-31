@@ -5,9 +5,6 @@ import Link from "next/link";
 
 import EventForm from "../components/EventForm";
 
-
-
-
 function Events() {
   const [events, setEvents] = useState<Event[]>([]);
 
@@ -56,23 +53,22 @@ function Events() {
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
           <div>
             {events.map((event) => (
-              <div>
-                <li>
+              <div className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in">
                 <Link
-                  className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
-                key={event.id}
-                href={{
-                  pathname: "/event",
-                  query: { id: event.id},}}
-              >
+                  key={event.id}
+                  href={{
+                    pathname: "/event",
+                    query: { id: event.id },
+                  }}
+                >
                   {event.name}
-                  <br />
-                  {showOnlyDate(event.date)}
                 </Link>
-                </li>
+                <br />
+                {showOnlyDate(event.date)}
               </div>
             ))}
-          </div>.
+          </div>
+          .
         </div>
       </div>
     </div>
