@@ -1,16 +1,18 @@
 import React from "react";
 
-export default function Task() {
-
-
-
-
-
-
-
-
-
-  
+export default function Task({
+  setShowModal,
+  setTaskDescription,
+  setTaskPoints,
+  setTaskCost,
+  createTask,
+}: {
+  setShowModal: any;
+  setTaskDescription: any;
+  setTaskPoints: any;
+  setTaskCost: any;
+  createTask: any;
+}) {
   return (
     <div
       id="authentication-modal"

@@ -1,7 +1,5 @@
 import axios from "axios";
-import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
 import React, { useState, useEffect } from "react";
-import TaskList from "../pages/TaskList";
 import useAuth from "../src/hook/auth";
 
 export default function Dashboard() {
@@ -32,7 +30,6 @@ export default function Dashboard() {
   return (
     <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border">
       <div className="overflow-hidden m-10">
-        {" "}
         <div>
           <img src={user.photoURL} className=" m-auto"></img>
         </div>
@@ -40,7 +37,6 @@ export default function Dashboard() {
           {user.displayName}
         </div>
         <div className="mt-10 text-center text-4xl font-header">
-          {" "}
           Current Tasks
         </div>
       </div>

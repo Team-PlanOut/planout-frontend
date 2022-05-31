@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import Head from "next/head";
 import Dashboard from "../components/Dashboard";
 import Navbar from "../components/Navbar";
