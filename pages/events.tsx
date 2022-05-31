@@ -68,7 +68,6 @@ function Events() {
               </div>
             ))}
           </div>
-          .
         </div>
       </div>
     </div>
