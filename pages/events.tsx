@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import useRouter from "next/router";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import Link from "next/link";

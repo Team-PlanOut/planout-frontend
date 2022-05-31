@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
-function Event() {
+function singleEvent() {
     const router = useRouter()
     const {
       query: { id },
@@ -19,10 +20,10 @@ function Event() {
         created_at: number;
         modified: number;
       }
-      const [event, setEvent] = useState<Event[]>([]);
+      const [events, setEvents] = useState<Event[]>([]);
     
-      const showEvents = () => {
-        fetch(`https://cc26-planout.herokuapp.com/events/${router.query.id}`, {
+      const showEvents = async() => {
+       await fetch(`https://cc26-planout.herokuapp.com/events/${router.query.id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -31,19 +32,25 @@ function Event() {
         })
           .then((res) => res.json())
           .then((data) => {
-            setEvent(data);
+            setEvents(data);
           });
       };
     
       useEffect(() => {
         showEvents();
-      }, [event]);
+      }, [events]);
     return (
         <div>
             <Navbar/>
-            <div>{event.length > 0 ? event[0].name : "Weeeeee"}</div>
+            <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
+        <div className="overflow-hidden m-10">
+          <div className="mt-10 text-center text-4xl font-header">{events.name}</div>
+          <div>TASKS</div>
+        </div>
+      </div>
+            {/* <div>{event[0]}</div> */}
         </div>
     )
 }
 
-export default withProtected(Event);
+export default withProtected(singleEvent);
