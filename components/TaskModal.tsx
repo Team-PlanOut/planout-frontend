@@ -17,7 +17,6 @@ export default function Task({
     <div
       id="authentication-modal"
       aria-hidden="true"
-      tabIndex="-1"
       className="auto overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
     >
       <div className="relative p-4 w-full max-w-md h-full md:h-auto">

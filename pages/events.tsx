@@ -54,9 +54,11 @@ function Events() {
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
           <div>
             {events.map((event) => (
-              <div className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in">
+              <div
+                key={event.id}
+                className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
+              >
                 <Link
-                  key={event.id}
                   href={{
                     pathname: "/event",
                     query: { id: event.id },
