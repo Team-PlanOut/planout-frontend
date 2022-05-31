@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 
 export default function Navbar() {
   let [open, setOpen] = useState(false);
   let [currentView, setCurrentView] = useState("pc");
 
-  const links: { name: string; link: string; icon: any }[] = [
+  const links: { name: string; link: string; icon: ReactElement }[] = [
     {
       name: "My Account",
       link: "/profile",
