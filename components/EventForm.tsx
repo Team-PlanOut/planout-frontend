@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import Modal from "./Modal";
@@ -26,16 +25,22 @@ export default function EventForm() {
           date: eventDate,
           // hostFirstName: user.multiFactor.delegate.email,
           // date: "2022-06-22T00:00:00.000Z",
-
           // time: eventTime,
           budget: eventBudget,
         }),
-      }).then((res) => console.log(res));
+      });
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(eventName, eventDate, eventTime, eventBudget);
+
+  const resetFields = () => {
+    setEventName("");
+    setEventDate("");
+    setEventTime("");
+    setEventBudget(0);
+  };
+
   return (
     <div>
       <button

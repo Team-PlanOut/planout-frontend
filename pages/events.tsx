@@ -36,14 +36,18 @@ function Events() {
 
   useEffect(() => {
     showEvents();
-  }, []);
+  }, [events]);
+
+  const showOnlyDate = (date: Date) => {
+    return date.toString().slice(0, 10);
+  };
 
   return (
     <div>
       <Navbar />
       <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
-        <EventForm />
         <div className="overflow-hidden m-10">
+          <EventForm />
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
           <div>
             {events.map((event) => (
@@ -53,7 +57,9 @@ function Events() {
               >
                 <>
                   {event.name}
-                  {event.date}
+                  <br />
+                  {/* {event.date} */}
+                  {showOnlyDate(event.date)}
                 </>
               </div>
             ))}
