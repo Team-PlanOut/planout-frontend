@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
+import Link from "next/link";
+
 import EventForm from "../components/EventForm";
+
+
+
 
 function Events() {
   const [events, setEvents] = useState<Event[]>([]);
+
   interface Event {
     id: number;
     host: string;
@@ -47,23 +53,26 @@ function Events() {
       <Navbar />
       <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
         <div className="overflow-hidden m-10">
-          <EventForm />
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
           <div>
             {events.map((event) => (
-              <div
+              <div>
+                <li>
+                <Link
+                  className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
                 key={event.id}
-                className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
+                href={{
+                  pathname: "/event",
+                  query: { id: event.id},}}
               >
-                <>
                   {event.name}
                   <br />
-                  {/* {event.date} */}
                   {showOnlyDate(event.date)}
-                </>
+                </Link>
+                </li>
               </div>
             ))}
-          </div>
+          </div>.
         </div>
       </div>
     </div>
