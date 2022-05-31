@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import useRouter from "next/router";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
-import Link from 'next/link';
+import Link from "next/link";
+
 
 function Events() {
   interface Event {
@@ -42,13 +44,20 @@ function Events() {
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
           <div>
             {events.map((event) => (
-              <Link
-              className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
-              href={"/event/" + event.id}
+              <div>
+                <li>
+                <Link
+                  className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
                 key={event.id}
+                href={{
+                  pathname: "/event",
+                  query: { id: event.id},}}
               >
                 {event.name}
-              </Link>
+                </Link>
+                </li>
+
+              </div>
             ))}
           </div>
         </div>
