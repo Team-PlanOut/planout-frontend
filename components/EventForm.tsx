@@ -43,17 +43,18 @@ export default function EventForm() {
       >
         Create Event
       </button>
-
-      {showModal && (
-        <EventModal
-          setShowModal={setShowModal}
-          setEventName={setEventName}
-          setEventDate={setEventDate}
-          setEventTime={setEventTime}
-          setEventBudget={setEventBudget}
-          createEvent={createEvent}
-        />
-      )}
+      <div className="m-auto bg-black">
+        {showModal && (
+          <EventModal
+            setShowModal={setShowModal}
+            setEventName={setEventName}
+            setEventDate={setEventDate}
+            setEventTime={setEventTime}
+            setEventBudget={setEventBudget}
+            createEvent={createEvent}
+          />
+        )}
+      </div>
     </div>
   );
 }
