@@ -81,9 +81,11 @@ function SingleEvent() {
         <div className="mt-10 text-center text-4xl font-header">
           {events.name}
         </div>
+
         <div className="overflow-hidden m-10">
-          <div className="mt-10 text-center text-4xl font-header"></div>
           <TaskForm />
+
+          <div className="mt-10 text-center text-4xl font-header"></div>
           <div className="mt-10 text-center text-4xl font-header">TASKS</div>
           <div className="overflow-hidden m-10">
             <div>

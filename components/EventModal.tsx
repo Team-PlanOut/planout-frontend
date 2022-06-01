@@ -21,7 +21,7 @@ export default function Event({
       aria-hidden="true"
       className=" auto overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
     >
-      <div className="m-auto mt-16  p-4 w-full max-w-md h-full md:h-auto">
+      <div className="m-auto mt-16 p-4 w-full max-w-md h-full md:h-auto">
         <div className="m-auto bg-white e rounded-lg shadow dark:bg-gray-700 ">
           <button
             type="button"
