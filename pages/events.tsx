@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import Link from "next/link";
-
+import useAuth from "../src/hook/auth";
+import axios from "axios";
 import EventForm from "../components/EventForm";
 
 function Events() {
   const [events, setEvents] = useState<Event[]>([]);
+  const { token } = useAuth() as any;
 
   interface Event {
     id: number;
@@ -19,22 +21,16 @@ function Events() {
     modified: number;
   }
 
-  const showEvents = () => {
-    try {
-      fetch("https://cc26-planout.herokuapp.com/events", {
-        method: "GET",
+  const showEvents = async () => {
+    const response = await axios.get(
+      "https://cc26-planout.herokuapp.com/events",
+      {
         headers: {
-          "Content-Type": "application/json",
-          // "x-auth-token": localStorage.getItem("token")
+          Authorization: "Bearer " + token,
         },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setEvents(data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+      }
+    );
+    setEvents(response.data);
   };
 
   useEffect(() => {

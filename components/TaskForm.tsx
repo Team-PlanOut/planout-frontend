@@ -1,29 +1,34 @@
-import router from "next/router";
 import React, { useState } from "react";
+import router from "next/router";
 import TaskModal from "../components/TaskModal";
+import useAuth from "../src/hook/auth";
+import axios from "axios";
 
 export default function TaskForm() {
   const [showModal, setShowModal] = useState(false);
   const [taskDescription, setTaskDescription] = useState("");
   const [taskPoints, setTaskPoints] = useState(0);
   const [taskCost, setTaskCost] = useState(0);
+  const { token } = useAuth() as any;
 
   const createTask = () => {
+    const dataObj = {
+      description: taskDescription,
+      status: false,
+      points: taskPoints,
+      event_id: router.query.id,
+      user_id: 2,
+      cost: taskCost,
+    };
+    submitPostReq(dataObj);
+  };
+
+  const submitPostReq = async (data: object) => {
     try {
-      fetch("https://cc26-planout.herokuapp.com/tasks", {
-        method: "POST",
+      await axios.post("  https://cc26-planout.herokuapp.com/tasks ", data, {
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          Authorization: "Bearer " + token,
         },
-        body: JSON.stringify({
-          description: taskDescription,
-          status: false,
-          points: taskPoints,
-          event_id: router.query.id,
-          user_id: 2,
-          cost: taskCost,
-        }),
       });
     } catch (error) {
       console.log(error);

@@ -8,7 +8,7 @@ export default function Dashboard() {
   const { token, user } = useAuth() as any;
   const [complete, setComplete] = useState<Set<number>>(new Set());
 
-  const fetchTaskData = async (token: string) => {
+  const fetchTaskData = async () => {
     const response = await axios.get(
       "https://cc26-planout.herokuapp.com/tasks",
       {
@@ -35,7 +35,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (token) {
-      fetchTaskData(token);
+      fetchTaskData();
     }
   }, []);
 

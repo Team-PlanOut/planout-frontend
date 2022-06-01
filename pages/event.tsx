@@ -4,11 +4,14 @@ import { withProtected } from "../src/hook/route";
 import { useRouter } from "next/router";
 
 import TaskForm from "../components/TaskForm";
+import useAuth from "../src/hook/auth";
+import axios from "axios";
 
 function SingleEvent() {
   const router = useRouter();
   const [events, setEvents] = useState<Event[]>([]);
   const [task, setTask] = useState<Task[]>([]);
+  const { token } = useAuth() as any;
 
   let [complete, setComplete] = useState<number | null>(null);
 
@@ -40,42 +43,36 @@ function SingleEvent() {
   }
 
   const showEvents = async () => {
-    await fetch(
-      `https://cc26-planout.herokuapp.com/events/${router.query.id}`,
+    const response = await axios.get(
+      `https://cc26-planout.herokuapp.com/events/${id}`,
       {
-        method: "GET",
         headers: {
-          "Content-Type": "application/json",
-          // "x-auth-token": localStorage.getItem("token")
+          Authorization: "Bearer " + token,
         },
       }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setEvents(data);
-      });
+    );
+    setEvents(response.data);
   };
 
   const showTasks = async () => {
-    await fetch(
-      `https://cc26-planout.herokuapp.com/tasks/event/${router.query.id}`,
+    const response = await axios.get(
+      `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
       {
-        method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
         },
       }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setTask(data);
-      });
+    );
+    setTask(response.data);
   };
 
   useEffect(() => {
-    showTasks();
     showEvents();
-  }, [events, task]);
+  }, [events]);
+
+  useEffect(() => {
+    showTasks();
+  }, [task]);
 
   return (
     <div>

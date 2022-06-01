@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import EventModal from "./EventModal";
+import axios from "axios";
 
 export default function EventForm() {
   const [showModal, setShowModal] = useState(false);
@@ -8,26 +9,24 @@ export default function EventForm() {
   const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
   const [eventBudget, setEventBudget] = useState(0);
-
-  const { user } = useAuth() as any;
+  const { token } = useAuth() as any;
 
   const createEvent = () => {
+    const dataObj = {
+      event_name: eventName,
+      host: 1,
+      date: eventDate,
+      budget: eventBudget,
+    };
+    submitPostReq(dataObj);
+  };
+
+  const submitPostReq = async (data: object) => {
     try {
-      fetch("https://cc26-planout.herokuapp.com/events", {
-        method: "POST",
+      await axios.post("https://cc26-planout.herokuapp.com/events", data, {
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          Authorization: "Bearer " + token,
         },
-        body: JSON.stringify({
-          event_name: eventName,
-          host: 1,
-          date: eventDate,
-          // hostFirstName: user.multiFactor.delegate.email,
-          // date: "2022-06-22T00:00:00.000Z",
-          // time: eventTime,
-          budget: eventBudget,
-        }),
       });
     } catch (error) {
       console.log(error);
