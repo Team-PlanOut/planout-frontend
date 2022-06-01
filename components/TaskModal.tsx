@@ -108,7 +108,7 @@ export default function Task({
                   setShowModal(false);
                 }}
               >
-                Create event
+                Create Task
               </button>
             </form>
           </div>
