@@ -26,12 +26,50 @@ export default function Dashboard() {
     const newSet = new Set(complete);
     newSet.add(index);
     setComplete(newSet);
+
+    // Simple PUT request with a JSON body using axios
+    // const article = JSON.stringify({ status: true });
+    // axios
+    //   .put(`https://cc26-planout.herokuapp.com/tasks/43`, article)
+    //   .then((response) => console.log(response));
+
+    try {
+      fetch(`https://cc26-planout.herokuapp.com/tasks/${index}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
+      JSON.stringify({
+        status: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const removeComplete = (index: number) => {
     const newSet = new Set(complete);
     newSet.delete(index);
     setComplete(newSet);
+
+    // try {
+    //   fetch(`https://cc26-planout.herokuapp.com/tasks/${index}`, {
+    //     method: "PUT",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Accept: "application/json",
+    //       Authorization: "Bearer " + token,
+    //     },
+    //   });
+    //   JSON.stringify({
+    //     status: false,
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   useEffect(() => {
