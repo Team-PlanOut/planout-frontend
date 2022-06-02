@@ -1,12 +1,13 @@
-import axios from 'axios';
-import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
+import axios from "axios";
+import Link from "next/link";
+import React, { useCallback, useEffect, useState } from "react";
 
-import EventForm from '../components/EventForm';
-import useAuth from '../src/hook/auth';
+import EventForm from "../components/EventForm";
+import useAuth from "../src/hook/auth";
 
 export default function EventsFeed() {
   const [events, setEvents] = useState<Event[]>([]);
+
   const { token } = useAuth() as any;
 
   interface Event {
@@ -20,7 +21,7 @@ export default function EventsFeed() {
     modified: number;
   }
 
-  const showEvents = async () => {
+  const getEvents = async () => {
     const response = await axios.get(
       "https://cc26-planout.herokuapp.com/events",
       {
@@ -33,7 +34,7 @@ export default function EventsFeed() {
   };
 
   useEffect(() => {
-    showEvents();
+    getEvents();
   }, []);
 
   const showOnlyDate = (date: Date) => {
@@ -44,7 +45,7 @@ export default function EventsFeed() {
     <div>
       <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
         <div className="overflow-hidden m-10">
-          <EventForm />
+          <EventForm getEvents={getEvents} />
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
           <div>
             {events.map((event) => (

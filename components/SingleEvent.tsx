@@ -63,6 +63,8 @@ export default function SingleEvent() {
     getEvent();
   }, []);
 
+  // console.log(event);
+
   useEffect(() => {
     showTasks();
   }, []);

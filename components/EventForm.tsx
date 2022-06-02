@@ -1,10 +1,10 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import axios from "axios";
+import React, { useState } from "react";
 
-import useAuth from '../src/hook/auth';
-import EventModal from './EventModal';
+import useAuth from "../src/hook/auth";
+import EventModal from "./EventModal";
 
-export default function EventForm() {
+export default function EventForm({ getEvents }) {
   const [showModal, setShowModal] = useState(false);
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
@@ -53,6 +53,7 @@ export default function EventForm() {
             setEventTime={setEventTime}
             setEventBudget={setEventBudget}
             createEvent={createEvent}
+            getEvents={getEvents}
           />
         )}
       </div>

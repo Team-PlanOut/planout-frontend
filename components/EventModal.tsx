@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function Event({
   setShowModal,
@@ -7,6 +7,7 @@ export default function Event({
   setEventTime,
   setEventBudget,
   createEvent,
+  getEvents,
 }: {
   setShowModal: any;
   setEventName: any;
@@ -14,6 +15,7 @@ export default function Event({
   setEventTime: any;
   setEventBudget: any;
   createEvent: any;
+  getEvents: any;
 }) {
   return (
     <div
@@ -123,6 +125,7 @@ export default function Event({
                 onClick={(e) => {
                   e.preventDefault();
                   createEvent();
+                  getEvents();
                   setShowModal(false);
                 }}
               >
