@@ -15,7 +15,7 @@ module.exports = {
       },
     },
     backgroundImage: (theme) => ({
-      image: "url('./balloons/jpg')",
+      image: "url('/balloons.jpg')",
     }),
   },
   plugins: [require("flowbite/plugin")],
