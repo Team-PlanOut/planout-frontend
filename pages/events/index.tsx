@@ -2,27 +2,16 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import EventForm from "../../components/events/EventForm";
+import { Events } from "../../types";
 
-// import EventsFeed from "../../components/events/EventsFeed";
 import Navbar from "../../components/Navbar";
 import useAuth from "../../src/hook/auth";
 import { withProtected } from "../../src/hook/route";
 
 function Events() {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Events[]>([]);
 
   const { token } = useAuth() as any;
-
-  interface Event {
-    id: number;
-    host: string;
-    name: string;
-    event_name: string;
-    date: Date;
-    budget: number;
-    created_at: number;
-    modified: number;
-  }
 
   const getEvents = async () => {
     const response = await axios.get(

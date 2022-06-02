@@ -5,13 +5,14 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
+import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
 
 function SingleEventPage() {
   const router = useRouter();
 
-  const [event, setEvent] = useState<Event>({} as Event);
-  const [task, setTask] = useState<Task[]>([]);
+  const [event, setEvent] = useState<Events>({} as Events);
+  const [task, setTask] = useState<Tasks[]>([]);
   const { token } = useAuth() as any;
 
   let [complete, setComplete] = useState<number | null>(null);
@@ -19,14 +20,6 @@ function SingleEventPage() {
   const {
     query: { id },
   } = router;
-
-  interface Event {
-    name: string;
-  }
-
-  interface Task {
-    id: number;
-  }
 
   const getEventName = async () => {
     const response = await axios.get(
@@ -40,7 +33,7 @@ function SingleEventPage() {
     setEvent(response.data);
   };
 
-  const showTasks = async () => {
+  const getTasks = async () => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
       {
@@ -57,7 +50,7 @@ function SingleEventPage() {
   }, []);
 
   useEffect(() => {
-    showTasks();
+    getTasks();
   }, []);
 
   const completeTask = async (id: number) => {
@@ -82,8 +75,8 @@ function SingleEventPage() {
         <div className="mt-10 text-center text-4xl font-header">
           {event.name}
         </div>
+        <TaskForm getTasks={getTasks} />
         <div className="overflow-hidden m-10">
-          <TaskForm />
           <div className="mt-10 text-center text-4xl font-header"></div>
           <div className="mt-16 text-center text-4xl font-header">TASKS</div>
           <div className="overflow-hidden m-10">
@@ -91,7 +84,7 @@ function SingleEventPage() {
               {task.map((task: any, index: number) => (
                 <div
                   key={task.id}
-                  className={`p-5   border-2 md:w-1/2 m-auto mt-10 ${
+                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
                     complete === index ? "bg-green-100" : "bg-red-100"
                   }`}
                 >
