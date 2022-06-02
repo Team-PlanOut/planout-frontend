@@ -41,7 +41,7 @@ export default function EventsFeed() {
 
   return (
     <div>
-      <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
+      <div className="container m-auto mt-20 box-content h-screen md:w-1/2 md:shadow-lg ">
         <div className="overflow-hidden m-10">
           <EventForm />
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>

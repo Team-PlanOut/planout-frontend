@@ -1,5 +1,4 @@
 module.exports = {
-  
   mode: "jit",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -15,7 +14,9 @@ module.exports = {
         body: ["Barlow Condensed"],
       },
     },
+    backgroundImage: (theme) => ({
+      image: "url('./balloons/jpg')",
+    }),
   },
   plugins: [require("flowbite/plugin")],
 };
-

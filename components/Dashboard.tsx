@@ -40,7 +40,7 @@ export default function Dashboard() {
   }, [token]);
 
   return (
-    <div className="container m-auto h-screen mt-20 box-content md:w-1/2 border overflow-y-auto pb-10">
+    <div className="container m-auto h-screen mt-20 box-content md:w-1/2 shadow md:shadow-lg overflow-y-auto pb-10">
       <div className="overflow-hidden m-10">
         <div className="flex flex-row justify-center">
           <Image
@@ -63,7 +63,7 @@ export default function Dashboard() {
         {tasks.map((task: any, index: number) => (
           <div
             key={task.id}
-            className={`p-5   border-2 md:w-1/2 m-auto mt-10 ${
+            className={`p-5 shadow-md md:w-1/2 m-auto mt-10 ${
               complete.has(index) ? "bg-green-100" : "bg-red-100"
             }`}
           >

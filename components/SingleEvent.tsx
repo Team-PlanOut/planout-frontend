@@ -9,7 +9,7 @@ import axios from "axios";
 
 export default function SingleEvent() {
   const router = useRouter();
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event>({} as Event);
   const [task, setTask] = useState<Task[]>([]);
   const { token } = useAuth() as any;
 
@@ -52,6 +52,7 @@ export default function SingleEvent() {
       }
     );
     setEvents(response.data);
+    console.log(events);
   };
 
   const showTasks = async () => {
@@ -77,15 +78,14 @@ export default function SingleEvent() {
   return (
     <div>
       <Navbar />
-      <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
+      <div className="container m-auto mt-20 box-content h-screen md:w-1/2 md:shadow-lg ">
         <div className="mt-10 text-center text-4xl font-header">
           {events.name}
         </div>
+        <TaskForm />
 
         <div className="overflow-hidden m-10">
-          <TaskForm />
-
-          <div className="mt-10 text-center text-4xl font-header"></div>
+          <div className="mt-2 text-center text-4xl font-header"></div>
           <div className="mt-16 text-center text-4xl font-header">TASKS</div>
           <div className="overflow-hidden m-10">
             <div>
