@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import useAuth from "../src/hook/auth";
-import { MoonLoader } from "react-spinners";
+import 'firebase/compat/auth';
+
+import firebase from 'firebase/compat/app';
+import React, { useEffect, useState } from 'react';
+import { MoonLoader } from 'react-spinners';
+
+import useAuth from '../src/hook/auth';
 
 export default function AuthStateChanged({ children }: any) {
   const { setUser, setToken } = useAuth();

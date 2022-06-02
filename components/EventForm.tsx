@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import useAuth from "../src/hook/auth";
-import EventModal from "./EventModal";
-import axios from "axios";
+import axios from 'axios';
+import React, { useState } from 'react';
+
+import useAuth from '../src/hook/auth';
+import EventModal from './EventModal';
 
 export default function EventForm() {
   const [showModal, setShowModal] = useState(false);

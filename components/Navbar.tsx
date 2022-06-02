@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useState } from 'react';
 
 export default function Navbar() {
   let [open, setOpen] = useState(false);

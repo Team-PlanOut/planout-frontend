@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import { withProtected } from "../src/hook/route";
+import axios from "axios";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
+import Navbar from "../components/Navbar";
 import TaskForm from "../components/TaskForm";
 import useAuth from "../src/hook/auth";
-import axios from "axios";
 
 export default function SingleEvent() {
   const router = useRouter();
-  const [events, setEvents] = useState<Event[]>([]);
+
+  const [event, setEvent] = useState<Event>({} as Event);
   const [task, setTask] = useState<Task[]>([]);
   const { token } = useAuth() as any;
 
@@ -20,14 +20,7 @@ export default function SingleEvent() {
   } = router;
 
   interface Event {
-    id: number;
-    host: string;
     name: string;
-    event_name: string;
-    date: Date;
-    budget: number;
-    created_at: number;
-    modified: number;
   }
 
   interface Task {
@@ -42,7 +35,7 @@ export default function SingleEvent() {
     modified: number;
   }
 
-  const showEvents = async () => {
+  const getEvent = async () => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/events/${id}`,
       {
@@ -51,7 +44,7 @@ export default function SingleEvent() {
         },
       }
     );
-    setEvents(response.data);
+    setEvent(response.data);
   };
 
   const showTasks = async () => {
@@ -67,19 +60,34 @@ export default function SingleEvent() {
   };
 
   useEffect(() => {
-    showEvents();
+    getEvent();
   }, []);
 
   useEffect(() => {
     showTasks();
   }, []);
 
+  const completeTask = async (id: number) => {
+    const response = await axios.put(
+      `https://cc26-planout.herokuapp.com/tasks/${id}`,
+      {
+        status: true,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    setComplete(response.data.id);
+  };
+
   return (
     <div>
       <Navbar />
       <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
         <div className="mt-10 text-center text-4xl font-header">
-          {events.name}
+          {event.name}
         </div>
 
         <div className="overflow-hidden m-10">
@@ -118,7 +126,7 @@ export default function SingleEvent() {
                         </svg>
                       </div>
                     ) : (
-                      <div onClick={() => setComplete(index)}>
+                      <div onClick={() => completeTask(task.id)}>
                         Complete task
                       </div>
                     )}

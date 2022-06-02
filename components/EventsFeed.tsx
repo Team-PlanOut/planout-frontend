@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useCallback } from "react";
-import Link from "next/link";
-import useAuth from "../src/hook/auth";
-import axios from "axios";
-import EventForm from "../components/EventForm";
+import axios from 'axios';
+import Link from 'next/link';
+import React, { useCallback, useEffect, useState } from 'react';
+
+import EventForm from '../components/EventForm';
+import useAuth from '../src/hook/auth';
 
 export default function EventsFeed() {
   const [events, setEvents] = useState<Event[]>([]);

@@ -1,6 +1,7 @@
-import React from "react";
-import useAuth from "../src/hook/auth";
-import { withPublic } from "../src/hook/route";
+import React from 'react';
+
+import useAuth from '../src/hook/auth';
+import { withPublic } from '../src/hook/route';
 
 function Login({ auth }: any) {
   auth = useAuth();

@@ -1,10 +1,10 @@
+import Head from 'next/head';
+
+import Dashboard from '../components/Dashboard';
+import Navbar from '../components/Navbar';
+import { withProtected } from '../src/hook/route';
+
 import type { NextPage } from "next";
-import Head from "next/head";
-import Dashboard from "../components/Dashboard";
-import Navbar from "../components/Navbar";
-
-import { withProtected } from "../src/hook/route";
-
 const Home: NextPage = () => {
   return (
     <div>

@@ -1,7 +1,8 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import { withProtected } from "../src/hook/route";
-import EventsFeed from "../components/EventsFeed";
+import React from 'react';
+
+import EventsFeed from '../components/EventsFeed';
+import Navbar from '../components/Navbar';
+import { withProtected } from '../src/hook/route';
 
 function Events() {
   return (
