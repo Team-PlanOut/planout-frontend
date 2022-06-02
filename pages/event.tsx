@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import SingleEvent from '../components/SingleEvent';
-import { withProtected } from '../src/hook/route';
+import SingleEvent from "../components/events/SingleEvent";
+import { withProtected } from "../src/hook/route";
 
 function SingleEventPage() {
   return (

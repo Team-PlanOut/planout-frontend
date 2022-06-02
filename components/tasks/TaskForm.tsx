@@ -1,9 +1,9 @@
-import axios from 'axios';
-import router from 'next/router';
-import React, { useState } from 'react';
+import axios from "axios";
+import router from "next/router";
+import React, { useState } from "react";
 
-import TaskModal from '../components/TaskModal';
-import useAuth from '../src/hook/auth';
+import TaskModal from "../tasks/TaskModal";
+import useAuth from "../../src/hook/auth";
 
 export default function TaskForm() {
   const [showModal, setShowModal] = useState(false);

@@ -1,9 +1,9 @@
 import axios from "axios";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import EventForm from "../components/EventForm";
-import useAuth from "../src/hook/auth";
+import EventForm from "../events/EventForm";
+import useAuth from "../../src/hook/auth";
 
 export default function EventsFeed() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -37,9 +37,7 @@ export default function EventsFeed() {
     getEvents();
   }, []);
 
-  const showOnlyDate = (date: Date) => {
-    return date.toString().slice(0, 10);
-  };
+  const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
 
   return (
     <div>

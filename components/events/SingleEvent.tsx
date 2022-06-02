@@ -2,9 +2,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import Navbar from "../components/Navbar";
-import TaskForm from "../components/TaskForm";
-import useAuth from "../src/hook/auth";
+import Navbar from "../Navbar";
+import TaskForm from "../tasks/TaskForm";
+import useAuth from "../../src/hook/auth";
 
 export default function SingleEvent() {
   const router = useRouter();
@@ -35,7 +35,7 @@ export default function SingleEvent() {
     modified: number;
   }
 
-  const getEvent = async () => {
+  const getEventName = async () => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/events/${id}`,
       {
@@ -60,10 +60,8 @@ export default function SingleEvent() {
   };
 
   useEffect(() => {
-    getEvent();
+    getEventName();
   }, []);
-
-  // console.log(event);
 
   useEffect(() => {
     showTasks();
