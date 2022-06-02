@@ -37,7 +37,7 @@ export default function Dashboard() {
     if (token) {
       fetchTaskData();
     }
-  }, []);
+  }, [token]);
 
   return (
     <div className="container m-auto h-screen mt-20 box-content md:w-1/2 border overflow-y-auto pb-10">
