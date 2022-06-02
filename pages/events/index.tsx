@@ -1,11 +1,14 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import EventForm from "../../components/events/EventForm";
 
-import EventForm from "../events/EventForm";
+// import EventsFeed from "../../components/events/EventsFeed";
+import Navbar from "../../components/Navbar";
 import useAuth from "../../src/hook/auth";
+import { withProtected } from "../../src/hook/route";
 
-export default function EventsFeed() {
+function Events() {
   const [events, setEvents] = useState<Event[]>([]);
 
   const { token } = useAuth() as any;
@@ -40,10 +43,11 @@ export default function EventsFeed() {
   const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
 
   return (
-    <div>
+    <>
+      <Navbar />
       <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
         <div className="overflow-hidden m-10">
-          <EventForm getEvents={getEvents} />
+          <EventForm />
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
           <div>
             {events.map((event) => (
@@ -51,12 +55,7 @@ export default function EventsFeed() {
                 key={event.id}
                 className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
               >
-                <Link
-                  href={{
-                    pathname: "/event",
-                    query: { id: event.id },
-                  }}
-                >
+                <Link href={"/events/" + event.id} key={event.id}>
                   {event.name}
                 </Link>
                 <br />
@@ -66,6 +65,8 @@ export default function EventsFeed() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
+
+export default withProtected(Events);

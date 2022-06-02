@@ -8,12 +8,12 @@ export default function Event({
   setEventBudget,
   createEvent,
 }: {
-  setShowModal: any;
-  setEventName: any;
-  setEventDate: any;
-  setEventTime: any;
-  setEventBudget: any;
-  createEvent: any;
+  setShowModal: (showModal: boolean) => void;
+  setEventName: (eventName: string) => void;
+  setEventDate: (eventDate: string) => void;
+  setEventTime: (eventTime: string) => void;
+  setEventBudget: (eventBudget: number) => void;
+  createEvent: () => void;
 }) {
   return (
     <div

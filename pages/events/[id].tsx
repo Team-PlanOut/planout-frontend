@@ -2,11 +2,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import Navbar from "../Navbar";
-import TaskForm from "../tasks/TaskForm";
+import Navbar from "../../components/Navbar";
+import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
+import { withProtected } from "../../src/hook/route";
 
-export default function SingleEvent() {
+function SingleEventPage() {
   const router = useRouter();
 
   const [event, setEvent] = useState<Event>({} as Event);
@@ -25,14 +26,6 @@ export default function SingleEvent() {
 
   interface Task {
     id: number;
-    description: string;
-    points: number;
-    cost: number;
-    status: boolean;
-    event_id: number;
-    user_id: number;
-    created_at: number;
-    modified: number;
   }
 
   const getEventName = async () => {
@@ -89,10 +82,8 @@ export default function SingleEvent() {
         <div className="mt-10 text-center text-4xl font-header">
           {event.name}
         </div>
-
         <div className="overflow-hidden m-10">
           <TaskForm />
-
           <div className="mt-10 text-center text-4xl font-header"></div>
           <div className="mt-16 text-center text-4xl font-header">TASKS</div>
           <div className="overflow-hidden m-10">
@@ -140,3 +131,4 @@ export default function SingleEvent() {
     </div>
   );
 }
+export default withProtected(SingleEventPage);
