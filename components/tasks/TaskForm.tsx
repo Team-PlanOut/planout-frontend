@@ -5,11 +5,11 @@ import React, { useState } from "react";
 import TaskModal from "../tasks/TaskModal";
 import useAuth from "../../src/hook/auth";
 
-export default function TaskForm() {
+export default function TaskForm({ getTasks }: any) {
   const [showModal, setShowModal] = useState(false);
   const [taskDescription, setTaskDescription] = useState("");
-  const [taskPoints, setTaskPoints] = useState(0);
-  const [taskCost, setTaskCost] = useState(0);
+  const [taskPoints, setTaskPoints] = useState("");
+  const [taskCost, setTaskCost] = useState("");
   const { token } = useAuth() as any;
 
   const createTask = () => {
@@ -54,6 +54,7 @@ export default function TaskForm() {
           setTaskPoints={setTaskPoints}
           setTaskCost={setTaskCost}
           createTask={createTask}
+          getTasks={getTasks}
         />
       )}
     </div>

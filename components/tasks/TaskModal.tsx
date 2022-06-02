@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function Task({
   setShowModal,
@@ -6,12 +6,14 @@ export default function Task({
   setTaskPoints,
   setTaskCost,
   createTask,
+  getTasks,
 }: {
-  setShowModal: any;
-  setTaskDescription: any;
-  setTaskPoints: any;
-  setTaskCost: any;
-  createTask: any;
+  setShowModal: (showModal: boolean) => void;
+  setTaskDescription: (taskDescription: string) => void;
+  setTaskPoints: (taskPoints: string) => void;
+  setTaskCost: (taskCost: string) => void;
+  createTask: () => void;
+  getTasks: () => void;
 }) {
   return (
     <div
@@ -105,6 +107,7 @@ export default function Task({
                 onClick={(e) => {
                   e.preventDefault();
                   createTask();
+                  getTasks();
                   setShowModal(false);
                 }}
               >

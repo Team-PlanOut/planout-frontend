@@ -7,13 +7,15 @@ export default function Event({
   setEventTime,
   setEventBudget,
   createEvent,
+  getEvents,
 }: {
   setShowModal: (showModal: boolean) => void;
   setEventName: (eventName: string) => void;
   setEventDate: (eventDate: string) => void;
   setEventTime: (eventTime: string) => void;
-  setEventBudget: (eventBudget: number) => void;
+  setEventBudget: (eventBudget: string) => void;
   createEvent: () => void;
+  getEvents: () => void;
 }) {
   return (
     <div
@@ -123,7 +125,7 @@ export default function Event({
                 onClick={(e) => {
                   e.preventDefault();
                   createEvent();
-                  // getEvents();
+                  getEvents();
                   setShowModal(false);
                 }}
               >

@@ -14,6 +14,7 @@ function SingleEventPage() {
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
   const { token } = useAuth() as any;
+  console.log("~ token", token);
 
   let [complete, setComplete] = useState<number | null>(null);
 
@@ -47,11 +48,8 @@ function SingleEventPage() {
 
   useEffect(() => {
     getEventName();
-  }, []);
-
-  useEffect(() => {
     getTasks();
-  }, []);
+  });
 
   const completeTask = async (id: number) => {
     const response = await axios.put(

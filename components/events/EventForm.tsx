@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import useAuth from "../../src/hook/auth";
 import EventModal from "./EventModal";
 
-export default function EventForm() {
+export default function EventForm({ getEvents }: any) {
   const [showModal, setShowModal] = useState(false);
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventTime, setEventTime] = useState("");
-  const [eventBudget, setEventBudget] = useState(0);
+  const [eventBudget, setEventBudget] = useState("");
   const { token } = useAuth() as any;
 
   const createEvent = () => {
@@ -53,6 +53,7 @@ export default function EventForm() {
             setEventTime={setEventTime}
             setEventBudget={setEventBudget}
             createEvent={createEvent}
+            getEvents={getEvents}
           />
         )}
       </div>
