@@ -42,7 +42,7 @@ function Login({ auth }: any) {
                 </span>
                 <input
                   className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 round-md transition focus:ring-2 focus:ring-green-300"
-                  placeholder="Username"
+                  placeholder="Password"
                   type="password"
                 />
               </div>
