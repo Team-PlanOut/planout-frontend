@@ -2,7 +2,6 @@ import { ReactElement, useState } from "react";
 
 export default function Navbar() {
   let [open, setOpen] = useState(false);
-  let [currentView, setCurrentView] = useState("pc");
 
   const links: { name: string; link: string; icon: ReactElement }[] = [
     {
