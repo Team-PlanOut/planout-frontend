@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import { withProtected } from "../src/hook/route";
-import { useRouter } from "next/router";
-
-import TaskForm from "../components/TaskForm";
-import useAuth from "../src/hook/auth";
 import axios from "axios";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
-export default function SingleEvent() {
+import Navbar from "../../components/Navbar";
+import TaskForm from "../../components/tasks/TaskForm";
+import useAuth from "../../src/hook/auth";
+import { Events, Tasks } from "../../types";
+import { withProtected } from "../../src/hook/route";
+
+function SingleEventPage() {
   const router = useRouter();
-  const [events, setEvents] = useState<Event>({} as Event);
-  const [task, setTask] = useState<Task[]>([]);
+
+  const [event, setEvent] = useState<Events>({} as Events);
+  const [task, setTask] = useState<Tasks[]>([]);
   const { token } = useAuth() as any;
+  console.log("~ token", token);
 
   let [complete, setComplete] = useState<number | null>(null);
 
@@ -19,30 +22,7 @@ export default function SingleEvent() {
     query: { id },
   } = router;
 
-  interface Event {
-    id: number;
-    host: string;
-    name: string;
-    event_name: string;
-    date: Date;
-    budget: number;
-    created_at: number;
-    modified: number;
-  }
-
-  interface Task {
-    id: number;
-    description: string;
-    points: number;
-    cost: number;
-    status: boolean;
-    event_id: number;
-    user_id: number;
-    created_at: number;
-    modified: number;
-  }
-
-  const showEvents = async () => {
+  const getEventName = async () => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/events/${id}`,
       {
@@ -51,11 +31,10 @@ export default function SingleEvent() {
         },
       }
     );
-    setEvents(response.data);
-    console.log(events);
+    setEvent(response.data);
   };
 
-  const showTasks = async () => {
+  const getTasks = async () => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
       {
@@ -68,31 +47,42 @@ export default function SingleEvent() {
   };
 
   useEffect(() => {
-    showEvents();
-  }, []);
+    getEventName();
+    getTasks();
+  });
 
-  useEffect(() => {
-    showTasks();
-  }, []);
+  const completeTask = async (id: number) => {
+    const response = await axios.put(
+      `https://cc26-planout.herokuapp.com/tasks/${id}`,
+      {
+        status: true,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    setComplete(response.data.id);
+  };
 
   return (
     <div>
       <Navbar />
       <div className="container m-auto mt-20 box-content h-screen md:w-1/2 md:shadow-lg ">
         <div className="mt-10 text-center text-4xl font-header">
-          {events.name}
+          {event.name}
         </div>
-        <TaskForm />
-
+        <TaskForm getTasks={getTasks} />
         <div className="overflow-hidden m-10">
-          <div className="mt-2 text-center text-4xl font-header"></div>
+          <div className="mt-10 text-center text-4xl font-header"></div>
           <div className="mt-16 text-center text-4xl font-header">TASKS</div>
           <div className="overflow-hidden m-10">
             <div>
               {task.map((task: any, index: number) => (
                 <div
                   key={task.id}
-                  className={`p-5   border-2 md:w-1/2 m-auto mt-10 ${
+                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
                     complete === index ? "bg-green-100" : "bg-red-100"
                   }`}
                 >
@@ -118,7 +108,7 @@ export default function SingleEvent() {
                         </svg>
                       </div>
                     ) : (
-                      <div onClick={() => setComplete(index)}>
+                      <div onClick={() => completeTask(task.id)}>
                         Complete task
                       </div>
                     )}
@@ -132,3 +122,4 @@ export default function SingleEvent() {
     </div>
   );
 }
+export default withProtected(SingleEventPage);

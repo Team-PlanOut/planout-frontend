@@ -1,25 +1,19 @@
-import React, { useEffect, useState, useCallback } from "react";
-import Link from "next/link";
-import useAuth from "../src/hook/auth";
 import axios from "axios";
-import EventForm from "../components/EventForm";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import EventForm from "../../components/events/EventForm";
+import { Events } from "../../types";
 
-export default function EventsFeed() {
-  const [events, setEvents] = useState<Event[]>([]);
+import Navbar from "../../components/Navbar";
+import useAuth from "../../src/hook/auth";
+import { withProtected } from "../../src/hook/route";
+
+function Events() {
+  const [events, setEvents] = useState<Events[]>([]);
+
   const { token } = useAuth() as any;
 
-  interface Event {
-    id: number;
-    host: string;
-    name: string;
-    event_name: string;
-    date: Date;
-    budget: number;
-    created_at: number;
-    modified: number;
-  }
-
-  const showEvents = async () => {
+  const getEvents = async () => {
     const response = await axios.get(
       "https://cc26-planout.herokuapp.com/events",
       {
@@ -32,18 +26,17 @@ export default function EventsFeed() {
   };
 
   useEffect(() => {
-    showEvents();
-  }, []);
+    getEvents();
+  });
 
-  const showOnlyDate = (date: Date) => {
-    return date.toString().slice(0, 10);
-  };
+  const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
 
   return (
-    <div>
-      <div className="container m-auto mt-20 box-content h-screen md:w-1/2 md:shadow-lg ">
+    <>
+      <Navbar />
+      <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
         <div className="overflow-hidden m-10">
-          <EventForm />
+          <EventForm getEvents={getEvents} />
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
           <div>
             {events.map((event) => (
@@ -51,12 +44,7 @@ export default function EventsFeed() {
                 key={event.id}
                 className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
               >
-                <Link
-                  href={{
-                    pathname: "/event",
-                    query: { id: event.id },
-                  }}
-                >
+                <Link href={"/events/" + event.id} key={event.id}>
                   {event.name}
                 </Link>
                 <br />
@@ -66,6 +54,8 @@ export default function EventsFeed() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
+
+export default withProtected(Events);

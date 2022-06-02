@@ -1,29 +1,33 @@
 import React from "react";
 
-export default function Task({
+export default function Event({
   setShowModal,
-  setTaskDescription,
-  setTaskPoints,
-  setTaskCost,
-  createTask,
+  setEventName,
+  setEventDate,
+  setEventTime,
+  setEventBudget,
+  createEvent,
+  getEvents,
 }: {
-  setShowModal: any;
-  setTaskDescription: any;
-  setTaskPoints: any;
-  setTaskCost: any;
-  createTask: any;
+  setShowModal: (showModal: boolean) => void;
+  setEventName: (eventName: string) => void;
+  setEventDate: (eventDate: string) => void;
+  setEventTime: (eventTime: string) => void;
+  setEventBudget: (eventBudget: string) => void;
+  createEvent: () => void;
+  getEvents: () => void;
 }) {
   return (
     <div
       id="authentication-modal"
       aria-hidden="true"
-      className="auto overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
+      className=" auto overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
     >
       <div className="m-auto mt-16 p-4 w-full max-w-md h-full md:h-auto">
-        <div className="m-auto bg-white rounded-lg shadow dark:bg-gray-700">
+        <div className="m-auto bg-white e rounded-lg shadow dark:bg-gray-700 ">
           <button
             type="button"
-            className="float-right mr-2 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+            className=" float-right mr-2 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
             data-modal-toggle="authentication-modal"
             onClick={() => setShowModal(false)}
           >
@@ -42,7 +46,7 @@ export default function Task({
           </button>
           <div className="py-6 px-6 lg:px-8">
             <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-              Enter information about your task
+              Enter information about your event
             </h3>
             <form className="space-y-6" action="#">
               <div>
@@ -50,15 +54,49 @@ export default function Task({
                   htmlFor="event-name"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  Task description
+                  Event name
                 </label>
                 <input
                   type="text"
                   name="event_name"
                   id="event_name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  placeholder="Enter task"
-                  onChange={(e) => setTaskDescription(e.target.value)}
+                  placeholder="Enter event name"
+                  onChange={(e) => setEventName(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="date"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Date
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  id="date"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  onChange={(e) => setEventDate(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="time"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Time
+                </label>
+                <input
+                  type="time"
+                  name="time"
+                  id="time"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  onChange={(e) => setEventTime(e.target.value)}
                   required
                 />
               </div>
@@ -68,7 +106,7 @@ export default function Task({
                   htmlFor="budget"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  Points
+                  Budget
                 </label>
                 <input
                   type="number"
@@ -76,25 +114,7 @@ export default function Task({
                   id="budget"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   min="0"
-                  onChange={(e) => setTaskPoints(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="budget"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                >
-                  Cost
-                </label>
-                <input
-                  type="number"
-                  name="budget"
-                  id="budget"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  min="0"
-                  onChange={(e) => setTaskCost(e.target.value)}
+                  onChange={(e) => setEventBudget(e.target.value)}
                   required
                 />
               </div>
@@ -104,11 +124,12 @@ export default function Task({
                 className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={(e) => {
                   e.preventDefault();
-                  createTask();
+                  createEvent();
+                  getEvents();
                   setShowModal(false);
                 }}
               >
-                Create Task
+                Create event
               </button>
             </form>
           </div>

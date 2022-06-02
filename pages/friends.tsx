@@ -1,6 +1,7 @@
-import React from "react";
-import { withProtected } from "../src/hook/route";
-import Navbar from "../components/Navbar";
+import React from 'react';
+
+import Navbar from '../components/Navbar';
+import { withProtected } from '../src/hook/route';
 
 function Friends() {
   return (

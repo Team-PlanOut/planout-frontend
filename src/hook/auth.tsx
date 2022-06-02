@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
-import { authService } from "../service/authentication";
+import { createContext, useContext, useState } from 'react';
+
+import { authService } from '../service/authentication';
 
 interface AuthData {
   user: object | null;
