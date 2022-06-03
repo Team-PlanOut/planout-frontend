@@ -27,7 +27,7 @@ function Events() {
 
   useEffect(() => {
     getEvents();
-  });
+  }, []);
 
   const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
 
