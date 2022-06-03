@@ -48,7 +48,7 @@ function SingleEventPage() {
   useEffect(() => {
     getEventName();
     getTasks();
-  });
+  }, []);
 
   const completeTask = async (id: number) => {
     const response = await axios.put(
