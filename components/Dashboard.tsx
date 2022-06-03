@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import useAuth from "../src/hook/auth";
 import Image from "next/image";
+import { FaTasks } from "react-icons/fa";
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState<any>([]);
@@ -56,8 +57,11 @@ export default function Dashboard() {
             <div> Points : </div>
           </div>
         </div>
-        <div className="mt-10 text-center text-3xl font-header">
-          Current Tasks
+        <div className="mt-10 text-center font-header flex justify-center">
+          <FaTasks className="text-xl relative top-1" />{" "}
+          <span className="ml-2 text-2xl relative bottom-1">
+            Current Tasks{" "}
+          </span>
         </div>
       </div>
 
@@ -69,10 +73,11 @@ export default function Dashboard() {
               complete.has(index) ? "bg-green-100" : "bg-red-100"
             }`}
           >
-            <div className="text-2xl text-center font-body">
-              {task.description}
+            <div className="text-xl ml-2 font-body">Event Name:</div>
+            <div className="text-xl mt-2 ml-2 font-body">
+              Task : {task.description}
             </div>
-            <div className="mt-5 hover:underline hover:cursor-pointer text-right">
+            <div className="mt-5 hover:underline hover:cursor-pointer font-body text-small text-right">
               {complete.has(index) ? (
                 <div onClick={() => removeComplete(index)}>
                   <svg
@@ -91,7 +96,7 @@ export default function Dashboard() {
                   </svg>
                 </div>
               ) : (
-                <div onClick={() => addComplete(index)}>Complete task</div>
+                <div onClick={() => addComplete(index)}>Mark as complete</div>
               )}
             </div>
           </div>
