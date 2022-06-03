@@ -17,6 +17,10 @@ module.exports = {
     backgroundImage: (theme) => ({
       image: "url('/balloons.jpg')",
     }),
+    colors: {
+      mintGreen: "#4ac6b7",
+      lightGreen: "#7eb19f",
+    },
   },
   plugins: [require("flowbite/plugin")],
 };

@@ -125,8 +125,10 @@ export default function Event({
                 onClick={(e) => {
                   e.preventDefault();
                   createEvent();
-                  getEvents();
                   setShowModal(false);
+                  setTimeout(() => {
+                    getEvents();
+                  });
                 }}
               >
                 Create event

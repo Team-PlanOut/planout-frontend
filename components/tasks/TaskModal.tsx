@@ -107,8 +107,10 @@ export default function Task({
                 onClick={(e) => {
                   e.preventDefault();
                   createTask();
-                  getTasks();
                   setShowModal(false);
+                  setTimeout(() => {
+                    getTasks();
+                  });
                 }}
               >
                 Create Task

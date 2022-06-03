@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FaTasks } from "react-icons/fa";
 
 export default function Dashboard() {
-  const [tasks, setTasks] = useState<any>([]);
+  const [task, setTasks] = useState<any>([]);
   const { token, user } = useAuth() as any;
   const [complete, setComplete] = useState<Set<number>>(new Set());
 
@@ -19,19 +19,47 @@ export default function Dashboard() {
       }
     );
     setTasks(response.data);
-    return tasks;
+    return task;
   };
 
-  const addComplete = (index: number) => {
-    const newSet = new Set(complete);
-    newSet.add(index);
-    setComplete(newSet);
-  };
+  const completeTask = async (id: number) => {
+    const selectedTask = task.find((task) => task.id === id);
 
-  const removeComplete = (index: number) => {
-    const newSet = new Set(complete);
-    newSet.delete(index);
-    setComplete(newSet);
+    if (selectedTask.status) {
+      try {
+        await axios.put(
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
+          {
+            id: id,
+            status: false,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        await axios.put(
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
+          {
+            id: id,
+            status: true,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   useEffect(() => {
@@ -66,38 +94,25 @@ export default function Dashboard() {
       </div>
 
       <div>
-        {tasks.map((task: any, index: number) => (
+        {task.map((task: any, index: number) => (
           <div
             key={task.id}
-            className={`p-5 shadow-md md:w-1/2 m-auto mt-10 ${
-              complete.has(index) ? "bg-green-100" : "bg-red-100"
+            className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
+              task.status ? "bg-green-100" : "bg-red-100"
             }`}
           >
-            <div className="text-xl ml-2 font-body">Event Name:</div>
-            <div className="text-xl mt-2 ml-2 font-body">
-              Task : {task.description}
+            <div className="text-2xl text-center font-body">
+              {task.description}
             </div>
-            <div className="mt-5 hover:underline hover:cursor-pointer font-body text-small text-right">
-              {complete.has(index) ? (
-                <div onClick={() => removeComplete(index)}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-              ) : (
-                <div onClick={() => addComplete(index)}>Mark as complete</div>
-              )}
+            <div className="mt-5 hover:underline hover:cursor-pointer text-right">
+              <button
+                onClick={() => {
+                  completeTask(task.id);
+                }}
+                className="text-2xl text-center font-body "
+              >
+                {task.status ? "Complete" : "Incomplete"}
+              </button>
             </div>
           </div>
         ))}
