@@ -39,13 +39,6 @@ export default function TaskForm({ getTasks }: any) {
 
   return (
     <div>
-      {/* <button
-        className="border-2  text-black float-right md:mr-24 p-2 hover:cursor-pointer"
-        data-modal-toggle="small-modal"
-        onClick={() => setShowModal(true)}
-      >
-        Create Task
-      </button> */}
       <FaPlusCircle
         data-tooltip-target="tooltip-top"
         data-tooltip-placement="top"
