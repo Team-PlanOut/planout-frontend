@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-
+import { FaPlusCircle } from "react-icons/fa";
 import useAuth from "../../src/hook/auth";
 import EventModal from "./EventModal";
 
@@ -36,14 +36,18 @@ export default function EventForm({ getEvents }: any) {
 
   return (
     <div>
-      <button
+      {/* <button
         className="block text-white float-right mb-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button"
         data-modal-toggle="authentication-modal"
         onClick={() => setShowModal(true)}
-      >
-        Create Event
-      </button>
+      > */}
+      <FaPlusCircle
+        data-modal-toggle="small-modal"
+        onClick={() => setShowModal(true)}
+        className="float-right md:mr-48 text-2xl hover:cursor-pointer  hover:fill-orange-300"
+      />
+
       <div className="m-auto bg-black">
         {showModal && (
           <EventModal

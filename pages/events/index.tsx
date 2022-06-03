@@ -36,19 +36,28 @@ function Events() {
       <Navbar />
       <div className="container m-auto mt-20 box-content h-auto md:w-1/2 shadow-lg pb-2">
         <div className="overflow-hidden m-10">
-          <EventForm getEvents={getEvents} />
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
+          <div>
+            <EventForm getEvents={getEvents} />
+          </div>
           <div>
             {events.map((event) => (
               <div
                 key={event.id}
                 className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
               >
-                <Link href={"/events/" + event.id} key={event.id}>
-                  {event.name}
-                </Link>
-                <br />
-                {showOnlyDate(event.date)}
+                <div className="text-left">
+                  Event name:
+                  <span className="ml-2">
+                    <Link href={"/events/" + event.id} key={event.id}>
+                      {event.name}
+                    </Link>
+                  </span>
+                </div>
+                <div className="text-left mt-2">
+                  {" "}
+                  Date: {showOnlyDate(event.date)}
+                </div>
               </div>
             ))}
           </div>
