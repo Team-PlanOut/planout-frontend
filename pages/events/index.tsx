@@ -10,7 +10,6 @@ import { withProtected } from "../../src/hook/route";
 
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
-
   const { token } = useAuth() as any;
 
   const getEvents = async () => {

@@ -13,6 +13,7 @@ function SingleEventPage() {
 
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
+  console.log("~ task", task);
   const { token } = useAuth() as any;
 
   let [complete, setComplete] = useState<number | null>(null);
@@ -51,18 +52,43 @@ function SingleEventPage() {
   }, []);
 
   const completeTask = async (id: number) => {
-    const response = await axios.put(
-      `https://cc26-planout.herokuapp.com/tasks/${id}`,
-      {
-        status: true,
-      },
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
+    const selectedTask = task.find((task) => task.id === id);
+
+    if (selectedTask.status) {
+      try {
+        await axios.put(
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
+          {
+            id: id,
+            status: false,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error);
       }
-    );
-    setComplete(response.data.id);
+    } else {
+      try {
+        await axios.put(
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
+          {
+            id: id,
+            status: true,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
