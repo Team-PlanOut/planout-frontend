@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import useAuth from "../src/hook/auth";
 import Image from "next/image";
+import { FaTasks } from "react-icons/fa";
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState<any>([]);
@@ -40,22 +41,27 @@ export default function Dashboard() {
   }, [token]);
 
   return (
-    <div className="container m-auto h-screen mt-20 box-content md:w-1/2 shadow md:shadow-lg overflow-y-auto pb-10">
+    <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
       <div className="overflow-hidden m-10">
-        <div className="flex flex-row justify-center">
+        <div className="flex flex-row md:ml-10 mt-10 md:justify-center">
           <Image
-            className="-z-10"
+            className="-z-10 rounded-full"
             src={user.photoURL}
             alt="user image"
             width={100}
             height={100}
           ></Image>
+
+          <div className="mt-5 font-body text-xl ml-5">
+            <div> Name: {user.displayName} </div>
+            <div> Points : </div>
+          </div>
         </div>
-        <div className="text-center mt-5 font-body text-2xl">
-          {user.displayName}
-        </div>
-        <div className="mt-10 text-center text-4xl font-header">
-          Current Tasks
+        <div className="mt-10 text-center font-header flex justify-center">
+          <FaTasks className="text-xl relative top-1" />{" "}
+          <span className="ml-2 text-2xl relative bottom-1">
+            Current Tasks{" "}
+          </span>
         </div>
       </div>
 
@@ -67,10 +73,11 @@ export default function Dashboard() {
               complete.has(index) ? "bg-green-100" : "bg-red-100"
             }`}
           >
-            <div className="text-2xl text-center font-body">
-              {task.description}
+            <div className="text-xl ml-2 font-body">Event Name:</div>
+            <div className="text-xl mt-2 ml-2 font-body">
+              Task : {task.description}
             </div>
-            <div className="mt-5 hover:underline hover:cursor-pointer text-right">
+            <div className="mt-5 hover:underline hover:cursor-pointer font-body text-small text-right">
               {complete.has(index) ? (
                 <div onClick={() => removeComplete(index)}>
                   <svg
@@ -89,7 +96,7 @@ export default function Dashboard() {
                   </svg>
                 </div>
               ) : (
-                <div onClick={() => addComplete(index)}>Complete task</div>
+                <div onClick={() => addComplete(index)}>Mark as complete</div>
               )}
             </div>
           </div>

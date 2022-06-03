@@ -31,7 +31,7 @@ function Login({ auth }: any) {
                   <FaUser />
                 </span>
                 <input
-                  className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 round-md transition focus:ring-2 focus:ring-green-300"
+                  className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 round-md transition focus:ring-2 focus:ring-orange-300"
                   placeholder="Username"
                   type="text"
                 />
@@ -41,7 +41,7 @@ function Login({ auth }: any) {
                   <FaLock />
                 </span>
                 <input
-                  className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 round-md transition focus:ring-2 focus:ring-green-300"
+                  className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 round-md transition focus:ring-2 focus:ring-orange-300"
                   placeholder="Password"
                   type="password"
                 />
