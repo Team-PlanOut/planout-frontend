@@ -40,21 +40,23 @@ export default function Dashboard() {
   }, [token]);
 
   return (
-    <div className="container m-auto h-screen mt-20 box-content md:w-1/2 shadow md:shadow-lg overflow-y-auto pb-10">
+    <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
       <div className="overflow-hidden m-10">
-        <div className="flex flex-row justify-center">
+        <div className="flex flex-row md:ml-10 mt-10 md:justify-center">
           <Image
-            className="-z-10"
+            className="-z-10 rounded-full"
             src={user.photoURL}
             alt="user image"
             width={100}
             height={100}
           ></Image>
+
+          <div className="mt-5 font-body text-xl ml-5">
+            <div> Name: {user.displayName} </div>
+            <div> Points : </div>
+          </div>
         </div>
-        <div className="text-center mt-5 font-body text-2xl">
-          {user.displayName}
-        </div>
-        <div className="mt-10 text-center text-4xl font-header">
+        <div className="mt-10 text-center text-3xl font-header">
           Current Tasks
         </div>
       </div>

@@ -34,7 +34,7 @@ function Events() {
   return (
     <>
       <Navbar />
-      <div className="container m-auto mt-20 box-content h-screen md:w-1/2 border-2">
+      <div className="container m-auto mt-20 box-content h-auto md:w-1/2 shadow-lg pb-2">
         <div className="overflow-hidden m-10">
           <EventForm getEvents={getEvents} />
           <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
