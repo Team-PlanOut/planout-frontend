@@ -2,12 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import useAuth from "../src/hook/auth";
 import Image from "next/image";
-import { FaTasks } from "react-icons/fa";
+import { FaCheckCircle, FaTasks } from "react-icons/fa";
 
 export default function Dashboard() {
   const [task, setTasks] = useState<any>([]);
   const { token, user } = useAuth() as any;
-  const [complete, setComplete] = useState<Set<number>>(new Set());
 
   const fetchTaskData = async () => {
     const response = await axios.get(
@@ -111,7 +110,7 @@ export default function Dashboard() {
                 }}
                 className="text-2xl text-center font-body "
               >
-                {task.status ? "Complete" : "Incomplete"}
+                {task.status ? <FaCheckCircle /> : "Incomplete"}
               </button>
             </div>
           </div>
