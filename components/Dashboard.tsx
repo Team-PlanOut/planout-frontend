@@ -67,7 +67,6 @@ export default function Dashboard() {
     }
   }, [token]);
 
-  //use effect that sorts events by id
   const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
     a.id > b.id ? 1 : -1
   );
