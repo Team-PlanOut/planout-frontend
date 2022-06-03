@@ -123,7 +123,9 @@ export default function Navbar() {
               >
                 <div className="flex flex-row mr-2">
                   {link.icon}
-                  <span className="md:hidden ml-2">{link.name}</span>
+                  <span className="md:hidden ml-2 relative bottom-1">
+                    {link.name}
+                  </span>
                 </div>
               </a>
             </li>
