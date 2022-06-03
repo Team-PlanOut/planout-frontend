@@ -54,7 +54,7 @@ function SingleEventPage() {
   const completeTask = async (id: number) => {
     const selectedTask = task.find((task) => task.id === id);
 
-    if (selectedTask.status) {
+    if (selectedTask?.status) {
       try {
         await axios.put(
           `https://cc26-planout.herokuapp.com/tasks/${id}`,
