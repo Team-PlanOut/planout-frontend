@@ -91,6 +91,10 @@ function SingleEventPage() {
     }
   };
 
+  const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
+    a.id > b.id ? 1 : -1
+  );
+
   return (
     <div>
       <Navbar />
@@ -104,39 +108,28 @@ function SingleEventPage() {
           <div className="mt-16 text-center text-4xl font-header">TASKS</div>
           <div className="overflow-hidden m-10">
             <div>
-              {task.map((task: any, index: number) => (
+              {sortedTasks.map((task: any, index: number) => (
                 <div
                   key={task.id}
                   className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-                    complete === index ? "bg-green-100" : "bg-red-100"
+                    task.status ? "bg-green-100" : "bg-red-100"
                   }`}
                 >
                   <div className="text-2xl text-center font-body">
                     {task.description}
                   </div>
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
-                    {complete === index ? (
-                      <div onClick={() => setComplete(null)}>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                      </div>
-                    ) : (
-                      <div onClick={() => completeTask(task.id)}>
-                        Complete task
-                      </div>
-                    )}
+                    <button
+                      onClick={() => {
+                        completeTask(task.id);
+                        setTimeout(() => {
+                          getTasks();
+                        }, 200);
+                      }}
+                      className="text-2xl text-center font-body "
+                    >
+                      {task.status ? "Complete" : "Incomplete"}
+                    </button>
                   </div>
                 </div>
               ))}
@@ -147,4 +140,36 @@ function SingleEventPage() {
     </div>
   );
 }
+
+//                       <div onClick={() => setComplete(null)}>
+//                         <svg
+//                           xmlns="http://www.w3.org/2000/svg"
+//                           className="h-6 w-6"
+//                           fill="none"
+//                           viewBox="0 0 24 24"
+//                           stroke="currentColor"
+//                           strokeWidth={2}
+//                         >
+//                           <path
+//                             strokeLinecap="round"
+//                             strokeLinejoin="round"
+//                             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+//                           />
+//                         </svg>
+//                       </div>
+//                     ) : (
+//                       <div onClick={() => completeTask(task.id)}>
+//                         Complete task
+//                       </div>
+//                     )}
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 export default withProtected(SingleEventPage);
