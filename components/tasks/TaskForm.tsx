@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 import TaskModal from "../tasks/TaskModal";
 import useAuth from "../../src/hook/auth";
+import { FaPlusCircle } from "react-icons/fa";
 
 export default function TaskForm({ getTasks }: any) {
   const [showModal, setShowModal] = useState(false);
@@ -38,14 +39,20 @@ export default function TaskForm({ getTasks }: any) {
 
   return (
     <div>
-      <button
-        className="block text-white float-right mb-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button"
-        data-modal-toggle="authentication-modal"
+      {/* <button
+        className="border-2  text-black float-right md:mr-24 p-2 hover:cursor-pointer"
+        data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
       >
         Create Task
-      </button>
+      </button> */}
+      <FaPlusCircle
+        data-tooltip-target="tooltip-top"
+        data-tooltip-placement="top"
+        data-modal-toggle="small-modal"
+        onClick={() => setShowModal(true)}
+        className="float-right md:mr-36 text-2xl hover:cursor-pointer fill-orange-300 hover:fill-red-600"
+      />
 
       {showModal && (
         <TaskModal

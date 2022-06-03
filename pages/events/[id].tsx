@@ -7,10 +7,12 @@ import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
 import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
+import { FaMoneyBill } from "react-icons/fa";
+import CostModal from "../../components/CostModal";
 
 function SingleEventPage() {
   const router = useRouter();
-
+  const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
   const { token } = useAuth() as any;
@@ -48,7 +50,7 @@ function SingleEventPage() {
   useEffect(() => {
     getEventName();
     getTasks();
-  });
+  }, []);
 
   const completeTask = async (id: number) => {
     const response = await axios.put(
@@ -68,25 +70,47 @@ function SingleEventPage() {
   return (
     <div>
       <Navbar />
-      <div className="container m-auto mt-20 box-content h-screen md:w-1/2 md:shadow-lg ">
-        <div className="mt-10 text-center text-4xl font-header">
-          {event.name}
-        </div>
-        <TaskForm getTasks={getTasks} />
+
+      <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
+        <div className="text-center text-4xl font-header">{event.name}</div>
+
         <div className="overflow-hidden m-10">
           <div className="mt-10 text-center text-4xl font-header"></div>
-          <div className="mt-16 text-center text-4xl font-header">TASKS</div>
-          <div className="overflow-hidden m-10">
+          <div className="mt-10 text-center text-4xl font-header mb-2">
+            TASKS
+          </div>
+
+          <div className="overflow-hidden">
+            <div>
+              <TaskForm getTasks={getTasks} />
+            </div>
             <div>
               {task.map((task: any, index: number) => (
                 <div
                   key={task.id}
-                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
+                  className={`p-5 shadow-md md:w-2/3 m-auto mt-10 ${
                     complete === index ? "bg-green-100" : "bg-red-100"
                   }`}
                 >
-                  <div className="text-2xl text-center font-body">
-                    {task.description}
+                  <div className="text-lg ml-2 font-body">
+                    <div>Task: {task.description}</div>
+
+                    <div>$ Cost:</div>
+                    <div className="mt-2 flex text-base hover:underline hover:cursor-pointer">
+                      {" "}
+                      <FaMoneyBill className="relative top-1 mr-1 text-lg" />
+                      <div
+                        className="mr-2"
+                        data-modal-toggle="small-modal"
+                        onClick={() => setShowCostModal(true)}
+                      >
+                        {" "}
+                        Add cost
+                      </div>
+                      {showCostModal ? (
+                        <CostModal setShowCostModal={setShowCostModal} />
+                      ) : null}
+                    </div>
                   </div>
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     {complete === index ? (
@@ -108,7 +132,7 @@ function SingleEventPage() {
                       </div>
                     ) : (
                       <div onClick={() => completeTask(task.id)}>
-                        Complete task
+                        Mark as complete
                       </div>
                     )}
                   </div>
