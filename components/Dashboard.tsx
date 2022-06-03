@@ -2,12 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import useAuth from "../src/hook/auth";
 import Image from "next/image";
-import { FaTasks } from "react-icons/fa";
+import { FaCheckCircle, FaTasks } from "react-icons/fa";
 
 export default function Dashboard() {
   const [task, setTasks] = useState<any>([]);
   const { token, user } = useAuth() as any;
-  const [complete, setComplete] = useState<Set<number>>(new Set());
 
   const fetchTaskData = async () => {
     const response = await axios.get(
@@ -23,7 +22,7 @@ export default function Dashboard() {
   };
 
   const completeTask = async (id: number) => {
-    const selectedTask = task.find((task) => task.id === id);
+    const selectedTask = task.find((task: { id: number }) => task.id === id);
 
     if (selectedTask.status) {
       try {
@@ -68,6 +67,10 @@ export default function Dashboard() {
     }
   }, [token]);
 
+  const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
+    a.id > b.id ? 1 : -1
+  );
+
   return (
     <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
       <div className="overflow-hidden m-10">
@@ -86,15 +89,13 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="mt-10 text-center font-header flex justify-center">
-          <FaTasks className="text-xl relative top-1" />{" "}
-          <span className="ml-2 text-2xl relative bottom-1">
-            Current Tasks{" "}
-          </span>
+          <FaTasks className="text-xl relative top-1" />
+          <span className="ml-2 text-2xl relative bottom-1">Current Tasks</span>
         </div>
       </div>
 
       <div>
-        {task.map((task: any, index: number) => (
+        {sortedTasks.map((task: any, index: number) => (
           <div
             key={task.id}
             className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
@@ -108,10 +109,14 @@ export default function Dashboard() {
               <button
                 onClick={() => {
                   completeTask(task.id);
+
+                  setTimeout(() => {
+                    fetchTaskData();
+                  }, 200);
                 }}
-                className="text-2xl text-center font-body "
+                className="text-2xl text-center font-body"
               >
-                {task.status ? "Complete" : "Incomplete"}
+                {task.status ? <FaCheckCircle /> : "Incomplete"}
               </button>
             </div>
           </div>
