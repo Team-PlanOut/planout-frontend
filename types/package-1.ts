@@ -12,7 +12,6 @@ export type Events = {
 export type Tasks = {
   id: number;
   description: string;
-  status: boolean;
   points: number;
   cost: number;
   complete: boolean;

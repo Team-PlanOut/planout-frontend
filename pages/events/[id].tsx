@@ -98,7 +98,6 @@ function SingleEventPage() {
   return (
     <div>
       <Navbar />
-
       <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
         <div className="text-center text-4xl font-header">{event.name}</div>
 
