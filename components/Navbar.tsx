@@ -2,7 +2,6 @@ import { ReactElement, useState } from "react";
 
 export default function Navbar() {
   let [open, setOpen] = useState(false);
-  let [currentView, setCurrentView] = useState("pc");
 
   const links: { name: string; link: string; icon: ReactElement }[] = [
     {
@@ -124,7 +123,9 @@ export default function Navbar() {
               >
                 <div className="flex flex-row mr-2">
                   {link.icon}
-                  <span className="md:hidden ml-2">{link.name}</span>
+                  <span className="md:hidden ml-2 relative bottom-1">
+                    {link.name}
+                  </span>
                 </div>
               </a>
             </li>

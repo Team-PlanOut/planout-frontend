@@ -1,5 +1,4 @@
 module.exports = {
-  
   mode: "jit",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -15,7 +14,13 @@ module.exports = {
         body: ["Barlow Condensed"],
       },
     },
+    backgroundImage: (theme) => ({
+      image: "url('/balloons.jpg')",
+    }),
+    colors: {
+      mintGreen: "#4ac6b7",
+      lightGreen: "#7eb19f",
+    },
   },
   plugins: [require("flowbite/plugin")],
 };
-
