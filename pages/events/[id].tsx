@@ -15,7 +15,7 @@ function SingleEventPage() {
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
-  console.log("~ task", task);
+
   const { token } = useAuth() as any;
 
   const {

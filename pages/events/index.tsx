@@ -54,7 +54,6 @@ function Events() {
                   </span>
                 </div>
                 <div className="text-left mt-2">
-                  {" "}
                   Date: {showOnlyDate(event.date)}
                 </div>
               </div>
