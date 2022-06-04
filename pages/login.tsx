@@ -8,7 +8,7 @@ function Login({ auth }: any) {
     const { loginWithGoogle } = auth;
 
     return (
-      <div className="bg-amber-50 block h-screen items-center justify-center p-4 md:flex ">
+      <div className="bg-bg block h-screen items-center justify-center p-4 md:flex">
         <div className="bg-cover bg-image flex flex-col items-center max-w-screen-lg overflow-hidden rounded-lg shadow-lg text-gray-600 w-full md:flex-row">
           <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2">
             <h1 className="font-medium text-3xl font-logo">PlanOut</h1>
@@ -49,7 +49,7 @@ function Login({ auth }: any) {
             </form>
             <div className="flex-flex-row">
               <button
-                className="bg-orange-200 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-amber-600"
+                className="bg-orange-200 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
                 type="submit"
               >
                 <FaUser className="mr-2" />
@@ -58,7 +58,7 @@ function Login({ auth }: any) {
 
               <button
                 onClick={loginWithGoogle}
-                className="bg-orange-200 font-medium ml-4 inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-amber-600"
+                className="bg-orange-200 font-medium ml-4 inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
               >
                 <FaGoogle className="mr-2" />
                 Login with Google

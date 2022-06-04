@@ -5,13 +5,14 @@ import React, { useState } from "react";
 import TaskModal from "../tasks/TaskModal";
 import useAuth from "../../src/hook/auth";
 import { FaPlusCircle } from "react-icons/fa";
+import { userInfo } from "os";
 
 export default function TaskForm({ getTasks }: any) {
   const [showModal, setShowModal] = useState(false);
   const [taskDescription, setTaskDescription] = useState("");
   const [taskPoints, setTaskPoints] = useState("");
   const [taskCost, setTaskCost] = useState("");
-  const { token } = useAuth() as any;
+  const { token, user } = useAuth() as any;
 
   const createTask = () => {
     const dataObj = {
@@ -19,7 +20,7 @@ export default function TaskForm({ getTasks }: any) {
       status: false,
       points: taskPoints,
       event_id: router.query.id,
-      user_id: 2,
+      asignee_uid: user.uid,
       cost: taskCost,
     };
     submitPostReq(dataObj);
@@ -27,7 +28,7 @@ export default function TaskForm({ getTasks }: any) {
 
   const submitPostReq = async (data: object) => {
     try {
-      await axios.post("  https://cc26-planout.herokuapp.com/tasks ", data, {
+      await axios.post("http://localhost:8090/tasks ", data, {
         headers: {
           Authorization: "Bearer " + token,
         },

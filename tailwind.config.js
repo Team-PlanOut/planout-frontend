@@ -18,10 +18,7 @@ module.exports = {
       image: "url('/balloons.jpg')",
     }),
     colors: {
-      skyBlue: "#dbf1f2",
-      darkOrange: "#cd5555",
-      indigo: "#882042",
-      lumot: "#cdd582",
+      bg: "#fdba9a",
     },
   },
   plugins: [require("flowbite/plugin")],
