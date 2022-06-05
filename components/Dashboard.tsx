@@ -9,9 +9,8 @@ export default function Dashboard() {
   const { token, user } = useAuth() as any;
 
   const fetchTaskData = async () => {
-    const uid = user.uid;
     const response = await axios.get(
-      `http://localhost:8090/tasks/user/${uid}`,
+      "https://cc26-planout.herokuapp.com/tasks",
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -28,7 +27,7 @@ export default function Dashboard() {
     if (selectedTask.status) {
       try {
         await axios.put(
-          `http://localhost:8090/tasks/${id}`,
+          `https://cc26-planout.herokuapp.com/${id}`,
           {
             id: id,
             status: false,
@@ -45,7 +44,7 @@ export default function Dashboard() {
     } else {
       try {
         await axios.put(
-          `http://localhost:8090/tasks/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
             status: true,
