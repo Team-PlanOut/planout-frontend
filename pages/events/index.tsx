@@ -32,37 +32,48 @@ function Events() {
     getEvents();
   }, []);
 
+  console.log(events.length);
+
   const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
   return (
     <>
       <Navbar />
-      <div className="container m-auto mt-20 box-content h-auto md:w-1/2 shadow-lg pb-2">
-        <div className="overflow-hidden m-10">
-          <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
-          <div>
-            <EventForm getEvents={getEvents} />
+      {events.length < 0 ? (
+        <>
+          <div className="container m-auto mt-20 box-content h-auto md:w-1/2 shadow-lg pb-2">
+            <div className="overflow-hidden m-10"></div>
+            No events found
           </div>
-          <div>
-            {events.map((event) => (
-              <Link
-                href="/events/[id]"
-                as={`/events/${event.id}`}
-                key={event.id}
-              >
-                <div
+        </>
+      ) : (
+        <div className="container m-auto mt-20 box-content h-auto md:w-1/2 shadow-lg pb-2">
+          <div className="overflow-hidden m-10">
+            <div className="mt-10 text-center text-4xl font-header">EVENTS</div>
+            <div>
+              <EventForm getEvents={getEvents} />
+            </div>
+            <div>
+              {events.map((event) => (
+                <Link
+                  href="/events/[id]"
+                  as={`/events/${event.id}`}
                   key={event.id}
-                  className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
                 >
-                  <div className="text-left">Event name: {event.name}</div>
-                  <div className="text-left mt-2">
-                    Date: {showOnlyDate(event.date)}
+                  <div
+                    key={event.id}
+                    className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
+                  >
+                    <div className="text-left">Event name: {event.name}</div>
+                    <div className="text-left mt-2">
+                      Date: {showOnlyDate(event.date)}
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

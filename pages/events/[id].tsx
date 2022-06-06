@@ -9,6 +9,7 @@ import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
 import { FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
+import events from ".";
 
 function SingleEventPage() {
   const router = useRouter();
@@ -119,71 +120,80 @@ function SingleEventPage() {
   return (
     <div>
       <Navbar />
-
-      <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
-        <div className="text-center text-4xl font-header">{event.name}</div>
-
-        <div className="overflow-hidden m-10">
-          <div className="mt-10 text-center text-4xl font-header"></div>
-          <div className="mt-10 text-center text-4xl font-header mb-2">
-            TASKS
-          </div>
-
-          <div className="overflow-hidden">
-            <div>
-              <TaskForm getTasks={getTasks} />
+      {events.length < 0 ? (
+        <>
+          <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
+            <div className="text-center text-4xl font-header">
+              Add some events!
             </div>
-            <div>
-              {sortedTasks.map((task: any, index: number) => (
-                <div
-                  key={task.id}
-                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-                    task.status ? "bg-green-100" : "bg-red-100"
-                  }`}
-                >
-                  <div className="text-lg ml-2 font-body">
-                    <div>Task: {task.description}</div>
+          </div>
+        </>
+      ) : (
+        <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
+          <div className="text-center text-4xl font-header">{event.name}</div>
 
-                    <div>$ Cost:</div>
-                    <div className="mt-2 flex text-base hover:underline hover:cursor-pointer">
-                      <FaMoneyBill className="relative top-1 mr-1 text-lg" />
-                      <div
-                        className="mr-2"
-                        data-modal-toggle="small-modal"
-                        onClick={() => setShowCostModal(true)}
-                      >
-                        Add cost
+          <div className="overflow-hidden m-10">
+            <div className="mt-10 text-center text-4xl font-header"></div>
+            <div className="mt-10 text-center text-4xl font-header mb-2">
+              TASKS
+            </div>
+
+            <div className="overflow-hidden">
+              <div>
+                <TaskForm getTasks={getTasks} />
+              </div>
+              <div>
+                {sortedTasks.map((task: any, index: number) => (
+                  <div
+                    key={task.id}
+                    className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
+                      task.status ? "bg-green-100" : "bg-red-100"
+                    }`}
+                  >
+                    <div className="text-lg ml-2 font-body">
+                      <div>Task: {task.description}</div>
+
+                      <div>$ Cost:</div>
+                      <div className="mt-2 flex text-base hover:underline hover:cursor-pointer">
+                        <FaMoneyBill className="relative top-1 mr-1 text-lg" />
+                        <div
+                          className="mr-2"
+                          data-modal-toggle="small-modal"
+                          onClick={() => setShowCostModal(true)}
+                        >
+                          Add cost
+                        </div>
+                        {showCostModal ? (
+                          <CostModal setShowCostModal={setShowCostModal} />
+                        ) : null}
                       </div>
-                      {showCostModal ? (
-                        <CostModal setShowCostModal={setShowCostModal} />
-                      ) : null}
+                      <div className="mr-2" data-modal-toggle="small-modal">
+                        {assign
+                          ? `assigned to  ${user.displayName}`
+                          : "assign to self"}
+                      </div>
                     </div>
-                    <div className="mr-2" data-modal-toggle="small-modal">
-                      {assign
-                        ? `assigned to  ${user.displayName}`
-                        : "assign to self"}
-                    </div>
-                  </div>
 
-                  <div className="mt-5 hover:underline hover:cursor-pointer text-right">
-                    <button
-                      onClick={() => {
-                        completeTask(task.id);
-                        setTimeout(() => {
-                          getTasks();
-                        }, 200);
-                      }}
-                      className="text-2xl text-center font-body "
-                    >
-                      {task.status ? "Complete" : "Incomplete"}
-                    </button>
+                    <div className="mt-5 hover:underline hover:cursor-pointer text-right">
+                      <button
+                        onClick={() => {
+                          completeTask(task.id);
+                          setTimeout(() => {
+                            getTasks();
+                          }, 200);
+                        }}
+                        className="text-2xl text-center font-body "
+                      >
+                        {task.status ? "Complete" : "Incomplete"}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
