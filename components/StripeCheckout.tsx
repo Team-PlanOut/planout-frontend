@@ -2,7 +2,7 @@ import React from 'react'
 
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe( "pk_test_46zswMCbz39W2KAqKj43vDRu" //this is hard coded
+const stripePromise = loadStripe( "pk_test_51L7UpKF9KFH9wctxGfqKckcUDmzhVUEkGZQTCeXZjSYvI5k33s1oXe3rIPJP5I8Un5qV5q016WE0aW4NcI3wThOx00OFftpTkL" //this is hard coded
   //process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY 
 );
 
