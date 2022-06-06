@@ -15,28 +15,26 @@ function SingleEventPage() {
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
+  const [assign, setAssign] = useState<boolean>(false);
 
-  const { token } = useAuth() as any;
+  const { token, user } = useAuth() as any;
 
   const {
     query: { id },
   } = router;
 
   const getEventName = async () => {
-    const response = await axios.get(
-      `https://cc26-planout.herokuapp.com/events/${id}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
+    const response = await axios.get(`http://localhost:8090/events/${id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
     setEvent(response.data);
   };
 
   const getTasks = async () => {
     const response = await axios.get(
-      `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+      `http://localhost:8090/tasks/event/${id}`,
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -51,13 +49,32 @@ function SingleEventPage() {
     getTasks();
   }, []);
 
+  const assignTask = async (id: number) => {
+    const selectedTask = task.find((task) => task.id === id);
+    try {
+      await axios.put(
+        `http://localhost:8090/tasks/event/${id}`,
+        {
+          user_id: user.uid,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      setAssign(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const completeTask = async (id: number) => {
     const selectedTask = task.find((task) => task.id === id);
 
     if (selectedTask?.status) {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `http://localhost:8090/tasks/event/${id}`,
           {
             id: id,
             status: false,
@@ -85,6 +102,7 @@ function SingleEventPage() {
             },
           }
         );
+        setAssign(true);
       } catch (error) {
         console.log(error);
       }
@@ -137,35 +155,13 @@ function SingleEventPage() {
                         <CostModal setShowCostModal={setShowCostModal} />
                       ) : null}
                     </div>
+                    <div className="mr-2" data-modal-toggle="small-modal">
+                      {assign
+                        ? `assigned to  ${user.displayName}`
+                        : "assign to self"}
+                    </div>
                   </div>
-                  <div>
-                    <div>Assignee:</div>
-                    <select
-                      className="form-select form-select-sm
-                      appearance-none
-                      block
-                      w-1/2
-                      px-2
-                      py-1
-                      text-sm
-                      font-normal
-                      text-gray-700
-                      bg-white bg-clip-padding bg-no-repeat
-                      border border-solid border-gray-300
-                      rounded
-                      transition
-                      ease-in-out
-                      m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                      aria-label=".form-select-sm example"
-                    >
-                      <option selected>select</option>
-                      <option value="1">Yushiko</option>
-                      <option value="2">Jon</option>
-                      <option value="3">Ruprecht</option>
-                      <option value="3">Julie</option>
-                    </select>
-                  </div>
+
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     <button
                       onClick={() => {

@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import TaskModal from "../tasks/TaskModal";
 import useAuth from "../../src/hook/auth";
 import { FaPlusCircle } from "react-icons/fa";
-import { userInfo } from "os";
 
 export default function TaskForm({ getTasks }: any) {
   const [showModal, setShowModal] = useState(false);
@@ -20,8 +19,9 @@ export default function TaskForm({ getTasks }: any) {
       status: false,
       points: taskPoints,
       event_id: router.query.id,
-      asignee_uid: user.uid,
+      user_id: "",
       cost: taskCost,
+      datetime: "",
     };
     submitPostReq(dataObj);
   };
