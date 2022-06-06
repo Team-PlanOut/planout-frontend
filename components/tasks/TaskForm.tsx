@@ -11,7 +11,7 @@ export default function TaskForm({ getTasks }: any) {
   const [taskDescription, setTaskDescription] = useState("");
   const [taskPoints, setTaskPoints] = useState("");
   const [taskCost, setTaskCost] = useState("");
-  const { token } = useAuth() as any;
+  const { token, user } = useAuth() as any;
 
   const createTask = () => {
     const dataObj = {
@@ -19,15 +19,16 @@ export default function TaskForm({ getTasks }: any) {
       status: false,
       points: taskPoints,
       event_id: router.query.id,
-      user_id: 2,
+      user_id: "",
       cost: taskCost,
+      datetime: "",
     };
     submitPostReq(dataObj);
   };
 
   const submitPostReq = async (data: object) => {
     try {
-      await axios.post("  https://cc26-planout.herokuapp.com/tasks ", data, {
+      await axios.post("https://cc26-planout.herokuapp.com/tasks ", data, {
         headers: {
           Authorization: "Bearer " + token,
         },
