@@ -5,18 +5,20 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import useAuth from "./../src/hook/auth";
-import { Users } from "../types";
+import { Friends } from "../types";
 
 
 function Friends() {
-  const [friends, setFriends] = useState<Users[]>([]);
+  const [friends, setFriends] = useState<Friends[]>([]);
   const { token } = useAuth() as any;
   const { user } = useAuth() as any;
 
   const getFriends = async() => {
-    const id = user.uid;
+    // const id = user.uid;
+    const id = "1a9d53c2";
     const response = await axios.get(
-      `https://cc26-planout.herokuapp.com/friends/${id}`,
+      /*`https://cc26-planout.herokuapp.com/friends/${id}`*/
+      `http://localhost:8080/friends/${id}`,
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -40,8 +42,8 @@ useEffect(() => {
         <div>
           <div>
             {friends.map((friend) => (
-              <div key={friend.id}>
-                {friend.first_name + ' ' + friend.last_name}
+              <div key={friend.friendId}>
+                {friend.friendFirstName + ' ' + friend.friendLastName}
                 {friend.username}
                 </div>
             ))}
