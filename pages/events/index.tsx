@@ -10,9 +10,11 @@ import { withProtected } from "../../src/hook/route";
 
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
-  const { token } = useAuth() as any;
+  const { token, user } = useAuth() as any;
 
   const getEvents = async () => {
+    const uid = user.uid;
+    console.log(uid);
     const response = await axios.get(
       "https://cc26-planout.herokuapp.com/events",
       {
@@ -21,7 +23,9 @@ function Events() {
         },
       }
     );
+    console.log(user);
     setEvents(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -29,7 +33,6 @@ function Events() {
   }, []);
 
   const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
-
   return (
     <>
       <Navbar />
@@ -41,22 +44,21 @@ function Events() {
           </div>
           <div>
             {events.map((event) => (
-              <div
+              <Link
+                href="/events/[id]"
+                as={`/events/${event.id}`}
                 key={event.id}
-                className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
               >
-                <div className="text-left">
-                  Event name:
-                  <span className="ml-2">
-                    <Link href={"/events/" + event.id} key={event.id}>
-                      {event.name}
-                    </Link>
-                  </span>
+                <div
+                  key={event.id}
+                  className="p-4 font-body text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
+                >
+                  <div className="text-left">Event name: {event.name}</div>
+                  <div className="text-left mt-2">
+                    Date: {showOnlyDate(event.date)}
+                  </div>
                 </div>
-                <div className="text-left mt-2">
-                  Date: {showOnlyDate(event.date)}
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

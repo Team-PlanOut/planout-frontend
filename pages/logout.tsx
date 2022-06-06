@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
-import { withProtected } from '../src/hook/route';
+import { withProtected } from "../src/hook/route";
 
 function Logout({ auth }: any) {
   const { logout } = auth;
