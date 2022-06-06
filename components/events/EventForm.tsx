@@ -25,7 +25,7 @@ export default function EventForm({ getEvents }: any) {
   const submitPostReq = async (data: object) => {
     console.log("submitting post request with data", data);
     try {
-      await axios.post("http//:localhost:8090/events", data, {
+      await axios.post("https://cc26-planout.herokuapp.com/events", data, {
         headers: {
           Authorization: "Bearer " + token,
         },

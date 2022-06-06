@@ -11,7 +11,7 @@ export default function Dashboard() {
   const fetchTaskData = async () => {
     const uid = user.uid;
     const response = await axios.get(
-      `http://localhost:8090/tasks/user/${uid}`,
+      `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -28,7 +28,7 @@ export default function Dashboard() {
     if (selectedTask.status) {
       try {
         await axios.put(
-          `http://localhost:8090/tasks/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
             status: false,
@@ -45,7 +45,7 @@ export default function Dashboard() {
     } else {
       try {
         await axios.put(
-          `http://localhost:8090/tasks/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
             status: true,
@@ -116,7 +116,7 @@ export default function Dashboard() {
                 }}
                 className="text-2xl text-center font-body"
               >
-                {task.status ? <FaCheckCircle /> : "Incompletee"}
+                {task.status ? <FaCheckCircle /> : "Incomplete"}
               </button>
             </div>
           </div>
