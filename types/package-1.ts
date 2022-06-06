@@ -27,3 +27,10 @@ export type Users = {
   points: number,
 }
 
+export type Friends = {
+  friendId: string,
+  friendFirstName: string,
+  friendLastName: string,
+  username: string,
+  email: string
+}
