@@ -91,9 +91,7 @@ function SingleEventPage() {
     }
   };
 
-  const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
-    a.id > b.id ? 1 : -1
-  );
+  const sortedTasks = task.sort((a: { id: number }, b: { id: number }) => a.id > b.id ? 1 : -1);
 
   return (
     <div>
