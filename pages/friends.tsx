@@ -42,11 +42,11 @@ useEffect(() => {
         <div>
           <div>
             {friends.map((friend) => (
-              <div>
+              <div key={friend.friendId}>
               <div key={friend.friendId}>
                 {friend.friendFirstName + ' ' + friend.friendLastName}
                 </div>
-                <div>{friend.username}</div>
+                <div >{friend.username}</div>
                 </div>
             ))}
           </div>
