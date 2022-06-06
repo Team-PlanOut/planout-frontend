@@ -17,3 +17,13 @@ export type Tasks = {
   cost: number;
   complete: boolean;
 };
+
+export type Users = {
+  id: string,
+  email: string,
+  username: string,
+  first_name: string,
+  last_name: string,
+  points: number,
+}
+
