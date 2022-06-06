@@ -19,7 +19,7 @@ export default function TaskForm({ getTasks }: any) {
       status: false,
       points: taskPoints,
       event_id: router.query.id,
-      user_id: "",
+      user_id: user.uid,
       cost: taskCost,
       datetime: "",
     };

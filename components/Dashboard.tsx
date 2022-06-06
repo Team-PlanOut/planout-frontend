@@ -68,6 +68,8 @@ export default function Dashboard() {
     }
   }, [token]);
 
+  console.log("~ task", task);
+
   const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
     a.id > b.id ? 1 : -1
   );
