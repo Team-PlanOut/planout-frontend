@@ -24,17 +24,20 @@ function SingleEventPage() {
   } = router;
 
   const getEventName = async () => {
-    const response = await axios.get(`http://localhost:8090/events/${id}`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const response = await axios.get(
+      `https://cc26-planout.herokuapp.com/events/${id}`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
     setEvent(response.data);
   };
 
   const getTasks = async () => {
     const response = await axios.get(
-      `http://localhost:8090/tasks/event/${id}`,
+      `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -53,7 +56,7 @@ function SingleEventPage() {
     const selectedTask = task.find((task) => task.id === id);
     try {
       await axios.put(
-        `http://localhost:8090/tasks/event/${id}`,
+        `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
         {
           user_id: user.uid,
         },
@@ -74,7 +77,7 @@ function SingleEventPage() {
     if (selectedTask?.status) {
       try {
         await axios.put(
-          `http://localhost:8090/tasks/event/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
           {
             id: id,
             status: false,
