@@ -28,7 +28,7 @@ export default function TaskForm({ getTasks }: any) {
 
   const submitPostReq = async (data: object) => {
     try {
-      await axios.post("https://cc26-planout.herokuapp.com/tasks ", data, {
+      await axios.post("http://localhost:8090/tasks ", data, {
         headers: {
           Authorization: "Bearer " + token,
         },

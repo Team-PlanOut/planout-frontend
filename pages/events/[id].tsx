@@ -91,7 +91,7 @@ function SingleEventPage() {
     } else {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `http://localhost:8090/tasks/event/${id}`,
           {
             id: id,
             status: true,
