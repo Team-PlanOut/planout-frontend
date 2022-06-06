@@ -38,19 +38,21 @@ useEffect(() => {
     <div>
       <Navbar />
       <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
-        <div>Friend List</div>
+        <div className="mt-40 text-center text-4xl font-header">friends List</div>
         <div>
           <div>
             {friends.map((friend) => (
-              <div key={friend.friendId}>
+              <div 
+              key={friend.friendId}
+              className="p-4 font-body bg-mintGreen text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
+              >
               <div key={friend.friendId}>
                 {friend.friendFirstName + ' ' + friend.friendLastName}
                 </div>
-                <div >{friend.username}</div>
+                <div >{"AKA: " + friend.username}</div>
                 </div>
             ))}
           </div>
-          {/* <FaPersonBooth /> */}
         </div>
       </div>
     </div>
