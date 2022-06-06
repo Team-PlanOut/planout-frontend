@@ -33,8 +33,8 @@ export default function StripeCheckout() {
               background: #ffffff;
               display: flex;
               flex-direction: column;
-              width: 400px;
-              height: 112px;
+              width: 16.5em;
+              height: 10;
               border-radius: 6px;
               justify-content: space-between;
             }
