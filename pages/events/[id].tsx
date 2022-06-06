@@ -9,6 +9,7 @@ import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
 import { FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
+import StripeCheckout from "../../components/StripeCheckout";
 
 function SingleEventPage() {
   const router = useRouter();
@@ -115,11 +116,12 @@ function SingleEventPage() {
             <div>
               {sortedTasks.map((task: any, index: number) => (
                 <div
-                  key={task.id}
-                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-                    task.status ? "bg-green-100" : "bg-red-100"
-                  }`}
+                key={task.id}
+                className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
+                  task.status ? "bg-green-100" : "bg-red-100"
+                }`}
                 >
+                  <StripeCheckout/>
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
