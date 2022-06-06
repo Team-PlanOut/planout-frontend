@@ -119,7 +119,7 @@ function SingleEventPage() {
                   task.status ? "bg-green-100" : "bg-red-100"
                 }`}
                 >
-                  <StripeCheckout/>
+                  
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
@@ -138,6 +138,7 @@ function SingleEventPage() {
                       ) : null}
                     </div>
                   </div>
+                  <StripeCheckout/>
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     <button
                       onClick={() => {
