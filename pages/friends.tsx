@@ -5,23 +5,27 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import useAuth from "./../src/hook/auth";
+import { Users } from "../types";
+
 
 function Friends() {
-  const [friends, setFriends] = useState<Friend[]>([]);
+  const [friends, setFriends] = useState<Users[]>([]);
   const { token } = useAuth() as any;
+  const { user } = useAuth() as any;
 
   const getFriends = async() => {
-    // need a way to access logged in id
+    const id = user.uid;
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/friends/${id}`,
       {
         headers: {
           Authorization: "Bearer " + token,
-        },
+       },
       }
-    );
-    setFriends(response.data);
-};
+  );
+      setFriends(response.data)
+  }
+
 
 useEffect(() => {
   getFriends()
@@ -37,7 +41,8 @@ useEffect(() => {
           <div>
             {friends.map((friend) => (
               <div key={friend.id}>
-                {friend.firstName}
+                {friend.first_name + ' ' + friend.last_name}
+                {friend.username}
                 </div>
             ))}
           </div>
