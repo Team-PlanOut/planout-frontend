@@ -11,7 +11,7 @@ export default function Dashboard() {
   const fetchTaskData = async () => {
     const uid = user.uid;
     const response = await axios.get(
-      `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
+      `http://localhost:8090/tasks/user/${uid}`,
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -28,7 +28,7 @@ export default function Dashboard() {
     if (selectedTask.status) {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/${id}`,
+          `http://localhost:8090/tasks/${id}`,
           {
             id: id,
             status: false,
@@ -45,7 +45,7 @@ export default function Dashboard() {
     } else {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/${id}`,
+          `http://localhost:8090/tasks/${id}`,
           {
             id: id,
             status: true,
@@ -87,11 +87,14 @@ export default function Dashboard() {
           <div className="mt-5 font-body text-xl ml-5">
             <div> Name: {user.displayName} </div>
             <div> Points : </div>
+            <div> Total Balance: </div>
           </div>
         </div>
         <div className="mt-10 text-center font-header flex justify-center">
-          <FaTasks className="text-xl relative top-1" />
-          <span className="ml-2 text-2xl relative bottom-1">Current Tasks</span>
+          <FaTasks className="text-xl -z-10 relative top-1" />
+          <span className="ml-2 text-2xl relative -z-10 bottom-1">
+            Current Tasks
+          </span>
         </div>
       </div>
 

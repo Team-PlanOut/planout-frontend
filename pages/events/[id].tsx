@@ -24,20 +24,17 @@ function SingleEventPage() {
   } = router;
 
   const getEventName = async () => {
-    const response = await axios.get(
-      `https://cc26-planout.herokuapp.com/events/${id}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
+    const response = await axios.get(`http://localhost:8090/events/${id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
     setEvent(response.data);
   };
 
   const getTasks = async () => {
     const response = await axios.get(
-      `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+      `http://localhost:8090/tasks/event/${id}`,
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -52,32 +49,32 @@ function SingleEventPage() {
     getTasks();
   }, []);
 
-  const assignTask = async (id: number) => {
-    const selectedTask = task.find((task) => task.id === id);
-    try {
-      await axios.put(
-        `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
-        {
-          user_id: user.uid,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      setAssign(true);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const assignTask = async (id: number) => {
+  //   const selectedTask = task.find((task) => task.id === id);
+  //   try {
+  //     await axios.put(
+  //       `http://localhost:8090/tasks/event/${id}`,
+  //       {
+  //         user_id: user.uid,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: "Bearer " + token,
+  //         },
+  //       }
+  //     );
+  //     setAssign(true);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
   const completeTask = async (id: number) => {
     const selectedTask = task.find((task) => task.id === id);
 
     if (selectedTask?.status) {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `http://localhost:8090/tasks/event/${id}`,
           {
             id: id,
             status: false,
@@ -94,7 +91,7 @@ function SingleEventPage() {
     } else {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `http://localhost:8090/tasks/event/${id}`,
           {
             id: id,
             status: true,
@@ -173,7 +170,7 @@ function SingleEventPage() {
                           getTasks();
                         }, 200);
                       }}
-                      className="text-2xl text-center font-body "
+                      className="text-xl text-center font-body "
                     >
                       {task.status ? "Complete" : "Incomplete"}
                     </button>
