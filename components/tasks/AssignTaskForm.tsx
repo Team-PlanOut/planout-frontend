@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import useAuth from "../../src/hook/auth";
 import AssignTaskModal from "./AssignTaskModal";
 
-export default function AssignTask() {
+export default function AssignTask({ id }: { id: number }) {
   const [showModal, setShowModal] = useState(false);
   const [eventUsers, setEventUsers] = useState([]);
 
@@ -43,6 +43,10 @@ export default function AssignTask() {
     setEventUsers(response.data);
   };
 
+  useEffect(() => {
+    getUsersInEvent(id);
+  }, []);
+
   return (
     <div>
       <FaPlusCircle
@@ -56,8 +60,7 @@ export default function AssignTask() {
           <AssignTaskModal
             setShowModal={setShowModal}
             assignTask={assignTask}
-            getUsersInEvent={getUsersInEvent}
-            setEventUsers={setEventUsers}
+            eventUsers={eventUsers}
           />
         )}
       </div>
