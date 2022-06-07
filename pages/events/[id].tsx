@@ -72,13 +72,14 @@ function SingleEventPage() {
       console.error(error);
     }
   };
+
   const completeTask = async (id: number) => {
-    const selectedTask = task.find((task) => task.id === id);
+    const selectedTask = task.find((task: { id: number }) => task.id === id);
 
     if (selectedTask?.status) {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
             status: false,
@@ -95,7 +96,7 @@ function SingleEventPage() {
     } else {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
             status: true,
@@ -106,7 +107,6 @@ function SingleEventPage() {
             },
           }
         );
-        setAssign(true);
       } catch (error) {
         console.log(error);
       }
