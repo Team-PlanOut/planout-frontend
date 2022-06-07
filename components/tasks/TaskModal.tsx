@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from 'react-toastify';
 
 export default function Task({
   setShowModal,
@@ -15,6 +16,7 @@ export default function Task({
   createTask: () => void;
   getTasks: () => void;
 }) {
+  const newTaskNotification = () => toast("New Task Created!");
   return (
     <div
       id="authentication-modal"
@@ -126,6 +128,7 @@ export default function Task({
                         e.preventDefault();
                         createTask();
                         setShowModal(false);
+                        newTaskNotification();
                         setTimeout(() => {
                           getTasks();
                         });

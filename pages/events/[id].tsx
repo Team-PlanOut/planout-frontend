@@ -11,17 +11,44 @@ import { FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
 import AssignTaskForm from "../../components/tasks/AssignTaskForm";
 
+import Members from "../../components/events/AddMembers";
+import MembersModal from "../../components/MembersModal";
+
+import StripeCheckout from "../../components/StripeCheckout";
+
 function SingleEventPage() {
   const router = useRouter();
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
+    
+  const [assign, setAssign] = useState<boolean>(false);
+  const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
 
   const { token, user } = useAuth() as any;
+  const [data, setData] = useState<any>([]);
 
   const {
     query: { id },
   } = router;
+
+  const fetchUserData = async () => {
+    const response = await axios.get(
+      "https://cc26-planout.herokuapp.com/users",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    setData(response.data);
+    console.log(response.data);
+    return data;
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const getEventName = async () => {
     const response = await axios.get(
@@ -53,12 +80,12 @@ function SingleEventPage() {
   }, []);
 
   const completeTask = async (id: number) => {
-    const selectedTask = task.find((task) => task.id === id);
+    const selectedTask = task.find((task: { id: number }) => task.id === id);
 
     if (selectedTask?.status) {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
             status: false,
@@ -75,7 +102,7 @@ function SingleEventPage() {
     } else {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
             status: true,
@@ -102,6 +129,17 @@ function SingleEventPage() {
 
       <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
         <div className="text-center text-4xl font-header">{event.name}</div>
+        <div
+          className="float-right mr-20  underline hover:cursor-pointer"
+          data-modal-toggle="small-modal"
+          onClick={() => setShowMembersModal(true)}
+        >
+          {" "}
+          Show Members
+        </div>
+        {showMembersModal ? (
+          <MembersModal setShowMembersModal={setShowMembersModal} data={data} />
+        ) : null}
 
         <div className="overflow-hidden m-10">
           <div className="mt-10 text-center text-4xl font-header"></div>
@@ -116,11 +154,12 @@ function SingleEventPage() {
             <div>
               {sortedTasks.map((task: any, index: number) => (
                 <div
-                  key={task.id}
-                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-                    task.status ? "bg-green-100" : "bg-red-100"
-                  }`}
+                key={task.id}
+                className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
+                  task.status ? "bg-green-100" : "bg-red-100"
+                }`}
                 >
+                  
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
@@ -145,6 +184,7 @@ function SingleEventPage() {
                     </div>
                   </div>
                   <AssignTaskForm id={id} getTasks={getTasks} />
+                  <StripeCheckout/>
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     <button
                       onClick={() => {
