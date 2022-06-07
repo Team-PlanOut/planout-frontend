@@ -55,7 +55,7 @@ function SingleEventPage() {
 
   const handleAddMember = () => {
     const formData = {
-      id: id,
+      event_id: id,
       user_id: member,
     };
     addMemberToEvent(formData);
