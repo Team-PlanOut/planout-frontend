@@ -36,7 +36,6 @@ function SingleEventPage() {
       }
     );
     setEventMembers(response.data);
-    console.log("users!!!!", response.data);
     return data;
   };
 
@@ -71,7 +70,6 @@ function SingleEventPage() {
       }
     );
     setData(response.data);
-    console.log(response.data);
     return data;
   };
 

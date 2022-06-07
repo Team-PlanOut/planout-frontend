@@ -50,9 +50,11 @@ export default function MembersModal({
           <div className="flex flex-col justify-center items-center p-4">
             <div className="font-header text-xl"> Current Members</div>
             <ul className="text-leftoverflow-y-auto capitalize font-body">
-              {eventMembers.map((user, index) => (
-                <li key={index}>{user.firstName}</li>
-              ))}
+              {eventMembers.length
+                ? eventMembers.map((user, index) => (
+                    <li key={index}>{user.firstName}</li>
+                  ))
+                : "no members in this event yet"}
             </ul>
           </div>
           <div>
