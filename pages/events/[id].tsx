@@ -1,17 +1,16 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-
 import Navbar from "../../components/Navbar";
 import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
 import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
-import { FaMoneyBill } from "react-icons/fa";
+import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
-import AssignTaskForm from "../../components/tasks/AssignTaskForm";
 
-import MembersModal from "../../components/MembersModal";
+import AssignTaskForm from "../../components/tasks/AssignTaskForm";
+import MembersModal from "../../components/events/MembersModal";
 
 import StripeCheckout from "../../components/StripeCheckout";
 
@@ -25,10 +24,46 @@ function SingleEventPage() {
 
   const { token, user } = useAuth() as any;
   const [data, setData] = useState<any>([]);
+  const [member, setMember] = useState<string>("");
+  const [eventMembers, setEventMembers] = useState<any>(null);
 
   const {
     query: { id },
   } = router;
+
+  const getEventUsers = async () => {
+    const response = await axios.get(
+      `https://cc26-planout.herokuapp.com/eventusers/users/${id}`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    setEventMembers(response.data);
+    return data;
+  };
+
+  const addMemberToEvent = async (data: object) => {
+    try {
+      await axios.post("https://cc26-planout.herokuapp.com/eventusers", data, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAddMember = () => {
+    const formData = {
+      id: id,
+      user_id: member,
+    };
+    addMemberToEvent(formData);
+    getEventUsers();
+  };
 
   const fetchUserData = async () => {
     const response = await axios.get(
@@ -40,13 +75,8 @@ function SingleEventPage() {
       }
     );
     setData(response.data);
-    console.log(response.data);
     return data;
   };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
   const getEventName = async () => {
     const response = await axios.get(
@@ -71,6 +101,11 @@ function SingleEventPage() {
     );
     setTask(response.data);
   };
+
+  useEffect(() => {
+    fetchUserData();
+    getEventUsers();
+  }, []);
 
   useEffect(() => {
     getEventName();
@@ -128,14 +163,21 @@ function SingleEventPage() {
       <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
         <div className="text-center text-4xl font-header">{event.name}</div>
         <div
-          className="float-right mr-20  underline hover:cursor-pointer"
+          className="float-right mr-20  underline hover:cursor-pointer flex mt-2"
           data-modal-toggle="small-modal"
           onClick={() => setShowMembersModal(true)}
         >
+          <FaHandPointRight className="relative top-1 mr-1 -z-10" />
           Show Members
         </div>
         {showMembersModal ? (
-          <MembersModal setShowMembersModal={setShowMembersModal} data={data} />
+          <MembersModal
+            setShowMembersModal={setShowMembersModal}
+            data={data}
+            setMember={setMember}
+            handleAddMember={handleAddMember}
+            eventMembers={eventMembers}
+          />
         ) : null}
 
         <div className="overflow-hidden m-10">
