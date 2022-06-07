@@ -8,6 +8,8 @@ import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
 import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
+import { FaTrash} from "react-icons/fa";
+
 
 import AssignTaskForm from "../../components/tasks/AssignTaskForm";
 import MembersModal from "../../components/events/MembersModal";
@@ -159,9 +161,13 @@ function SingleEventPage() {
 
   async function deleteEvent(eventId: any) {
     console.log('event', eventId)
-    await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`);
+    await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
   }
-  
+
   return (
     <div>
       <Navbar />
@@ -200,9 +206,8 @@ function SingleEventPage() {
               {sortedTasks.map((task: any, index: number) => (
                 <div
                   key={task.id}
-                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-                    task.status ? "bg-green-100" : "bg-red-100"
-                  }`}
+                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${task.status ? "bg-green-100" : "bg-red-100"
+                    }`}
                 >
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
@@ -247,18 +252,19 @@ function SingleEventPage() {
             </div>
           </div>
         </div>
-      <div className="z-10 mt-5 hover:underline hover:cursor-pointer text-right">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        return deleteEvent(event.id);
-                      }}
-                      className="inset-y-0.5 text-2xl text-center font-body "
-                      >
-                      DELETE
-                    </button>
-                    
-                  </div>
+        <div className="z-10 mt-5 hover:underline hover:cursor-pointer text-right">
+          <button
+            type="button"
+            onClick={() => {
+              deleteEvent(event.id);
+              router.push('/events')
+            }}
+            className="inset-y-0.5 text-2xl text-center font-body "
+          ><FaTrash/>
+            
+          </button>
+
+        </div>
       </div>
     </div>
   );
