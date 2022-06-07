@@ -1,6 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import EventForm from "../../components/events/EventForm";
 import { Events } from "../../types";
 
@@ -56,8 +56,8 @@ function Events() {
                   <div className="text-left">Event name: {event.name}</div>
                   <div className="text-left mt-2">
                     Date: {showOnlyDate(event.date)}
-                  </div>
                 </div>
+                  </div>
               </Link>
             ))}
           </div>
@@ -66,5 +66,6 @@ function Events() {
     </>
   );
 }
+
 
 export default withProtected(Events);
