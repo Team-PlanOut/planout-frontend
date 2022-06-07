@@ -9,7 +9,11 @@ import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
 import { FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
+import Members from "../../components/events/AddMembers";
+import MembersModal from "../../components/MembersModal";
+
 import StripeCheckout from "../../components/StripeCheckout";
+
 
 function SingleEventPage() {
   const router = useRouter();
@@ -17,12 +21,31 @@ function SingleEventPage() {
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
   const [assign, setAssign] = useState<boolean>(false);
-
+  const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
   const { token, user } = useAuth() as any;
+  const [data, setData] = useState<any>([]);
 
   const {
     query: { id },
   } = router;
+
+  const fetchUserData = async () => {
+    const response = await axios.get(
+      "https://cc26-planout.herokuapp.com/users",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    setData(response.data);
+    console.log(response.data);
+    return data;
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const getEventName = async () => {
     const response = await axios.get(
@@ -123,6 +146,17 @@ function SingleEventPage() {
 
       <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
         <div className="text-center text-4xl font-header">{event.name}</div>
+        <div
+          className="float-right mr-20  underline hover:cursor-pointer"
+          data-modal-toggle="small-modal"
+          onClick={() => setShowMembersModal(true)}
+        >
+          {" "}
+          Show Members
+        </div>
+        {showMembersModal ? (
+          <MembersModal setShowMembersModal={setShowMembersModal} data={data} />
+        ) : null}
 
         <div className="overflow-hidden m-10">
           <div className="mt-10 text-center text-4xl font-header"></div>
