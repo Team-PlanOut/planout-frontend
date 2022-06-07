@@ -11,7 +11,6 @@ import { FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
 import AssignTaskForm from "../../components/tasks/AssignTaskForm";
 
-import Members from "../../components/events/AddMembers";
 import MembersModal from "../../components/MembersModal";
 
 import StripeCheckout from "../../components/StripeCheckout";
@@ -21,8 +20,7 @@ function SingleEventPage() {
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
-    
-  const [assign, setAssign] = useState<boolean>(false);
+
   const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
 
   const { token, user } = useAuth() as any;
@@ -134,7 +132,6 @@ function SingleEventPage() {
           data-modal-toggle="small-modal"
           onClick={() => setShowMembersModal(true)}
         >
-          {" "}
           Show Members
         </div>
         {showMembersModal ? (
@@ -154,12 +151,11 @@ function SingleEventPage() {
             <div>
               {sortedTasks.map((task: any, index: number) => (
                 <div
-                key={task.id}
-                className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-                  task.status ? "bg-green-100" : "bg-red-100"
-                }`}
+                  key={task.id}
+                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
+                    task.status ? "bg-green-100" : "bg-red-100"
+                  }`}
                 >
-                  
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
@@ -184,7 +180,7 @@ function SingleEventPage() {
                     </div>
                   </div>
                   <AssignTaskForm id={id} getTasks={getTasks} />
-                  <StripeCheckout/>
+                  <StripeCheckout />
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     <button
                       onClick={() => {
