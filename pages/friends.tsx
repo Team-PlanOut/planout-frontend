@@ -6,12 +6,14 @@ import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import useAuth from "./../src/hook/auth";
 import { Friends } from "../types";
+import AddFriend from "./../components/AddFriend";
 
 
 function Friends() {
   const [friends, setFriends] = useState<Friends[]>([]);
   const { token } = useAuth() as any;
   const { user } = useAuth() as any;
+  const [addFriend, setAddFriend] = useState(false);
 
   const getFriends = async() => {
     // const id = user.uid;
@@ -24,9 +26,13 @@ function Friends() {
           Authorization: "Bearer " + token,
        },
       }
-  );
+    );
       setFriends(response.data)
   }
+
+  const addUserAsFriend = () => {
+    setAddFriend(!addFriend)
+  };
 
 
 useEffect(() => {
@@ -38,8 +44,9 @@ useEffect(() => {
     <div>
       <Navbar />
       <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
-        <div className="mt-40 text-center text-4xl font-header">friends List</div>
-        <div>
+        <div className="mt-40 text-center text-4xl font-header">Friends List</div>
+        <button onClick={addUserAsFriend}>Add Friend</button>
+         {addFriend ? <AddFriend setAddFriend={setAddFriend} /> : <div>
           <div>
             {friends.map((friend) => (
               <div 
@@ -53,7 +60,8 @@ useEffect(() => {
                 </div>
             ))}
           </div>
-        </div>
+        </div> }
+        
       </div>
     </div>
   );
