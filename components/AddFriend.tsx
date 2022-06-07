@@ -25,9 +25,7 @@ function addFriend({ setAddFriend }) {
   }
 
   const beginFriendship = async(findFriend) => {
-    console.log(findFriend);
       try {
-        console.log(friend);
         await axios.post(`https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend.data.id}`, {
           headers: {
             Authorization: "Bearer " + token,
