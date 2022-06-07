@@ -8,58 +8,65 @@ import useAuth from "./../src/hook/auth";
 import { Friends } from "../types";
 import AddFriend from "./../components/AddFriend";
 
-
 function Friends() {
   const [friends, setFriends] = useState<Friends[]>([]);
   const { token } = useAuth() as any;
   const { user } = useAuth() as any;
   const [addFriend, setAddFriend] = useState(false);
 
-  const getFriends = async() => {
+  const getFriends = async () => {
     const id = user.uid;
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/friends/${id}`,
       {
         headers: {
           Authorization: "Bearer " + token,
-       },
+        },
       }
     );
-      setFriends(response.data)
-  }
-
-  const addUserAsFriend = () => {
-    setAddFriend(!addFriend)
+    setFriends(response.data);
   };
 
+  const addUserAsFriend = () => {
+    setAddFriend(!addFriend);
+  };
 
-useEffect(() => {
-  getFriends()
-},[]);
-
+  useEffect(() => {
+    getFriends();
+  }, []);
 
   return (
     <div>
       <Navbar />
       <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
-        <div className="mt-40 text-center text-4xl font-header">Friends List</div>
-        <button onClick={addUserAsFriend}>Add Friend</button>
-         {addFriend ? <AddFriend setAddFriend={setAddFriend} /> : <div>
+        <div className="mt-40 text-center text-4xl font-header">
+          Friends List
+        </div>
+        <button
+          onClick={addUserAsFriend}
+          className="bg-blue-200 ml-8 mt-4 font-medium m-auto items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-400"
+        >
+          Add Friend
+        </button>
+        {addFriend ? (
+          <AddFriend setAddFriend={setAddFriend} />
+        ) : (
           <div>
-            {friends.map((friend) => (
-              <div 
-              key={friend.friendId}
-              className="p-4 font-body bg-mintGreen text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
-              >
-              <div key={friend.friendId}>
-                {friend.friendFirstName + ' ' + friend.friendLastName}
+            <div>
+              {friends.map((friend) => (
+                <div
+                  key={friend.friendId}
+                  className="p-2 font-body bg-mintGreen text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
+                >
+                  <div key={friend.friendId}>
+                    {friend.friendFirstName + " " + friend.friendLastName}
+                  </div>
+                  <div>{"AKA: " + friend.username}</div>
                 </div>
-                <div >{"AKA: " + friend.username}</div>
-                </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div> }
-        
+        )}
       </div>
     </div>
   );
