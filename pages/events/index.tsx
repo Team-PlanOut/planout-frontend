@@ -10,9 +10,11 @@ import { withProtected } from "../../src/hook/route";
 
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
-  const { token } = useAuth() as any;
+  const { token, user } = useAuth() as any;
 
   const getEvents = async () => {
+    const uid = user.uid;
+    console.log(uid);
     const response = await axios.get(
       "https://cc26-planout.herokuapp.com/events",
       {
@@ -21,8 +23,9 @@ function Events() {
         },
       }
     );
-
+    console.log(user);
     setEvents(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -53,8 +56,8 @@ function Events() {
                   <div className="text-left">Event name: {event.name}</div>
                   <div className="text-left mt-2">
                     Date: {showOnlyDate(event.date)}
-                </div>
                   </div>
+                </div>
               </Link>
             ))}
           </div>
@@ -63,6 +66,5 @@ function Events() {
     </>
   );
 }
-
 
 export default withProtected(Events);
