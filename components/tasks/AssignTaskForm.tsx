@@ -1,60 +1,65 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { FaPlusCircle } from "react-icons/fa";
+import useAuth from "../../src/hook/auth";
+import AssignTaskModal from "./AssignTaskModal";
 
 export default function AssignTask() {
+  const [showModal, setShowModal] = useState(false);
+  const [eventUsers, setEventUsers] = useState([]);
 
-  
+  const { token, user } = useAuth() as any;
 
+  const assignTask = async (id: number) => {
+    // const selectedTask = task.find((task) => task.id === id);
+    try {
+      await axios.put(
+        `https://cc26-planout.herokuapp.com/tasks/${id}`,
+        {
+          id: id,
+          user_id: user.uid,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  const getUsersInEvent = async (id: number) => {
+    const response = await axios.get(
+      `https://cc26-planout.herokuapp.com/eventusers/users/${id}`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
 
-
-
-
-
+    setEventUsers(response.data);
+  };
 
   return (
-    <div className="fixed z-10 overflow-y-auto top-0 w-full left-0" id="modal">
-      <div className="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 transition-opacity">
-          <div className="absolute inset-0 bg-gray-500 opacity-20" />
-        </div>
-        <span className="hidden sm:inline-block sm:align-middle sm:h-screen">
-          &#8203;
-        </span>
-        <div
-          className="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-headline"
-        >
-          <div>
-            <div>Assignee:</div>
-            <select
-              className="form-select form-select-sm
-                        appearance-none
-                        block
-                        w-1/2
-                        px-2
-                        py-1
-                        text-sm
-                        font-normal
-                        text-gray-700
-                        bg-white bg-clip-padding bg-no-repeat
-                        border border-solid border-gray-300
-                        rounded
-                        transition
-                        ease-in-out
-                        m-0
-                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              aria-label=".form-select-sm example"
-            >
-              <option selected>select</option>
-              <option value="1">Yushiko</option>
-              <option value="2">Jon</option>
-              <option value="3">Ruprecht</option>
-              <option value="3">Julie</option>
-            </select>
-          </div>
-        </div>
+    <div>
+      <FaPlusCircle
+        data-modal-toggle="small-modal"
+        onClick={() => setShowModal(true)}
+        className="float-right md:mr-48 text-2xl hover:cursor-pointer hover:fill-orange-300"
+      />
+
+      <div className="m-auto bg-black">
+        {showModal && (
+          <AssignTaskModal
+            setShowModal={setShowModal}
+            assignTask={assignTask}
+            getUsersInEvent={getUsersInEvent}
+            setEventUsers={setEventUsers}
+          />
+        )}
       </div>
     </div>
   );

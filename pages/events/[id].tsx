@@ -9,16 +9,15 @@ import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
 import { FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
+import AssignTaskForm from "../../components/tasks/AssignTaskForm";
 
 function SingleEventPage() {
   const router = useRouter();
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
-  const [assign, setAssign] = useState<boolean>(false);
 
   const { token, user } = useAuth() as any;
-  console.log("~ token", token);
 
   const {
     query: { id },
@@ -52,27 +51,6 @@ function SingleEventPage() {
     getEventName();
     getTasks();
   }, []);
-
-  const assignTask = async (id: number) => {
-    // const selectedTask = task.find((task) => task.id === id);
-    try {
-      await axios.put(
-        `https://cc26-planout.herokuapp.com/tasks/${id}`,
-        {
-          id: id,
-          user_id: user.uid,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      setAssign(true);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const completeTask = async (id: number) => {
     const selectedTask = task.find((task) => task.id === id);
@@ -108,7 +86,6 @@ function SingleEventPage() {
             },
           }
         );
-        setAssign(true);
       } catch (error) {
         console.log(error);
       }
@@ -167,7 +144,7 @@ function SingleEventPage() {
                         : "Assigned to me!"}
                     </div>
                   </div>
-
+                  <AssignTaskForm task={task} />
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     <button
                       onClick={() => {
