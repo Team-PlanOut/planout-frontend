@@ -4,11 +4,11 @@ import { BsFillPersonLinesFill } from "react-icons/bs";
 import useAuth from "../../src/hook/auth";
 import AssignTaskModal from "./AssignTaskModal";
 
-export default function AssignTask({
+export default function AssignTaskForm({
   id,
   getTasks,
 }: {
-  id: string | string[] | undefined;
+  id: any;
   getTasks: () => void;
 }) {
   const [showModal, setShowModal] = useState(false);
@@ -36,7 +36,7 @@ export default function AssignTask({
     }
   };
 
-  const getUsersInEvent = async (id: number) => {
+  const getUsersInEvent = async (id: string) => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/eventusers/users/${id}`,
       {
