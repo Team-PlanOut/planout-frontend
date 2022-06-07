@@ -1,5 +1,5 @@
 import React from "react";
-import AddMembers from "./events/AddMembers";
+import AddMembers from "./AddMembers";
 
 export default function MembersModal({
   eventMembers,

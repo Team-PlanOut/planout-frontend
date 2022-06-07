@@ -8,7 +8,7 @@ import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
 import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
-import MembersModal from "../../components/MembersModal";
+import MembersModal from "../../components/events/MembersModal";
 
 import StripeCheckout from "../../components/StripeCheckout";
 
