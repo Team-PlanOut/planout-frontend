@@ -21,7 +21,6 @@ function Events() {
         },
       }
     );
-
     setEvents(response.data);
   };
 

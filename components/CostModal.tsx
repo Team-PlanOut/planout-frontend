@@ -21,8 +21,6 @@ export default function CostModal({
           aria-labelledby="modal-headline"
         >
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <label>Expense Name:</label>
-            <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" />
             <label>Cost</label>
             <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" />
           </div>
@@ -39,7 +37,7 @@ export default function CostModal({
               type="submit"
               className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"
             >
-              Create
+              Submit
             </button>
           </div>
         </div>

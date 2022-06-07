@@ -1,19 +1,16 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-
 import Navbar from "../../components/Navbar";
 import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
 import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
-import { FaMoneyBill } from "react-icons/fa";
+import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
-import Members from "../../components/events/AddMembers";
-import MembersModal from "../../components/MembersModal";
+import MembersModal from "../../components/events/MembersModal";
 
 import StripeCheckout from "../../components/StripeCheckout";
-
 
 function SingleEventPage() {
   const router = useRouter();
@@ -24,10 +21,46 @@ function SingleEventPage() {
   const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
   const { token, user } = useAuth() as any;
   const [data, setData] = useState<any>([]);
+  const [member, setMember] = useState<string>("");
+  const [eventMembers, setEventMembers] = useState<any>(null);
 
   const {
     query: { id },
   } = router;
+
+  const getEventUsers = async () => {
+    const response = await axios.get(
+      `https://cc26-planout.herokuapp.com/eventusers/users/${id}`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    setEventMembers(response.data);
+    return data;
+  };
+
+  const addMemberToEvent = async (data: object) => {
+    try {
+      await axios.post("https://cc26-planout.herokuapp.com/eventusers", data, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAddMember = () => {
+    const formData = {
+      id: id,
+      user_id: member,
+    };
+    addMemberToEvent(formData);
+    getEventUsers();
+  };
 
   const fetchUserData = async () => {
     const response = await axios.get(
@@ -39,13 +72,8 @@ function SingleEventPage() {
       }
     );
     setData(response.data);
-    console.log(response.data);
     return data;
   };
-
-  useEffect(() => {
-    fetchUserData();
-  }, []);
 
   const getEventName = async () => {
     const response = await axios.get(
@@ -72,29 +100,14 @@ function SingleEventPage() {
   };
 
   useEffect(() => {
+    fetchUserData();
+    getEventUsers();
+  }, []);
+
+  useEffect(() => {
     getEventName();
     getTasks();
   }, []);
-
-  const assignTask = async (id: number) => {
-    const selectedTask = task.find((task) => task.id === id);
-    try {
-      await axios.put(
-        `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
-        {
-          user_id: user.uid,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      setAssign(true);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const completeTask = async (id: number) => {
     const selectedTask = task.find((task: { id: number }) => task.id === id);
@@ -147,15 +160,22 @@ function SingleEventPage() {
       <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
         <div className="text-center text-4xl font-header">{event.name}</div>
         <div
-          className="float-right mr-20  underline hover:cursor-pointer"
+          className="float-right mr-20  underline hover:cursor-pointer flex mt-2"
           data-modal-toggle="small-modal"
           onClick={() => setShowMembersModal(true)}
         >
           {" "}
+          <FaHandPointRight className="relative top-1 mr-1 -z-10" />
           Show Members
         </div>
         {showMembersModal ? (
-          <MembersModal setShowMembersModal={setShowMembersModal} data={data} />
+          <MembersModal
+            setShowMembersModal={setShowMembersModal}
+            data={data}
+            setMember={setMember}
+            handleAddMember={handleAddMember}
+            eventMembers={eventMembers}
+          />
         ) : null}
 
         <div className="overflow-hidden m-10">
@@ -171,12 +191,11 @@ function SingleEventPage() {
             <div>
               {sortedTasks.map((task: any, index: number) => (
                 <div
-                key={task.id}
-                className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-                  task.status ? "bg-green-100" : "bg-red-100"
-                }`}
+                  key={task.id}
+                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
+                    task.status ? "bg-green-100" : "bg-red-100"
+                  }`}
                 >
-                  
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
@@ -200,7 +219,7 @@ function SingleEventPage() {
                         : "assign to self"}
                     </div>
                   </div>
-                  <StripeCheckout/>
+                  <StripeCheckout />
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     <button
                       onClick={() => {
