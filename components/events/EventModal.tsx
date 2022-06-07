@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Multiselect from "multiselect-react-dropdown";
 
 export default function Event({
   setShowModal,
@@ -18,40 +17,6 @@ export default function Event({
   createEvent: () => void;
   getEvents: () => void;
 }) {
-  const friendsList = [
-    {
-      id: 1,
-      name: "Yushiko",
-    },
-    {
-      id: 2,
-      name: "dom",
-    },
-    { id: 3, name: "jon" },
-    {
-      id: 4,
-      name: "jay",
-    },
-    {
-      id: 5,
-      name: "lou",
-    },
-    {
-      id: 6,
-      name: "juls",
-    },
-    { id: 7, name: "konst" },
-    {
-      id: 8,
-      name: "joe",
-    },
-  ];
-  const [selectedFriend, setSelectedFriend] = useState<any>(friendsList);
-
-  function handleSelect(data: any) {
-    console.log(data);
-  }
-
   return (
     <div
       id="authentication-modal"
@@ -168,15 +133,6 @@ export default function Event({
                         min="0"
                         onChange={(e) => setEventBudget(e.target.value)}
                         required
-                      />
-                    </div>
-                    <div>
-                      <Multiselect
-                        className="max-w-fit"
-                        options={selectedFriend}
-                        displayValue="name"
-                        placeholder="select members"
-                        onSelect={handleSelect}
                       />
                     </div>
 
