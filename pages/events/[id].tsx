@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-
 import Navbar from "../../components/Navbar";
 import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
@@ -9,7 +8,6 @@ import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
 import { FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
-import Members from "../../components/events/AddMembers";
 import MembersModal from "../../components/MembersModal";
 
 function SingleEventPage() {
