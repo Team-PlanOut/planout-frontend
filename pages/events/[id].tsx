@@ -8,6 +8,8 @@ import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
 import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
+
+import AssignTaskForm from "../../components/tasks/AssignTaskForm";
 import MembersModal from "../../components/events/MembersModal";
 
 import StripeCheckout from "../../components/StripeCheckout";
@@ -17,8 +19,9 @@ function SingleEventPage() {
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
-  const [assign, setAssign] = useState<boolean>(false);
+
   const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
+
   const { token, user } = useAuth() as any;
   const [data, setData] = useState<any>([]);
   const [member, setMember] = useState<string>("");
@@ -164,7 +167,6 @@ function SingleEventPage() {
           data-modal-toggle="small-modal"
           onClick={() => setShowMembersModal(true)}
         >
-          {" "}
           <FaHandPointRight className="relative top-1 mr-1 -z-10" />
           Show Members
         </div>
@@ -214,11 +216,12 @@ function SingleEventPage() {
                       ) : null}
                     </div>
                     <div className="mr-2" data-modal-toggle="small-modal">
-                      {assign
-                        ? `assigned to  ${user.displayName}`
-                        : "assign to self"}
+                      {task.user_id !== user.uid
+                        ? `Assigned to ${task.userFirstName}`
+                        : "Assigned to me!"}
                     </div>
                   </div>
+                  <AssignTaskForm id={id} getTasks={getTasks} />
                   <StripeCheckout />
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     <button
@@ -228,7 +231,7 @@ function SingleEventPage() {
                           getTasks();
                         }, 200);
                       }}
-                      className="text-2xl text-center font-body "
+                      className="text-xl text-center font-body "
                     >
                       {task.status ? "Complete" : "Incomplete"}
                     </button>

@@ -21,14 +21,13 @@ export default function TaskForm({ getTasks }: any) {
       event_id: router.query.id,
       user_id: user.uid,
       cost: taskCost,
-      datetime: "",
     };
     submitPostReq(dataObj);
   };
 
   const submitPostReq = async (data: object) => {
     try {
-      await axios.post("https://cc26-planout.herokuapp.com/tasks ", data, {
+      await axios.post(`https://cc26-planout.herokuapp.com/tasks`, data, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -43,7 +42,7 @@ export default function TaskForm({ getTasks }: any) {
       <FaPlusCircle
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
-        className="float-right md:mr-36 text-2xl hover:cursor-pointer  hover:fill-orange-300"
+        className="float-right md:mr-36 text-2xl hover:cursor-pointer hover:fill-orange-300"
       />
 
       {showModal && (
