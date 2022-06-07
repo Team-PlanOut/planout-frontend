@@ -12,6 +12,9 @@ import CostModal from "../../components/CostModal";
 import Members from "../../components/events/AddMembers";
 import MembersModal from "../../components/MembersModal";
 
+import StripeCheckout from "../../components/StripeCheckout";
+
+
 function SingleEventPage() {
   const router = useRouter();
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
@@ -92,13 +95,14 @@ function SingleEventPage() {
       console.error(error);
     }
   };
+
   const completeTask = async (id: number) => {
-    const selectedTask = task.find((task) => task.id === id);
+    const selectedTask = task.find((task: { id: number }) => task.id === id);
 
     if (selectedTask?.status) {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
             status: false,
@@ -115,7 +119,7 @@ function SingleEventPage() {
     } else {
       try {
         await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
+          `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
             status: true,
@@ -126,7 +130,6 @@ function SingleEventPage() {
             },
           }
         );
-        setAssign(true);
       } catch (error) {
         console.log(error);
       }
@@ -168,11 +171,12 @@ function SingleEventPage() {
             <div>
               {sortedTasks.map((task: any, index: number) => (
                 <div
-                  key={task.id}
-                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-                    task.status ? "bg-green-100" : "bg-red-100"
-                  }`}
+                key={task.id}
+                className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
+                  task.status ? "bg-green-100" : "bg-red-100"
+                }`}
                 >
+                  
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
@@ -196,7 +200,7 @@ function SingleEventPage() {
                         : "assign to self"}
                     </div>
                   </div>
-
+                  <StripeCheckout/>
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     <button
                       onClick={() => {
