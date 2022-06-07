@@ -1,5 +1,5 @@
-import React from "react";
 import { toast } from 'react-toastify';
+import React from "react";
 
 export default function Event({
   setShowModal,

@@ -10,6 +10,7 @@ export default function Dashboard() {
 
   const fetchTaskData = async () => {
     const uid = user.uid;
+    console.log(token);
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
       {
@@ -68,8 +69,6 @@ export default function Dashboard() {
     }
   }, [token]);
 
-  console.log("~ task", task);
-
   const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
     a.id > b.id ? 1 : -1
   );
@@ -92,8 +91,10 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="mt-10 text-center font-header flex justify-center">
-          <FaTasks className="text-xl relative top-1" />
-          <span className="ml-2 text-2xl relative bottom-1">Current Tasks</span>
+          <FaTasks className="text-xl -z-10  relative top-1" />
+          <span className="ml-2 text-2xl relative bottom-1 -z-10">
+            Current Tasks
+          </span>
         </div>
       </div>
 
