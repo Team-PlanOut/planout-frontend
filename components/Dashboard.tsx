@@ -10,6 +10,7 @@ export default function Dashboard() {
 
   const fetchTaskData = async () => {
     const uid = user.uid;
+    console.log(token);
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
       {
@@ -91,8 +92,8 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="mt-10 text-center font-header flex justify-center">
-          <FaTasks className="text-xl -z-10 relative top-1" />
-          <span className="ml-2 text-2xl relative -z-10 bottom-1">
+          <FaTasks className="text-xl -z-10  relative top-1" />
+          <span className="ml-2 text-2xl relative bottom-1 -z-10">
             Current Tasks
           </span>
         </div>
