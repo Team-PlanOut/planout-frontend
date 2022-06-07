@@ -11,7 +11,7 @@ export default function TaskForm({ getTasks }: any) {
   const [taskDescription, setTaskDescription] = useState("");
   const [taskPoints, setTaskPoints] = useState("");
   const [taskCost, setTaskCost] = useState("");
-  const { token } = useAuth() as any;
+  const { token, user } = useAuth() as any;
 
   const createTask = () => {
     const dataObj = {
