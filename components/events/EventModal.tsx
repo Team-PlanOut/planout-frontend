@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Multiselect from "multiselect-react-dropdown";
 
 export default function Event({
   setShowModal,
@@ -17,7 +18,40 @@ export default function Event({
   createEvent: () => void;
   getEvents: () => void;
 }) {
-  const names = ["Yushko", "jon", "dominic"];
+  const friendsList = [
+    {
+      id: 1,
+      name: "Yushiko",
+    },
+    {
+      id: 2,
+      name: "dom",
+    },
+    { id: 3, name: "jon" },
+    {
+      id: 4,
+      name: "jay",
+    },
+    {
+      id: 5,
+      name: "lou",
+    },
+    {
+      id: 6,
+      name: "juls",
+    },
+    { id: 7, name: "konst" },
+    {
+      id: 8,
+      name: "joe",
+    },
+  ];
+  const [selectedFriend, setSelectedFriend] = useState<any>(friendsList);
+
+  function handleSelect(data: any) {
+    console.log(data);
+  }
+
   return (
     <div
       id="authentication-modal"
@@ -137,36 +171,13 @@ export default function Event({
                       />
                     </div>
                     <div>
-                      <label
-                        htmlFor="budget"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                      >
-                        Members
-                      </label>
-                      <select
-                        className="form-select form-select-sm
-                        appearance-none
-                        block
-                        w-1/2
-                        px-2
-                        py-1
-                        text-sm
-                        font-normal
-                        text-gray-700
-                        bg-white bg-clip-padding bg-no-repeat
-                        border border-solid border-gray-300
-                        rounded
-                        transition
-                        ease-in-out
-                        m-0
-                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        aria-label=".form-select-sm example"
-                      >
-                        <option selected>select</option>
-                        {names.map((name, index) => (
-                          <option value={index}>{name}</option>
-                        ))}
-                      </select>
+                      <Multiselect
+                        className="max-w-fit"
+                        options={selectedFriend}
+                        displayValue="name"
+                        placeholder="select members"
+                        onSelect={handleSelect}
+                      />
                     </div>
 
                     <button
