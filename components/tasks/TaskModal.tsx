@@ -16,7 +16,7 @@ export default function Task({
   createTask: () => void;
   getTasks: () => void;
 }) {
-  const newTaskNotification = () => toast("THERE'S A NEW TASK WAITING FOR YOU!");
+  const newTaskNotification = () => toast("Hey, there's a new task for you!");
   return (
     <div
       id="authentication-modal"
