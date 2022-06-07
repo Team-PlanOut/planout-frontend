@@ -1,10 +1,34 @@
-import React from "react";
-
+import axios from "axios";
+import React, { useState } from "react";
+import useAuth from "../src/hook/auth";
 export default function CostModal({
   setShowCostModal,
 }: {
   setShowCostModal: (showCostModal: boolean) => void;
 }) {
+  const [cost, setCost] = useState<number | null>(null);
+  const { token, user } = useAuth() as any;
+
+  const submitCost = async (id: number) => {
+    try {
+      await axios.put(
+        `http:localhost:8090/tasks/${id}`,
+        {
+          id: id,
+          cost: { cost },
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      setShowCostModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="fixed z-10 overflow-y-auto top-0 w-full left-0" id="modal">
       <div className="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">

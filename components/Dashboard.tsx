@@ -90,6 +90,7 @@ export default function Dashboard() {
           <div className="mt-5 font-body text-xl ml-5">
             <div> Name: {user.displayName} </div>
             <div> Points : </div>
+            <div> Total Balance: </div>
           </div>
         </div>
         <div className="mt-10 text-center font-header flex justify-center">
