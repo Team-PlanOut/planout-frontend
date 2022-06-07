@@ -141,10 +141,11 @@ function SingleEventPage() {
   );
 
 
-  async function deleteEvent(event: any) {
-    await axios.delete(`https://cc26-planout.herokuapp.com/events/${event.id}`);
+  async function deleteEvent(eventId: any) {
+    console.log('event', eventId)
+    await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`);
   }
-
+  
   return (
     <div>
       <Navbar />
@@ -228,7 +229,7 @@ function SingleEventPage() {
                     <button
                       type="button"
                       onClick={() => {
-                        deleteEvent(event.id);
+                        return deleteEvent(event.id);
                       }}
                       className="inset-y-0.5 text-2xl text-center font-body "
                       >
