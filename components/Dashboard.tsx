@@ -9,8 +9,9 @@ export default function Dashboard() {
   const { token, user } = useAuth() as any;
 
   const fetchTaskData = async () => {
+    const uid = user.uid;
     const response = await axios.get(
-      "https://cc26-planout.herokuapp.com/tasks",
+      `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
       {
         headers: {
           Authorization: "Bearer " + token,
@@ -67,6 +68,8 @@ export default function Dashboard() {
     }
   }, [token]);
 
+  console.log("~ task", task);
+
   const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
     a.id > b.id ? 1 : -1
   );
@@ -109,7 +112,6 @@ export default function Dashboard() {
               <button
                 onClick={() => {
                   completeTask(task.id);
-
                   setTimeout(() => {
                     fetchTaskData();
                   }, 200);
