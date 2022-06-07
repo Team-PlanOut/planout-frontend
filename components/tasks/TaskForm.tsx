@@ -11,7 +11,7 @@ export default function TaskForm({ getTasks }: any) {
   const [taskDescription, setTaskDescription] = useState("");
   const [taskPoints, setTaskPoints] = useState("");
   const [taskCost, setTaskCost] = useState("");
-  const { token, user } = useAuth() as any;
+  const { token } = useAuth() as any;
 
   const createTask = () => {
     const dataObj = {
@@ -21,7 +21,6 @@ export default function TaskForm({ getTasks }: any) {
       event_id: router.query.id,
       user_id: "",
       cost: taskCost,
-      datetime: "",
     };
     submitPostReq(dataObj);
   };
@@ -43,7 +42,7 @@ export default function TaskForm({ getTasks }: any) {
       <FaPlusCircle
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
-        className="float-right md:mr-36 text-2xl hover:cursor-pointer  hover:fill-orange-300"
+        className="float-right md:mr-36 text-2xl hover:cursor-pointer hover:fill-orange-300"
       />
 
       {showModal && (

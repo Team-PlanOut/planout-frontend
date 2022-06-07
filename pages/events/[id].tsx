@@ -144,7 +144,7 @@ function SingleEventPage() {
                         : "Assigned to me!"}
                     </div>
                   </div>
-                  <AssignTaskForm task={task} id={id} />
+                  <AssignTaskForm id={id} getTasks={getTasks} />
                   <div className="mt-5 hover:underline hover:cursor-pointer text-right">
                     <button
                       onClick={() => {

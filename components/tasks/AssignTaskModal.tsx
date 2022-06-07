@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
-
 export default function AssignTaskModal({
   setShowModal,
   assignTask,
   eventUsers,
+  selectedUser,
+  setSelectedUser,
+  getTasks,
 }: {
   setShowModal: (showModal: boolean) => void;
-  assignTask: (id: number) => void;
+  assignTask: (userId: number) => void;
   eventUsers: any;
+  selectedUser: any;
+  setSelectedUser: (user: any) => void;
+  getTasks: () => void;
 }) {
   return (
     <div
@@ -56,7 +60,7 @@ export default function AssignTaskModal({
 
                 <div className="py-6 px-6 lg:px-8">
                   <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-                    Assign a user to complete the ask:
+                    Assign a user to complete the task:
                   </h3>
                   <div className="flex flex-wrap -mx-3 mb-6">
                     {eventUsers.map((user: any) => (
@@ -64,7 +68,30 @@ export default function AssignTaskModal({
                         key={user.id}
                         className="w-full md:w-1/2 px-3 mb-6 md:mb-0"
                       >
-                        {user.firstName} {user.lastName}
+                        <label
+                          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                          htmlFor={`user-${user.id}`}
+                        >
+                          {user.firstName}
+                        </label>
+                        <div className="relative">
+                          <div className="absolute inset-0 flex items-center">
+                            <svg
+                              className="h-5 w-5 text-gray-500"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                              xmlns="http://www.w3.org/2000/svg"
+                            ></svg>
+                          </div>
+                          <input
+                            id={`user-${user.id}`}
+                            type="radio"
+                            name="user"
+                            value={user.id}
+                            className="form-radio h-5 w-5 text-gray-600 transition-colors duration-200 ease-in-out"
+                            onChange={() => setSelectedUser(user.id)}
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -74,8 +101,11 @@ export default function AssignTaskModal({
                       className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       onClick={(e) => {
                         e.preventDefault();
+                        assignTask(selectedUser);
                         setShowModal(false);
-                        setTimeout(() => {});
+                        setTimeout(() => {
+                          getTasks();
+                        }, 100);
                       }}
                     >
                       Assign

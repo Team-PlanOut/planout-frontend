@@ -1,23 +1,29 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaPlusCircle } from "react-icons/fa";
+import { BsFillPersonLinesFill } from "react-icons/bs";
 import useAuth from "../../src/hook/auth";
 import AssignTaskModal from "./AssignTaskModal";
 
-export default function AssignTask({ id }: { id: number }) {
+export default function AssignTask({
+  id,
+  getTasks,
+}: {
+  id: string | string[] | undefined;
+  getTasks: () => void;
+}) {
   const [showModal, setShowModal] = useState(false);
   const [eventUsers, setEventUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState();
 
-  const { token, user } = useAuth() as any;
+  const { token } = useAuth() as any;
 
-  const assignTask = async (id: number) => {
-    // const selectedTask = task.find((task) => task.id === id);
+  const assignTask = async (userId: number) => {
     try {
       await axios.put(
         `https://cc26-planout.herokuapp.com/tasks/${id}`,
         {
           id: id,
-          user_id: user.uid,
+          user_id: userId,
         },
         {
           headers: {
@@ -49,10 +55,10 @@ export default function AssignTask({ id }: { id: number }) {
 
   return (
     <div>
-      <FaPlusCircle
+      <BsFillPersonLinesFill
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
-        className="float-right md:mr-48 text-2xl hover:cursor-pointer hover:fill-orange-300"
+        className="float-right   text-2xl hover:cursor-pointer hover:fill-orange-300"
       />
 
       <div className="m-auto bg-black">
@@ -61,6 +67,9 @@ export default function AssignTask({ id }: { id: number }) {
             setShowModal={setShowModal}
             assignTask={assignTask}
             eventUsers={eventUsers}
+            selectedUser={selectedUser}
+            setSelectedUser={setSelectedUser}
+            getTasks={getTasks}
           />
         )}
       </div>
