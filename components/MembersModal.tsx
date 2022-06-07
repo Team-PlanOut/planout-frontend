@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { FaClosedCaptioning, FaToggleOff, FaXbox } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import AddMembers from "./events/AddMembers";
 
 export default function MembersModal({
+  data,
   setShowMembersModal,
 }: {
+  data: any;
   setShowMembersModal: (showMembersModal: boolean) => void;
 }) {
   return (
@@ -39,20 +40,15 @@ export default function MembersModal({
           </svg>
           <div className="flex flex-col justify-center items-center p-4">
             <div> Current Members</div>
-            <ul className="text-leftoverflow-y-auto">
-              <li>yushiko</li>
-              <li>jon</li>
-              <li>ruprecht</li>
-              <li>yushiko</li>
-              <li>jon</li>
-              <li>ruprecht</li>
-              <li>yushiko</li>
-              <li>jon</li>
-              <li>ruprecht</li>
+            <ul className="text-leftoverflow-y-auto capitalize">
+              <li>juliette</li>
+              <li>bill</li>
+              <li>cloe</li>
+              <li>jhonny</li>
             </ul>
           </div>
           <div>
-            <AddMembers setShowMembersModal={setShowMembersModal} />
+            <AddMembers setShowMembersModal={setShowMembersModal} data={data} />
           </div>
         </div>
       </div>

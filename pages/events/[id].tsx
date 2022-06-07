@@ -19,12 +19,30 @@ function SingleEventPage() {
   const [task, setTask] = useState<Tasks[]>([]);
   const [assign, setAssign] = useState<boolean>(false);
   const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
-
   const { token, user } = useAuth() as any;
+  const [data, setData] = useState<any>([]);
 
   const {
     query: { id },
   } = router;
+
+  const fetchUserData = async () => {
+    const response = await axios.get(
+      "https://cc26-planout.herokuapp.com/users",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    setData(response.data);
+    console.log(response.data);
+    return data;
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const getEventName = async () => {
     const response = await axios.get(
@@ -134,7 +152,7 @@ function SingleEventPage() {
           Show Members
         </div>
         {showMembersModal ? (
-          <MembersModal setShowMembersModal={setShowMembersModal} />
+          <MembersModal setShowMembersModal={setShowMembersModal} data={data} />
         ) : null}
 
         <div className="overflow-hidden m-10">
