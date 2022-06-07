@@ -13,8 +13,6 @@ function Events() {
   const { token, user } = useAuth() as any;
 
   const getEvents = async () => {
-    const uid = user.uid;
-    console.log(uid);
     const response = await axios.get(
       "https://cc26-planout.herokuapp.com/events",
       {
@@ -23,9 +21,8 @@ function Events() {
         },
       }
     );
-    console.log(user);
+
     setEvents(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {
