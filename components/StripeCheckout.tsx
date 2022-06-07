@@ -33,21 +33,21 @@ export default function StripeCheckout() {
               background: #ffffff;
               display: flex;
               flex-direction: column;
-              width: 16.5em;
-              height: 10;
-              border-radius: 6px;
+              width: 10em;
+              height: 1em;
+              border-radius: .5em;
               justify-content: space-between;
             }
             button {
-              height: 36px;
+              height: 4em;
               background: #556cd6;
-              border-radius: 4px;
+              border-radius: .25em;
               color: white;
               border: 0;
-              font-weight: 600;
+              font-weight: 20em;
               cursor: pointer;
               transition: all 0.2s ease;
-              box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+              box-shadow: 0em .2em .5em 0em rgba(0, 0, 0, 0.07);
             }
             button:hover {
               opacity: 0.8;
