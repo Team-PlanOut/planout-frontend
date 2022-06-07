@@ -32,7 +32,10 @@ export default function AddMembers({
             </option>
           ))}
         </select>
-        <button type="submit" className="border mt-2 p-2 font-body">
+        <button
+          type="submit"
+          className="bg-orange-200 mt-2 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
+        >
           Add Member
         </button>
       </form>
