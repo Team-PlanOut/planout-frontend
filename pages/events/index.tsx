@@ -23,7 +23,6 @@ function Events() {
         },
       }
     );
-    console.log(user);
     setEvents(response.data);
     console.log(response.data);
   };

@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AddMembers from "./events/AddMembers";
 
 export default function MembersModal({
+  eventMembers,
+  setMember,
   data,
+  handleAddMember,
   setShowMembersModal,
 }: {
-  data: any;
+  eventMembers: { firstName: string }[];
+  setMember: (member: string) => void;
+  data: { first_name: string }[];
+  handleAddMember: unknown;
   setShowMembersModal: (showMembersModal: boolean) => void;
 }) {
   return (
-    <div className="fixed z-10 overflow-y-auto top-0 w-full left-0" id="modal">
+    <div
+      className="fixed z-10 overflow-y-auto top-0 md: w-full left-0"
+      id="modal"
+    >
       <div className="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div className="fixed inset-0 transition-opacity">
           <div className="absolute inset-0 bg-gray-500 opacity-20" />
@@ -25,7 +34,7 @@ export default function MembersModal({
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 float-right mr-2 hover:cursor-pointer"
+            className="h-6 w-6 float-right mr-2 hover:cursor-pointer mt-2"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -39,16 +48,20 @@ export default function MembersModal({
             />
           </svg>
           <div className="flex flex-col justify-center items-center p-4">
-            <div> Current Members</div>
-            <ul className="text-leftoverflow-y-auto capitalize">
-              <li>juliette</li>
-              <li>bill</li>
-              <li>cloe</li>
-              <li>jhonny</li>
+            <div className="font-header text-xl"> Current Members</div>
+            <ul className="text-leftoverflow-y-auto capitalize font-body">
+              {eventMembers.map((user, index) => (
+                <li key={index}>{user.firstName}</li>
+              ))}
             </ul>
           </div>
           <div>
-            <AddMembers setShowMembersModal={setShowMembersModal} data={data} />
+            <AddMembers
+              setShowMembersModal={setShowMembersModal}
+              data={data}
+              setMember={setMember}
+              handleAddMember={handleAddMember}
+            />
           </div>
         </div>
       </div>
