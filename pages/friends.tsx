@@ -11,7 +11,7 @@ function Friends() {
   const [friends, setFriends] = useState<Friends[]>([]);
   const { token } = useAuth() as any;
   const { user } = useAuth() as any;
-  const [addFriend, setAddFriend] = useState(false);
+  const [addFriend, setAddFriend] = useState<boolean>(false);
 
   const getFriends = async () => {
     const id = user.uid;
@@ -50,7 +50,7 @@ function Friends() {
           Add Friend
         </button>
         {addFriend ? (
-          <AddFriend setAddFriend={setAddFriend} />
+          <AddFriend />
         ) : (
           <div>
             <div>
