@@ -10,7 +10,7 @@ export default function Navbar() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
+          className="h-8 w-8"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -30,7 +30,7 @@ export default function Navbar() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
+          className="h-8 w-8"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -50,7 +50,7 @@ export default function Navbar() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
+          className="h-8 w-8"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -70,7 +70,7 @@ export default function Navbar() {
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
+          className="h-8 w-8"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -86,8 +86,8 @@ export default function Navbar() {
 
   return (
     <div className="shadow-md w-full fixed top-0 left-0">
-      <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
-        <div className=" text-3xl cursor-pointer flex items-center  text-gray-800 font-logo">
+      <div className="md:flex items-center justify-around bg-white py-4 md:px-10 px-7">
+        <div className="text-4xl  cursor-pointer flex items-center align-bottom  text-gray-800 font-logo">
           PlanOut
         </div>
         <div
@@ -111,7 +111,7 @@ export default function Navbar() {
         </div>
 
         <ul
-          className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+          className={`md:flex  md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
             open ? "top-20" : "top-[-490px]"
           } `}
         >
@@ -123,7 +123,7 @@ export default function Navbar() {
               >
                 <div className="flex flex-row mr-2">
                   {link.icon}
-                  <span className="md:hidden ml-2 relative bottom-1">
+                  <span className="md:hidden ml-2 relative top-1">
                     {link.name}
                   </span>
                 </div>

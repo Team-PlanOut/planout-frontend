@@ -76,7 +76,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
+    <div className="container m-auto h-screen mt-20 box-content md:w-1/2  pb-10">
       <div className="overflow-hidden m-10">
         <div className="flex flex-row md:ml-10 mt-10 md:justify-center">
           <Image
@@ -105,8 +105,8 @@ export default function Dashboard() {
         {sortedTasks.map((task: any, index: number) => (
           <div
             key={task.id}
-            className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-              task.status ? "bg-green-100" : "bg-red-100"
+            className={`p-5 border md:rounded-md md:w-1/2 m-auto mt-10 ${
+              task.status ? "bg-green-50" : "bg-red-50"
             }`}
           >
             <div className="text-2xl text-center font-body">
