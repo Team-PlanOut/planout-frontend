@@ -1,15 +1,14 @@
 import axios from "axios";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Navbar from "../../components/Navbar";
 import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
 import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
-import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
+import { FaCheckCircle, FaMoneyBill } from "react-icons/fa";
+import { IoIosPeople } from "react-icons/io";
 import CostModal from "../../components/CostModal";
-import { FaTrash} from "react-icons/fa";
-
 
 import AssignTaskForm from "../../components/tasks/AssignTaskForm";
 import MembersModal from "../../components/events/MembersModal";
@@ -21,9 +20,7 @@ function SingleEventPage() {
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
-
   const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
-
   const { token, user } = useAuth() as any;
   const [data, setData] = useState<any>([]);
   const [member, setMember] = useState<string>("");
@@ -159,32 +156,23 @@ function SingleEventPage() {
     a.id > b.id ? 1 : -1
   );
 
-
-  async function deleteEvent(eventId: any) {
-    console.log('event', eventId)
-    await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-  }
-
   return (
     <div>
       <Navbar />
 
-      <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
-        <div className="text-center text-4xl font-header capitalize">
+      <div className="container m-auto mt-24 box-content h-screen md:w-1/2 pb-10 mb-2">
+        <div className="text-center text-5xl font-body font-bold capitalize">
           {event.name}
         </div>
         <div
-          className="float-right mr-20  underline hover:cursor-pointer flex mt-2"
+          className="float-right mr-20  text-sm underline hover:cursor-pointer flex mt-2"
           data-modal-toggle="small-modal"
           onClick={() => setShowMembersModal(true)}
         >
-          <FaHandPointRight className="relative top-1 mr-1 -z-10" />
-          Show Members
+          <IoIosPeople className="relative top-1 mr-1 -z-10" />
+          Members
         </div>
+
         {showMembersModal ? (
           <MembersModal
             setShowMembersModal={setShowMembersModal}
@@ -194,10 +182,8 @@ function SingleEventPage() {
             eventMembers={eventMembers}
           />
         ) : null}
-
         <div className="overflow-hidden m-10">
-          <div className="mt-10 text-center text-4xl font-header"></div>
-          <div className="mt-10 text-center text-4xl font-header mb-2">
+          <div className="mt-10 text-center text-4xl font-body font-bold mb-2">
             TASKS
           </div>
 
@@ -209,13 +195,14 @@ function SingleEventPage() {
               {sortedTasks.map((task: any, index: number) => (
                 <div
                   key={task.id}
-                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${task.status ? "bg-green-100" : "bg-red-100"
-                    }`}
+                  className={`p-5 md:rounded-lg md:w-1/2 m-auto mt-10 ${
+                    task.status ? "bg-green-50" : "bg-red-50"
+                  }`}
                 >
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
-                    <div>$ Cost: {task.cost}</div>
+                    <div> ¥Cost: {task.cost}</div>
                     <div className="mt-2 flex text-base hover:underline hover:cursor-pointer">
                       <FaMoneyBill className="relative top-1 mr-1 text-lg" />
                       <div
@@ -245,28 +232,15 @@ function SingleEventPage() {
                           getTasks();
                         }, 200);
                       }}
-                      className="text-xl text-center font-body "
+                      className="text-xl text-center font-body underline"
                     >
-                      {task.status ? "Complete" : "Incomplete"}
+                      {task.status ? <FaCheckCircle /> : "Incomplete"}
                     </button>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-        <div className="z-10 mt-5 hover:underline hover:cursor-pointer text-right">
-          <button
-            type="button"
-            onClick={() => {
-              deleteEvent(event.id);
-              router.push('/events')
-            }}
-            className="inset-y-0.5 text-2xl text-center font-body "
-          ><FaTrash/>
-            
-          </button>
-
         </div>
       </div>
     </div>
