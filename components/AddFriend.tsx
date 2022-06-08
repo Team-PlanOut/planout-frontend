@@ -30,7 +30,6 @@ function AddFriend() {
           },
         }
       )
-      .then((res) => console.log(token))
       .catch((error) => console.error(error));
 
   };
