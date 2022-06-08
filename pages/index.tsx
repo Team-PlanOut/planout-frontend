@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       <Head>
         <title>PlanOut</title>
         <meta name="description" content="Planout App for planning events" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel=" " href="/favicon.ico" />
       </Head>
       <Navbar />
       <Dashboard />

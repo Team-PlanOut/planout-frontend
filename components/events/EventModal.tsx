@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import React from "react";
 
 export default function Event({
@@ -17,6 +18,7 @@ export default function Event({
   createEvent: () => void;
   getEvents: () => void;
 }) {
+  const newEventNotification = () => toast("HEY, LISTEN! There's a new event!");
   return (
     <div
       id="authentication-modal"
@@ -101,7 +103,7 @@ export default function Event({
                       />
                     </div>
 
-                    <div>
+                    {/* <div>
                       <label
                         htmlFor="time"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -116,7 +118,7 @@ export default function Event({
                         onChange={(e) => setEventTime(e.target.value)}
                         required
                       />
-                    </div>
+                    </div> */}
 
                     <div>
                       <label
@@ -140,12 +142,13 @@ export default function Event({
                       type="submit"
                       className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       onClick={(e) => {
-                        e.preventDefault();
+                        // e.preventDefault();
                         createEvent();
                         setShowModal(false);
+                        newEventNotification();
                         setTimeout(() => {
                           getEvents();
-                        });
+                        }, 200);
                       }}
                     >
                       Create event
