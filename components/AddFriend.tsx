@@ -1,13 +1,9 @@
 import axios from "axios";
-import Link from "next/link";
-import React, { useEffect, useState, useRef } from "react";
-import { Users } from "../types";
-
-import Navbar from "./Navbar";
+import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import { withProtected } from "../src/hook/route";
 
-function addFriend({ setAddFriend }) {
+function addFriend() {
   const [input, setInput] = useState<string>();
   const { token } = useAuth() as any;
   const { user } = useAuth() as any;
