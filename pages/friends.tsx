@@ -44,7 +44,7 @@ function Friends() {
         </div>
         <button
           onClick={addUserAsFriend}
-          className="bg-blue-200 ml-8 mt-4 font-medium m-auto items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-400"
+          className="bg-blue-400 ml-8 mt-4 font-medium m-auto items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-300"
         >
           Add Friend
         </button>
