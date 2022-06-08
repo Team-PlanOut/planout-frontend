@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
-import React from 'react';
-import MoonLoader from 'react-spinners/MoonLoader';
+import { useRouter } from "next/router";
+import React from "react";
+import MoonLoader from "react-spinners/MoonLoader";
 
-import useAuth from './auth';
+import useAuth from "./auth";
 
 export function withPublic(Component: any) {
   return function WithPublic({ ...props }) {
