@@ -3,7 +3,7 @@ export type Events = {
   host: string | null;
   name: string | null;
   event_name: string | null;
-  date: Date | null;
+  date: Date;
   budget: number | null;
   created_at: number | null;
   modified: number | null;
