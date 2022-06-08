@@ -3,22 +3,19 @@ import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import { withProtected } from "../src/hook/route";
 
-function addFriend() {
+function AddFriend() {
   const [input, setInput] = useState<string>();
-  const { token } = useAuth() as any;
-  const { user } = useAuth() as any;
-  const [friend, setFriend] = useState<string>();
+  const { token, user } = useAuth() as any;
 
   const getFriend = async () => {
     const findFriend = await axios.get(
       `https://cc26-planout.herokuapp.com/users/${input}`,
       {
         headers: {
-          Authorization: "Bearer" + token,
+          Authorization: "Bearer " + token,
         },
       }
     );
-    setFriend(findFriend.data);
     console.log(findFriend);
     beginFriendship(findFriend);
   };
@@ -50,10 +47,7 @@ function addFriend() {
               <input
                 type="text"
                 placeholder="友達の名前は何だろう？"
-                onChange={(e) => {
-                  setInput(e.target.value);
-                  console.log(e.target.value);
-                }}
+                onChange={(e) => setInput(e.target.value)}
               ></input>
             </form>
             <button
@@ -69,4 +63,4 @@ function addFriend() {
   );
 }
 
-export default withProtected(addFriend);
+export default withProtected(AddFriend);
