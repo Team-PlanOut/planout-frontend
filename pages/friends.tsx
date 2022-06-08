@@ -58,10 +58,11 @@ function Friends() {
                   key={friend.friendId}
                   className="p-2 font-body bg-mintGreen text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
                 >
-                  <div key={friend.friendId}>
-                    {friend.friendFirstName + " " + friend.friendLastName}
+                  <div>
+                    {friend.friendFirstName}{" "}
+                    <span>{friend.friendLastName} </span>
                   </div>
-                  <div>{"AKA: " + friend.username}</div>
+                  <div> AKA: {friend.username}</div>
                 </div>
               ))}
             </div>
