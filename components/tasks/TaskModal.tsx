@@ -1,5 +1,5 @@
 import React from "react";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export default function Task({
   setShowModal,
@@ -131,7 +131,7 @@ export default function Task({
                         newTaskNotification();
                         setTimeout(() => {
                           getTasks();
-                        });
+                        }, 200);
                       }}
                     >
                       Create Task

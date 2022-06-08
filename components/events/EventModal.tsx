@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import React from "react";
 
 export default function Event({
@@ -148,7 +148,7 @@ export default function Event({
                         newEventNotification();
                         setTimeout(() => {
                           getEvents();
-                        });
+                        }, 200);
                       }}
                     >
                       Create event
