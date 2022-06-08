@@ -5,9 +5,8 @@ import { withProtected } from "../src/hook/route";
 
 function AddFriend() {
   const [input, setInput] = useState<string>();
-  const { token } = useAuth() as any;
-  const { user } = useAuth() as any;
-  const [friend, setFriend] = useState<string>();
+  const { token, user } = useAuth() as any;
+  const [friend, setFriend] = useState<string | null>("");
 
   const getFriend = async () => {
     const findFriend = await axios.get(
