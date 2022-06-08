@@ -1,5 +1,5 @@
 export type Events = {
-  id: number | null;
+  id: number;
   host: string | null;
   name: string | null;
   event_name: string | null;
@@ -10,7 +10,7 @@ export type Events = {
 };
 
 export type Tasks = {
-  id: number | null;
+  id: number;
   description: string | null;
   status: boolean | null;
   points: number | null;
@@ -28,7 +28,7 @@ export type Users = {
 };
 
 export type Friends = {
-  friendId: string | null;
+  friendId: string;
   friendFirstName: string | null;
   friendLastName: string | null;
   username: string | null;
