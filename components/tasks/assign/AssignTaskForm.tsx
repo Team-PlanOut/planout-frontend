@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BsFillPersonLinesFill } from "react-icons/bs";
-import useAuth from "../../src/hook/auth";
+import useAuth from "../../../src/hook/auth";
 import AssignTaskModal from "./AssignTaskModal";
 
 export default function AssignTaskForm({
@@ -17,7 +17,7 @@ export default function AssignTaskForm({
 
   const { token } = useAuth() as any;
 
-  const assignTask = async (userId: number) => {
+  const assignTask = async (userId: string) => {
     try {
       await axios.put(
         `https://cc26-planout.herokuapp.com/tasks/${id}`,
@@ -31,6 +31,8 @@ export default function AssignTaskForm({
           },
         }
       );
+      console.log(typeof userId);
+      
     } catch (error) {
       console.error(error);
     }

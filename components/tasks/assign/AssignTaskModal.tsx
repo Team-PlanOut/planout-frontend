@@ -7,7 +7,7 @@ export default function AssignTaskModal({
   getTasks,
 }: {
   setShowModal: (showModal: boolean) => void;
-  assignTask: (userId: number) => void;
+  assignTask: (userId: string) => void;
   eventUsers: any;
   selectedUser: any;
   setSelectedUser: (user: any) => void;
