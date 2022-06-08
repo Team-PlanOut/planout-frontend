@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { FaPersonBooth } from "react-icons/fa";
 import axios from "axios";
 
 import Navbar from "../components/Navbar";
@@ -16,6 +15,7 @@ function Friends() {
 
   const getFriends = async () => {
     const id = user.uid;
+
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/friends/${id}`,
       {
@@ -24,6 +24,7 @@ function Friends() {
         },
       }
     );
+
     setFriends(response.data);
   };
 
