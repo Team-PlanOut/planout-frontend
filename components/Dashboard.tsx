@@ -10,17 +10,19 @@ export default function Dashboard() {
 
   const fetchTaskData = async () => {
     const uid = user.uid;
-    console.log(token);
-    const response = await axios.get(
-      `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
-    setTasks(response.data);
-    return task;
+    try {
+      const response = await axios.get(
+        `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      setTasks(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const completeTask = async (id: number) => {

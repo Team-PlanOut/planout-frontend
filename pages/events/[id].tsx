@@ -102,6 +102,7 @@ function SingleEventPage() {
       }
     );
     setTask(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -173,7 +174,9 @@ function SingleEventPage() {
       <Navbar />
 
       <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
-        <div className="text-center text-4xl font-header">{event.name}</div>
+        <div className="text-center text-4xl font-header capitalize">
+          {event.name}
+        </div>
         <div
           className="float-right mr-20  underline hover:cursor-pointer flex mt-2"
           data-modal-toggle="small-modal"
@@ -212,7 +215,7 @@ function SingleEventPage() {
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
-                    <div>$ Cost:</div>
+                    <div>$ Cost: {task.cost}</div>
                     <div className="mt-2 flex text-base hover:underline hover:cursor-pointer">
                       <FaMoneyBill className="relative top-1 mr-1 text-lg" />
                       <div
