@@ -10,18 +10,22 @@ import { withProtected } from "../../src/hook/route";
 
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
-  const { token } = useAuth() as any;
+  const { token, user } = useAuth() as any;
 
   const getEvents = async () => {
+    const uid = user.uid;
+    console.log(uid);
     const response = await axios.get(
-      `https://cc26-planout.herokuapp.com/events`,
+      "https://cc26-planout.herokuapp.com/events",
       {
         headers: {
           Authorization: "Bearer " + token,
         },
       }
     );
+    console.log(user);
     setEvents(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -52,6 +56,7 @@ function Events() {
                   <div className="text-center capitalize">{event.name}</div>
                   <div className="text-center mt-2">
                     {showOnlyDate(event.date)}
+
                   </div>
                 </div>
               </Link>
