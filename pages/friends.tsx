@@ -9,8 +9,7 @@ import AddFriend from "./../components/AddFriend";
 
 function Friends() {
   const [friends, setFriends] = useState<Friends[]>([]);
-  const { token } = useAuth() as any;
-  const { user } = useAuth() as any;
+  const { token, user } = useAuth() as any;
   const [addFriend, setAddFriend] = useState<boolean>(false);
 
   const getFriends = async () => {

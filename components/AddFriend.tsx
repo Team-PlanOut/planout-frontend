@@ -4,7 +4,7 @@ import useAuth from "../src/hook/auth";
 import { withProtected } from "../src/hook/route";
 
 function AddFriend() {
-  const [input, setInput] = useState<string>();
+  const [input, setInput] = useState<string | null>(null);
   const { token, user } = useAuth() as any;
 
   const getFriend = async () => {
