@@ -39,24 +39,24 @@ function AddFriend() {
     <>
       <div className="container m-auto mt-20 box-content h-auto md:w-1/2 shadow-lg pb-2">
         <div className="overflow-hidden m-10">
-          <div className="mt-10 text-center text-4xl font-header">
+          <div className="mt-10 mb-2 text-4xl font-header">
             What's yer pals name?
           </div>
-          <div>
-            <form>
-              <input
-                type="text"
-                placeholder="友達の名前は何だろう？"
-                onChange={(e) => setInput(e.target.value)}
-              ></input>
-            </form>
+
+          <form onSubmit={getFriend}>
+            <input
+              className="border-4 p-2"
+              type="text"
+              placeholder="友達の名前は何だろう？"
+              onChange={(e) => setInput(e.target.value)}
+            ></input>
             <button
-              className="bg-blue-200 ml-8 mt-4 font-medium m-auto items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-400"
-              onClick={getFriend}
+              type="submit"
+              className="bg-blue-400 ml-8 mt-4 font-medium flex flex-col items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-300"
             >
               Friendship Engage!
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </>

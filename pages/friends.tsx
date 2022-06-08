@@ -38,13 +38,13 @@ function Friends() {
   return (
     <div>
       <Navbar />
-      <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
+      <div className="container m-auto h-1/2 mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
         <div className="mt-40 text-center text-4xl font-header">
           Friends List
         </div>
         <button
           onClick={addUserAsFriend}
-          className="bg-blue-200 ml-8 mt-4 font-medium m-auto items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-400"
+          className="bg-blue-400 ml-8 mt-4 font-medium m-auto items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-300"
         >
           Add Friend
         </button>
@@ -62,7 +62,6 @@ function Friends() {
                     {friend.friendFirstName}{" "}
                     <span>{friend.friendLastName} </span>
                   </div>
-                  <div> AKA: {friend.username}</div>
                 </div>
               ))}
             </div>
