@@ -17,13 +17,13 @@ export default function AssignTaskForm({
 
   const { token } = useAuth() as any;
 
-  const assignTask = async (userId: string) => {
+  const assignTask = async () => {
     try {
       await axios.put(
         `https://cc26-planout.herokuapp.com/tasks/${id}`,
         {
           id: id,
-          user_id: userId,
+          user_id: selectedUser,
         },
         {
           headers: {
@@ -69,7 +69,7 @@ export default function AssignTaskForm({
             setShowModal={setShowModal}
             assignTask={assignTask}
             eventUsers={eventUsers}
-            selectedUser={selectedUser}
+   
             setSelectedUser={setSelectedUser}
             getTasks={getTasks}
           />
