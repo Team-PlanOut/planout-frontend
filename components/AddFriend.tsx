@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import { withProtected } from "../src/hook/route";
 
-function addFriend() {
+function AddFriend() {
   const [input, setInput] = useState<string>();
   const { token } = useAuth() as any;
   const { user } = useAuth() as any;
@@ -52,7 +52,6 @@ function addFriend() {
                 placeholder="友達の名前は何だろう？"
                 onChange={(e) => {
                   setInput(e.target.value);
-                  console.log(e.target.value);
                 }}
               ></input>
             </form>
@@ -69,4 +68,4 @@ function addFriend() {
   );
 }
 
-export default withProtected(addFriend);
+export default withProtected(AddFriend);
