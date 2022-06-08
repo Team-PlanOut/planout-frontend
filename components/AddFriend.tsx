@@ -12,7 +12,7 @@ function AddFriend() {
       `https://cc26-planout.herokuapp.com/users/${input}`,
       {
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: "Bearer " +  token,
         },
       }
     );
@@ -20,19 +20,18 @@ function AddFriend() {
     beginFriendship(findFriend);
   };
 
-  const beginFriendship = async (findFriend: any) => {
-    try {
-      await axios.post(
+  const beginFriendship = (findFriend: any) => {
+      axios.post(
         `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend.data.id}`,
+        {},
         {
           headers: {
             Authorization: "Bearer " + token,
           },
         }
-      );
-    } catch (error) {
-      console.log(error);
-    }
+      )
+      .catch((error) => console.error(error));
+
   };
 
   return (
@@ -43,7 +42,9 @@ function AddFriend() {
             What's yer pals name?
           </div>
 
-          <form onSubmit={getFriend}>
+          <form onSubmit={(e) => { 
+            e.preventDefault()
+            getFriend()}}>
             <input
               className="border-4 p-2"
               type="text"
