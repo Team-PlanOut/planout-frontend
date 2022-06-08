@@ -38,7 +38,7 @@ function Friends() {
   return (
     <div>
       <Navbar />
-      <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
+      <div className="container m-auto h-1/2 mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
         <div className="mt-40 text-center text-4xl font-header">
           Friends List
         </div>
@@ -62,7 +62,6 @@ function Friends() {
                     {friend.friendFirstName}{" "}
                     <span>{friend.friendLastName} </span>
                   </div>
-                  <div> AKA: {friend.username}</div>
                 </div>
               ))}
             </div>
