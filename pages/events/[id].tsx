@@ -100,6 +100,7 @@ function SingleEventPage() {
       }
     );
     setTask(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -201,7 +202,7 @@ function SingleEventPage() {
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
-                    <div>$ Cost:</div>
+                    <div>$ Cost: {task.cost}</div>
                     <div className="mt-2 flex text-base hover:underline hover:cursor-pointer">
                       <FaMoneyBill className="relative top-1 mr-1 text-lg" />
                       <div
