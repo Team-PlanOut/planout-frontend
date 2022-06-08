@@ -32,7 +32,6 @@ export default function AssignTaskForm({
         }
       );
       console.log(typeof userId);
-      
     } catch (error) {
       console.error(error);
     }
@@ -69,7 +68,6 @@ export default function AssignTaskForm({
             setShowModal={setShowModal}
             assignTask={assignTask}
             eventUsers={eventUsers}
-   
             setSelectedUser={setSelectedUser}
             getTasks={getTasks}
           />
