@@ -55,12 +55,19 @@ export default function AssignTaskForm({
 
   return (
     <div>
-      <BsFillPersonLinesFill
+      {/* <BsFillPersonLinesFill
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
         className="float-right   text-2xl hover:cursor-pointer hover:fill-orange-300"
-      />
+      /> */}
 
+      <button
+        data-modal-toggle="small-modal"
+        onClick={() => setShowModal(true)}
+        className="bg-orange-300 text-sm font-body items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
+      >
+        Assign
+      </button>
       <div className="m-auto bg-black">
         {showModal && (
           <AssignTaskModal

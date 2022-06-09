@@ -28,7 +28,6 @@ function SingleEventPage() {
   const [data, setData] = useState<any>([]);
   const [member, setMember] = useState<string>("");
   const [eventMembers, setEventMembers] = useState<any>(null);
-
   const {
     query: { id },
   } = router;
@@ -222,40 +221,47 @@ function SingleEventPage() {
                   <div className="text-lg ml-2 font-body">
                     <div>Task: {task.description}</div>
 
-                    <div> ¥Cost: {task.cost}</div>
-                    <div className="mt-2 flex text-base hover:underline hover:cursor-pointer">
-                      <FaMoneyBill className="relative top-1 mr-1 text-lg" />
-                      <div
-                        className="mr-2"
-                        data-modal-toggle="small-modal"
-                        onClick={() => setShowCostModal(true)}
-                      >
-                        Add cost
-                      </div>
-                      {showCostModal ? (
-                        <CostModal setShowCostModal={setShowCostModal} />
-                      ) : null}
-                    </div>
+                    <div> Cost: {task.cost} ¥</div>
+
                     <div className="mr-2" data-modal-toggle="small-modal">
                       {task.user_id !== user.uid
                         ? `Assigned to ${task.userFirstName}`
                         : "Assigned to me!"}
                     </div>
                   </div>
-                  <AssignTaskForm id={id} getTasks={getTasks} />
-                  <StripeCheckout />
-                  <div className="mt-5 hover:underline hover:cursor-pointer text-right">
-                    <button
+
+                  <div className="mt-5 flex flex-row justify-end hover:cursor-pointer ">
+                    <div
                       onClick={() => {
                         completeTask(task.id);
                         setTimeout(() => {
                           getTasks();
                         }, 200);
                       }}
-                      className="text-xl text-center font-body underline"
+                      className="font-body"
                     >
-                      {task.status ? <FaCheckCircle /> : "Incomplete"}
+                      {task.status ? (
+                        <button className="mr-1 inline-flex bg-orange-300 text-sm px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400">
+                          <FaCheckCircle className="w-3 h-3 mr-1 relative top-1" />{" "}
+                          Completed
+                        </button>
+                      ) : (
+                        <button className="mr-1 bg-orange-300 text-sm items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400">
+                          Complete task
+                        </button>
+                      )}
+                    </div>
+                    <AssignTaskForm id={id} getTasks={getTasks} />
+                    <button
+                      data-modal-toggle="small-modal"
+                      onClick={() => setShowCostModal(true)}
+                      className="mr-1 ml-1 font-body bg-orange-300 text-sm items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
+                    >
+                      Add cost
                     </button>
+                    {showCostModal ? (
+                      <CostModal setShowCostModal={setShowCostModal} />
+                    ) : null}
                   </div>
                   <DeleteTask task={task} getTasks={getTasks} />
                 </div>

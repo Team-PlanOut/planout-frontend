@@ -72,12 +72,13 @@ function Events() {
                     <div className="text-center mt-2">
                       {showOnlyDate(event.date)}
                     </div>
-                    <div className="float-right text-sm">
-                      {" "}
-                      Hosted by {event.hostFirstName} {event.hostLastName}
-                    </div>
                   </div>
                 </Link>
+
+                <div className="text-sm float-right">
+                  {" "}
+                  Hosted by {event.hostFirstName} {event.hostLastName}{" "}
+                </div>
               </div>
             </div>
           ))}
