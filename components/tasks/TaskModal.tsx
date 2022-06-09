@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { io } from 'socket.io-client';
-const socket = io('https://cc26-planout.herokuapp.com/');
 
 export default function Task({
   setShowModal,
