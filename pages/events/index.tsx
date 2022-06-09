@@ -7,6 +7,7 @@ import Navbar from "../../components/Navbar";
 import useAuth from "../../src/hook/auth";
 import { withProtected } from "../../src/hook/route";
 import { FaTrash } from "react-icons/fa";
+import { HiOutlineUserCircle } from "react-icons/hi";
 
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
@@ -25,7 +26,6 @@ function Events() {
     setEvents(response.data);
   };
   async function deleteEvent(eventId: any) {
-    console.log("event", eventId);
     await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`, {
       headers: {
         Authorization: "Bearer " + token,
@@ -52,7 +52,7 @@ function Events() {
             <div>
               <div
                 key={event.id}
-                className="p-4 font-body rounded-md text-2xl mb-2 shadow-md md:w-1/2 m-auto mt-10 text-center hover:border-blue-500 hover:bg-blue-50 transition-all duration-500 ease-in bg-gray-50"
+                className="pb-8 pt-4 pr-2 font-body rounded-md text-2xl mb-2 shadow-md md:w-1/2 m-auto mt-10 text-center hover:border-blue-500 hover:bg-blue-50 transition-all duration-500 ease-in bg-gray-50"
               >
                 <FaTrash
                   onClick={() => {
@@ -71,6 +71,10 @@ function Events() {
                     <div className="text-center capitalize ">{event.name}</div>
                     <div className="text-center mt-2">
                       {showOnlyDate(event.date)}
+                    </div>
+                    <div className="float-right text-sm">
+                      {" "}
+                      Hosted by {event.hostFirstName} {event.hostLastName}
                     </div>
                   </div>
                 </Link>

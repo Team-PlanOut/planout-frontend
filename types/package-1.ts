@@ -1,6 +1,8 @@
 export type Events = {
   id: number;
   host: string | null;
+  hostFirstName: string | null;
+  hostLastName: string | null;
   name: string | null;
   event_name: string | null;
   date: Date;
