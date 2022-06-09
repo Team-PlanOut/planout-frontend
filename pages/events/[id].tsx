@@ -6,22 +6,19 @@ import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
 import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
-import { FaCheckCircle, FaMoneyBill } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import CostModal from "../../components/CostModal";
 import { io } from "socket.io-client";
 const socket = io("https://cc26-planout.herokuapp.com/");
 import DeleteTask from "../../components/tasks/DeleteTask";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-
 import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
 import MembersModal from "../../components/events/members/MembersModal";
 
 import StripeCheckout from "../../components/StripeCheckout";
 
 function SingleEventPage() {
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
-
   const router = useRouter();
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
@@ -31,6 +28,8 @@ function SingleEventPage() {
   const [data, setData] = useState<any>([]);
   const [member, setMember] = useState<string>("");
   const [eventMembers, setEventMembers] = useState<any>(null);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+
   const {
     query: { id },
   } = router;
@@ -174,6 +173,7 @@ function SingleEventPage() {
   const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
     a.id > b.id ? 1 : -1
   );
+  const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
 
   return (
     <div>
@@ -182,6 +182,7 @@ function SingleEventPage() {
       <div className="container m-auto mt-24 box-content h-screen md:w-1/2 pb-10 mb-2">
         <div className="text-center text-5xl font-body font-bold capitalize">
           {event.name}
+          <div className="text-xl mt-2">{showOnlyDate(event.date)}</div>
         </div>
         <div
           className="float-right mr-20  text-sm underline hover:cursor-pointer flex mt-2"
@@ -228,7 +229,7 @@ function SingleEventPage() {
                           <button
                             onClick={() => setOpenMenu(!openMenu)}
                             type="button"
-                            className="rounded-md hover:bg-gray-200 hover:rounded-full text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+                            className="rounded-md hover:bg-gray-200 hover:rounded-full text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-orange-400"
                             id="menu-button"
                             aria-expanded="true"
                             aria-haspopup="true"
@@ -242,14 +243,12 @@ function SingleEventPage() {
                             role="menu"
                             aria-orientation="vertical"
                             aria-labelledby="menu-button"
-                            tabindex="-1"
                           >
                             <div className="py-1" role="none">
                               <div
                                 onClick={() => setShowCostModal(true)}
                                 className="hover:cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
                                 role="menuitem"
-                                tabindex="-1"
                               >
                                 Edit Cost
                               </div>
@@ -261,7 +260,6 @@ function SingleEventPage() {
                               <div
                                 className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
                                 role="menuitem"
-                                tabindex="-1"
                                 id="menu-item-1"
                               >
                                 <StripeCheckout />

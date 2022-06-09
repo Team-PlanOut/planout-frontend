@@ -7,7 +7,6 @@ import Navbar from "../../components/Navbar";
 import useAuth from "../../src/hook/auth";
 import { withProtected } from "../../src/hook/route";
 import { FaTrash } from "react-icons/fa";
-import { HiOutlineUserCircle } from "react-icons/hi";
 
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
