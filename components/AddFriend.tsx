@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import { withProtected } from "../src/hook/route";
 
-function AddFriend() {
+function AddFriend({ friends }) {
   const [input, setInput] = useState<string | null>(null);
   const { token, user } = useAuth() as any;
 
@@ -16,11 +16,15 @@ function AddFriend() {
         },
       }
     );
-    console.log(findFriend);
     beginFriendship(findFriend);
   };
 
   const beginFriendship = (findFriend: any) => {
+    if (friends.some((friend) => friend.friendId === findFriend.data.id)) {
+      alert("You have already added this friend!");
+      return;
+    }
+
     axios
       .post(
         `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend.data.id}`,

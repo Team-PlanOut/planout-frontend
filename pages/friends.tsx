@@ -9,8 +9,10 @@ import AddFriend from "./../components/AddFriend";
 
 function Friends() {
   const [friends, setFriends] = useState<Friends[]>([]);
-  const { token, user } = useAuth() as any;
+
   const [addFriend, setAddFriend] = useState<boolean>(false);
+
+  const { token, user } = useAuth() as any;
 
   const getFriends = async () => {
     const id = user.uid;
@@ -49,7 +51,7 @@ function Friends() {
           Add Friend
         </button>
         {addFriend ? (
-          <AddFriend />
+          <AddFriend friends={friends} />
         ) : (
           <div>
             <div>
@@ -59,8 +61,7 @@ function Friends() {
                   className="p-2 font-body bg-mintGreen text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
                 >
                   <div>
-                    {friend.friendFirstName}{" "}
-                    <span>{friend.friendLastName} </span>
+                    {friend.friendFirstName} {friend.friendLastName}
                   </div>
                 </div>
               ))}
