@@ -10,8 +10,10 @@ import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
 import { FaTrash } from "react-icons/fa";
 
+import DeleteTask from "../../components/tasks/DeleteTask"
 import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
 import MembersModal from "../../components/events/members/MembersModal";
+
 
 import StripeCheckout from "../../components/StripeCheckout";
 
@@ -248,6 +250,8 @@ function SingleEventPage() {
                       {task.status ? "Complete" : "Incomplete"}
                     </button>
                   </div>
+                  <DeleteTask task={task} 
+                  getTasks={getTasks}/>
                 </div>
               ))}
             </div>
@@ -261,8 +265,8 @@ function SingleEventPage() {
               router.push("/events");
             }}
             className="inset-y-0.5 text-2xl text-center font-body "
-          >
-            <FaTrash />
+
+          ><FaTrash />
           </button>
         </div>
       </div>
