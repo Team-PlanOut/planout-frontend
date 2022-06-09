@@ -51,11 +51,7 @@ function Friends() {
           Add Friend
         </button>
         {addFriend ? (
-<<<<<<< HEAD
-          <AddFriend friends={friends} />
-=======
-          <AddFriend setAddFriend={setAddFriend} />
->>>>>>> 190d33f (chore: css edit)
+          <AddFriend setAddFriend={setAddFriend} friends={friends} />
         ) : (
           <div>
             <div>
@@ -64,8 +60,9 @@ function Friends() {
                   key={friend.friendId}
                   className="p-2 font-body bg-mintGreen text-2xl border-2 border-green-800 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-green-500  transition-all duration-500 ease-in"
                 >
-                  <div>
-                    {friend.friendFirstName} {friend.friendLastName}
+                  <div key={friend.friendId}>
+                    {friend.friendFirstName}{" "}
+                    <span>{friend.friendLastName} </span>
                   </div>
                 </div>
               ))}
