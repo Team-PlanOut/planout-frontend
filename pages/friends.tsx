@@ -51,7 +51,7 @@ function Friends() {
           Add Friend
         </button>
         {addFriend ? (
-          <AddFriend setAddFriend={setAddFriend} friends={friends} />
+          <AddFriend setAddFriend={setAddFriend} />
         ) : (
           <div>
             <div>
