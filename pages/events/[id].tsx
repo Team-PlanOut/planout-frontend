@@ -9,11 +9,9 @@ import { withProtected } from "../../src/hook/route";
 import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
 import { FaTrash } from "react-icons/fa";
-
-
-import { io } from 'socket.io-client';
-const socket = io('https://cc26-planout.herokuapp.com/');
-import DeleteTask from "../../components/tasks/DeleteTask"
+import { io } from "socket.io-client";
+const socket = io("https://cc26-planout.herokuapp.com/");
+import DeleteTask from "../../components/tasks/DeleteTask";
 
 import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
 import MembersModal from "../../components/events/members/MembersModal";
@@ -120,7 +118,7 @@ function SingleEventPage() {
   };
 
   const newTaskNotification = () => {
-    socket.emit('taskCreated', { eventname: `${event.name}` });
+    socket.emit("taskCreated", { eventname: `${event.name}` });
   };
 
   useEffect(() => {
@@ -219,8 +217,10 @@ function SingleEventPage() {
 
           <div className="overflow-hidden">
             <div>
-              <TaskForm getTasks={getTasks}
-              newTaskNotification={newTaskNotification} />
+              <TaskForm
+                getTasks={getTasks}
+                newTaskNotification={newTaskNotification}
+              />
             </div>
             <div>
               {sortedTasks.map((task: any, index: number) => (
@@ -268,8 +268,7 @@ function SingleEventPage() {
                       {task.status ? "Complete" : "Incomplete"}
                     </button>
                   </div>
-                  <DeleteTask task={task} 
-                  getTasks={getTasks}/>
+                  <DeleteTask task={task} getTasks={getTasks} />
                 </div>
               ))}
             </div>
@@ -283,8 +282,8 @@ function SingleEventPage() {
               router.push("/events");
             }}
             className="inset-y-0.5 text-2xl text-center font-body "
-
-          ><FaTrash />
+          >
+            <FaTrash />
           </button>
         </div>
       </div>
