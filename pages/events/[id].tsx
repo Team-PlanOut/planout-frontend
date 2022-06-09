@@ -46,8 +46,6 @@ function SingleEventPage() {
   };
 
   const addMemberToEvent = async (data: object) => {
-    console.log(data);
-
     if (
       eventMembers.some(
         (member: { firstName: any }) => member.firstName === data["user_id"]
