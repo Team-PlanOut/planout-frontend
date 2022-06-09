@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { io } from 'socket.io-client';
-const socket = io('http://localhost:8080');
+const socket = io('https://cc26-planout.herokuapp.com/');
 
 export default function Task({
   setShowModal,
@@ -20,10 +20,6 @@ export default function Task({
   getTasks: () => void;
   newTaskNotification: () => any
 }) {
-
-  // const newTaskNotification = () => {
-  //   socket.emit('taskCreated', { eventname: 'data' });
-  // };
 
 
   return (

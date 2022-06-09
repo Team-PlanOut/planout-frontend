@@ -11,7 +11,7 @@ import CostModal from "../../components/CostModal";
 import { FaTrash } from "react-icons/fa";
 
 import { io } from 'socket.io-client';
-const socket = io('http://localhost:8080');
+const socket = io('https://cc26-planout.herokuapp.com/');
 
 import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
 import MembersModal from "../../components/events/members/MembersModal";
