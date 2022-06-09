@@ -49,10 +49,9 @@ function Events() {
     const eventData = response.data
 
     const filteredEvents =  await eventData.filter((event) => eventIds[event.id] || event.hostId === user.uid);
-
+    filteredEvents.sort((a, b) => a.date.localeCompare(b.date, {ignorePunctuation: true}));
     setEvents(filteredEvents);
   }
-
 
   async function deleteEvent(eventId: any) {
     await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`, {
@@ -66,6 +65,7 @@ function Events() {
   }, []);
 
   const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
+
   return (
     <>
       <Navbar />
