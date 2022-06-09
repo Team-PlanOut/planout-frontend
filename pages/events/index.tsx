@@ -24,12 +24,12 @@ function Events() {
     );
 
     let filteredResponse = response.data.filter((event: any) => {
-      return event.user_id === user.uid
-     });
-     for (let i = 0; i < filteredResponse.length; i ++){
-       eventIds[filteredResponse[i].event_id] ? '' : eventIds[filteredResponse[i].event_id] = filteredResponse[i].event_id;
-     }
-     getEvents(eventIds);
+      return event.user_id === user.uid;
+      });
+    for (let i = 0; i < filteredResponse.length; i ++){
+      eventIds[filteredResponse[i].event_id] ? '' : eventIds[filteredResponse[i].event_id] = filteredResponse[i].event_id;
+    }
+    getEvents(eventIds);
   };
 
   const getEvents = async (data: Object) => {
@@ -42,14 +42,15 @@ function Events() {
         },
       }
     );
-
    displayEvents(response, eventIds);
   };
 
   const displayEvents = async (response, eventIds) => {
     const eventData = response.data
-      const filteredEvents =  await eventData.filter((event) => eventIds[event.id]);
-      setEvents(filteredEvents);
+
+    const filteredEvents =  await eventData.filter((event) => eventIds[event.id] || event.hostId === user.uid);
+
+    setEvents(filteredEvents);
   }
 
 
