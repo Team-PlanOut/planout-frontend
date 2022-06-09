@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function Task({
   setShowModal,
@@ -6,20 +6,17 @@ export default function Task({
   setTaskCost,
   createTask,
   getTasks,
-  newTaskNotification
+  newTaskNotification,
 }: {
   setShowModal: (showModal: boolean) => void;
   setTaskDescription: (taskDescription: string) => void;
   setTaskCost: (taskCost: string) => void;
   createTask: () => void;
   getTasks: () => void;
-  newTaskNotification: () => any
+  newTaskNotification: () => any;
 }) {
-
-  const newTaskNotification = () => toast("Hey, there's a new task for you!");
-
-  const handleSubmit = () => {
-      e.preventDefault();
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
     createTask();
     newTaskNotification();
     setShowModal(false);
@@ -117,8 +114,7 @@ export default function Task({
                     <button
                       type="submit"
                       className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      onClick={() => handleSubmit()}
-
+                      onClick={(e) => handleSubmit(e)}
                     >
                       Create Task
                     </button>
