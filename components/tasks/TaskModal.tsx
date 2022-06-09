@@ -1,22 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 import { toast } from "react-toastify";
 
 export default function Task({
   setShowModal,
   setTaskDescription,
-  setTaskPoints,
   setTaskCost,
   createTask,
   getTasks,
 }: {
   setShowModal: (showModal: boolean) => void;
   setTaskDescription: (taskDescription: string) => void;
-  setTaskPoints: (taskPoints: string) => void;
   setTaskCost: (taskCost: string) => void;
   createTask: () => void;
   getTasks: () => void;
 }) {
   const newTaskNotification = () => toast("Hey, there's a new task for you!");
+  const ref = useRef(null);
   return (
     <div
       id="authentication-modal"
@@ -84,25 +83,6 @@ export default function Task({
                         required
                       />
                     </div>
-
-                    <div>
-                      <label
-                        htmlFor="budget"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                      >
-                        Points
-                      </label>
-                      <input
-                        type="number"
-                        name="budget"
-                        id="budget"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                        min="0"
-                        onChange={(e) => setTaskPoints(e.target.value)}
-                        required
-                      />
-                    </div>
-
                     <div>
                       <label
                         htmlFor="budget"
@@ -111,6 +91,8 @@ export default function Task({
                         Cost
                       </label>
                       <input
+                        ref={ref}
+                        defaultValue="0"
                         type="number"
                         name="budget"
                         id="budget"
