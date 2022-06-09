@@ -10,7 +10,6 @@ export default function EventForm({ getEvents }: any) {
   const [showModal, setShowModal] = useState(false);
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
-  const [eventTime, setEventTime] = useState("");
   const [eventBudget, setEventBudget] = useState("");
   const { token, user } = useAuth() as any;
 
@@ -30,7 +29,6 @@ export default function EventForm({ getEvents }: any) {
   };
 
   const submitPostReq = async (data: object) => {
-    console.log("submitting post request with data", data);
     try {
       await axios.post("https://cc26-planout.herokuapp.com/events", data, {
         headers: {
@@ -56,7 +54,6 @@ export default function EventForm({ getEvents }: any) {
             setShowModal={setShowModal}
             setEventName={setEventName}
             setEventDate={setEventDate}
-            setEventTime={setEventTime}
             setEventBudget={setEventBudget}
             createEvent={createEvent}
             getEvents={getEvents}

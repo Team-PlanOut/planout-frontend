@@ -9,15 +9,13 @@ import { FaPlusCircle } from "react-icons/fa";
 export default function TaskForm({ getTasks, newTaskNotification }: any) {
   const [showModal, setShowModal] = useState(false);
   const [taskDescription, setTaskDescription] = useState("");
-  const [taskPoints, setTaskPoints] = useState("");
-  const [taskCost, setTaskCost] = useState("");
+  const [taskCost, setTaskCost] = useState("0");
   const { token, user } = useAuth() as any;
 
   const createTask = () => {
     const dataObj = {
       description: taskDescription,
       status: false,
-      points: taskPoints,
       event_id: router.query.id,
       user_id: user.uid,
       cost: taskCost,
@@ -49,7 +47,6 @@ export default function TaskForm({ getTasks, newTaskNotification }: any) {
         <TaskModal
           setShowModal={setShowModal}
           setTaskDescription={setTaskDescription}
-          setTaskPoints={setTaskPoints}
           setTaskCost={setTaskCost}
           createTask={createTask}
           getTasks={getTasks}
