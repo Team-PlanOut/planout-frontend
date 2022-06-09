@@ -6,7 +6,7 @@ import TaskModal from "../tasks/TaskModal";
 import useAuth from "../../src/hook/auth";
 import { FaPlusCircle } from "react-icons/fa";
 
-export default function TaskForm({ getTasks }: any) {
+export default function TaskForm({ getTasks, newSocketNotification }: any) {
   const [showModal, setShowModal] = useState(false);
   const [taskDescription, setTaskDescription] = useState("");
   const [taskPoints, setTaskPoints] = useState("");
@@ -53,6 +53,7 @@ export default function TaskForm({ getTasks }: any) {
           setTaskCost={setTaskCost}
           createTask={createTask}
           getTasks={getTasks}
+          newSocketNotification={newSocketNotification}
         />
       )}
     </div>

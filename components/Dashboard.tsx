@@ -1,8 +1,8 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import useAuth from "../src/hook/auth";
-import Image from "next/image";
-import { FaCheckCircle, FaTasks } from "react-icons/fa";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import useAuth from '../src/hook/auth';
+import Image from 'next/image';
+import { FaCheckCircle, FaTasks } from 'react-icons/fa';
 
 export default function Dashboard() {
   const [task, setTasks] = useState<any>([]);
@@ -15,7 +15,7 @@ export default function Dashboard() {
         `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
         {
           headers: {
-            Authorization: "Bearer " + token,
+            Authorization: 'Bearer ' + token,
           },
         }
       );
@@ -38,7 +38,7 @@ export default function Dashboard() {
           },
           {
             headers: {
-              Authorization: "Bearer " + token,
+              Authorization: 'Bearer ' + token,
             },
           }
         );
@@ -55,7 +55,7 @@ export default function Dashboard() {
           },
           {
             headers: {
-              Authorization: "Bearer " + token,
+              Authorization: 'Bearer ' + token,
             },
           }
         );
@@ -106,7 +106,7 @@ export default function Dashboard() {
           <div
             key={task.id}
             className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-              task.status ? "bg-green-100" : "bg-red-100"
+              task.status ? 'bg-green-100' : 'bg-red-100'
             }`}
           >
             <div className="text-2xl text-center font-body">
@@ -122,7 +122,7 @@ export default function Dashboard() {
                 }}
                 className="text-2xl text-center font-body"
               >
-                {task.status ? <FaCheckCircle /> : "Incomplete"}
+                {task.status ? <FaCheckCircle /> : 'Incomplete'}
               </button>
             </div>
           </div>

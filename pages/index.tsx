@@ -4,6 +4,7 @@ import Dashboard from "../components/Dashboard";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 
+
 import type { NextPage } from "next";
 const Home: NextPage = () => {
   return (

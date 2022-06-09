@@ -10,6 +10,9 @@ import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
 import { FaTrash } from "react-icons/fa";
 
+import { io } from 'socket.io-client';
+const socket = io('http://localhost:8080');
+
 import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
 import MembersModal from "../../components/events/members/MembersModal";
 
@@ -101,6 +104,10 @@ function SingleEventPage() {
       }
     );
     setTask(response.data);
+  };
+
+  const newSocketNotification = () => {
+    socket.emit('taskCreated', { eventname: `${event.name}` });
   };
 
   useEffect(() => {
@@ -200,7 +207,8 @@ function SingleEventPage() {
 
           <div className="overflow-hidden">
             <div>
-              <TaskForm getTasks={getTasks} />
+              <TaskForm getTasks={getTasks}
+              newSocketNotification={newSocketNotification} />
             </div>
             <div>
               {sortedTasks.map((task: any, index: number) => (
