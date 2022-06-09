@@ -2,8 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import { withProtected } from "../src/hook/route";
-
-function AddFriend({ friends }) {
+import { HiOutlineX } from "react-icons/hi";
+function AddFriend({ setAddFriend }) {
   const [input, setInput] = useState<string | null>(null);
   const { token, user } = useAuth() as any;
 
@@ -20,11 +20,6 @@ function AddFriend({ friends }) {
   };
 
   const beginFriendship = (findFriend: any) => {
-    if (friends.some((friend) => friend.friendId === findFriend.data.id)) {
-      alert("You have already added this friend!");
-      return;
-    }
-
     axios
       .post(
         `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend.data.id}`,
@@ -40,12 +35,17 @@ function AddFriend({ friends }) {
 
   return (
     <>
-      <div className="container m-auto mt-20 box-content h-auto md:w-1/2 shadow-lg pb-2">
-        <div className="overflow-hidden m-10">
-          <div className="mt-10 mb-2 text-4xl font-header">
+      <div className="container rounded-lg m-auto mt-20 bg-nav box-content h-auto md:w-1/2 shadow-lg pb-2">
+        <div className="p-4">
+          <HiOutlineX
+            className="float-right hover:bg-gray-100 hover:cursor-pointer"
+            onClick={() => {
+              setAddFriend(false);
+            }}
+          />
+          <div className="mt-10 mb-2 text-3xl font-body font-semibold">
             What's yer pals name?
           </div>
-
           <form
             onSubmit={(e) => {
               e.preventDefault();

@@ -1,20 +1,18 @@
 import axios from "axios";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Navbar from "../../components/Navbar";
 import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
 import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
-import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
+import { IoIosPeople } from "react-icons/io";
 import CostModal from "../../components/CostModal";
-import { FaTrash } from "react-icons/fa";
-
-
-import { io } from 'socket.io-client';
-const socket = io('https://cc26-planout.herokuapp.com/');
-import DeleteTask from "../../components/tasks/DeleteTask"
-
+import { io } from "socket.io-client";
+const socket = io("https://cc26-planout.herokuapp.com/");
+import DeleteTask from "../../components/tasks/DeleteTask";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
 import MembersModal from "../../components/events/members/MembersModal";
 
@@ -25,13 +23,12 @@ function SingleEventPage() {
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
-
   const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
-
   const { token, user } = useAuth() as any;
   const [data, setData] = useState<any>([]);
   const [member, setMember] = useState<string>("");
   const [eventMembers, setEventMembers] = useState<any>(null);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const {
     query: { id },
@@ -120,7 +117,7 @@ function SingleEventPage() {
   };
 
   const newTaskNotification = () => {
-    socket.emit('taskCreated', { eventname: `${event.name}` });
+    socket.emit("taskCreated", { eventname: `${event.name}` });
   };
 
   useEffect(() => {
@@ -177,30 +174,23 @@ function SingleEventPage() {
     a.id > b.id ? 1 : -1
   );
 
-  async function deleteEvent(eventId: any) {
-    await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
-  }
-
   return (
     <div>
       <Navbar />
 
-      <div className="container m-auto mt-24 box-content h-auto md:w-1/2 md:shadow-lg pb-10">
-        <div className="text-center text-4xl font-header capitalize">
+      <div className="container m-auto mt-24 bg-container bg-opacity-10 box-content h-screen no-scrollbar overflow-y-auto border md:w-1/2 pb-10 mb-2">
+        <div className="text-center text-5xl font-body font-bold mt-2 capitalize">
           {event.name}
         </div>
         <div
-          className="float-right mr-20  underline hover:cursor-pointer flex mt-2"
+          className="float-right mr-20  md:text-base underline hover:cursor-pointer flex mt-2"
           data-modal-toggle="small-modal"
           onClick={() => setShowMembersModal(true)}
         >
-          <FaHandPointRight className="relative top-1 mr-1 -z-10" />
-          Show Members
+          <IoIosPeople className="relative top-1 mr-1 -z-10" />
+          Members
         </div>
+
         {showMembersModal ? (
           <MembersModal
             setShowMembersModal={setShowMembersModal}
@@ -210,82 +200,121 @@ function SingleEventPage() {
             eventMembers={eventMembers}
           />
         ) : null}
-
         <div className="overflow-hidden m-10">
-          <div className="mt-10 text-center text-4xl font-header"></div>
-          <div className="mt-10 text-center text-4xl font-header mb-2">
+          <div className="mt-10 text-center text-4xl font-body font-bold mb-2">
             TASKS
           </div>
 
           <div className="overflow-hidden">
             <div>
-              <TaskForm getTasks={getTasks}
-              newTaskNotification={newTaskNotification} />
+              <TaskForm
+                getTasks={getTasks}
+                newTaskNotification={newTaskNotification}
+              />
             </div>
             <div>
               {sortedTasks.map((task: any, index: number) => (
                 <div
                   key={task.id}
-                  className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-                    task.status ? "bg-green-100" : "bg-red-100"
+                  className={`p-5 md:rounded-lg md:w-1/2 m-auto mt-10 ${
+                    task.status ? "bg-green-50" : "bg-red-50"
                   }`}
                 >
                   <div className="text-lg ml-2 font-body">
-                    <div>Task: {task.description}</div>
-
-                    <div>$ Cost: {task.cost}</div>
-                    <div className="mt-2 flex text-base hover:underline hover:cursor-pointer">
-                      <FaMoneyBill className="relative top-1 mr-1 text-lg" />
-                      <div
-                        className="mr-2"
-                        data-modal-toggle="small-modal"
-                        onClick={() => setShowCostModal(true)}
-                      >
-                        Add cost
+                    <div className="float-right">
+                      <div className="relative inline-block">
+                        <div className="flex justify-end">
+                          <button
+                            onClick={() => setOpenMenu(!openMenu)}
+                            type="button"
+                            className="rounded-md hover:bg-gray-200 hover:rounded-full text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-orange-400"
+                            id="menu-button"
+                            aria-expanded="true"
+                            aria-haspopup="true"
+                          >
+                            <HiOutlineDotsHorizontal className="w-6 h-6" />
+                          </button>
+                        </div>
+                        {openMenu && (
+                          <div
+                            className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            role="menu"
+                            aria-orientation="vertical"
+                            aria-labelledby="menu-button"
+                          >
+                            <div className="py-1" role="none">
+                              <div
+                                onClick={() => setShowCostModal(true)}
+                                className="hover:cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
+                                role="menuitem"
+                              >
+                                Edit Cost
+                              </div>
+                              {showCostModal ? (
+                                <CostModal
+                                  setShowCostModal={setShowCostModal}
+                                />
+                              ) : null}
+                              <div
+                                className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
+                                role="menuitem"
+                                id="menu-item-1"
+                              >
+                                <StripeCheckout />
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      {showCostModal ? (
-                        <CostModal setShowCostModal={setShowCostModal} />
-                      ) : null}
                     </div>
+                    <div>Task: {task.description}</div>
+                    <div> Cost: {task.cost} ¥</div>
+
                     <div className="mr-2" data-modal-toggle="small-modal">
                       {task.user_id !== user.uid
                         ? `Assigned to ${task.userFirstName}`
                         : "Assigned to me!"}
                     </div>
                   </div>
-                  <AssignTaskForm id={id} getTasks={getTasks} />
-                  <StripeCheckout />
-                  <div className="mt-5 hover:underline hover:cursor-pointer text-right">
-                    <button
+
+                  <div className="mt-5 flex flex-row justify-end hover:cursor-pointer ">
+                    <div
                       onClick={() => {
                         completeTask(task.id);
                         setTimeout(() => {
                           getTasks();
                         }, 200);
                       }}
-                      className="text-xl text-center font-body "
+                      className="font-body"
                     >
-                      {task.status ? "Complete" : "Incomplete"}
-                    </button>
+                      {task.status ? (
+                        <button className="mr-1 inline-flex bg-orange-300 text-sm px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400">
+                          <FaCheckCircle className="w-3 h-3 mr-1 relative top-1" />{" "}
+                          Completed
+                        </button>
+                      ) : (
+                        <button className="mr-1 bg-orange-300 text-sm items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400">
+                          Complete task
+                        </button>
+                      )}
+                    </div>
+                    <AssignTaskForm id={id} getTasks={getTasks} />
+                    {/* <button
+                      data-modal-toggle="small-modal"
+                      onClick={() => setShowCostModal(true)}
+                      className="mr-1 ml-1 font-body bg-orange-300 text-sm items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
+                    >
+                      Add cost
+                    </button> */}
+                    {/* {showCostModal ? (
+                      <CostModal setShowCostModal={setShowCostModal} />
+                    ) : null} */}
                   </div>
-                  <DeleteTask task={task} 
-                  getTasks={getTasks}/>
+                  <DeleteTask task={task} getTasks={getTasks} />
                 </div>
               ))}
             </div>
           </div>
-        </div>
-        <div className="z-10 mt-5 hover:underline hover:cursor-pointer text-right">
-          <button
-            type="button"
-            onClick={() => {
-              deleteEvent(event.id);
-              router.push("/events");
-            }}
-            className="inset-y-0.5 text-2xl text-center font-body "
-
-          ><FaTrash />
-          </button>
         </div>
       </div>
     </div>

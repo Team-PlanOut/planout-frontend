@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Pacifico&family=Raleway:wght@300&family=Rum+Raisin&display=swap");
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+body {
+  background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

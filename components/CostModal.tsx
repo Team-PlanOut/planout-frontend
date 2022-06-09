@@ -59,7 +59,7 @@ export default function CostModal({
             <button
               onClick={() => setShowCostModal(false)}
               type="submit"
-              className="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700 mr-2"
+              className="py-2 px-4 bg-orange-300 text-white rounded hover:bg-orange-400 mr-2"
             >
               Submit
             </button>

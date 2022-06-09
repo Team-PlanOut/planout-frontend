@@ -1,8 +1,8 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
-import useAuth from '../src/hook/auth';
-import Image from 'next/image';
-import { FaCheckCircle, FaTasks } from 'react-icons/fa';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import useAuth from "../src/hook/auth";
+import Image from "next/image";
+import { FaCheckCircle, FaTasks } from "react-icons/fa";
 
 export default function Dashboard() {
   const [task, setTasks] = useState<any>([]);
@@ -15,7 +15,7 @@ export default function Dashboard() {
         `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
         {
           headers: {
-            Authorization: 'Bearer ' + token,
+            Authorization: "Bearer " + token,
           },
         }
       );
@@ -38,7 +38,7 @@ export default function Dashboard() {
           },
           {
             headers: {
-              Authorization: 'Bearer ' + token,
+              Authorization: "Bearer " + token,
             },
           }
         );
@@ -55,7 +55,7 @@ export default function Dashboard() {
           },
           {
             headers: {
-              Authorization: 'Bearer ' + token,
+              Authorization: "Bearer " + token,
             },
           }
         );
@@ -76,7 +76,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
+    <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10">
       <div className="overflow-hidden m-10">
         <div className="flex flex-row md:ml-10 mt-10 md:justify-center">
           <Image
@@ -89,13 +89,12 @@ export default function Dashboard() {
 
           <div className="mt-5 font-body text-xl ml-5">
             <div> Name: {user.displayName} </div>
-            <div> Points : </div>
             <div> Total Balance: </div>
           </div>
         </div>
-        <div className="mt-10 text-center font-header flex justify-center">
-          <FaTasks className="text-xl -z-10  relative top-1" />
-          <span className="ml-2 text-2xl relative bottom-1 -z-10">
+        <div className="mt-10 text-center font-body flex justify-center">
+          <FaTasks className="text-2xl -z-10  relative top-1" />
+          <span className="ml-2 text-3xl relative font-bold  bottom-1 -z-10">
             Current Tasks
           </span>
         </div>
@@ -105,8 +104,8 @@ export default function Dashboard() {
         {sortedTasks.map((task: any, index: number) => (
           <div
             key={task.id}
-            className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-              task.status ? 'bg-green-100' : 'bg-red-100'
+            className={`p-5 border md:rounded-md md:w-1/2 m-auto mt-10 ${
+              task.status ? "bg-green-50" : "bg-red-50"
             }`}
           >
             <div className="text-2xl text-center font-body">
@@ -122,7 +121,7 @@ export default function Dashboard() {
                 }}
                 className="text-2xl text-center font-body"
               >
-                {task.status ? <FaCheckCircle /> : 'Incomplete'}
+                {task.status ? <FaCheckCircle /> : "Incomplete"}
               </button>
             </div>
           </div>
