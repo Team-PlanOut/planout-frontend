@@ -31,7 +31,6 @@ export default function AssignTaskForm({
           },
         }
       );
-      console.log(typeof userId);
     } catch (error) {
       console.error(error);
     }

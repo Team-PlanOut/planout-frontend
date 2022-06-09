@@ -10,8 +10,10 @@ import { FaHandPointRight, FaMoneyBill } from "react-icons/fa";
 import CostModal from "../../components/CostModal";
 import { FaTrash } from "react-icons/fa";
 
+
 import { io } from 'socket.io-client';
 const socket = io('https://cc26-planout.herokuapp.com/');
+import DeleteTask from "../../components/tasks/DeleteTask"
 
 import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
 import MembersModal from "../../components/events/members/MembersModal";
@@ -49,6 +51,15 @@ function SingleEventPage() {
   };
 
   const addMemberToEvent = async (data: object) => {
+    if (
+      eventMembers.some(
+        (member: { firstName: any }) => member.firstName === data["user_id"]
+      )
+    ) {
+      alert("Sorry, a user with that name is already in this event");
+      return;
+    }
+
     try {
       await axios.post("https://cc26-planout.herokuapp.com/eventusers", data, {
         headers: {
@@ -66,7 +77,9 @@ function SingleEventPage() {
       user_id: member,
     };
     addMemberToEvent(formData);
-    getEventUsers();
+    setTimeout(() => {
+      getEventUsers();
+    }, 200);
   };
 
   const fetchUserData = async () => {
@@ -165,7 +178,6 @@ function SingleEventPage() {
   );
 
   async function deleteEvent(eventId: any) {
-    console.log("event", eventId);
     await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`, {
       headers: {
         Authorization: "Bearer " + token,
@@ -256,6 +268,8 @@ function SingleEventPage() {
                       {task.status ? "Complete" : "Incomplete"}
                     </button>
                   </div>
+                  <DeleteTask task={task} 
+                  getTasks={getTasks}/>
                 </div>
               ))}
             </div>
@@ -269,8 +283,8 @@ function SingleEventPage() {
               router.push("/events");
             }}
             className="inset-y-0.5 text-2xl text-center font-body "
-          >
-            <FaTrash />
+
+          ><FaTrash />
           </button>
         </div>
       </div>
