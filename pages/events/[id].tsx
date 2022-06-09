@@ -11,8 +11,8 @@ import CostModal from "../../components/CostModal";
 import { FaTrash } from "react-icons/fa";
 
 import DeleteTask from "../../components/tasks/DeleteTask"
-import AssignTaskForm from "../../components/tasks/AssignTaskForm";
-import MembersModal from "../../components/events/MembersModal";
+import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
+import MembersModal from "../../components/events/members/MembersModal";
 
 
 import StripeCheckout from "../../components/StripeCheckout";
