@@ -3,15 +3,17 @@ import AddMembers from "./AddMembers";
 
 export default function MembersModal({
   eventMembers,
+  member,
   setMember,
   data,
   handleAddMember,
   setShowModal,
 }: {
   eventMembers: { firstName: string }[];
-  setMember: (member: string) => void;
+  member: string[];
+  setMember: (member: string[]) => void;
   data: { first_name: string }[];
-  handleAddMember: unknown;
+  handleAddMember: (member: string[]) => void;
   setShowModal: (showModal: boolean) => void;
 }) {
   return (
@@ -39,7 +41,10 @@ export default function MembersModal({
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
-            onClick={() => setShowModal(false)}
+            onClick={() => {
+              setShowModal(false);
+              setMember([]);
+            }}
           >
             <path
               strokeLinecap="round"
@@ -49,7 +54,7 @@ export default function MembersModal({
           </svg>
           <div className="flex flex-col justify-center items-center p-4">
             <div className="font-header text-xl"> Current Members</div>
-            <ul className="text-leftoverflow-y-auto capitalize font-body">
+            <ul className="text-leftoverflow-y-auto font-body">
               {eventMembers.length
                 ? eventMembers.map((user, index) => (
                     <li key={index}>{user.firstName}</li>
@@ -61,6 +66,7 @@ export default function MembersModal({
             <AddMembers
               setShowModal={setShowModal}
               data={data}
+              member={member}
               setMember={setMember}
               handleAddMember={handleAddMember}
             />

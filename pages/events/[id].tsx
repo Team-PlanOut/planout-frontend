@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useRouter } from "next/router";
 import Navbar from "../../components/Navbar";
 import TaskForm from "../../components/tasks/TaskForm";
@@ -24,7 +24,7 @@ function SingleEventPage() {
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
   const [data, setData] = useState<any>([]);
-  const [member, setMember] = useState<string>("");
+  const [member, setMember] = useState<string[]>([]);
   const [eventMembers, setEventMembers] = useState<any>(null);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
@@ -47,36 +47,25 @@ function SingleEventPage() {
     return data;
   };
 
-  const addMemberToEvent = async (data: object) => {
-    if (
-      eventMembers.some(
-        (member: { firstName: any }) => member.firstName === data["user_id"]
-      )
-    ) {
-      alert("Sorry, a user with that name is already in this event");
-      return;
-    }
-
-    try {
-      await axios.post("https://cc26-planout.herokuapp.com/eventusers", data, {
-        headers: {
-          Authorization: "Bearer " + token,
+  const handleAddMember = async () => {
+    member.forEach((user) => {
+      axios.post(
+        `https://cc26-planout.herokuapp.com/eventusers`,
+        {
+          event_id: id,
+          user_id: user,
         },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+    });
 
-  const handleAddMember = () => {
-    const formData = {
-      event_id: id,
-      user_id: member,
-    };
-    addMemberToEvent(formData);
     setTimeout(() => {
       getEventUsers();
-    }, 200);
+    }, 300);
   };
 
   const fetchUserData = async () => {
@@ -193,8 +182,9 @@ function SingleEventPage() {
 
         {showModal ? (
           <MembersModal
-          setShowModal={setShowModal}
+            setShowModal={setShowModal}
             data={data}
+            member={member}
             setMember={setMember}
             handleAddMember={handleAddMember}
             eventMembers={eventMembers}
@@ -251,9 +241,7 @@ function SingleEventPage() {
                                 Edit Cost
                               </div>
                               {showModal ? (
-                                <CostModal
-                                setShowModal={setShowModal}
-                                />
+                                <CostModal setShowModal={setShowModal} />
                               ) : null}
                               <div
                                 className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
