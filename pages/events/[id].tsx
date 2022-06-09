@@ -106,7 +106,7 @@ function SingleEventPage() {
     setTask(response.data);
   };
 
-  const newSocketNotification = () => {
+  const newTaskNotification = () => {
     socket.emit('taskCreated', { eventname: `${event.name}` });
   };
 
@@ -208,7 +208,7 @@ function SingleEventPage() {
           <div className="overflow-hidden">
             <div>
               <TaskForm getTasks={getTasks}
-              newSocketNotification={newSocketNotification} />
+              newTaskNotification={newTaskNotification} />
             </div>
             <div>
               {sortedTasks.map((task: any, index: number) => (

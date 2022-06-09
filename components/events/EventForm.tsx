@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import useAuth from "../../src/hook/auth";
 import EventModal from "./EventModal";
+import { io } from 'socket.io-client';
+const socket = io('http://localhost:8080');
 
 export default function EventForm({ getEvents }: any) {
   const [showModal, setShowModal] = useState(false);
@@ -12,6 +14,10 @@ export default function EventForm({ getEvents }: any) {
   const [eventBudget, setEventBudget] = useState("");
   const { token, user } = useAuth() as any;
 
+  function newEventNotification(){
+    socket.emit('eventCreated', { eventname: eventName });
+  };
+
   const createEvent = () => {
     const dataObj = {
       event_name: eventName,
@@ -19,6 +25,7 @@ export default function EventForm({ getEvents }: any) {
       date: eventDate,
       budget: eventBudget,
     };
+
     submitPostReq(dataObj);
   };
 
@@ -53,6 +60,7 @@ export default function EventForm({ getEvents }: any) {
             setEventBudget={setEventBudget}
             createEvent={createEvent}
             getEvents={getEvents}
+            newEventNotification={newEventNotification}
           />
         )}
       </div>

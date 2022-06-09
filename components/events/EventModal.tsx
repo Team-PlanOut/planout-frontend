@@ -9,6 +9,7 @@ export default function Event({
   setEventBudget,
   createEvent,
   getEvents,
+  newEventNotification,
 }: {
   setShowModal: (showModal: boolean) => void;
   setEventName: (eventName: string) => void;
@@ -17,8 +18,9 @@ export default function Event({
   setEventBudget: (eventBudget: string) => void;
   createEvent: () => void;
   getEvents: () => void;
+  newEventNotification: () => any
 }) {
-  const newEventNotification = () => toast("HEY, LISTEN! There's a new event!");
+
   return (
     <div
       id="authentication-modal"
@@ -142,7 +144,7 @@ export default function Event({
                       type="submit"
                       className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                       onClick={(e) => {
-                        // e.preventDefault();
+                        e.preventDefault();
                         createEvent();
                         setShowModal(false);
                         newEventNotification();
