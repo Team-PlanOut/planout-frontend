@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import useAuth from "../src/hook/auth";
 import Image from "next/image";
 import { FaCheckCircle, FaTasks } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Dashboard() {
   const [task, setTasks] = useState<any>([]);
@@ -99,10 +100,13 @@ export default function Dashboard() {
           </span>
         </div>
       </div>
-
       <div>
         {sortedTasks.map((task: any, index: number) => (
-          <div
+          <Link
+          href="/events/[id]"
+          as={`/events/${task.eventId}`}
+          key={task.id}>
+            <div
             key={task.id}
             className={`p-5 border md:rounded-md md:w-1/2 m-auto mt-10 ${
               task.status ? "bg-green-50" : "bg-red-50"
@@ -112,19 +116,9 @@ export default function Dashboard() {
               {task.description}
             </div>
             <div className="mt-5 hover:underline hover:cursor-pointer text-right">
-              <button
-                onClick={() => {
-                  completeTask(task.id);
-                  setTimeout(() => {
-                    fetchTaskData();
-                  }, 200);
-                }}
-                className="text-2xl text-center font-body"
-              >
-                {task.status ? <FaCheckCircle /> : "Incomplete"}
-              </button>
             </div>
           </div>
+          </Link>
         ))}
       </div>
     </div>
