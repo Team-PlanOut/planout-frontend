@@ -9,7 +9,7 @@ import { FaPlusCircle } from "react-icons/fa";
 export default function TaskForm({ getTasks }: any) {
   const [showModal, setShowModal] = useState(false);
   const [taskDescription, setTaskDescription] = useState("");
-  const [taskCost, setTaskCost] = useState("");
+  const [taskCost, setTaskCost] = useState("0");
   const { token, user } = useAuth() as any;
 
   const createTask = () => {

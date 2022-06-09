@@ -171,7 +171,6 @@ function SingleEventPage() {
   );
 
   async function deleteEvent(eventId: any) {
-    console.log("event", eventId);
     await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`, {
       headers: {
         Authorization: "Bearer " + token,
