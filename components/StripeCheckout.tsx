@@ -25,12 +25,17 @@ export default function StripeCheckout() {
   return (
     <form action="/api/checkout_sessions" method="POST">
       <section>
+<<<<<<< HEAD
         <button
           type="submit"
           role="link"
           className="bg-orange-300 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
         >
           Pay
+=======
+        <button type="submit" role="link">
+          Settle Expenses
+>>>>>>> 298392b (chore: add dropdown menu for tasks)
         </button>
       </section>
     </form>
