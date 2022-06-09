@@ -6,13 +6,13 @@ export default function MembersModal({
   setMember,
   data,
   handleAddMember,
-  setShowMembersModal,
+  setShowModal,
 }: {
   eventMembers: { firstName: string }[];
   setMember: (member: string) => void;
   data: { first_name: string }[];
   handleAddMember: unknown;
-  setShowMembersModal: (showMembersModal: boolean) => void;
+  setShowModal: (showModal: boolean) => void;
 }) {
   return (
     <div
@@ -39,7 +39,7 @@ export default function MembersModal({
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
-            onClick={() => setShowMembersModal(false)}
+            onClick={() => setShowModal(false)}
           >
             <path
               strokeLinecap="round"
@@ -54,12 +54,12 @@ export default function MembersModal({
                 ? eventMembers.map((user, index) => (
                     <li key={index}>{user.firstName}</li>
                   ))
-                : "no members in this event yet"}
+                : "No members yet, invite some!"}
             </ul>
           </div>
           <div>
             <AddMembers
-              setShowMembersModal={setShowMembersModal}
+              setShowModal={setShowModal}
               data={data}
               setMember={setMember}
               handleAddMember={handleAddMember}

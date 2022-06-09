@@ -36,6 +36,7 @@ function Events() {
   }, []);
 
   const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
+
   return (
     <>
       <Navbar />
@@ -74,7 +75,6 @@ function Events() {
               </Link>
 
               <div className="text-sm float-right">
-                {" "}
                 Hosted by {event.hostFirstName} {event.hostLastName}{" "}
               </div>
             </div>

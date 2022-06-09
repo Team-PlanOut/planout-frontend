@@ -4,17 +4,18 @@ export default function AddMembers({
   data,
   handleAddMember,
   setMember,
-  setShowMembersModal,
+  setShowModal,
 }: {
   handleAddMember: any;
   setMember: (member: string) => void;
   data: { first_name: string }[];
-  setShowMembersModal: (showMembersModal: boolean) => void;
+  setShowModal: (showModal: boolean) => void;
 }) {
   const handleSubmit = () => {
     handleAddMember();
-    setShowMembersModal(false);
+    setShowModal(false);
   };
+
   return (
     <div className="mt-10 p-10">
       <form

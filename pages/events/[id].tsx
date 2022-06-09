@@ -20,15 +20,15 @@ import StripeCheckout from "../../components/StripeCheckout";
 
 function SingleEventPage() {
   const router = useRouter();
-  const [showCostModal, setShowCostModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
-  const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
-  const { token, user } = useAuth() as any;
   const [data, setData] = useState<any>([]);
   const [member, setMember] = useState<string>("");
   const [eventMembers, setEventMembers] = useState<any>(null);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+
+  const { token, user } = useAuth() as any;
 
   const {
     query: { id },
@@ -185,15 +185,15 @@ function SingleEventPage() {
         <div
           className="float-right mr-20  md:text-base underline hover:cursor-pointer flex mt-2"
           data-modal-toggle="small-modal"
-          onClick={() => setShowMembersModal(true)}
+          onClick={() => setShowModal(true)}
         >
           <IoIosPeople className="relative top-1 mr-1 -z-10" />
           Members
         </div>
 
-        {showMembersModal ? (
+        {showModal ? (
           <MembersModal
-            setShowMembersModal={setShowMembersModal}
+          setShowModal={setShowModal}
             data={data}
             setMember={setMember}
             handleAddMember={handleAddMember}
@@ -244,15 +244,15 @@ function SingleEventPage() {
                           >
                             <div className="py-1" role="none">
                               <div
-                                onClick={() => setShowCostModal(true)}
+                                onClick={() => setShowModal(true)}
                                 className="hover:cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
                                 role="menuitem"
                               >
                                 Edit Cost
                               </div>
-                              {showCostModal ? (
+                              {showModal ? (
                                 <CostModal
-                                  setShowCostModal={setShowCostModal}
+                                setShowModal={setShowModal}
                                 />
                               ) : null}
                               <div
