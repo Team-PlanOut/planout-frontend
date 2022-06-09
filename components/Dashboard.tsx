@@ -76,7 +76,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="container m-auto h-screen mt-20 box-content md:w-1/2  pb-10">
+    <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10">
       <div className="overflow-hidden m-10">
         <div className="flex flex-row md:ml-10 mt-10 md:justify-center">
           <Image

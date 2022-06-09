@@ -173,19 +173,17 @@ function SingleEventPage() {
   const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
     a.id > b.id ? 1 : -1
   );
-  const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
 
   return (
     <div>
       <Navbar />
 
-      <div className="container m-auto mt-24 box-content h-screen md:w-1/2 pb-10 mb-2">
-        <div className="text-center text-5xl font-body font-bold capitalize">
+      <div className="container m-auto mt-24 bg-container bg-opacity-10 box-content h-screen no-scrollbar overflow-y-auto border md:w-1/2 pb-10 mb-2">
+        <div className="text-center text-5xl font-body font-bold mt-2 capitalize">
           {event.name}
-          <div className="text-xl mt-2">{showOnlyDate(event.date)}</div>
         </div>
         <div
-          className="float-right mr-20  text-sm underline hover:cursor-pointer flex mt-2"
+          className="float-right mr-20  md:text-base underline hover:cursor-pointer flex mt-2"
           data-modal-toggle="small-modal"
           onClick={() => setShowMembersModal(true)}
         >
@@ -234,7 +232,7 @@ function SingleEventPage() {
                             aria-expanded="true"
                             aria-haspopup="true"
                           >
-                            <HiOutlineDotsHorizontal />
+                            <HiOutlineDotsHorizontal className="w-6 h-6" />
                           </button>
                         </div>
                         {openMenu && (
