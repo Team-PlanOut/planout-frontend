@@ -9,13 +9,17 @@ import { withProtected } from "../../src/hook/route";
 import { FaCheckCircle, FaMoneyBill } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import CostModal from "../../components/CostModal";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 
 import AssignTaskForm from "../../components/tasks/AssignTaskForm";
 import MembersModal from "../../components/events/MembersModal";
 
 import StripeCheckout from "../../components/StripeCheckout";
+import DropDown from "./DropDown";
 
 function SingleEventPage() {
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+
   const router = useRouter();
   const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
@@ -199,8 +203,56 @@ function SingleEventPage() {
                   }`}
                 >
                   <div className="text-lg ml-2 font-body">
+                    <div className="float-right">
+                      <div className="relative inline-block">
+                        <div className="flex justify-end">
+                          <button
+                            onClick={() => setOpenMenu(!openMenu)}
+                            type="button"
+                            className="rounded-md hover:bg-gray-200 hover:rounded-full text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+                            id="menu-button"
+                            aria-expanded="true"
+                            aria-haspopup="true"
+                          >
+                            <HiOutlineDotsHorizontal />
+                          </button>
+                        </div>
+                        {openMenu && (
+                          <div
+                            className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                            role="menu"
+                            aria-orientation="vertical"
+                            aria-labelledby="menu-button"
+                            tabindex="-1"
+                          >
+                            <div className="py-1" role="none">
+                              <div
+                                onClick={() => setShowCostModal(true)}
+                                className="hover:cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
+                                role="menuitem"
+                                tabindex="-1"
+                              >
+                                Edit Cost
+                              </div>
+                              {showCostModal ? (
+                                <CostModal
+                                  setShowCostModal={setShowCostModal}
+                                />
+                              ) : null}
+                              <div
+                                className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-1"
+                              >
+                                <StripeCheckout />
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                     <div>Task: {task.description}</div>
-
                     <div> Cost: {task.cost} ¥</div>
 
                     <div className="mr-2" data-modal-toggle="small-modal">
@@ -232,16 +284,16 @@ function SingleEventPage() {
                       )}
                     </div>
                     <AssignTaskForm id={id} getTasks={getTasks} />
-                    <button
+                    {/* <button
                       data-modal-toggle="small-modal"
                       onClick={() => setShowCostModal(true)}
                       className="mr-1 ml-1 font-body bg-orange-300 text-sm items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
                     >
                       Add cost
-                    </button>
-                    {showCostModal ? (
+                    </button> */}
+                    {/* {showCostModal ? (
                       <CostModal setShowCostModal={setShowCostModal} />
-                    ) : null}
+                    ) : null} */}
                   </div>
                 </div>
               ))}
