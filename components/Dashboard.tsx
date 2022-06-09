@@ -89,13 +89,12 @@ export default function Dashboard() {
 
           <div className="mt-5 font-body text-xl ml-5">
             <div> Name: {user.displayName} </div>
-            <div> Points : </div>
             <div> Total Balance: </div>
           </div>
         </div>
-        <div className="mt-10 text-center font-header flex justify-center">
-          <FaTasks className="text-xl -z-10  relative top-1" />
-          <span className="ml-2 text-2xl relative bottom-1 -z-10">
+        <div className="mt-10 text-center font-body flex justify-center">
+          <FaTasks className="text-2xl -z-10  relative top-1" />
+          <span className="ml-2 text-3xl relative font-bold  bottom-1 -z-10">
             Current Tasks
           </span>
         </div>
