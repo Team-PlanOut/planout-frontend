@@ -38,8 +38,8 @@ function Friends() {
   return (
     <div>
       <Navbar />
-      <div className="container m-auto h-1/2 mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
-        <div className="mt-40 text-center text-4xl font-header">
+      <div className="container m-auto h-screen no-scrollbar overflow-y-auto mt-20 box-content bg-container bg-opacity-10 md:w-1/2 shadow md:shadow-lg pb-10">
+        <div className="text-center text-4xl mt-4 font-body font-bold">
           Friends List
         </div>
         <button
@@ -49,14 +49,14 @@ function Friends() {
           Add Friend
         </button>
         {addFriend ? (
-          <AddFriend />
+          <AddFriend setAddFriend={setAddFriend} />
         ) : (
           <div>
             <div>
               {friends.map((friend) => (
                 <div
                   key={friend.friendId}
-                  className="p-2 font-body bg-mintGreen text-2xl border-2 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-blue-500 hover:bg-blue-100 transition-all duration-500 ease-in"
+                  className="p-2 font-body bg-mintGreen text-2xl border-2 border-green-800 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-green-500  transition-all duration-500 ease-in"
                 >
                   <div>
                     {friend.friendFirstName}{" "}

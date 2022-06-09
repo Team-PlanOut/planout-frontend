@@ -19,7 +19,8 @@ module.exports = {
     }),
     colors: {
       bg: "#fdba9a",
-      nav: "#ffe9e3",
+      nav: "#f2f2f2",
+      container: "#685454",
     },
   },
   plugins: [require("flowbite/plugin")],
