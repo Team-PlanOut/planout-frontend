@@ -46,6 +46,17 @@ function SingleEventPage() {
   };
 
   const addMemberToEvent = async (data: object) => {
+    console.log(data);
+
+    if (
+      eventMembers.some(
+        (member: { firstName: any }) => member.firstName === data["user_id"]
+      )
+    ) {
+      alert("Sorry, a user with that name is already in this event");
+      return;
+    }
+
     try {
       await axios.post("https://cc26-planout.herokuapp.com/eventusers", data, {
         headers: {
@@ -63,7 +74,9 @@ function SingleEventPage() {
       user_id: member,
     };
     addMemberToEvent(formData);
-    getEventUsers();
+    setTimeout(() => {
+      getEventUsers();
+    }, 200);
   };
 
   const fetchUserData = async () => {
