@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import useAuth from "../../src/hook/auth";
-import { useRouter } from "next/router";
 import { FaTrash } from "react-icons/fa";
 import { Events, Tasks } from "../../types";
 
@@ -13,7 +12,6 @@ export default function DeleteTask({
   getTasks: () => void;
 }) {
   const { token, user } = useAuth() as any;
-  const router = useRouter();
 
   function deleteTask(taskId: any) {
     axios
