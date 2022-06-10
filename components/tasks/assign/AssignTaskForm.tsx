@@ -13,7 +13,7 @@ export default function AssignTaskForm({
 }) {
   const [showModal, setShowModal] = useState(false);
   const [eventUsers, setEventUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState();
+  const [selectedUser, setSelectedUser] = useState<string | null>(null);
 
   const { token } = useAuth() as any;
 
