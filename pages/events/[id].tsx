@@ -120,6 +120,10 @@ function SingleEventPage() {
     socket.emit("taskCreated", { eventname: `${event.name}` });
   };
 
+  const taskCompleteNotification = (task) => {
+    socket.emit("taskCompleted", { eventname: `${event.name}`, taskName: `${task.description}` });
+  };
+
   useEffect(() => {
     fetchUserData();
     getEventUsers();
@@ -295,6 +299,7 @@ function SingleEventPage() {
                     <div
                       onClick={() => {
                         completeTask(task.id);
+                        taskCompleteNotification(task)
                         setTimeout(() => {
                           getTasks();
                         }, 200);
