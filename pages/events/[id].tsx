@@ -262,9 +262,15 @@ function SingleEventPage() {
                                 role="menuitem"
                                 id="menu-item-1"
                               >
+                                <AssignTaskForm id={id} getTasks={getTasks} />
+                              </div>
+                              <div
+                                className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
+                                role="menuitem"
+                                id="menu-item-1"
+                              >
                                 <StripeCheckout />
                               </div>
-
                               <div
                                 className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
                                 role="menuitem"
@@ -275,13 +281,6 @@ function SingleEventPage() {
                                   getTasks={getTasks}
                                   setOpenMenu={setOpenMenu}
                                 />
-                              </div>
-                              <div
-                                className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
-                                role="menuitem"
-                                id="menu-item-1"
-                              >
-                                <AssignTaskForm id={id} getTasks={getTasks} />
                               </div>
                             </div>
                           </div>
