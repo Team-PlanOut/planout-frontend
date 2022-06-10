@@ -9,9 +9,9 @@ import {
 } from "react-icons/hi";
 
 export default function Navbar() {
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const links: { name: string; link: string; icon: ReactElement }[] = [
+  const links: { name: string; link: string | null; icon: ReactElement }[] = [
     {
       name: "My Account",
       link: "/profile",
