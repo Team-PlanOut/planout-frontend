@@ -48,9 +48,9 @@ export default function Dashboard() {
             height={100}
           ></Image>
 
-          <div className="mt-5 font-body text-xl ml-5">
+          <div className="mt-5 font-body text-lg ml-5">
             <div> Name: {user.displayName} </div>
-            <div> Total Balance: </div>
+            <div className="text-lg"> @ {user.email} </div>
           </div>
         </div>
         <div className="mt-10 text-center font-body flex justify-center">
@@ -67,16 +67,9 @@ export default function Dashboard() {
             as={`/events/${task.eventId}`}
             key={task.id}
           >
-            <div
-              key={task.id}
-              className={`p-5 border md:rounded-md md:w-1/2 m-auto mt-10 ${
-                task.status ? "bg-green-50" : "bg-red-50"
-              }`}
-            >
-              <div className="text-2xl text-center font-body">
-                {task.description}
-              </div>
-              <div className="mt-5 hover:underline hover:cursor-pointer text-right"></div>
+            <div className="pb-8 pt-4 pr-2 font-body rounded-md text-2xl mb-2 shadow-md w-80 m-auto mt-10 text-center hover:border-blue-500 hover:bg-blue-50 transition-all duration-500 ease-in bg-white hover:cursor-pointer">
+              {task.description}
+
             </div>
           </Link>
         ))}

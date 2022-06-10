@@ -24,6 +24,7 @@ function Friends() {
         },
       }
     );
+    console.log(response.data);
 
     setFriends(response.data);
   };
@@ -50,18 +51,20 @@ function Friends() {
           Add Friend
         </button>
         {addFriend ? (
-          <AddFriend setAddFriend={setAddFriend} />
+          <AddFriend setAddFriend={setAddFriend} getFriends={getFriends} />
         ) : (
           <div>
             <div>
               {friends.map((friend) => (
                 <div
                   key={friend.friendId}
-                  className="p-2 font-body bg-mintGreen text-2xl border-2 border-green-800 md:w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-green-500  transition-all duration-500 ease-in"
+                  className="pt-2 pb-2 pl-4 pr-4 font-body bg-mintGreen text-xl border-2 border-green-800 w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-green-500  transition-all duration-500 ease-in"
                 >
                   <div key={friend.friendId}>
                     {friend.friendFirstName} {friend.friendLastName}
                   </div>
+
+                  <div className="text-sm"> {friend.email}</div>
                 </div>
               ))}
             </div>
