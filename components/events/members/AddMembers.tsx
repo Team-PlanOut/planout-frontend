@@ -11,9 +11,9 @@ export default function AddMembers({
   data: { first_name: string }[];
   setShowMembersModal: (showMembersModal: boolean) => void;
 }) {
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     handleAddMember();
-    setShowMembersModal(false);
   };
   return (
     <div className="mt-10 p-10">
