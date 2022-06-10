@@ -37,7 +37,8 @@ export default function DeleteTask({ task, getTasks }: { task: Tasks, getTasks: 
           console.log(task.id)
           deleteTask(task.id);
           console.log(`clicked`, task);
-          router.push('/events'); //then go back to all events
+          //router.push('/'); 
+          getTasks();
         }}
         className="inset-y-0.5 text-2xl text-center font-body "
       ><FaTrash />
