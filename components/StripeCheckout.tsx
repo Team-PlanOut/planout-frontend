@@ -1,6 +1,7 @@
 import React from "react";
 
 import { loadStripe } from "@stripe/stripe-js";
+import { FaCcStripe } from "react-icons/fa";
 
 const stripePromise = loadStripe(
   "pk_test_51L7UpKF9KFH9wctxGfqKckcUDmzhVUEkGZQTCeXZjSYvI5k33s1oXe3rIPJP5I8Un5qV5q016WE0aW4NcI3wThOx00OFftpTkL" //this is hard coded
@@ -25,7 +26,8 @@ export default function StripeCheckout() {
   return (
     <form action="/api/checkout_sessions" method="POST">
       <section>
-        <button type="submit" role="link">
+        <button type="submit" role="link" className="inline-flex">
+          <FaCcStripe className="relative top-1 mr-1" />
           Settle Expenses
         </button>
       </section>

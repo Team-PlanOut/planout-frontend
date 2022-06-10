@@ -10,15 +10,15 @@ import { FaCheckCircle } from "react-icons/fa";
 import { IoIosPeople } from "react-icons/io";
 import CostModal from "../../components/CostModal";
 import { io } from "socket.io-client";
-const socket = io("https://cc26-planout.herokuapp.com/");
 import DeleteTask from "../../components/tasks/DeleteTask";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
 import MembersModal from "../../components/events/members/MembersModal";
-
+import { AiFillEdit } from "react-icons/ai";
 import StripeCheckout from "../../components/StripeCheckout";
 
 function SingleEventPage() {
+  const socket = io("https://cc26-planout.herokuapp.com/");
   const router = useRouter();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
@@ -26,7 +26,7 @@ function SingleEventPage() {
   const [data, setData] = useState<any>([]);
   const [member, setMember] = useState<string[]>([]);
   const [eventMembers, setEventMembers] = useState<any>(null);
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [openMenu, setOpenMenu] = useState<number | null>(null);
 
   const { token, user } = useAuth() as any;
 
@@ -107,6 +107,10 @@ function SingleEventPage() {
 
   const newTaskNotification = () => {
     socket.emit("taskCreated", { eventname: `${event.name}` });
+  };
+
+  const taskCompleteNotification = (task) => {
+    socket.emit("taskCompleted", { eventname: `${event.name}`, taskName: `${task.description}` });
   };
 
   useEffect(() => {
@@ -215,7 +219,13 @@ function SingleEventPage() {
                       <div className="relative inline-block">
                         <div className="flex justify-end">
                           <button
-                            onClick={() => setOpenMenu(!openMenu)}
+                            onClick={() => {
+                              if (openMenu === index) {
+                                setOpenMenu(null);
+                              } else {
+                                setOpenMenu(index);
+                              }
+                            }}
                             type="button"
                             className="rounded-md hover:bg-gray-200 hover:rounded-full text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-orange-400"
                             id="menu-button"
@@ -225,7 +235,7 @@ function SingleEventPage() {
                             <HiOutlineDotsHorizontal className="w-6 h-6" />
                           </button>
                         </div>
-                        {openMenu && (
+                        {openMenu === index && (
                           <div
                             className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu"
@@ -238,6 +248,7 @@ function SingleEventPage() {
                                 className="hover:cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
                                 role="menuitem"
                               >
+                                <AiFillEdit className="relative top-1 mr-1" />{" "}
                                 Edit Cost
                               </div>
                               {showModal ? (
@@ -249,6 +260,13 @@ function SingleEventPage() {
                                 id="menu-item-1"
                               >
                                 <StripeCheckout />
+                              </div>
+                              <div
+                                className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
+                                role="menuitem"
+                                id="menu-item-1"
+                              >
+                                <DeleteTask task={task} getTasks={getTasks} />
                               </div>
                             </div>
                           </div>
@@ -269,6 +287,7 @@ function SingleEventPage() {
                     <div
                       onClick={() => {
                         completeTask(task.id);
+                        taskCompleteNotification(task)
                         setTimeout(() => {
                           getTasks();
                         }, 200);
@@ -287,18 +306,7 @@ function SingleEventPage() {
                       )}
                     </div>
                     <AssignTaskForm id={id} getTasks={getTasks} />
-                    {/* <button
-                      data-modal-toggle="small-modal"
-                      onClick={() => setShowCostModal(true)}
-                      className="mr-1 ml-1 font-body bg-orange-300 text-sm items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
-                    >
-                      Add cost
-                    </button> */}
-                    {/* {showCostModal ? (
-                      <CostModal setShowCostModal={setShowCostModal} />
-                    ) : null} */}
                   </div>
-                  <DeleteTask task={task} getTasks={getTasks} />
                 </div>
               ))}
             </div>

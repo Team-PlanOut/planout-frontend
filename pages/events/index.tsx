@@ -10,9 +10,31 @@ import { FaTrash } from "react-icons/fa";
 
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
-  const { token } = useAuth() as any;
+  const { token, user } = useAuth() as any;
 
-  const getEvents = async () => {
+  const getUserEvents = async () => {
+    const eventIds = {};
+    const response = await axios.get(
+      "https://cc26-planout.herokuapp.com/eventusers",
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+
+    let filteredResponse = response.data.filter((event: any) => {
+      return event.user_id === user.uid;
+      });
+    for (let i = 0; i < filteredResponse.length; i ++){
+      eventIds[filteredResponse[i].event_id] ? '' : eventIds[filteredResponse[i].event_id] = filteredResponse[i].event_id;
+    }
+    
+    getEvents(eventIds);
+  };
+
+  const getEvents = async (data: Object) => {
+    const eventIds = data;
     const response = await axios.get(
       "https://cc26-planout.herokuapp.com/events",
       {
@@ -21,9 +43,19 @@ function Events() {
         },
       }
     );
-
-    setEvents(response.data);
+   displayEvents(response, eventIds);
   };
+
+  const displayEvents = async (response, eventIds) => {
+    const eventData = response.data
+
+    const filteredEvents =  await eventData.filter((event) => {
+      return eventIds[event.id] || event.hostId === user.uid
+    });
+    filteredEvents.sort((a, b) => a.date.localeCompare(b.date, {ignorePunctuation: true}));
+    setEvents(filteredEvents);
+  }
+
   async function deleteEvent(eventId: any) {
     await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`, {
       headers: {
@@ -32,7 +64,7 @@ function Events() {
     });
   }
   useEffect(() => {
-    getEvents();
+    getUserEvents();
   }, []);
 
   const showOnlyDate = (date: Date) => date.toString().slice(0, 10);
@@ -46,7 +78,7 @@ function Events() {
             EVENTS
           </div>
           <div>
-            <EventForm getEvents={getEvents} />
+            <EventForm getEvents={getUserEvents} />
           </div>
           {events.map((event) => (
             <div
@@ -56,7 +88,7 @@ function Events() {
               <FaTrash
                 onClick={() => {
                   deleteEvent(event.id);
-                  getEvents();
+                  getUserEvents();
                 }}
                 className="text-sm float-right md:fill-gray-50 hover:cursor-pointer hover:fill-black"
               />

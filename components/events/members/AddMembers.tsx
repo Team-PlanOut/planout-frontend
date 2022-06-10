@@ -13,6 +13,7 @@ export default function AddMembers({
   data: { first_name: string }[];
   setShowModal: (showModal: boolean) => void;
 }) {
+  
   const handleCheck = (e: any) => {
     const user = e.target.value;
     if (member.includes(user)) {
@@ -21,7 +22,7 @@ export default function AddMembers({
       setMember([...member, user]);
     }
   };
-
+  
   const handleSubmit = () => {
     if (member.length > 0) {
       handleAddMember(member);
