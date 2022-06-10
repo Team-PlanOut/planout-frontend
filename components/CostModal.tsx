@@ -57,6 +57,7 @@ export default function CostModal({
           </div>
           <div className="bg-gray-200 px-4 py-3 text-right">
             <button
+              onClick={() => setShowCostModal(false)}
               type="button"
               className="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2"
             >
