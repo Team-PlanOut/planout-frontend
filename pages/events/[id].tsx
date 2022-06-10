@@ -262,7 +262,11 @@ function SingleEventPage() {
                                 role="menuitem"
                                 id="menu-item-1"
                               >
-                                <AssignTaskForm id={id} getTasks={getTasks} />
+                                <AssignTaskForm
+                                  id={id}
+                                  task={task}
+                                  getTasks={getTasks}
+                                />
                               </div>
                               <div
                                 className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
@@ -288,7 +292,7 @@ function SingleEventPage() {
                       </div>
                     </div>
                     <div>Task: {task.description}</div>
-                    <div> Cost: {task.cost} ¥</div>
+                    <div> Cost: ${task.cost} </div>
 
                     <div className="mr-2" data-modal-toggle="small-modal">
                       {task.user_id !== user.uid
@@ -319,7 +323,6 @@ function SingleEventPage() {
                         </button>
                       )}
                     </div>
-                    {/* <AssignTaskForm id={id} getTasks={getTasks} /> */}
                   </div>
                 </div>
               ))}

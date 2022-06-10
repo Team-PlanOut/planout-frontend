@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import useAuth from "../src/hook/auth";
 import Image from "next/image";
-import { FaCheckCircle, FaTasks } from "react-icons/fa";
+import { FaTasks } from "react-icons/fa";
 import Link from "next/link";
 
 export default function Dashboard() {
@@ -69,6 +69,7 @@ export default function Dashboard() {
           >
             <div className="pb-8 pt-4 pr-2 font-body rounded-md text-2xl mb-2 shadow-md w-80 m-auto mt-10 text-center hover:border-blue-500 hover:bg-blue-50 transition-all duration-500 ease-in bg-white hover:cursor-pointer">
               {task.description}
+
             </div>
           </Link>
         ))}
