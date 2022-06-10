@@ -13,6 +13,7 @@ import AuthStateChanged from "../components/AuthStateChanged";
 import { AuthProvider } from "../src/hook/auth";
 
 import type { AppProps } from "next/app";
+
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     socket.on("newTask", (data) => {
@@ -21,6 +22,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
     socket.on("newEvent", (data) => {
       toast(`NEW EVENT ALERT: ${data.eventname}`);
+    });
+    socket.on("taskComplete", (data) => {
+      toast.success(
+        `${data.taskName} has been completed in the event: ${data.eventname}!`
+      );
     });
   }, []);
 

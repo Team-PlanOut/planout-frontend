@@ -319,7 +319,7 @@ function SingleEventPage() {
                         </button>
                       )}
                     </div>
-                    {/* <AssignTaskForm id={id} getTasks={getTasks} /> */}
+                    <AssignTaskForm id={id} task={task} getTasks={getTasks} />
                   </div>
                 </div>
               ))}
