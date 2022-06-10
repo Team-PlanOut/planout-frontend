@@ -202,7 +202,7 @@ function SingleEventPage() {
             TASKS
           </div>
 
-          <div className="overflow-hidden">
+          <div className="overflow-hidden pb-14 ">
             <div>
               <TaskForm
                 getTasks={getTasks}
@@ -219,7 +219,7 @@ function SingleEventPage() {
                 >
                   <div className="text-lg ml-2 font-body">
                     <div className="float-right">
-                      <div className="relative inline-block">
+                      <div className=" relative inline-block">
                         <div className="flex justify-end">
                           <button
                             onClick={() => {
@@ -245,7 +245,7 @@ function SingleEventPage() {
                             aria-orientation="vertical"
                             aria-labelledby="menu-button"
                           >
-                            <div className="py-1" role="none">
+                            <div className="py-2" role="none">
                               <div
                                 onClick={() => setShowModal(true)}
                                 className="inline-flex hover:cursor-pointer hover:bg-gray-100 text-gray-700 px-4 py-2 text-sm"
