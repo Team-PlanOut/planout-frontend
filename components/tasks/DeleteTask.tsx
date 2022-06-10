@@ -35,11 +35,7 @@ export default function DeleteTask({
       <button
         type="button"
         onClick={() => {
-          console.log(token)
-          console.log(task.id)
           deleteTask(task.id);
-          console.log(`clicked`, task);
-          //router.push('/'); 
           getTasks();
         }}
         className="inset-y-0.5 text-2xl text-center font-body "
