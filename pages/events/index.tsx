@@ -11,7 +11,6 @@ import { FaTrash } from "react-icons/fa";
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
   const { token, user } = useAuth() as any;
-  const [storeEventIds, setStoreEventIds] = useState<Object>();
 
   const getUserEvents = async () => {
     const eventIds = {};
@@ -30,7 +29,7 @@ function Events() {
     for (let i = 0; i < filteredResponse.length; i ++){
       eventIds[filteredResponse[i].event_id] ? '' : eventIds[filteredResponse[i].event_id] = filteredResponse[i].event_id;
     }
-    setStoreEventIds(eventIds)
+    
     getEvents(eventIds);
   };
 
