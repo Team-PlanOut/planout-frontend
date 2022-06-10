@@ -288,7 +288,7 @@ function SingleEventPage() {
                       </div>
                     </div>
                     <div>Task: {task.description}</div>
-                    <div> Cost: {task.cost} ¥</div>
+                    <div> Cost: ${task.cost} </div>
 
                     <div className="mr-2" data-modal-toggle="small-modal">
                       {task.user_id !== user.uid
