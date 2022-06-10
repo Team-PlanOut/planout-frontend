@@ -22,7 +22,7 @@ export default function AssignTaskForm({
       await axios.put(
         `https://cc26-planout.herokuapp.com/tasks/${id}`,
         {
-          id: id,
+          event_id: id,
           user_id: selectedUser,
         },
         {
