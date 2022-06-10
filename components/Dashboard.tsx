@@ -67,7 +67,7 @@ export default function Dashboard() {
             as={`/events/${task.eventId}`}
             key={task.id}
           >
-            <div className="border-4 text-xl font-body font-semibold rounded p-8 w-1/2 m-auto text-center border-orange-600">
+            <div className="pb-8 pt-4 pr-2 font-body rounded-md text-2xl mb-2 shadow-md w-80 m-auto mt-10 text-center hover:border-blue-500 hover:bg-blue-50 transition-all duration-500 ease-in bg-white hover:cursor-pointer">
               {task.description}
             </div>
           </Link>
