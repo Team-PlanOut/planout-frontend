@@ -110,7 +110,10 @@ function SingleEventPage() {
   };
 
   const taskCompleteNotification = (task) => {
-    socket.emit("taskCompleted", { eventname: `${event.name}`, taskName: `${task.description}` });
+    socket.emit("taskCompleted", {
+      eventname: `${event.name}`,
+      taskName: `${task.description}`,
+    });
   };
 
   useEffect(() => {
@@ -287,7 +290,7 @@ function SingleEventPage() {
                     <div
                       onClick={() => {
                         completeTask(task.id);
-                        taskCompleteNotification(task)
+                        taskCompleteNotification(task);
                         setTimeout(() => {
                           getTasks();
                         }, 200);
@@ -305,7 +308,7 @@ function SingleEventPage() {
                         </button>
                       )}
                     </div>
-                    <AssignTaskForm id={id} getTasks={getTasks} />
+                    <AssignTaskForm id={id} task={task} getTasks={getTasks} />
                   </div>
                 </div>
               ))}

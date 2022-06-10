@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import useAuth from "../src/hook/auth";
 import Image from "next/image";
-import { FaCheckCircle, FaTasks } from "react-icons/fa";
+import { FaTasks } from "react-icons/fa";
 import Link from "next/link";
 
 export default function Dashboard() {
@@ -23,46 +23,6 @@ export default function Dashboard() {
       setTasks(response.data);
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const completeTask = async (id: number) => {
-    const selectedTask = task.find((task: { id: number }) => task.id === id);
-
-    if (selectedTask.status) {
-      try {
-        await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/${id}`,
-          {
-            id: id,
-            status: false,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/${id}`,
-          {
-            id: id,
-            status: true,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
     }
   };
 
@@ -103,21 +63,21 @@ export default function Dashboard() {
       <div>
         {sortedTasks.map((task: any, index: number) => (
           <Link
-          href="/events/[id]"
-          as={`/events/${task.eventId}`}
-          key={task.id}>
-            <div
+            href="/events/[id]"
+            as={`/events/${task.eventId}`}
             key={task.id}
-            className={`p-5 border md:rounded-md md:w-1/2 m-auto mt-10 ${
-              task.status ? "bg-green-50" : "bg-red-50"
-            }`}
           >
-            <div className="text-2xl text-center font-body">
-              {task.description}
+            <div
+              key={task.id}
+              className={`p-5 border md:rounded-md md:w-1/2 m-auto mt-10 ${
+                task.status ? "bg-green-50" : "bg-red-50"
+              }`}
+            >
+              <div className="text-2xl text-center font-body">
+                {task.description}
+              </div>
+              <div className="mt-5 hover:underline hover:cursor-pointer text-right"></div>
             </div>
-            <div className="mt-5 hover:underline hover:cursor-pointer text-right">
-            </div>
-          </div>
           </Link>
         ))}
       </div>
