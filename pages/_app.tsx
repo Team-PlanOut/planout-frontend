@@ -13,7 +13,6 @@ import AuthStateChanged from "../components/AuthStateChanged";
 import { AuthProvider } from "../src/hook/auth";
 
 import type { AppProps } from "next/app";
-import { data } from 'autoprefixer';
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -23,9 +22,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     socket.on("newEvent", (data) => {
       toast(`NEW EVENT ALERT: ${data.eventname}`);
     });
-    socket.on('taskComplete', data => {
-      toast.success(`${data.taskName} has been completed in the event: ${data.eventname}!`)})
-  }, [socket]);
+    socket.on("taskComplete", (data) => {
+      toast.success(
+        `${data.taskName} has been completed in the event: ${data.eventname}!`
+      );
+    });
+  }, []);
 
   return (
     <AuthProvider>

@@ -11,7 +11,7 @@ export default function AssignTaskForm({
   task: {
     id: string;
   };
-  id: string;
+  id: any;
   getTasks: () => void;
 }) {
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +23,6 @@ export default function AssignTaskForm({
   const taskId = task.id;
 
   const assignTask = async (taskId: string) => {
-
     try {
       await axios.put(
         `https://cc26-planout.herokuapp.com/tasks/${taskId}`,
