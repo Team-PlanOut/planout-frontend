@@ -1,9 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
+import { Tasks } from "../types";
 export default function CostModal({
+  getTasks,
+  task,
   setShowCostModal,
 }: {
+  getTasks: () => Promise<void>;
+
+  task: Tasks;
   setShowCostModal: (showCostModal: boolean) => void;
 }) {
   const [cost, setCost] = useState<number | null>(null);
@@ -12,10 +18,10 @@ export default function CostModal({
   const submitCost = async (id: number) => {
     try {
       await axios.put(
-        `http:localhost:8090/tasks/${id}`,
+        `https://cc26-planout.herokuapp.com/tasks/${id}`,
         {
           id: id,
-          cost: { cost },
+          cost: cost,
         },
         {
           headers: {
@@ -24,6 +30,7 @@ export default function CostModal({
         }
       );
       setShowCostModal(false);
+      getTasks();
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +53,11 @@ export default function CostModal({
         >
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <label>Cost</label>
-            <input type="text" className="w-full bg-gray-100 p-2 mt-2 mb-3" />
+            <input
+              type="text"
+              onChange={(e) => setCost(Number(e.target.value))}
+              className="w-full bg-gray-100 p-2 mt-2 mb-3"
+            />
           </div>
           <div className="bg-gray-200 px-4 py-3 text-right">
             <button
@@ -57,7 +68,7 @@ export default function CostModal({
               Cancel
             </button>
             <button
-              onClick={() => setShowCostModal(false)}
+              onClick={() => submitCost(task.id)}
               type="submit"
               className="py-2 px-4 bg-orange-300 text-white rounded hover:bg-orange-400 mr-2"
             >
