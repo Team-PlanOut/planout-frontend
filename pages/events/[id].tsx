@@ -261,6 +261,7 @@ function SingleEventPage() {
                                 <CostModal
                                   setShowCostModal={setShowCostModal}
                                   task={task}
+                                  getTasks={getTasks}
                                 />
                               ) : null}
                               <div

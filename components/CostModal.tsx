@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import { Tasks } from "../types";
 export default function CostModal({
+  getTasks,
   task,
   setShowCostModal,
 }: {
+  getTasks: () => Promise<void>;
+
   task: Tasks;
   setShowCostModal: (showCostModal: boolean) => void;
 }) {
@@ -27,6 +30,7 @@ export default function CostModal({
         }
       );
       setShowCostModal(false);
+      getTasks();
     } catch (error) {
       console.log(error);
     }
