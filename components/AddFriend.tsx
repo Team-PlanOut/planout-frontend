@@ -3,7 +3,13 @@ import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 import { withProtected } from "../src/hook/route";
 import { HiOutlineX } from "react-icons/hi";
-function AddFriend({ setAddFriend }) {
+function AddFriend({
+  setAddFriend,
+  getFriends,
+}: {
+  setAddFriend: (addFriend: boolean) => void;
+  getFriends: () => Promise<void>;
+}) {
   const [input, setInput] = useState<string | null>(null);
   const { token, user } = useAuth() as any;
 
@@ -19,9 +25,9 @@ function AddFriend({ setAddFriend }) {
     beginFriendship(findFriend);
   };
 
-  const beginFriendship = (findFriend: any) => {
-    axios
-      .post(
+  const beginFriendship = async (findFriend: any) => {
+    try {
+      await axios.post(
         `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend.data.id}`,
         {},
         {
@@ -29,8 +35,16 @@ function AddFriend({ setAddFriend }) {
             Authorization: "Bearer " + token,
           },
         }
-      )
-      .catch((error) => console.error(error));
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmit = () => {
+    getFriend();
+    getFriends();
+    setAddFriend(false);
   };
 
   return (
@@ -49,7 +63,7 @@ function AddFriend({ setAddFriend }) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              getFriend();
+              handleSubmit();
             }}
           >
             <input

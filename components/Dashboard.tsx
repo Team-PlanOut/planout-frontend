@@ -26,46 +26,6 @@ export default function Dashboard() {
     }
   };
 
-  const completeTask = async (id: number) => {
-    const selectedTask = task.find((task: { id: number }) => task.id === id);
-
-    if (selectedTask.status) {
-      try {
-        await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/${id}`,
-          {
-            id: id,
-            status: false,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/${id}`,
-          {
-            id: id,
-            status: true,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   useEffect(() => {
     if (token) {
       fetchTaskData();
@@ -88,9 +48,9 @@ export default function Dashboard() {
             height={100}
           ></Image>
 
-          <div className="mt-5 font-body text-xl ml-5">
+          <div className="mt-5 font-body text-lg ml-5">
             <div> Name: {user.displayName} </div>
-            <div> Total Balance: </div>
+            <div className="text-lg"> @ {user.email} </div>
           </div>
         </div>
         <div className="mt-10 text-center font-body flex justify-center">
@@ -103,21 +63,13 @@ export default function Dashboard() {
       <div>
         {sortedTasks.map((task: any, index: number) => (
           <Link
-          href="/events/[id]"
-          as={`/events/${task.eventId}`}
-          key={task.id}>
-            <div
+            href="/events/[id]"
+            as={`/events/${task.eventId}`}
             key={task.id}
-            className={`p-5 border md:rounded-md md:w-1/2 m-auto mt-10 ${
-              task.status ? "bg-green-50" : "bg-red-50"
-            }`}
           >
-            <div className="text-2xl text-center font-body">
+            <div className="border-4 text-xl font-body font-semibold rounded p-8 w-1/2 m-auto text-center border-orange-600">
               {task.description}
             </div>
-            <div className="mt-5 hover:underline hover:cursor-pointer text-right">
-            </div>
-          </div>
           </Link>
         ))}
       </div>
