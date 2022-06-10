@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useRouter } from "next/router";
 import Navbar from "../../components/Navbar";
 import TaskForm from "../../components/tasks/TaskForm";
@@ -20,15 +20,15 @@ import StripeCheckout from "../../components/StripeCheckout";
 function SingleEventPage() {
   const socket = io("https://cc26-planout.herokuapp.com/");
   const router = useRouter();
-  const [showCostModal, setShowCostModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
-  const [showMembersModal, setShowMembersModal] = useState<boolean>(false);
-  const { token, user } = useAuth() as any;
   const [data, setData] = useState<any>([]);
-  const [member, setMember] = useState<string>("");
+  const [member, setMember] = useState<string[]>([]);
   const [eventMembers, setEventMembers] = useState<any>(null);
   const [openMenu, setOpenMenu] = useState<number | null>(null);
+
+  const { token, user } = useAuth() as any;
 
   const {
     query: { id },
@@ -47,36 +47,25 @@ function SingleEventPage() {
     return data;
   };
 
-  const addMemberToEvent = async (data: object) => {
-    if (
-      eventMembers.some(
-        (member: { firstName: any }) => member.firstName === data["user_id"]
-      )
-    ) {
-      alert("Sorry, a user with that name is already in this event");
-      return;
-    }
-
-    try {
-      await axios.post("https://cc26-planout.herokuapp.com/eventusers", data, {
-        headers: {
-          Authorization: "Bearer " + token,
+  const handleAddMember = async () => {
+    member.forEach((user) => {
+      axios.post(
+        `https://cc26-planout.herokuapp.com/eventusers`,
+        {
+          event_id: id,
+          user_id: user,
         },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+    });
 
-  const handleAddMember = () => {
-    const formData = {
-      event_id: id,
-      user_id: member,
-    };
-    addMemberToEvent(formData);
     setTimeout(() => {
       getEventUsers();
-    }, 200);
+    }, 300);
   };
 
   const fetchUserData = async () => {
@@ -189,16 +178,17 @@ function SingleEventPage() {
         <div
           className="float-right mr-20  md:text-base underline hover:cursor-pointer flex mt-2"
           data-modal-toggle="small-modal"
-          onClick={() => setShowMembersModal(true)}
+          onClick={() => setShowModal(true)}
         >
           <IoIosPeople className="relative top-1 mr-1 -z-10" />
           Members
         </div>
 
-        {showMembersModal ? (
+        {showModal ? (
           <MembersModal
-            setShowMembersModal={setShowMembersModal}
+            setShowModal={setShowModal}
             data={data}
+            member={member}
             setMember={setMember}
             handleAddMember={handleAddMember}
             eventMembers={eventMembers}
@@ -254,19 +244,15 @@ function SingleEventPage() {
                           >
                             <div className="py-1" role="none">
                               <div
-                                onClick={() => setShowCostModal(true)}
-                                className="inline-flex hover:cursor-pointer hover:bg-gray-100 text-gray-700 px-4 py-2 text-sm"
+                                onClick={() => setShowModal(true)}
+                                className="hover:cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
                                 role="menuitem"
                               >
                                 <AiFillEdit className="relative top-1 mr-1" />{" "}
                                 Edit Cost
                               </div>
-                              {showCostModal ? (
-                                <CostModal
-                                  setShowCostModal={setShowCostModal}
-                                  task={task}
-                                  getTasks={getTasks}
-                                />
+                              {showModal ? (
+                                <CostModal setShowModal={setShowModal} />
                               ) : null}
                               <div
                                 className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"

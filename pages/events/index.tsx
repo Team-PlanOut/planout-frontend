@@ -107,7 +107,6 @@ function Events() {
               </Link>
 
               <div className="text-sm float-right">
-                {" "}
                 Hosted by {event.hostFirstName} {event.hostLastName}{" "}
               </div>
             </div>
