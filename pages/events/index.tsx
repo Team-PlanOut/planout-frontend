@@ -79,7 +79,7 @@ function Events() {
             EVENTS
           </div>
           <div>
-            <EventForm getEvents={getEvents} />
+            <EventForm getEvents={getUserEvents} />
           </div>
           {events.map((event) => (
             <div
@@ -89,7 +89,7 @@ function Events() {
               <FaTrash
                 onClick={() => {
                   deleteEvent(event.id);
-                  getEvents(storeEventIds);
+                  getUserEvents();
                 }}
                 className="text-sm float-right md:fill-gray-50 hover:cursor-pointer hover:fill-black"
               />
