@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useAuth from "../../../src/hook/auth";
 import AssignTaskModal from "./AssignTaskModal";
+import { MdOutlineAssignmentInd } from "react-icons/md";
 
 export default function AssignTaskForm({
   id,
@@ -16,7 +17,7 @@ export default function AssignTaskForm({
 }) {
   const [showModal, setShowModal] = useState(false);
   const [eventUsers, setEventUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState();
+  const [selectedUser, setSelectedUser] = useState<string | null>(null);
 
   const { token } = useAuth() as any;
 
@@ -66,9 +67,10 @@ export default function AssignTaskForm({
       <button
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
-        className="bg-orange-300 text-sm font-body items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
+        className="inline-flex"
       >
-        Assign
+        <MdOutlineAssignmentInd className="relative top-1 mr-1" />
+        Change assignee{" "}
       </button>
       <div className="m-auto bg-black">
         {showModal && (

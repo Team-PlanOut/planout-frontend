@@ -11,7 +11,8 @@ export default function AssignTaskModal({
   assignTask: (id: string) => void;
   taskId: string;
   eventUsers: any;
-  setSelectedUser: (user: any) => void;
+  setSelectedUser: (user: string) => void;
+  getTasks: () => void;
 }) {
   const handleSubmit = (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>

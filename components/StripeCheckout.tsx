@@ -28,7 +28,7 @@ export default function StripeCheckout() {
       <section>
         <button type="submit" role="link" className="inline-flex">
           <FaCcStripe className="relative top-1 mr-1" />
-          Settle Expenses
+          Settle expenses
         </button>
       </section>
     </form>

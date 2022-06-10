@@ -5,11 +5,13 @@ import { FaTrash } from "react-icons/fa";
 import { Events, Tasks } from "../../types";
 
 export default function DeleteTask({
+  setOpenMenu,
   task,
   getTasks,
 }: {
   task: Tasks;
   getTasks: () => void;
+  setOpenMenu: any;
 }) {
   const { token, user } = useAuth() as any;
 
@@ -25,24 +27,23 @@ export default function DeleteTask({
       });
   }
 
-
-
-  return (<>
-
-    <div className="z-10 mt-5 hover:underline hover:cursor-pointer text-right">
-      <button
-        type="button"
-        onClick={() => {
-          deleteTask(task.id);
-          getTasks();
-        }}
-        className="inset-y-0.5 text-2xl text-center font-body "
-      ><FaTrash />
-      </button>
-
-    </div>
-
-
-
-  </>)
+  return (
+    <>
+      <div>
+        <button
+          type="button"
+          onClick={() => {
+            deleteTask(task.id);
+            alert("are you sure?");
+            getTasks();
+            setOpenMenu(null);
+          }}
+          className="font-body inline-flex"
+        >
+          <FaTrash className="relative top-1 w-3 h-3 mr-1 " />
+          Delete task
+        </button>
+      </div>
+    </>
+  );
 }

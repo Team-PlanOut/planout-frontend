@@ -230,7 +230,7 @@ function SingleEventPage() {
                               }
                             }}
                             type="button"
-                            className="rounded-md hover:bg-gray-200 hover:rounded-full text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-orange-400"
+                            className="rounded-md hover:bg-gray-200 hover:rounded-full text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-orange-200"
                             id="menu-button"
                             aria-expanded="true"
                             aria-haspopup="true"
@@ -248,15 +248,22 @@ function SingleEventPage() {
                             <div className="py-1" role="none">
                               <div
                                 onClick={() => setShowModal(true)}
-                                className="hover:cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
+                                className="inline-flex hover:cursor-pointer hover:bg-gray-100 text-gray-700 px-4 py-2 text-sm"
                                 role="menuitem"
                               >
                                 <AiFillEdit className="relative top-1 mr-1" />{" "}
-                                Edit Cost
+                                Edit cost
                               </div>
                               {showModal ? (
                                 <CostModal setShowModal={setShowModal} />
                               ) : null}
+                              <div
+                                className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
+                                role="menuitem"
+                                id="menu-item-1"
+                              >
+                                <AssignTaskForm id={id} getTasks={getTasks} />
+                              </div>
                               <div
                                 className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
                                 role="menuitem"
@@ -269,7 +276,11 @@ function SingleEventPage() {
                                 role="menuitem"
                                 id="menu-item-1"
                               >
-                                <DeleteTask task={task} getTasks={getTasks} />
+                                <DeleteTask
+                                  task={task}
+                                  getTasks={getTasks}
+                                  setOpenMenu={setOpenMenu}
+                                />
                               </div>
                             </div>
                           </div>
@@ -277,7 +288,7 @@ function SingleEventPage() {
                       </div>
                     </div>
                     <div>Task: {task.description}</div>
-                    <div> Cost: {task.cost} ¥</div>
+                    <div> Cost: ${task.cost} </div>
 
                     <div className="mr-2" data-modal-toggle="small-modal">
                       {task.user_id !== user.uid
