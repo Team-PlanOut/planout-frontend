@@ -11,6 +11,7 @@ import { FaTrash } from "react-icons/fa";
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
   const { token, user } = useAuth() as any;
+  const [storeEventIds, setStoreEventIds] = useState<Object>();
 
   const getUserEvents = async () => {
     const eventIds = {};
@@ -29,6 +30,7 @@ function Events() {
     for (let i = 0; i < filteredResponse.length; i ++){
       eventIds[filteredResponse[i].event_id] ? '' : eventIds[filteredResponse[i].event_id] = filteredResponse[i].event_id;
     }
+    setStoreEventIds(eventIds)
     getEvents(eventIds);
   };
 
@@ -48,7 +50,9 @@ function Events() {
   const displayEvents = async (response, eventIds) => {
     const eventData = response.data
 
-    const filteredEvents =  await eventData.filter((event) => eventIds[event.id] || event.hostId === user.uid);
+    const filteredEvents =  await eventData.filter((event) => {
+      return eventIds[event.id] || event.hostId === user.uid
+    });
     filteredEvents.sort((a, b) => a.date.localeCompare(b.date, {ignorePunctuation: true}));
     setEvents(filteredEvents);
   }
@@ -85,7 +89,7 @@ function Events() {
               <FaTrash
                 onClick={() => {
                   deleteEvent(event.id);
-                  getEvents();
+                  getEvents(storeEventIds);
                 }}
                 className="text-sm float-right md:fill-gray-50 hover:cursor-pointer hover:fill-black"
               />
