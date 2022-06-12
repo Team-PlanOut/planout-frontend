@@ -56,7 +56,7 @@ function Friends() {
             {friends.map((friend) => (
               <div
                 key={friend.friendId}
-                className="flex flex-row w-2/3 rounded-lg font-body text-xl border-2 p-4 bg-friends bg-opacity-30  md:w-1/2 mt-10 text-center hover:cursor-pointer hover:border-green-500  transition-all duration-500 ease-in"
+                className="flex flex-row w-2/3 rounded-lg font-body text-xl border-2 p-4 bg-friends bg-opacity-30  md:w-80 mt-10 text-center hover:cursor-pointer hover:border-green-500  transition-all duration-500 ease-in"
               >
                 <div>
                   <img
