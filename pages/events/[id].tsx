@@ -48,24 +48,24 @@ function SingleEventPage() {
   };
 
   const handleAddMember = async () => {
-    member.forEach((user) => {
-      axios.post(
-        `https://cc26-planout.herokuapp.com/eventusers`,
-        {
-          event_id: id,
-          user_id: user,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
+    try {
+      member.forEach((user) => {
+        axios.post(
+          `https://cc26-planout.herokuapp.com/eventusers`,
+          {
+            event_id: id,
+            user_id: user,
           },
-        }
-      );
-    });
-
-    setTimeout(() => {
-      getEventUsers();
-    }, 300);
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const fetchUserData = async () => {
@@ -116,22 +116,12 @@ function SingleEventPage() {
     });
   };
 
-  useEffect(() => {
-    fetchUserData();
-    getEventUsers();
-  }, []);
-
-  useEffect(() => {
-    getEventName();
-    getTasks();
-  }, []);
-
   const completeTask = async (id: number) => {
     const selectedTask = task.find((task: { id: number }) => task.id === id);
 
     if (selectedTask?.status) {
       try {
-        await axios.put(
+        const response = await axios.put(
           `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
@@ -143,12 +133,16 @@ function SingleEventPage() {
             },
           }
         );
+
+        if (response.status === 200) {
+          getTasks();
+        }
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
-        await axios.put(
+        const response = await axios.put(
           `https://cc26-planout.herokuapp.com/tasks/${id}`,
           {
             id: id,
@@ -160,6 +154,10 @@ function SingleEventPage() {
             },
           }
         );
+        if (response.status === 200) {
+          getTasks();
+          taskCompleteNotification(selectedTask);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -169,6 +167,13 @@ function SingleEventPage() {
   const sortedTasks = task.sort((a: { id: number }, b: { id: number }) =>
     a.id > b.id ? 1 : -1
   );
+
+  useEffect(() => {
+    fetchUserData();
+    getEventUsers();
+    getEventName();
+    getTasks();
+  }, []);
 
   return (
     <div>
@@ -303,13 +308,7 @@ function SingleEventPage() {
 
                   <div className="mt-5 flex flex-row justify-end hover:cursor-pointer ">
                     <div
-                      onClick={() => {
-                        completeTask(task.id);
-                        taskCompleteNotification(task);
-                        setTimeout(() => {
-                          getTasks();
-                        }, 200);
-                      }}
+                      onClick={() => completeTask(task.id)}
                       className="font-body"
                     >
                       {task.status ? (

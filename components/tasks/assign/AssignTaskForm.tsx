@@ -25,7 +25,7 @@ export default function AssignTaskForm({
 
   const assignTask = async (taskId: string) => {
     try {
-      await axios.put(
+      const response = await axios.put(
         `https://cc26-planout.herokuapp.com/tasks/${taskId}`,
         {
           id: taskId,
@@ -37,12 +37,12 @@ export default function AssignTaskForm({
           },
         }
       );
+      if (response.status === 200) {
+        getTasks();
+      }
     } catch (error) {
       console.error(error);
     }
-    setTimeout(() => {
-      getTasks();
-    }, 200);
   };
 
   const getUsersInEvent = async (id: string) => {

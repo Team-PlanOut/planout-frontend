@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import useAuth from "../../src/hook/auth";
 import EventModal from "./EventModal";
-import { io } from 'socket.io-client';
-const socket = io('https://cc26-planout.herokuapp.com/');
+import { io } from "socket.io-client";
+const socket = io("https://cc26-planout.herokuapp.com/");
 
 export default function EventForm({ getEvents }: any) {
   const [showModal, setShowModal] = useState(false);
@@ -13,9 +13,9 @@ export default function EventForm({ getEvents }: any) {
   const [eventBudget, setEventBudget] = useState("");
   const { token, user } = useAuth() as any;
 
-  function newEventNotification(){
-    socket.emit('eventCreated', { eventname: eventName });
-  };
+  function newEventNotification() {
+    socket.emit("eventCreated", { eventname: eventName });
+  }
 
   const createEvent = () => {
     const dataObj = {
@@ -25,16 +25,24 @@ export default function EventForm({ getEvents }: any) {
       budget: eventBudget,
     };
 
-    submitPostReq(dataObj);
+    handleSubmit(dataObj);
   };
 
-  const submitPostReq = async (data: object) => {
+  const handleSubmit = async (data: object) => {
     try {
-      await axios.post("https://cc26-planout.herokuapp.com/events", data, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const response = await axios.post(
+        "https://cc26-planout.herokuapp.com/events",
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        getEvents();
+        newEventNotification();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -56,8 +64,6 @@ export default function EventForm({ getEvents }: any) {
             setEventDate={setEventDate}
             setEventBudget={setEventBudget}
             createEvent={createEvent}
-            getEvents={getEvents}
-            newEventNotification={newEventNotification}
           />
         )}
       </div>
