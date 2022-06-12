@@ -35,4 +35,5 @@ export type Friends = {
   friendLastName: string | null;
   username: string | null;
   email: string | null;
+  photoUrl: any;
 };

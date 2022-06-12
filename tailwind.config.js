@@ -21,6 +21,7 @@ module.exports = {
       bg: "#fdba9a",
       nav: "#f2f2f2",
       container: "#685454",
+      friends: "#a393eb",
     },
   },
   plugins: [require("flowbite/plugin")],
