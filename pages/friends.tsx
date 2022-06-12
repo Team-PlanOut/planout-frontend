@@ -24,7 +24,6 @@ function Friends() {
         },
       }
     );
-    console.log(response.data);
     setFriends(response.data);
   };
 

@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
 
 export default function CostModal({
-  setShowModal
+  setShowCostModal,
 }: {
-  setShowModal: (showModal: boolean) => void;
+  setShowCostModal: (showCostModal: boolean) => void;
 }) {
-  
   const [cost, setCost] = useState<number | null>(null);
   const { token } = useAuth() as any;
 
@@ -25,7 +24,7 @@ export default function CostModal({
           },
         }
       );
-      setShowModal(false);
+      setShowCostModal(false);
     } catch (error) {
       console.log(error);
     }
@@ -56,14 +55,14 @@ export default function CostModal({
           </div>
           <div className="bg-gray-200 px-4 py-3 text-right">
             <button
-              onClick={() => setShowModal(false)}
+              onClick={() => setShowCostModal(false)}
               type="button"
               className="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2"
             >
               Cancel
             </button>
             <button
-              onClick={() => setShowModal(false)}
+              onClick={() => setShowCostModal(false)}
               type="submit"
               className="py-2 px-4 bg-orange-300 text-white rounded hover:bg-orange-400 mr-2"
             >
