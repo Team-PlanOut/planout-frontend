@@ -27,7 +27,7 @@ function AddFriend({
 
   const beginFriendship = async (findFriend: any) => {
     try {
-      await axios.post(
+      const response = await axios.post(
         `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend.data.id}`,
         {},
         {
@@ -36,6 +36,10 @@ function AddFriend({
           },
         }
       );
+      if (response.status === 200) {
+        getFriends();
+        setAddFriend(false);
+      }
     } catch (error) {
       console.error(error);
     }
