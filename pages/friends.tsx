@@ -24,6 +24,7 @@ function Friends() {
         },
       }
     );
+    console.log(response.data);
     setFriends(response.data);
   };
 
@@ -38,7 +39,7 @@ function Friends() {
   return (
     <div>
       <Navbar />
-      <div className="container m-auto h-screen no-scrollbar overflow-y-auto mt-20 box-content bg-container bg-opacity-10 md:w-1/2 shadow md:shadow-lg pb-10">
+      <div className="container m-auto h-screen md:w-1/2  overflow-y-auto mt-20 box-content bg-container bg-opacity-10 shadow md:shadow-lg pb-10">
         <div className="text-center text-4xl mt-4 font-body font-bold">
           Friends List
         </div>
@@ -51,20 +52,26 @@ function Friends() {
         {addFriend ? (
           <AddFriend setAddFriend={setAddFriend} getFriends={getFriends} />
         ) : (
-          <div>
-            <div>
-              {friends.map((friend) => (
-                <div
-                  key={friend.friendId}
-                  className="pt-2 pb-2 pl-4 pr-4 font-body bg-mintGreen text-xl border-2 border-green-800 w-1/2 m-auto mt-10 text-center hover:cursor-pointer hover:border-green-500  transition-all duration-500 ease-in"
-                >
-                  <div key={friend.friendId}>
+          <div className=" flex flex-col justify-center items-center">
+            {friends.map((friend) => (
+              <div
+                key={friend.friendId}
+                className="flex flex-row w-2/3 rounded-lg font-body text-xl border-2 p-4 bg-friends bg-opacity-30  md:w-80 mt-10 text-center hover:cursor-pointer hover:border-green-500  transition-all duration-500 ease-in"
+              >
+                <div>
+                  <img
+                    src={friend.photoUrl}
+                    className="rounded-full w-16 h-16"
+                  />
+                </div>
+                <div className="ml-4 flex flex-col justify-center">
+                  <div key={friend.friendId} className="font-semibold">
                     {friend.friendFirstName} {friend.friendLastName}
                   </div>
                   <div className="text-sm"> {friend.email}</div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         )}
       </div>
