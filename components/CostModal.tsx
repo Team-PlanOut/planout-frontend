@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
-import { Tasks } from "../types";
+
 export default function CostModal({
   setShowModal
 }: {
@@ -9,7 +9,7 @@ export default function CostModal({
 }) {
   
   const [cost, setCost] = useState<number | null>(null);
-  const { token, user } = useAuth() as any;
+  const { token } = useAuth() as any;
 
   const submitCost = async (id: number) => {
     try {

@@ -1,28 +1,20 @@
 import React from "react";
 
-export default function Task({
+export default function TaskModal({
   setShowModal,
   setTaskDescription,
   setTaskCost,
   createTask,
-  getTasks,
-  newTaskNotification,
 }: {
   setShowModal: (showModal: boolean) => void;
   setTaskDescription: (taskDescription: string) => void;
   setTaskCost: (taskCost: string) => void;
   createTask: () => void;
-  getTasks: () => void;
-  newTaskNotification: () => any;
 }) {
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     createTask();
-    newTaskNotification();
     setShowModal(false);
-    setTimeout(() => {
-      getTasks();
-    }, 150);
   };
 
   return (

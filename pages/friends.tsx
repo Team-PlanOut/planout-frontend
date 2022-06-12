@@ -24,8 +24,6 @@ function Friends() {
         },
       }
     );
-    console.log(response.data);
-
     setFriends(response.data);
   };
 
@@ -63,7 +61,6 @@ function Friends() {
                   <div key={friend.friendId}>
                     {friend.friendFirstName} {friend.friendLastName}
                   </div>
-
                   <div className="text-sm"> {friend.email}</div>
                 </div>
               ))}

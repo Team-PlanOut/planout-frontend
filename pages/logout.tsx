@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import { withProtected } from "../src/hook/route";
-import { HiOutlineX } from "react-icons/hi";
 
 function Logout({ auth }: any) {
   const { logout } = auth;

@@ -27,7 +27,7 @@ function AddFriend({
 
   const beginFriendship = async (findFriend: any) => {
     try {
-      await axios.post(
+      const response = await axios.post(
         `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend.data.id}`,
         {},
         {
@@ -36,12 +36,17 @@ function AddFriend({
           },
         }
       );
+      if (response.status === 200) {
+        getFriends();
+        setAddFriend(false);
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     getFriend();
     getFriends();
     setAddFriend(false);
@@ -60,12 +65,7 @@ function AddFriend({
           <div className="mt-10 mb-2 text-3xl font-body font-semibold">
             What's yer pals name?
           </div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-          >
+          <form onSubmit={(e) => handleSubmit(e)}>
             <input
               className="border-4 p-2"
               type="text"

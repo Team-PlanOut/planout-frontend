@@ -20,16 +20,24 @@ export default function TaskForm({ getTasks, newTaskNotification }: any) {
       user_id: user.uid,
       cost: taskCost,
     };
-    submitPostReq(dataObj);
+    handleSubmit(dataObj);
   };
 
-  const submitPostReq = async (data: object) => {
+  const handleSubmit = async (data: object) => {
     try {
-      await axios.post(`https://cc26-planout.herokuapp.com/tasks`, data, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const response = await axios.post(
+        `https://cc26-planout.herokuapp.com/tasks`,
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        getTasks();
+        newTaskNotification();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -49,8 +57,6 @@ export default function TaskForm({ getTasks, newTaskNotification }: any) {
           setTaskDescription={setTaskDescription}
           setTaskCost={setTaskCost}
           createTask={createTask}
-          getTasks={getTasks}
-          newTaskNotification={newTaskNotification}
         />
       )}
     </div>
