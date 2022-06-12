@@ -2,20 +2,20 @@ import React from "react";
 import axios from "axios";
 import useAuth from "../../src/hook/auth";
 import { FaTrash } from "react-icons/fa";
-import { Events, Tasks } from "../../types";
+import { Tasks } from "../../types";
 
 export default function DeleteTask({
-  setOpenMenu,
   task,
   getTasks,
+  setOpenMenu,
 }: {
   task: Tasks;
-  getTasks: () => void;
   setOpenMenu: any;
+  getTasks: () => void;
 }) {
-  const { token, user } = useAuth() as any;
+  const { token } = useAuth() as any;
 
-  function deleteTask(taskId: any) {
+  const deleteTask = (taskId: any) => {
     axios
       .delete(`https://cc26-planout.herokuapp.com/tasks/${taskId}`, {
         headers: {
@@ -25,19 +25,21 @@ export default function DeleteTask({
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
+
+  const handleDelete = () => {
+    deleteTask(task.id);
+    alert("Are you sure?");
+    getTasks();
+    setOpenMenu(false);
+  };
 
   return (
     <>
       <div>
         <button
           type="button"
-          onClick={() => {
-            deleteTask(task.id);
-            alert("are you sure?");
-            getTasks();
-            setOpenMenu(null);
-          }}
+          onClick={() => handleDelete()}
           className="font-body inline-flex"
         >
           <FaTrash className="relative top-1 w-3 h-3 mr-1 " />
