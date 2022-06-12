@@ -9,6 +9,7 @@ export type Events = {
   budget: number | null;
   created_at: number | null;
   modified: number | null;
+  hostPhoto: any;
 };
 
 export type Tasks = {

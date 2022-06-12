@@ -22,6 +22,8 @@ module.exports = {
       nav: "#f2f2f2",
       container: "#685454",
       friends: "#a393eb",
+      events: "#8bd5cb",
+      eventsButton: "#54878f",
     },
   },
   plugins: [require("flowbite/plugin")],
