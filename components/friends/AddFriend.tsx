@@ -20,7 +20,7 @@ function AddFriend({
       const friendIds = friends.map((friend) => friend.friendId);
 
       if (!friendIds.includes(findFriend)) {
-        const response = await axios.post(
+        const userToFriend = await axios.post(
           `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend}`,
           {},
           {
@@ -30,32 +30,24 @@ function AddFriend({
           }
         );
 
-        if (response.status === 200) {
+        const friendToUser = await axios.post(
+          `https://cc26-planout.herokuapp.com/friends/${findFriend}/${user.uid}`,
+          {},
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+
+        axios.all([userToFriend, friendToUser]);
+
+        if (friendToUser.status === 200) {
           getFriends();
           setAddFriend(false);
         }
       } else {
         alert("You are already friends with this user");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const beginReverseFriendship = async (findFriend: any) => {
-    try {
-      const response = await axios.post(
-        `https://cc26-planout.herokuapp.com/friends/${findFriend}/${user.uid}`,
-        {},
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      if (response.status === 200) {
-        getFriends();
-        setAddFriend(false);
       }
     } catch (error) {
       console.error(error);
@@ -73,10 +65,7 @@ function AddFriend({
             }}
           />
         </div>
-        <SearchFriend
-          beginFriendship={beginFriendship}
-          beginReverseFriendship={beginReverseFriendship}
-        />
+        <SearchFriend beginFriendship={beginFriendship} />
       </div>
     </>
   );

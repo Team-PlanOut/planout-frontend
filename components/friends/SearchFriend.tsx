@@ -4,10 +4,8 @@ import useAuth from "../../src/hook/auth";
 
 export default function SearchFriend({
   beginFriendship,
-  beginReverseFriendship,
 }: {
   beginFriendship: (friendId: string) => void;
-  beginReverseFriendship: (friendId: string) => void;
 }) {
   const [input, setInput] = useState<string | null>(null);
   const [filteredFriends, setFilteredFriends] = useState([]);
@@ -58,7 +56,6 @@ export default function SearchFriend({
               className="bg-blue-400 ml-8 mt-4 font-medium flex flex-col items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-300"
               onClick={() => {
                 beginFriendship(friend.id);
-                beginReverseFriendship(friend.id);
               }}
             >
               Friendship Engage!

@@ -11,7 +11,6 @@ function Friends() {
   const [friends, setFriends] = useState<Friends[]>([]);
   const [addFriend, setAddFriend] = useState<boolean>(false);
 
-
   const { token, user } = useAuth() as any;
 
   const getFriends = async () => {
@@ -28,15 +27,6 @@ function Friends() {
 
     setFriends(response.data);
   };
-
-  //friends [{friendObj}{friendObj}]
-  //['19ECrWxCX5MZuYFesPxsu6Hlor73', '19ECrWxCX5MZuYFesPxsu6Hlor73']
-  //we map the friends array to show ids
-  //if (friendIds.includes(ourTargetID) => do nothing
-  //else add friend)
-  //on add friend we check if friend id is already in friend array
-  //if not => add friend
-  //if it is => show friend already exist message
 
   const addUserAsFriend = () => {
     setAddFriend(!addFriend);
