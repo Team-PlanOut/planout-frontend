@@ -5,17 +5,17 @@ export default function Event({
   setEventName,
   setEventDate,
   setEventBudget,
-  createEvent,
+  handleCreateEvent,
 }: {
   setShowModal: (showModal: boolean) => void;
   setEventName: (eventName: string) => void;
   setEventDate: (eventDate: string) => void;
   setEventBudget: (eventBudget: string) => void;
-  createEvent: () => void;
+  handleCreateEvent: () => void;
 }) {
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    createEvent();
+    handleCreateEvent();
     setShowModal(false);
   };
 
@@ -115,6 +115,7 @@ export default function Event({
                         id="budget"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                         min="0"
+                        max="10000000"
                         onChange={(e) => setEventBudget(e.target.value)}
                         required
                       />
