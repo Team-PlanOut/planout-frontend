@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function AddMembers({
   data,
@@ -10,10 +10,12 @@ export default function AddMembers({
   handleAddMember: (member: string[]) => void;
   checkedMembers: string[];
   setCheckedMembers: (member: any) => void;
-  data: { first_name: string }[];
+  data: { first_name: string; last_name: string }[];
   setShowModal: (showModal: boolean) => void;
 }) {
+  const [selected, setSelected] = useState<any>(null);
   const handleCheck = (e: any) => {
+
     const user = e.target.value;
     if (checkedMembers.includes(user)) {
       setCheckedMembers(
@@ -41,7 +43,7 @@ export default function AddMembers({
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col justify-center items-center">
-          <ul className="text-leftoverflow-y-auto capitalize font-body">
+          <ul className="text-left overflow-y-auto capitalize font-body">
             {data.map((user, index) => (
               <li key={index}>
                 <input

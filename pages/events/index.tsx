@@ -53,16 +53,16 @@ function Events() {
     eventIds: Object
   ) => {
     const eventData = response.data;
+    const filteredEvents = await eventData.filter((event) => {
+      return eventIds[event.id] || event.hostId === user.uid;
+    });
+    filteredEvents.sort((a, b) =>
+      a.date.localeCompare(b.date, { ignorePunctuation: true })
 
-    const filteredEvents = await eventData.filter(
-      (event: { id: string | number; hostId: any }) => {
-        return eventIds[event.id] || event.hostId === user.uid;
-      }
     );
     filteredEvents.sort((a: { date: string }, b: { date: any }) =>
       a.date.localeCompare(b.date)
     );
-
     setEvents(filteredEvents);
   };
 
@@ -94,12 +94,10 @@ function Events() {
           {events.map((event) => (
             <div
               key={event.id}
-              className="bg-events bg-opacity-40 md:w-1/2 m-auto mt-8 font-body shadow-lg"
-              style={{
-                cursor: "pointer",
-              }}
+              className="bg-events bg-opacity-40 md:w-96  m-auto mt-10 font-body shadow-lg"
+
             >
-              <div className="flex flex-row  border-b border-gray-400 bg-gray-300">
+              <div className="flex flex-row  border-b border-gray-400 bg-nav">
                 <div className="flex flex-row items-center">
                   <img
                     src={event.hostPhoto}

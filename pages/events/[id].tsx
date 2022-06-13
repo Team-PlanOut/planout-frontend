@@ -93,6 +93,7 @@ function SingleEventPage() {
       }
     );
     setData(response.data);
+    console.log(data);
     return data;
   };
 
@@ -233,7 +234,7 @@ function SingleEventPage() {
                 <div
                   key={task.id}
                   className={`p-5 md:rounded-lg md:w-1/2 m-auto mt-10 ${
-                    task.status ? "bg-green-100" : "bg-red-100"
+                    task.status ? "bg-green-200" : "bg-red-200"
                   }`}
                 >
                   <div className="text-lg ml-2 font-body">
