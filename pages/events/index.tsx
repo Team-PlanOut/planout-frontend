@@ -90,7 +90,7 @@ function Events() {
               key={event.id}
               className="bg-events bg-opacity-40 md:w-1/2 m-auto mt-8 font-body shadow-lg"
             >
-              <div className="flex flex-row  border-b border-gray-400 bg-gray-300">
+              <div className="flex flex-row  border-b border-gray-400 bg-nav">
                 <div className="flex flex-row items-center">
                   <img
                     src={event.hostPhoto}
