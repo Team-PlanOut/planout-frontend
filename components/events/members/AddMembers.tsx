@@ -13,7 +13,6 @@ export default function AddMembers({
   data: { first_name: string }[];
   setShowModal: (showModal: boolean) => void;
 }) {
-  
   const handleCheck = (e: any) => {
     const user = e.target.value;
     if (member.includes(user)) {
@@ -22,7 +21,7 @@ export default function AddMembers({
       setMember([...member, user]);
     }
   };
-  
+
   const handleSubmit = () => {
     if (member.length > 0) {
       handleAddMember(member);
@@ -53,7 +52,7 @@ export default function AddMembers({
         </div>
         <button
           type="submit"
-          className="bg-orange-200 mt-2 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
+          className="bg-login font-body mt-2 font-lg inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-eventsButton"
         >
           Add Member
         </button>

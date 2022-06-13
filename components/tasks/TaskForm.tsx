@@ -48,7 +48,7 @@ export default function TaskForm({ getTasks, newTaskNotification }: any) {
       <FaPlusCircle
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
-        className="float-right md:mr-36 text-2xl hover:cursor-pointer hover:fill-orange-300"
+        className="float-right md:mr-36 text-2xl hover:cursor-pointer hover:fill-eventsButton"
       />
 
       {showModal && (

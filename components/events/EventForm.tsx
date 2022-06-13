@@ -53,7 +53,7 @@ export default function EventForm({ getEvents }: any) {
       <FaPlusCircle
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
-        className="float-right md:mr-48 text-2xl hover:cursor-pointer hover:fill-orange-300"
+        className="float-right md:mr-48 text-2xl hover:cursor-pointer hover:fill-eventsButton"
       />
 
       <div className="m-auto bg-black">
