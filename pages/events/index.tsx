@@ -60,6 +60,9 @@ function Events() {
       a.date.localeCompare(b.date, { ignorePunctuation: true })
 
     );
+    filteredEvents.sort((a: { date: string }, b: { date: any }) =>
+      a.date.localeCompare(b.date)
+    );
     setEvents(filteredEvents);
   };
 
@@ -70,6 +73,7 @@ function Events() {
       },
     });
   }
+
   useEffect(() => {
     getUserEvents();
   }, []);

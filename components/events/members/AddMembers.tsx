@@ -3,31 +3,35 @@ import React, { useState } from "react";
 export default function AddMembers({
   data,
   handleAddMember,
-  member,
-  setMember,
+  checkedMembers,
+  setCheckedMembers,
   setShowModal,
 }: {
   handleAddMember: (member: string[]) => void;
-  member: string[];
-  setMember: (member: any) => void;
+  checkedMembers: string[];
+  setCheckedMembers: (member: any) => void;
   data: { first_name: string; last_name: string }[];
   setShowModal: (showModal: boolean) => void;
 }) {
   const [selected, setSelected] = useState<any>(null);
   const handleCheck = (e: any) => {
-    console.log("checking", e);
-    const user = e;
-    if (member.includes(user)) {
-      setMember(member.filter((member: string) => member !== user));
+
+    const user = e.target.value;
+    if (checkedMembers.includes(user)) {
+      setCheckedMembers(
+        checkedMembers.filter(
+          (checkedMembers: string) => checkedMembers !== user
+        )
+      );
     } else {
-      setMember([...member, user]);
+      setCheckedMembers([...checkedMembers, user]);
     }
   };
 
   const handleSubmit = () => {
-    console.log(`member`, member);
-    if (member.length > 0) {
-      handleAddMember(member);
+    if (checkedMembers.length > 0) {
+      handleAddMember(checkedMembers);
+      setCheckedMembers([]);
     }
     setShowModal(false);
   };
