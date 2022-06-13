@@ -50,14 +50,12 @@ function Events() {
 
   const displayEvents = async (response, eventIds) => {
     const eventData = response.data;
-
     const filteredEvents = await eventData.filter((event) => {
       return eventIds[event.id] || event.hostId === user.uid;
     });
     filteredEvents.sort((a, b) =>
       a.date.localeCompare(b.date, { ignorePunctuation: true })
     );
-    console.log(filteredEvents);
     setEvents(filteredEvents);
   };
 

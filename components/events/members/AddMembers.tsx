@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
-import Select from "react-select";
 
 export default function AddMembers({
   data,
@@ -15,10 +13,8 @@ export default function AddMembers({
   data: { first_name: string; last_name: string }[];
   setShowModal: (showModal: boolean) => void;
 }) {
-  const [selected, setSelected] = useState<any>(null);
   const handleCheck = (e: any) => {
-    console.log("checking", e);
-    const user = e;
+    const user = e.target.value;
     if (member.includes(user)) {
       setMember(member.filter((member: string) => member !== user));
     } else {
@@ -26,26 +22,14 @@ export default function AddMembers({
     }
   };
 
-  // const handleClick = (e: any) => {
-  //   handleCheck(e);
-  //   console.log(e);
-  // };
   const handleSubmit = () => {
+    console.log(`member`, member);
     if (member.length > 0) {
       handleAddMember(member);
     }
     setShowModal(false);
   };
 
-  const handleForm = (e) => {
-    console.log(e);
-    handleCheck(e);
-    handleSubmit();
-  };
-  const options = data.map((item) => ({
-    value: item.first_name,
-    label: item.first_name + " " + item.last_name,
-  }));
   return (
     <div className="mt-10 p-10">
       <form
@@ -74,27 +58,6 @@ export default function AddMembers({
           Add Member
         </button>
       </form>
-      {/* <Select
-        options={options}
-        isMulti
-        onChange={(e) => {
-          for (let user of e) {
-            setSelected(user.value);
-          }
-
-          handleCheck(selected);
-        }}
-        isClearable={true}
-        isSearchable={true}
-        closeMenuOnSelect={false}
-      />
-      <button
-        type="submit"
-        onSubmit={() => handleForm(selected)}
-        className="bg-login font-body mt-2 font-lg m-auto items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-eventsButton"
-      >
-        Add Member
-      </button>{" "} */}
     </div>
   );
 }
