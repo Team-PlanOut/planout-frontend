@@ -252,12 +252,14 @@ function SingleEventPage() {
                           >
                             <div className="py-2" role="none">
                               <div
+                                className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
                                 onClick={() => setShowCostModal(true)}
-                                className="inline-flex hover:cursor-pointer hover:bg-gray-100 text-gray-700 px-4 py-2 text-sm"
                                 role="menuitem"
                               >
-                                <AiFillEdit className="relative top-1 mr-1" />{" "}
-                                Edit cost
+                                <div className="inline-flex ">
+                                  <AiFillEdit className="relative top-1 mr-1" />{" "}
+                                  Edit cost
+                                </div>
                               </div>
                               {showCostModal ? (
                                 <CostModal
