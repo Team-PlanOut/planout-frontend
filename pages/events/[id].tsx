@@ -260,7 +260,10 @@ function SingleEventPage() {
                                 Edit cost
                               </div>
                               {showModal ? (
-                                <CostModal setShowModal={setShowModal} />
+                                <CostModal
+                                  setShowModal={setShowModal}
+                                  task={task}
+                                />
                               ) : null}
                               <div
                                 className="hover: cursor-pointer hover:bg-gray-100 text-gray-700 block px-4 py-2 text-sm"
