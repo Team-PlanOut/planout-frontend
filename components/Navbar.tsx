@@ -11,7 +11,11 @@ import {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const links: { name: string; link: string | null; icon: ReactElement }[] = [
+  const links: {
+    name: string;
+    link: string | undefined;
+    icon: ReactElement;
+  }[] = [
     {
       name: "My Account",
       link: "/profile",
