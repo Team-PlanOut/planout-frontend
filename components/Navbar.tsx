@@ -15,26 +15,31 @@ export default function Navbar() {
     name: string;
     link: string | undefined;
     icon: ReactElement;
+    title: string;
   }[] = [
     {
       name: "My Account",
       link: "/profile",
       icon: <HiOutlineHome className="h-8 w-8" />,
+      title: "Profile",
     },
     {
       name: "Events",
       link: "/events",
       icon: <HiOutlineCalendar className="h-8 w-8" />,
+      title: "Events",
     },
     {
       name: "Friends",
       link: "/friends",
       icon: <HiOutlineUsers className="h-8 w-8" />,
+      title: "Friends",
     },
     {
       name: "Logout",
       link: "/logout",
       icon: <HiLogout className="h-8 w-8" />,
+      title: "Logout",
     },
   ];
 
@@ -65,6 +70,7 @@ export default function Navbar() {
               <a
                 href={link.link}
                 className="text-gray-800 hover:text-gray-400 duration-500"
+                title={link.title}
               >
                 <div className="flex flex-row mr-2">
                   {link.icon}
