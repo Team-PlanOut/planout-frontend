@@ -219,7 +219,7 @@ function SingleEventPage() {
                 <div
                   key={task.id}
                   className={`p-5 md:rounded-lg md:w-1/2 m-auto mt-10 ${
-                    task.status ? "bg-green-50" : "bg-red-50"
+                    task.status ? "bg-green-100" : "bg-red-100"
                   }`}
                 >
                   <div className="text-lg ml-2 font-body">
@@ -235,7 +235,7 @@ function SingleEventPage() {
                               }
                             }}
                             type="button"
-                            className="rounded-md hover:bg-gray-200 hover:rounded-full text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-orange-200"
+                            className="rounded-md hover:bg-gray-200 hover:rounded-full text-sm font-medium text-gray-700  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-200"
                             id="menu-button"
                             aria-expanded="true"
                             aria-haspopup="true"
@@ -317,12 +317,12 @@ function SingleEventPage() {
                       className="font-body"
                     >
                       {task.status ? (
-                        <button className="mr-1 inline-flex bg-orange-300 text-sm px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400">
+                        <button className="mr-1 inline-flex bg-login text-sm px-1 py-1 rounded-md shadow-md text-white transition hover:bg-eventsButton">
                           <FaCheckCircle className="w-3 h-3 mr-1 relative top-1" />{" "}
                           Completed
                         </button>
                       ) : (
-                        <button className="mr-1 bg-orange-300 text-sm items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400">
+                        <button className="mr-1 bg-eventsButton text-sm items-center px-1 py-1 rounded-md shadow-md  text-white transition hover:bg-opacity-80 hover:border-events">
                           Complete task
                         </button>
                       )}

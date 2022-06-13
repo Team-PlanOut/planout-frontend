@@ -24,6 +24,7 @@ module.exports = {
       friends: "#a393eb",
       events: "#8bd5cb",
       eventsButton: "#54878f",
+      login: "#61c0bf",
     },
   },
   plugins: [require("flowbite/plugin")],

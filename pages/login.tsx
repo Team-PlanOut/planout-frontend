@@ -8,7 +8,7 @@ function Login({ auth }: any) {
     const { loginWithGoogle } = auth;
 
     return (
-      <div className="bg-bg block h-screen items-center justify-center p-4 md:flex">
+      <div className="login block h-screen items-center justify-center p-4 md:flex">
         <div className="bg-cover bg-image flex flex-col items-center max-w-screen-lg overflow-hidden rounded-lg shadow-lg text-gray-600 w-full md:flex-row">
           <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2">
             <h1 className="font-medium text-4xl font-header">PlanOut</h1>
@@ -29,7 +29,7 @@ function Login({ auth }: any) {
                   <FaUser />
                 </span>
                 <input
-                  className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 round-md transition focus:ring-2 focus:ring-orange-300"
+                  className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 round-md transition focus:ring-2 focus:ring-green-300"
                   placeholder="Username"
                   type="text"
                 />
@@ -39,7 +39,7 @@ function Login({ auth }: any) {
                   <FaLock />
                 </span>
                 <input
-                  className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 round-md transition focus:ring-2 focus:ring-orange-300"
+                  className="border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 round-md transition focus:ring-2 focus:ring-green-300"
                   placeholder="Password"
                   type="password"
                 />
@@ -47,7 +47,7 @@ function Login({ auth }: any) {
             </form>
             <div className="flex-flex-row">
               <button
-                className="bg-orange-200 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
+                className="bg-login font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-eventsButton"
                 type="submit"
               >
                 <FaUser className="mr-2" />
@@ -56,11 +56,17 @@ function Login({ auth }: any) {
 
               <button
                 onClick={loginWithGoogle}
-                className="bg-orange-200 font-medium ml-4 inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
+                className="bg-login font-medium ml-4 inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-eventsButton"
               >
                 <FaGoogle className="mr-2" />
                 Login with Google
               </button>
+            </div>
+            <div className="font-body">
+              Don't have an account?{" "}
+              <span className="font-semibold underline hover:cursor-pointer ml-1">
+                Sign up{" "}
+              </span>
             </div>
           </div>
         </div>
