@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-import useAuth from "../src/hook/auth";
-import { withProtected } from "../src/hook/route";
+import useAuth from "../../src/hook/auth";
+import { withProtected } from "../../src/hook/route";
 import { HiOutlineX } from "react-icons/hi";
+import SearchFriend from "./SearchFriend";
 function AddFriend({
   setAddFriend,
   getFriends,
@@ -28,7 +29,27 @@ function AddFriend({
   const beginFriendship = async (findFriend: any) => {
     try {
       const response = await axios.post(
-        `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend.data.id}`,
+        `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend}`,
+        {},
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        getFriends();
+        setAddFriend(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const beginReverseFriendship = async (findFriend: any) => {
+    try {
+      const response = await axios.post(
+        `https://cc26-planout.herokuapp.com/friends/${findFriend}/${user.uid}`,
         {},
         {
           headers: {
@@ -55,6 +76,10 @@ function AddFriend({
   return (
     <>
       <div className="container rounded-lg m-auto mt-20 bg-nav box-content h-auto md:w-1/2 shadow-lg pb-2">
+        <SearchFriend
+          beginFriendship={beginFriendship}
+          beginReverseFriendship={beginReverseFriendship}
+        />
         <div className="p-4">
           <HiOutlineX
             className="float-right hover:bg-gray-100 hover:cursor-pointer"
