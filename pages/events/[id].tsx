@@ -25,7 +25,7 @@ function SingleEventPage() {
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
   const [data, setData] = useState<any>([]);
-  const [member, setMember] = useState<string[]>([]);
+  const [checkedMembers, setCheckedMembers] = useState<string[]>([]);
   const [eventMembers, setEventMembers] = useState<any>(null);
   const [openMenu, setOpenMenu] = useState<number | null>(null);
 
@@ -49,13 +49,23 @@ function SingleEventPage() {
   };
 
   const handleAddMember = async () => {
+    if (
+      eventMembers.some(
+        (findDup: { firstName: string }) =>
+          checkedMembers.indexOf(findDup.firstName) >= 0
+      )
+    ) {
+      alert("One of the users you selected is already in the event!");
+      return;
+    }
+
     try {
-      member.forEach((user) => {
+      checkedMembers.forEach((checkedPerson) => {
         axios.post(
           `https://cc26-planout.herokuapp.com/eventusers`,
           {
             event_id: id,
-            user_id: user,
+            user_id: checkedPerson,
           },
           {
             headers: {
@@ -64,6 +74,10 @@ function SingleEventPage() {
           }
         );
       });
+
+      setTimeout(() => {
+        getEventUsers();
+      }, 400);
     } catch (error) {
       console.error(error);
     }
@@ -110,10 +124,10 @@ function SingleEventPage() {
     socket.emit("taskCreated", { eventname: `${event.name}` });
   };
 
-  const taskCompleteNotification = (task) => {
+  const taskCompleteNotification = (task: Tasks | undefined) => {
     socket.emit("taskCompleted", {
       eventname: `${event.name}`,
-      taskName: `${task.description}`,
+      taskName: `${task?.description}`,
     });
   };
 
@@ -196,8 +210,8 @@ function SingleEventPage() {
           <MembersModal
             setShowModal={setShowModal}
             data={data}
-            member={member}
-            setMember={setMember}
+            checkedMembers={checkedMembers}
+            setCheckedMembers={setCheckedMembers}
             handleAddMember={handleAddMember}
             eventMembers={eventMembers}
           />

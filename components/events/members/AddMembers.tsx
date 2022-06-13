@@ -3,28 +3,33 @@ import React from "react";
 export default function AddMembers({
   data,
   handleAddMember,
-  member,
-  setMember,
+  checkedMembers,
+  setCheckedMembers,
   setShowModal,
 }: {
   handleAddMember: (member: string[]) => void;
-  member: string[];
-  setMember: (member: any) => void;
+  checkedMembers: string[];
+  setCheckedMembers: (member: any) => void;
   data: { first_name: string }[];
   setShowModal: (showModal: boolean) => void;
 }) {
   const handleCheck = (e: any) => {
     const user = e.target.value;
-    if (member.includes(user)) {
-      setMember(member.filter((member: string) => member !== user));
+    if (checkedMembers.includes(user)) {
+      setCheckedMembers(
+        checkedMembers.filter(
+          (checkedMembers: string) => checkedMembers !== user
+        )
+      );
     } else {
-      setMember([...member, user]);
+      setCheckedMembers([...checkedMembers, user]);
     }
   };
 
   const handleSubmit = () => {
-    if (member.length > 0) {
-      handleAddMember(member);
+    if (checkedMembers.length > 0) {
+      handleAddMember(checkedMembers);
+      setCheckedMembers([]);
     }
     setShowModal(false);
   };
