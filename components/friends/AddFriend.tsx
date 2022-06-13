@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import useAuth from "../../src/hook/auth";
 import { withProtected } from "../../src/hook/route";
 import { HiOutlineX } from "react-icons/hi";
@@ -7,39 +7,35 @@ import SearchFriend from "./SearchFriend";
 function AddFriend({
   setAddFriend,
   getFriends,
+  friends,
 }: {
   setAddFriend: (addFriend: boolean) => void;
   getFriends: () => Promise<void>;
+  friends: any[];
 }) {
-  const [input, setInput] = useState<string | null>(null);
   const { token, user } = useAuth() as any;
-
-  const getFriend = async () => {
-    const findFriend = await axios.get(
-      `https://cc26-planout.herokuapp.com/users/${input}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    );
-    beginFriendship(findFriend);
-  };
 
   const beginFriendship = async (findFriend: any) => {
     try {
-      const response = await axios.post(
-        `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend}`,
-        {},
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
+      const friendIds = friends.map((friend) => friend.friendId);
+
+      if (!friendIds.includes(findFriend)) {
+        const response = await axios.post(
+          `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend}`,
+          {},
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          getFriends();
+          setAddFriend(false);
         }
-      );
-      if (response.status === 200) {
-        getFriends();
-        setAddFriend(false);
+      } else {
+        alert("You are already friends with this user");
       }
     } catch (error) {
       console.error(error);
@@ -66,20 +62,9 @@ function AddFriend({
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    getFriend();
-    getFriends();
-    setAddFriend(false);
-  };
-
   return (
     <>
       <div className="container rounded-lg m-auto mt-20 bg-nav box-content h-auto md:w-1/2 shadow-lg pb-2">
-        <SearchFriend
-          beginFriendship={beginFriendship}
-          beginReverseFriendship={beginReverseFriendship}
-        />
         <div className="p-4">
           <HiOutlineX
             className="float-right hover:bg-gray-100 hover:cursor-pointer"
@@ -87,24 +72,11 @@ function AddFriend({
               setAddFriend(false);
             }}
           />
-          <div className="mt-10 mb-2 text-3xl font-body font-semibold">
-            What's yer pals name?
-          </div>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <input
-              className="border-4 p-2"
-              type="text"
-              placeholder="友達の名前は何だろう？"
-              onChange={(e) => setInput(e.target.value)}
-            ></input>
-            <button
-              type="submit"
-              className="bg-blue-400 ml-8 mt-4 font-medium flex flex-col items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-300"
-            >
-              Friendship Engage!
-            </button>
-          </form>
         </div>
+        <SearchFriend
+          beginFriendship={beginFriendship}
+          beginReverseFriendship={beginReverseFriendship}
+        />
       </div>
     </>
   );
