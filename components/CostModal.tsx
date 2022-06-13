@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import useAuth from "../src/hook/auth";
+import { Tasks } from "../types";
 
 export default function CostModal({
   setShowCostModal,
+  task,
 }: {
-  setShowCostModal: (showCostModal: boolean) => void;
+  setShowCostModal: (showModal: boolean) => void;
+  task: Tasks;
 }) {
   const [cost, setCost] = useState<number | null>(null);
   const { token } = useAuth() as any;
@@ -62,7 +65,7 @@ export default function CostModal({
               Cancel
             </button>
             <button
-              onClick={() => setShowCostModal(false)}
+              onClick={() => submitCost(task.id)}
               type="submit"
               className="py-2 px-4 bg-orange-300 text-white rounded hover:bg-orange-400 mr-2"
             >
