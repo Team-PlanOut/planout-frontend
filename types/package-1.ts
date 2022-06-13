@@ -31,6 +31,7 @@ export type Users = {
 };
 
 export type Friends = {
+  friendPhoto: any;
   friendId: string;
   friendFirstName: string | null;
   friendLastName: string | null;

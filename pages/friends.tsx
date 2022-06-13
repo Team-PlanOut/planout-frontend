@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
 import useAuth from "./../src/hook/auth";
 import { Friends } from "../types";
-import AddFriend from "./../components/AddFriend";
+import AddFriend from "../components/friends/AddFriend";
 
 function Friends() {
   const [friends, setFriends] = useState<Friends[]>([]);
@@ -24,6 +24,7 @@ function Friends() {
         },
       }
     );
+
     setFriends(response.data);
   };
 
@@ -49,7 +50,11 @@ function Friends() {
           Add Friend
         </button>
         {addFriend ? (
-          <AddFriend setAddFriend={setAddFriend} getFriends={getFriends} />
+          <AddFriend
+            setAddFriend={setAddFriend}
+            getFriends={getFriends}
+            friends={friends}
+          />
         ) : (
           <div className=" flex flex-col justify-center items-center">
             {friends.map((friend) => (
