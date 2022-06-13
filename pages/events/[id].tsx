@@ -259,7 +259,7 @@ function SingleEventPage() {
                                 <AiFillEdit className="relative top-1 mr-1" />{" "}
                                 Edit cost
                               </div>
-                              {showModal ? (
+                              {showCostModal ? (
                                 <CostModal
                                   setShowCostModal={setShowCostModal}
                                   task={task}
