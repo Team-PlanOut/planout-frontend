@@ -21,6 +21,7 @@ function SingleEventPage() {
   const socket = io("https://cc26-planout.herokuapp.com/");
   const router = useRouter();
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showCostModal, setShowCostModal] = useState<boolean>(false);
   const [event, setEvent] = useState<Events>({} as Events);
   const [task, setTask] = useState<Tasks[]>([]);
   const [data, setData] = useState<any>([]);
@@ -178,7 +179,6 @@ function SingleEventPage() {
   return (
     <div>
       <Navbar />
-
       <div className="container m-auto mt-24 bg-container bg-opacity-10 box-content h-screen no-scrollbar overflow-y-auto border md:w-1/2 pb-10 mb-2">
         <div className="text-center text-5xl font-body font-bold mt-2 capitalize">
           {event.name}
@@ -252,7 +252,7 @@ function SingleEventPage() {
                           >
                             <div className="py-2" role="none">
                               <div
-                                onClick={() => setShowModal(true)}
+                                onClick={() => setShowCostModal(true)}
                                 className="inline-flex hover:cursor-pointer hover:bg-gray-100 text-gray-700 px-4 py-2 text-sm"
                                 role="menuitem"
                               >

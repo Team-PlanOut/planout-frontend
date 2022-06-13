@@ -9,6 +9,7 @@ export default function CostModal({
 }: {
   setShowModal: (showModal: boolean) => void;
   task: Tasks;
+
 }) {
   const [cost, setCost] = useState<number | null>(null);
   const { token } = useAuth() as any;
@@ -27,7 +28,7 @@ export default function CostModal({
           },
         }
       );
-      setShowModal(false);
+      setShowCostModal(false);
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +66,7 @@ export default function CostModal({
               Cancel
             </button>
             <button
-              onClick={() => setShowModal(false)}
+              onClick={() => setShowCostModal(false)}
               type="submit"
               className="py-2 px-4 bg-orange-300 text-white rounded hover:bg-orange-400 mr-2"
             >
