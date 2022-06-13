@@ -13,8 +13,10 @@ export default function AddMembers({
   data: { first_name: string; last_name: string }[];
   setShowModal: (showModal: boolean) => void;
 }) {
+  const [selected, setSelected] = useState<any>(null);
   const handleCheck = (e: any) => {
-    const user = e.target.value;
+    console.log("checking", e);
+    const user = e;
     if (member.includes(user)) {
       setMember(member.filter((member: string) => member !== user));
     } else {
