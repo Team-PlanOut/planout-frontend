@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import EventForm from "../../components/events/EventForm";
@@ -48,14 +48,19 @@ function Events() {
     displayEvents(response, eventIds);
   };
 
-  const displayEvents = async (response, eventIds) => {
+  const displayEvents = async (
+    response: AxiosResponse<any, any>,
+    eventIds: Object
+  ) => {
     const eventData = response.data;
 
-    const filteredEvents = await eventData.filter((event) => {
-      return eventIds[event.id] || event.hostId === user.uid;
-    });
-    filteredEvents.sort((a, b) =>
-      a.date.localeCompare(b.date, { ignorePunctuation: true })
+    const filteredEvents = await eventData.filter(
+      (event: { id: string | number; hostId: any }) => {
+        return eventIds[event.id] || event.hostId === user.uid;
+      }
+    );
+    filteredEvents.sort((a: { date: string }, b: { date: any }) =>
+      a.date.localeCompare(b.date)
     );
     console.log(filteredEvents);
     setEvents(filteredEvents);
@@ -85,10 +90,13 @@ function Events() {
           <div>
             <EventForm getEvents={getUserEvents} />
           </div>
-          {events.map((event, index) => (
+          {events.map((event) => (
             <div
               key={event.id}
               className="bg-events bg-opacity-40 md:w-1/2 m-auto mt-8 font-body shadow-lg"
+              style={{
+                cursor: "pointer",
+              }}
             >
               <div className="flex flex-row  border-b border-gray-400 bg-gray-300">
                 <div className="flex flex-row items-center">
@@ -99,7 +107,7 @@ function Events() {
                   <div className="text-lg">
                     Hosted by{" "}
                     <span className="font-semibold">
-                      {event.hostFirstName} {event.hostLastName}{" "}
+                      {event.hostFirstName} {event.hostLastName}
                     </span>
                   </div>
                 </div>
