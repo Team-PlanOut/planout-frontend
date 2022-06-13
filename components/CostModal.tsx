@@ -7,8 +7,8 @@ export default function CostModal({
   setShowCostModal,
   task,
 }: {
+  setShowCostModal: (showModal: boolean) => void;
   task: Tasks;
-  setShowCostModal: (showCostModal: boolean) => void;
 }) {
   const [cost, setCost] = useState<number | null>(null);
   const { token } = useAuth() as any;
