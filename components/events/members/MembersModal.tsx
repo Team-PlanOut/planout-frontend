@@ -9,10 +9,10 @@ export default function MembersModal({
   handleAddMember,
   setShowModal,
 }: {
-  eventMembers: { firstName: string }[];
+  eventMembers: { firstName: string; lastName: string }[];
   member: string[];
   setMember: (member: string[]) => void;
-  data: { first_name: string }[];
+  data: { first_name: string; last_name: string }[];
   handleAddMember: (member: string[]) => void;
   setShowModal: (showModal: boolean) => void;
 }) {
@@ -29,7 +29,7 @@ export default function MembersModal({
           &#8203;
         </span>
         <div
-          className=" inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          className=" inline-block align-center bg-white rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-headline"
@@ -53,11 +53,13 @@ export default function MembersModal({
             />
           </svg>
           <div className="flex flex-col justify-center items-center p-4">
-            <div className="font-header text-xl"> Current Members</div>
-            <ul className="text-leftoverflow-y-auto font-body">
+            <div className="font-body font-bold text-xl"> Current Members</div>
+            <ul className="overflow-y-auto font-body">
               {eventMembers.length
                 ? eventMembers.map((user, index) => (
-                    <li key={index}>{user.firstName}</li>
+                    <li key={index}>
+                      {user.firstName} {user.lastName}
+                    </li>
                   ))
                 : "No members yet, invite some!"}
             </ul>
