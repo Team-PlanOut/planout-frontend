@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import EventForm from "../../components/events/EventForm";
@@ -48,13 +48,17 @@ function Events() {
     displayEvents(response, eventIds);
   };
 
-  const displayEvents = async (response, eventIds) => {
+  const displayEvents = async (
+    response: AxiosResponse<any, any>,
+    eventIds: Object
+  ) => {
     const eventData = response.data;
     const filteredEvents = await eventData.filter((event) => {
       return eventIds[event.id] || event.hostId === user.uid;
     });
     filteredEvents.sort((a, b) =>
       a.date.localeCompare(b.date, { ignorePunctuation: true })
+
     );
     setEvents(filteredEvents);
   };
@@ -83,10 +87,11 @@ function Events() {
           <div>
             <EventForm getEvents={getUserEvents} />
           </div>
-          {events.map((event, index) => (
+          {events.map((event) => (
             <div
               key={event.id}
               className="bg-events bg-opacity-40 md:w-96  m-auto mt-10 font-body shadow-lg"
+
             >
               <div className="flex flex-row  border-b border-gray-400 bg-nav">
                 <div className="flex flex-row items-center">
@@ -97,7 +102,7 @@ function Events() {
                   <div className="text-lg">
                     Hosted by{" "}
                     <span className="font-semibold">
-                      {event.hostFirstName} {event.hostLastName}{" "}
+                      {event.hostFirstName} {event.hostLastName}
                     </span>
                   </div>
                 </div>

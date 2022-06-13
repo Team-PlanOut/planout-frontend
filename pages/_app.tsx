@@ -17,7 +17,6 @@ import type { AppProps } from "next/app";
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     socket.on("newTask", (data) => {
-      console.log("this is your task data ", data);
       toast(`Hey, Listen! There's a new task in ${data.eventname}`);
     });
     socket.on("newEvent", (data) => {

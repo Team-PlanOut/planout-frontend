@@ -10,11 +10,15 @@ export default function CostModal({
   setShowCostModal: (showModal: boolean) => void;
   task: Tasks;
 }) {
-  const [cost, setCost] = useState<number | null>(null);
+  const [cost, setCost] = useState<string>(0);
   const { token } = useAuth() as any;
 
   const submitCost = async (id: number) => {
     try {
+      if (cost.length > 8) {
+        alert("Please limit to 8 digits");
+        return;
+      }
       await axios.put(
         `https://cc26-planout.herokuapp.com/tasks/${id}`,
         {
@@ -27,10 +31,10 @@ export default function CostModal({
           },
         }
       );
-      setShowCostModal(false);
     } catch (error) {
       console.log(error);
     }
+    setShowCostModal(false);
   };
 
   return (
@@ -51,8 +55,8 @@ export default function CostModal({
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <label>Cost</label>
             <input
-              type="text"
-              onChange={(e) => setCost(Number(e.target.value))}
+              type="number"
+              onChange={(e) => setCost(e.target.value)}
               className="w-full bg-gray-100 p-2 mt-2 mb-3"
             />
           </div>
@@ -65,9 +69,9 @@ export default function CostModal({
               Cancel
             </button>
             <button
-              onClick={() => submitCost(task.id)}
               type="submit"
               className="py-2 px-4 bg-orange-300 text-white rounded hover:bg-orange-400 mr-2"
+              onClick={() => submitCost(task.id)}
             >
               Submit
             </button>
