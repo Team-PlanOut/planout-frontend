@@ -322,7 +322,7 @@ function SingleEventPage() {
                           Completed
                         </button>
                       ) : (
-                        <button className="mr-1 bg-orange-300 text-sm items-center px-1 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400">
+                        <button className="mr-1 bg-eventsButton text-sm items-center px-1 py-1 rounded-md shadow-md  text-white transition hover:bg-opacity-80 hover:border-events">
                           Complete task
                         </button>
                       )}
