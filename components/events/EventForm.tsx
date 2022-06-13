@@ -17,22 +17,22 @@ export default function EventForm({ getEvents }: any) {
     socket.emit("eventCreated", { eventname: eventName });
   }
 
-  const createEvent = () => {
-    const dataObj = {
-      event_name: eventName,
-      host: user.uid,
-      date: eventDate,
-      budget: eventBudget,
-    };
-
-    handleSubmit(dataObj);
+  const dataObj = {
+    event_name: eventName,
+    host: user.uid,
+    date: eventDate,
+    budget: eventBudget,
   };
 
-  const handleSubmit = async (data: object) => {
+  const handleCreateEvent = async () => {
     try {
+      if (dataObj.budget.length > 8) {
+        alert("Please limit to 8 digits");
+        return;
+      }
       const response = await axios.post(
         "https://cc26-planout.herokuapp.com/events",
-        data,
+        dataObj,
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -63,7 +63,7 @@ export default function EventForm({ getEvents }: any) {
             setEventName={setEventName}
             setEventDate={setEventDate}
             setEventBudget={setEventBudget}
-            createEvent={createEvent}
+            handleCreateEvent={handleCreateEvent}
           />
         )}
       </div>
