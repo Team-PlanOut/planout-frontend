@@ -10,12 +10,11 @@ export default function AddMembers({
   handleAddMember: (member: string[]) => void;
   checkedMembers: string[];
   setCheckedMembers: (member: any) => void;
-  data: { first_name: string; last_name: string }[];
+  data: { friendFirstName: string; friendLastName: string }[];
   setShowModal: (showModal: boolean) => void;
 }) {
   const [selected, setSelected] = useState<any>(null);
   const handleCheck = (e: any) => {
-
     const user = e.target.value;
     if (checkedMembers.includes(user)) {
       setCheckedMembers(
@@ -49,10 +48,10 @@ export default function AddMembers({
                 <input
                   type="checkbox"
                   name="checkbox"
-                  value={user.first_name}
+                  value={user.friendFirstName}
                   onChange={(e) => handleCheck(e)}
                 />
-                <span className="ml-2">{user.first_name}</span>
+                <span className="ml-2">{user.friendFirstName}</span>
               </li>
             ))}
           </ul>

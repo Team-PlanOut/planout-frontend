@@ -10,6 +10,7 @@ export default function Dashboard() {
   const { token, user } = useAuth() as any;
 
   const fetchTaskData = async () => {
+    console.log(token);
     const uid = user.uid;
     try {
       const response = await axios.get(
