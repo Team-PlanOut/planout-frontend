@@ -11,7 +11,6 @@ export default function MembersModal({
 }: {
   checkedMembers: string[];
   setCheckedMembers: (member: string[]) => void;
-  data: { first_name: string }[];
   eventMembers: { firstName: string; lastName: string }[];
   data: { first_name: string; last_name: string }[];
   handleAddMember: (member: string[]) => void;
