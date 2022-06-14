@@ -1,53 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import useAuth from "../../src/hook/auth";
-import { useRouter } from "next/router";
 import { FaTrash } from "react-icons/fa";
-import { Events, Tasks } from "../../types";
+import { Tasks } from "../../types";
 
-export default function DeleteTask({ task, getTasks }: { task: Tasks, getTasks: () => void }) {
-  const { token, user } = useAuth() as any;
-  const router = useRouter();
+export default function DeleteTask({
+  task,
+  getTasks,
+  setOpenMenu,
+}: {
+  task: Tasks;
+  setOpenMenu: any;
+  getTasks: () => void;
+}) {
+  const { token } = useAuth() as any;
 
-
-
-
-  function deleteTask(taskId: any) {
+  const deleteTask = (taskId: any) => {
     axios
-      .delete(`https://cc26-planout.herokuapp.com/tasks/${taskId}`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      ).catch((error) => {
-        console.log(error);
+      .delete(`https://cc26-planout.herokuapp.com/tasks/${taskId}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
       })
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  const handleDelete = () => {
+    deleteTask(task.id);
+    alert("Are you sure?");
+    getTasks();
+    setOpenMenu(false);
+  };
 
-
-  return (<>
-
-    <div className="z-10 mt-5 hover:underline hover:cursor-pointer text-right">
-      <button
-        type="button"
-        onClick={() => {
-          console.log(token)
-          console.log(task.id)
-          deleteTask(task.id);
-          console.log(`clicked`, task);
-          router.push('/events'); //then go back to all events
-        }}
-        className="inset-y-0.5 text-2xl text-center font-body "
-      ><FaTrash />
-      </button>
-
-    </div>
-
-
-
-  </>)
+  return (
+    <>
+      <div>
+        <button
+          type="button"
+          onClick={() => handleDelete()}
+          className="font-body inline-flex"
+        >
+          <FaTrash className="relative top-1 w-3 h-3 mr-1 " />
+          Delete task
+        </button>
+      </div>
+    </>
+  );
 }
-
-

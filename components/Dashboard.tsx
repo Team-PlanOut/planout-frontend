@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import useAuth from "../src/hook/auth";
 import Image from "next/image";
-import { FaCheckCircle, FaTasks } from "react-icons/fa";
+import { FaTasks } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Dashboard() {
   const [task, setTasks] = useState<any>([]);
@@ -25,46 +26,6 @@ export default function Dashboard() {
     }
   };
 
-  const completeTask = async (id: number) => {
-    const selectedTask = task.find((task: { id: number }) => task.id === id);
-
-    if (selectedTask.status) {
-      try {
-        await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/${id}`,
-          {
-            id: id,
-            status: false,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        await axios.put(
-          `https://cc26-planout.herokuapp.com/tasks/${id}`,
-          {
-            id: id,
-            status: true,
-          },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   useEffect(() => {
     if (token) {
       fetchTaskData();
@@ -76,7 +37,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="container m-auto h-auto mt-20 box-content md:w-1/2 shadow md:shadow-lg pb-10">
+    <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10">
       <div className="overflow-hidden m-10">
         <div className="flex flex-row md:ml-10 mt-10 md:justify-center">
           <Image
@@ -87,45 +48,33 @@ export default function Dashboard() {
             height={100}
           ></Image>
 
-          <div className="mt-5 font-body text-xl ml-5">
+          <div className="mt-5 font-body text-lg ml-5">
             <div> Name: {user.displayName} </div>
-            <div> Points : </div>
-            <div> Total Balance: </div>
+            <div className="text-lg"> @ {user.email} </div>
           </div>
         </div>
-        <div className="mt-10 text-center font-header flex justify-center">
-          <FaTasks className="text-xl -z-10  relative top-1" />
-          <span className="ml-2 text-2xl relative bottom-1 -z-10">
+        <div className="mt-10 text-center font-body flex justify-center">
+          <FaTasks className="text-2xl -z-10  relative top-1" />
+          <span className="ml-2 text-3xl relative font-bold  bottom-1 -z-10">
             Current Tasks
           </span>
         </div>
       </div>
-
       <div>
         {sortedTasks.map((task: any, index: number) => (
-          <div
+          <Link
+            href="/events/[id]"
+            as={`/events/${task.eventId}`}
             key={task.id}
-            className={`p-5 border-2 md:w-1/2 m-auto mt-10 ${
-              task.status ? "bg-green-100" : "bg-red-100"
-            }`}
           >
-            <div className="text-2xl text-center font-body">
-              {task.description}
+            <div
+              title="Click to open task"
+              className="pb-4 pt-4 pr-2 font-body rounded-md mb-2 shadow-md w-80 m-auto mt-10 text-center hover:border-blue-500 hover:bg-blue-50 transition-all duration-500 ease-in bg-white hover:cursor-pointer"
+            >
+              <div className="text-xl font-semibold"> {task.eventName}</div>
+              <div className="text-"> {task.description}</div>
             </div>
-            <div className="mt-5 hover:underline hover:cursor-pointer text-right">
-              <button
-                onClick={() => {
-                  completeTask(task.id);
-                  setTimeout(() => {
-                    fetchTaskData();
-                  }, 200);
-                }}
-                className="text-2xl text-center font-body"
-              >
-                {task.status ? <FaCheckCircle /> : "Incomplete"}
-              </button>
-            </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

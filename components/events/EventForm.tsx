@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import useAuth from "../../src/hook/auth";
 import EventModal from "./EventModal";
+import { io } from "socket.io-client";
+const socket = io("https://cc26-planout.herokuapp.com/");
 
 export default function EventForm({ getEvents }: any) {
   const [showModal, setShowModal] = useState(false);
@@ -11,23 +13,36 @@ export default function EventForm({ getEvents }: any) {
   const [eventBudget, setEventBudget] = useState("");
   const { token, user } = useAuth() as any;
 
-  const createEvent = () => {
-    const dataObj = {
-      event_name: eventName,
-      host: user.uid,
-      date: eventDate,
-      budget: eventBudget,
-    };
-    submitPostReq(dataObj);
+  function newEventNotification() {
+    socket.emit("eventCreated", { eventname: eventName });
+  }
+
+  const dataObj = {
+    event_name: eventName,
+    host: user.uid,
+    date: eventDate,
+    budget: eventBudget,
   };
 
-  const submitPostReq = async (data: object) => {
+  const handleCreateEvent = async () => {
     try {
-      await axios.post("https://cc26-planout.herokuapp.com/events", data, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      if (dataObj.budget.length > 8) {
+        alert("Please limit to 8 digits");
+        return;
+      }
+      const response = await axios.post(
+        "https://cc26-planout.herokuapp.com/events",
+        dataObj,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        getEvents();
+        newEventNotification();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -36,9 +51,10 @@ export default function EventForm({ getEvents }: any) {
   return (
     <div>
       <FaPlusCircle
+        title="Add event"
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
-        className="float-right md:mr-48 text-2xl hover:cursor-pointer hover:fill-orange-300"
+        className="float-right relative md:right-40 text-2xl hover:cursor-pointer hover:fill-eventsButton"
       />
 
       <div className="m-auto bg-black">
@@ -48,8 +64,7 @@ export default function EventForm({ getEvents }: any) {
             setEventName={setEventName}
             setEventDate={setEventDate}
             setEventBudget={setEventBudget}
-            createEvent={createEvent}
-            getEvents={getEvents}
+            handleCreateEvent={handleCreateEvent}
           />
         )}
       </div>

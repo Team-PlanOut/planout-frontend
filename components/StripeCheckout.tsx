@@ -1,6 +1,7 @@
 import React from "react";
 
 import { loadStripe } from "@stripe/stripe-js";
+import { FaCcStripe } from "react-icons/fa";
 
 const stripePromise = loadStripe(
   "pk_test_51L7UpKF9KFH9wctxGfqKckcUDmzhVUEkGZQTCeXZjSYvI5k33s1oXe3rIPJP5I8Un5qV5q016WE0aW4NcI3wThOx00OFftpTkL" //this is hard coded
@@ -17,7 +18,7 @@ export default function StripeCheckout() {
 
     if (query.get("canceled")) {
       console.log(
-        "Order canceled -- continue to shop around and checkout when you’re ready."
+        "Order canceled -- continue to shop around and checkout when you're ready."
       );
     }
   }, []);
@@ -25,12 +26,9 @@ export default function StripeCheckout() {
   return (
     <form action="/api/checkout_sessions" method="POST">
       <section>
-        <button
-          type="submit"
-          role="link"
-          className="bg-orange-300 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-orange-400"
-        >
-          Pay
+        <button type="submit" role="link" className="inline-flex">
+          <FaCcStripe className="relative top-1 mr-1" />
+          Settle expenses
         </button>
       </section>
     </form>

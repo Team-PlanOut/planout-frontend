@@ -6,32 +6,38 @@ import TaskModal from "../tasks/TaskModal";
 import useAuth from "../../src/hook/auth";
 import { FaPlusCircle } from "react-icons/fa";
 
-export default function TaskForm({ getTasks }: any) {
+export default function TaskForm({ getTasks, newTaskNotification }: any) {
   const [showModal, setShowModal] = useState(false);
   const [taskDescription, setTaskDescription] = useState("");
-  const [taskPoints, setTaskPoints] = useState("");
-  const [taskCost, setTaskCost] = useState("");
+  const [taskCost, setTaskCost] = useState("0");
   const { token, user } = useAuth() as any;
 
   const createTask = () => {
     const dataObj = {
       description: taskDescription,
       status: false,
-      points: taskPoints,
       event_id: router.query.id,
       user_id: user.uid,
       cost: taskCost,
     };
-    submitPostReq(dataObj);
+    handleSubmit(dataObj);
   };
 
-  const submitPostReq = async (data: object) => {
+  const handleSubmit = async (data: object) => {
     try {
-      await axios.post(`https://cc26-planout.herokuapp.com/tasks`, data, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      const response = await axios.post(
+        `https://cc26-planout.herokuapp.com/tasks`,
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        getTasks();
+        newTaskNotification();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -42,17 +48,15 @@ export default function TaskForm({ getTasks }: any) {
       <FaPlusCircle
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
-        className="float-right md:mr-36 text-2xl hover:cursor-pointer hover:fill-orange-300"
+        className="float-right md:mr-36 text-2xl hover:cursor-pointer hover:fill-eventsButton"
       />
 
       {showModal && (
         <TaskModal
           setShowModal={setShowModal}
           setTaskDescription={setTaskDescription}
-          setTaskPoints={setTaskPoints}
           setTaskCost={setTaskCost}
           createTask={createTask}
-          getTasks={getTasks}
         />
       )}
     </div>

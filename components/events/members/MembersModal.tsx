@@ -3,16 +3,18 @@ import AddMembers from "./AddMembers";
 
 export default function MembersModal({
   eventMembers,
-  setMember,
+  checkedMembers,
+  setCheckedMembers,
   data,
   handleAddMember,
-  setShowMembersModal,
+  setShowModal,
 }: {
-  eventMembers: { firstName: string }[];
-  setMember: (member: string) => void;
-  data: { first_name: string }[];
-  handleAddMember: unknown;
-  setShowMembersModal: (showMembersModal: boolean) => void;
+  checkedMembers: string[];
+  setCheckedMembers: (member: string[]) => void;
+  eventMembers: { firstName: string; lastName: string }[];
+  data: { first_name: string; last_name: string }[];
+  handleAddMember: (member: string[]) => void;
+  setShowModal: (showModal: boolean) => void;
 }) {
   return (
     <div
@@ -27,7 +29,7 @@ export default function MembersModal({
           &#8203;
         </span>
         <div
-          className=" inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          className=" inline-block align-center bg-white rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-headline"
@@ -39,7 +41,10 @@ export default function MembersModal({
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
-            onClick={() => setShowMembersModal(false)}
+            onClick={() => {
+              setShowModal(false);
+              setCheckedMembers([]);
+            }}
           >
             <path
               strokeLinecap="round"
@@ -48,20 +53,23 @@ export default function MembersModal({
             />
           </svg>
           <div className="flex flex-col justify-center items-center p-4">
-            <div className="font-header text-xl"> Current Members</div>
-            <ul className="text-leftoverflow-y-auto capitalize font-body">
+            <div className="font-body font-bold text-xl"> Current Members</div>
+            <ul className="overflow-y-auto font-body h-60 overflow-auto w-2/3 text-center text-lg rounded bg-opacity-40 mt-5 scrollbar pb-4 pt-4">
               {eventMembers.length
                 ? eventMembers.map((user, index) => (
-                    <li key={index}>{user.firstName}</li>
+                    <li key={index}>
+                      {user.firstName} {user.lastName}
+                    </li>
                   ))
-                : "no members in this event yet"}
+                : "No members yet, invite some!"}
             </ul>
           </div>
           <div>
             <AddMembers
-              setShowMembersModal={setShowMembersModal}
+              setShowModal={setShowModal}
               data={data}
-              setMember={setMember}
+              checkedMembers={checkedMembers}
+              setCheckedMembers={setCheckedMembers}
               handleAddMember={handleAddMember}
             />
           </div>

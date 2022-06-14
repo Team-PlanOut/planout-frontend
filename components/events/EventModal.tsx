@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import React from "react";
 
 export default function Event({
@@ -6,17 +5,20 @@ export default function Event({
   setEventName,
   setEventDate,
   setEventBudget,
-  createEvent,
-  getEvents,
+  handleCreateEvent,
 }: {
   setShowModal: (showModal: boolean) => void;
   setEventName: (eventName: string) => void;
   setEventDate: (eventDate: string) => void;
   setEventBudget: (eventBudget: string) => void;
-  createEvent: () => void;
-  getEvents: () => void;
+  handleCreateEvent: () => void;
 }) {
-  const newEventNotification = () => toast("HEY, LISTEN! There's a new event!");
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    handleCreateEvent();
+    setShowModal(false);
+  };
+
   return (
     <div
       id="authentication-modal"
@@ -113,6 +115,7 @@ export default function Event({
                         id="budget"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                         min="0"
+                        max="10000000"
                         onChange={(e) => setEventBudget(e.target.value)}
                         required
                       />
@@ -121,14 +124,7 @@ export default function Event({
                     <button
                       type="submit"
                       className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      onClick={() => {
-                        createEvent();
-                        setShowModal(false);
-                        newEventNotification();
-                        setTimeout(() => {
-                          getEvents();
-                        }, 200);
-                      }}
+                      onClick={(e) => handleSubmit(e)}
                     >
                       Create event
                     </button>
