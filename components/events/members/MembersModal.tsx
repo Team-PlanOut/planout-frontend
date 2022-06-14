@@ -3,15 +3,15 @@ import AddMembers from "./AddMembers";
 
 export default function MembersModal({
   eventMembers,
-  member,
-  setMember,
+  checkedMembers,
+  setCheckedMembers,
   data,
   handleAddMember,
   setShowModal,
 }: {
+  checkedMembers: string[];
+  setCheckedMembers: (member: string[]) => void;
   eventMembers: { firstName: string; lastName: string }[];
-  member: string[];
-  setMember: (member: string[]) => void;
   data: { first_name: string; last_name: string }[];
   handleAddMember: (member: string[]) => void;
   setShowModal: (showModal: boolean) => void;
@@ -43,7 +43,7 @@ export default function MembersModal({
             strokeWidth={2}
             onClick={() => {
               setShowModal(false);
-              setMember([]);
+              setCheckedMembers([]);
             }}
           >
             <path
@@ -68,8 +68,8 @@ export default function MembersModal({
             <AddMembers
               setShowModal={setShowModal}
               data={data}
-              member={member}
-              setMember={setMember}
+              checkedMembers={checkedMembers}
+              setCheckedMembers={setCheckedMembers}
               handleAddMember={handleAddMember}
             />
           </div>
