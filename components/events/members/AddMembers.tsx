@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function AddMembers({
   data,
@@ -13,7 +13,6 @@ export default function AddMembers({
   data: { friendFirstName: string; friendLastName: string }[];
   setShowModal: (showModal: boolean) => void;
 }) {
-  const [selected, setSelected] = useState<any>(null);
   const handleCheck = (e: any) => {
     const user = e.target.value;
     if (checkedMembers.includes(user)) {
@@ -42,7 +41,7 @@ export default function AddMembers({
         onSubmit={handleSubmit}
       >
         <div className="flex flex-col justify-center items-center">
-          <ul className="text-left overflow-y-auto capitalize font-body">
+          <ul className="text-left auto capitalize font-body">
             {data.map((user, index) => (
               <li key={index}>
                 <input
@@ -51,7 +50,7 @@ export default function AddMembers({
                   value={user.friendFirstName}
                   onChange={(e) => handleCheck(e)}
                 />
-                <span className="ml-2">{user.friendFirstName}</span>
+                <span className="ml-2 text-4xl">{user.friendFirstName}</span>
               </li>
             ))}
           </ul>
