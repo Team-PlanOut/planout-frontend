@@ -12,7 +12,7 @@ body {
 }
 
 .scrollbar::-webkit-scrollbar {
-  width: 20px;
+  width: 16px;
   height: 20px;
 }
 
@@ -22,13 +22,13 @@ body {
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #cbdab4;
+  background: #54878f;
   border-radius: 100vh;
   border: 3px solid #f6f7ed;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #54878f;
+  background: #8a9a73;
 }
 @tailwind base;
 @tailwind components;

@@ -8,7 +8,7 @@ function Login({ auth }: any) {
     const { loginWithGoogle } = auth;
 
     return (
-      <div className="login block h-screen items-center justify-center p-4 md:flex">
+      <div className="login h-screen items-center justify-center p-4 flex">
         <div className="bg-cover bg-image flex flex-col items-center max-w-screen-lg overflow-hidden rounded-lg shadow-lg text-gray-600 w-full md:flex-row">
           <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2">
             <h1 className="font-medium text-4xl font-header">PlanOut</h1>
