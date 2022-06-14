@@ -90,7 +90,7 @@ function Events() {
       <Navbar />
       <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10">
         <div className="overflow-hidden m-10 p-1">
-          <div className="mt-10 text-center text-4xl font-body font-bold">
+          <div className="mt-8 text-center text-4xl font-body font-bold">
             EVENTS
           </div>
           <div>
@@ -99,7 +99,7 @@ function Events() {
           {events.map((event) => (
             <div
               key={event.id}
-              className="bg-events bg-opacity-40 md:w-96  m-auto mt-10 font-body shadow-lg"
+              className="bg-eventBg md:w-1/2 m-auto mt-10 font-body shadow-lg"
             >
               <div className="flex flex-row  border-b border-gray-400 bg-nav">
                 <div className="flex flex-row items-center">
@@ -135,7 +135,7 @@ function Events() {
                 key={event.id}
               >
                 <div className="p-2">
-                  <button className="bg-eventsButton text-sm hover:bg-opacity-50 border border-gray-300 hover:border-events font-semibold bg-opacity-40 flex flex-row ml-auto pl-2 pr-2 pt-1 pb-1 rounded-md">
+                  <button className="bg-buttonColor text-sm hover:bg-opacity-80 border border-gray-300 hover:border-white font-semibold flex flex-row ml-auto pl-2 pr-2 pt-1 pb-1 rounded-md">
                     View tasks
                   </button>
                 </div>
