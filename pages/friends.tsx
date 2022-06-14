@@ -45,7 +45,7 @@ function Friends() {
         </div>
         <button
           onClick={addUserAsFriend}
-          className="bg-blue-400 ml-8 mt-4 font-medium m-auto items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-300"
+          className="bg-buttonColor ml-8 mt-4 font-body  text-xl font-medium m-auto items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-blue-300"
         >
           Add Friend
         </button>
@@ -60,7 +60,7 @@ function Friends() {
             {friends.map((friend) => (
               <div
                 key={friend.friendId}
-                className="flex flex-row w-2/3 rounded-lg font-body text-xl border-2 p-4 bg-friends bg-opacity-30  md:w-80 mt-10 text-center hover:cursor-pointer hover:border-green-500  transition-all duration-500 ease-in"
+                className="flex flex-row w-2/3 rounded-lg font-body text-xl border-2 p-4 bg-eventBg  bg-opacity-50 md:w-80 mt-10 text-center hover:cursor-pointer hover:border-white  transition-all duration-500 ease-in"
               >
                 <div>
                   <img
