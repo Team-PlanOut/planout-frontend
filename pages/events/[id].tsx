@@ -219,7 +219,7 @@ function SingleEventPage() {
               {sortedTasks.map((task: any, index: number) => (
                 <div
                   key={task.id}
-                  className={`p-5 md:rounded-lg md:w-1/2 m-auto mt-10 ${
+                  className={`p-5 md:rounded-lg md:w-1/2 m-auto mt-10 shadow-lg ${
                     task.status ? "bg-green-200" : "bg-red-200"
                   }`}
                 >
