@@ -74,25 +74,6 @@ export default function SearchFriend({
           ))}
         </div>
       )}
-      {/* <div className="text-center mt-4 font-body text-lg pb-10 pl-8 pr-8 pt-2">
-        <div>Result/s:</div>
-        {filteredFriends.map((friend: any) => (
-          <div key={friend.id} className="flex flex-row p-2">
-            <p className="mr-8">
-              {friend.first_name} {friend.last_name}
-            </p>
-            <button
-              className="text-sm inline-flex padding-1 font-body bg-blue-200 rounded-lg p-1 hover:bg-blue-400"
-              type="submit"
-              onClick={() => {
-                beginFriendship(friend.id);
-              }}
-            >
-              <MdPersonAdd className="relative top-1 mr-1" /> Add
-            </button>
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 }
