@@ -194,7 +194,7 @@ function SingleEventPage() {
   return (
     <div>
       <Navbar />
-      <div className="container m-auto mt-24 bg-container bg-opacity-10 box-content h-screen no-scrollbar overflow-y-auto border md:w-1/2 pb-10 mb-2">
+      <div className="container m-auto mt-24 bg-container bg-opacity-20 box-content h-screen no-scrollbar overflow-y-auto border md:w-1/2 pb-10 mb-2">
         <div className="text-center text-5xl font-body font-bold mt-2 capitalize">
           {event.name}
         </div>
@@ -233,8 +233,8 @@ function SingleEventPage() {
               {sortedTasks.map((task: any, index: number) => (
                 <div
                   key={task.id}
-                  className={`p-5 md:rounded-lg md:w-1/2 m-auto mt-10 ${
-                    task.status ? "bg-green-200" : "bg-red-200"
+                  className={`p-5 md:rounded-lg md:w-1/2 m-auto mt-10 shadow-lg ${
+                    task.status ? "bg-completedBox" : "bg-red-200"
                   }`}
                 >
                   <div className="text-lg ml-2 font-body">
@@ -255,7 +255,7 @@ function SingleEventPage() {
                             aria-expanded="true"
                             aria-haspopup="true"
                           >
-                            <HiOutlineDotsHorizontal className="w-6 h-6" />
+                            <HiOutlineDotsHorizontal className="w-6 h-6 -z-10" />
                           </button>
                         </div>
                         {openMenu === index && (
@@ -332,13 +332,13 @@ function SingleEventPage() {
                       className="font-body"
                     >
                       {task.status ? (
-                        <button className="mr-1 inline-flex bg-login text-sm px-1 py-1 rounded-md shadow-md text-white transition hover:bg-eventsButton">
+                        <button className="mr-1 inline-flex bg-login text-sm border px-2 py-2 rounded-md shadow-md text-white transition hover:bg-eventsButton">
                           <FaCheckCircle className="w-3 h-3 mr-1 relative top-1" />{" "}
                           Completed
                         </button>
                       ) : (
-                        <button className="mr-1 bg-eventsButton text-sm items-center px-1 py-1 rounded-md shadow-md  text-white transition hover:bg-opacity-80 hover:border-events">
-                          Complete task
+                        <button className="mr-1 bg-completeButton text-sm border hover:border-white items-center px-2 py-2 rounded-md shadow-md  text-white transition hover:bg-opacity-80 ">
+                          Mark as complete
                         </button>
                       )}
                     </div>

@@ -4,10 +4,10 @@
   display: none;
 }
 body {
-  background-image: linear-gradient(
+  background: linear-gradient(
     111.5deg,
-    rgba(228, 247, 255, 1) 21.9%,
-    rgba(255, 216, 194, 1) 92.2%
+    rgb(228, 247, 255) 21.9%,
+    rgb(255, 216, 194) 92.2%
   );
 }
 
