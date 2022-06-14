@@ -4,11 +4,13 @@
   display: none;
 }
 body {
-  background-image: linear-gradient(
+  background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+
+  /* background-image: linear-gradient(
     111.5deg,
     rgba(228, 247, 255, 1) 21.9%,
     rgba(255, 216, 194, 1) 92.2%
-  );
+  ); */
 }
 
 .scrollbar::-webkit-scrollbar {
