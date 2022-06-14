@@ -135,7 +135,7 @@ function Events() {
                 key={event.id}
               >
                 <div className="p-2">
-                  <button className="bg-buttonColor text-lg hover:bg-opacity-80 border border-gray-300 hover:border-white font-semibold flex flex-row ml-auto pl-2 pr-2 pt-1 pb-1 rounded-md">
+                  <button className="bg-blue-300 text-lg hover:bg-opacity-80 border border-gray-300 hover:border-white font-semibold flex flex-row ml-auto pl-2 pr-2 pt-1 pb-1 rounded-md">
                     View tasks
                   </button>
                 </div>
