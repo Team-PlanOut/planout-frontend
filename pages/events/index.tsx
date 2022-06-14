@@ -58,7 +58,6 @@ function Events() {
     });
     filteredEvents.sort((a, b) =>
       a.date.localeCompare(b.date, { ignorePunctuation: true })
-
     );
     filteredEvents.sort((a: { date: string }, b: { date: any }) =>
       a.date.localeCompare(b.date)
@@ -67,11 +66,17 @@ function Events() {
   };
 
   async function deleteEvent(eventId: any) {
-    await axios.delete(`https://cc26-planout.herokuapp.com/events/${eventId}`, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    });
+    const response = await axios.delete(
+      `https://cc26-planout.herokuapp.com/events/${eventId}`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    if (response.status === 200) {
+      getUserEvents();
+    }
   }
 
   useEffect(() => {
@@ -95,7 +100,6 @@ function Events() {
             <div
               key={event.id}
               className="bg-events bg-opacity-40 md:w-96  m-auto mt-10 font-body shadow-lg"
-
             >
               <div className="flex flex-row  border-b border-gray-400 bg-nav">
                 <div className="flex flex-row items-center">
