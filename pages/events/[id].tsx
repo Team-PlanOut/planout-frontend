@@ -16,6 +16,7 @@ import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
 import MembersModal from "../../components/events/members/MembersModal";
 import { AiFillEdit } from "react-icons/ai";
 import StripeCheckout from "../../components/StripeCheckout";
+import JSConfetti from "js-confetti";
 
 function SingleEventPage() {
   const socket = io("https://cc26-planout.herokuapp.com/");
@@ -93,7 +94,6 @@ function SingleEventPage() {
       }
     );
     setData(response.data);
-    console.log(data);
     return data;
   };
 
@@ -133,6 +133,8 @@ function SingleEventPage() {
   };
 
   const completeTask = async (id: number) => {
+    const jsConfetti = new JSConfetti();
+
     const selectedTask = task.find((task: { id: number }) => task.id === id);
 
     if (selectedTask?.status) {
@@ -173,6 +175,7 @@ function SingleEventPage() {
         if (response.status === 200) {
           getTasks();
           taskCompleteNotification(selectedTask);
+          jsConfetti.addConfetti();
         }
       } catch (error) {
         console.log(error);
