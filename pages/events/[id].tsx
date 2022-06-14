@@ -84,8 +84,9 @@ function SingleEventPage() {
   };
 
   const fetchUserData = async () => {
+    const id = user.uid;
     const response = await axios.get(
-      "https://cc26-planout.herokuapp.com/users",
+      `https://cc26-planout.herokuapp.com/friends/${id}`,
       {
         headers: {
           Authorization: "Bearer " + token,
