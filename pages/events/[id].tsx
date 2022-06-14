@@ -316,10 +316,13 @@ function SingleEventPage() {
                         )}
                       </div>
                     </div>
-                    <div>Task: {task.description}</div>
-                    <div> Cost: ${task.cost} </div>
+                    <div className="text-xl">Task: {task.description}</div>
+                    <div className="text-xl"> Cost: ${task.cost} </div>
 
-                    <div className="mr-2" data-modal-toggle="small-modal">
+                    <div
+                      className="mr-2 text-xl"
+                      data-modal-toggle="small-modal"
+                    >
                       {task.user_id !== user.uid
                         ? `Assigned to ${task.userFirstName}`
                         : "Assigned to me!"}
