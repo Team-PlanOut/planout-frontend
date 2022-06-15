@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthProvider>
       <AuthStateChanged>
         <Component {...pageProps} />
-        <ToastContainer />
+        <ToastContainer position="bottom-right" />
       </AuthStateChanged>
     </AuthProvider>
   );
