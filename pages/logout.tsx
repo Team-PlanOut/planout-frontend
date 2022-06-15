@@ -7,7 +7,9 @@ function Logout({ auth }: any) {
 
   return (
     <div className="flex flex-col items-center justify-center font-body h-screen m-auto md:w-1/2 bg-container bg-opacity-10">
-      <h1 className="text-4xl mb-4">Are you sure you want to logout?</h1>
+      <h1 className="text-4xl mb-4 text-center">
+        Are you sure you want to logout?
+      </h1>
       <button
         onClick={logout}
         className="text-3xl border-4 rounded font-body hover:border-blue-300 bg-buttonColor px-10 py-2 mt-2 "
