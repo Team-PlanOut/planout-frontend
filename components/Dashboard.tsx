@@ -48,8 +48,8 @@ export default function Dashboard() {
             height={100}
           ></Image>
 
-          <div className="mt-5 font-body text-lg ml-5">
-            <div> Name: {user.displayName} </div>
+          <div className="mt-5 font-body text-xl ml-5">
+            <div> {user.displayName} </div>
             <div className="text-lg"> @ {user.email} </div>
           </div>
         </div>
