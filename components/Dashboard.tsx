@@ -49,8 +49,8 @@ export default function Dashboard() {
           ></Image>
 
           <div className="mt-5 font-body text-xl ml-5">
-            <div> {user.displayName} </div>
-            <div className="text-lg"> @ {user.email} </div>
+            <div className="font-semibold"> {user.displayName} </div>
+            <div className="text-lg font-semibold"> @ {user.email} </div>
           </div>
         </div>
         <div className="mt-10 text-center font-body flex justify-center">
