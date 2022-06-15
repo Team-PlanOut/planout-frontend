@@ -64,7 +64,10 @@ function Login({ auth }: any) {
             </div>
             <div className="font-body">
               Don't have an account?{" "}
-              <span className="font-semibold underline hover:cursor-pointer ml-1">
+              <span
+                onClick={loginWithGoogle}
+                className="font-semibold underline hover:cursor-pointer ml-1"
+              >
                 Sign up{" "}
               </span>
             </div>
