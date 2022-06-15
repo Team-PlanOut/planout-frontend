@@ -10,7 +10,6 @@ export default function Dashboard() {
   const { token, user } = useAuth() as any;
 
   const fetchTaskData = async () => {
-
     const uid = user.uid;
     try {
       const response = await axios.get(
@@ -38,7 +37,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10">
+    <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10 shadow-xl">
       <div className="overflow-hidden m-10">
         <div className="flex flex-row md:ml-10 mt-10 md:justify-center">
           <Image
@@ -49,9 +48,9 @@ export default function Dashboard() {
             height={100}
           ></Image>
 
-          <div className="mt-5 font-body text-lg ml-5">
-            <div> Name: {user.displayName} </div>
-            <div className="text-lg"> @ {user.email} </div>
+          <div className="mt-5 font-body text-xl ml-5">
+            <div className="font-semibold"> {user.displayName} </div>
+            <div className="text-lg font-semibold"> @ {user.email} </div>
           </div>
         </div>
         <div className="mt-10 text-center font-body flex justify-center">
