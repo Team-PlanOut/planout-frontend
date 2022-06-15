@@ -198,7 +198,7 @@ function SingleEventPage() {
   return (
     <div>
       <Navbar />
-      <div className="container m-auto mt-24 bg-container bg-opacity-20 box-content h-screen no-scrollbar overflow-y-auto border md:w-1/2 pb-10 mb-2">
+      <div className="shadow-2xl container m-auto mt-24 bg-container bg-opacity-20 box-content h-screen no-scrollbar overflow-y-auto border md:w-1/2 pb-10 mb-2">
         <div className="text-center text-5xl font-body font-bold mt-4 capitalize">
           {event.name}
         </div>

@@ -88,7 +88,7 @@ function Events() {
   return (
     <>
       <Navbar />
-      <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10">
+      <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10 shadow-2xl">
         <div className="overflow-hidden m-10 p-1">
           <div className="mt-8 text-center text-4xl font-body font-bold">
             EVENTS
