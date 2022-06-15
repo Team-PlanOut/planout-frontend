@@ -10,18 +10,20 @@ function Login({ auth }: any) {
     return (
       <div className="login h-screen items-center justify-center p-4 flex">
         <div className="bg-cover bg-image flex flex-col items-center max-w-screen-lg overflow-hidden rounded-lg shadow-lg text-gray-600 w-full md:flex-row">
-          <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2">
-            <h1 className="font-medium text-4xl font-header">PlanOut</h1>
-            <p className="font-header text-3xl">your HangOut!</p>
+          <div className="backdrop-blur-sm backdrop-filter flex flex-col justify-center items-center p-4 text-white w-full md:w-1/2">
+            <h1 className="font-medium text-5xl font-logo text-center ">
+              PlanOut
+            </h1>
+            <p className="font-logo text-4xl">your HangOut!</p>
           </div>
 
           <div className="bg-white flex flex-col items-center p-4 space-y-8 w-full md:w-1/2">
             <div className="flex flex-col items center">
-              <h1 className="text-2xl font-body text-amber-600 ">
+              <h1 className="text-3xl font-body text-amber-600 ">
                 {" "}
                 Welcome, pal!
               </h1>
-              <p className="font-body text-lg">Login to your account</p>
+              <p className="font-body text-xl">Login to your account</p>
             </div>
             <form className="flex flex-col items-center space-y-4">
               <div className="relative">
@@ -62,7 +64,7 @@ function Login({ auth }: any) {
                 Login with Google
               </button>
             </div>
-            <div className="font-body">
+            <div className="font-body text-xl">
               Don't have an account?{" "}
               <span
                 onClick={loginWithGoogle}
