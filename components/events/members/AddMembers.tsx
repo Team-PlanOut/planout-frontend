@@ -49,8 +49,9 @@ export default function AddMembers({
                   name="checkbox"
                   value={user.friendFirstName}
                   onChange={(e) => handleCheck(e)}
+                  className="relative bottom-1"
                 />
-                <span className="ml-2 text-4xl">{user.friendFirstName}</span>
+                <span className="ml-2 text-3xl">{user.friendFirstName}</span>
               </li>
             ))}
           </ul>
