@@ -39,7 +39,7 @@ function Friends() {
   return (
     <div>
       <Navbar />
-      <div className="container m-auto h-screen md:w-1/2  overflow-y-auto mt-20 box-content bg-container bg-opacity-10 shadow md:shadow-lg pb-10">
+      <div className="shadow-2xl container m-auto h-screen md:w-1/2  overflow-y-auto mt-20 box-content bg-container bg-opacity-10 pb-10">
         <div className="text-center text-4xl mt-4 font-body font-bold">
           Friends List
         </div>
