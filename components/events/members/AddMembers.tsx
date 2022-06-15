@@ -49,15 +49,16 @@ export default function AddMembers({
                   name="checkbox"
                   value={user.friendFirstName}
                   onChange={(e) => handleCheck(e)}
+                  className="relative bottom-1"
                 />
-                <span className="ml-2 text-4xl">{user.friendFirstName}</span>
+                <span className="ml-2 text-3xl">{user.friendFirstName}</span>
               </li>
             ))}
           </ul>
         </div>
         <button
           type="submit"
-          className="bg-login font-body mt-2 font-lg inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-eventsButton"
+          className="bg-login text-3xl font-body mt-4 font-lg inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-eventsButton"
         >
           Add Member
         </button>

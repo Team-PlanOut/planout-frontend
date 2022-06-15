@@ -199,15 +199,15 @@ function SingleEventPage() {
     <div>
       <Navbar />
       <div className="container m-auto mt-24 bg-container bg-opacity-20 box-content h-screen no-scrollbar overflow-y-auto border md:w-1/2 pb-10 mb-2">
-        <div className="text-center text-5xl font-body font-bold mt-2 capitalize">
+        <div className="text-center text-5xl font-body font-bold mt-4 capitalize">
           {event.name}
         </div>
         <div
-          className="float-right mr-20  md:text-base underline hover:cursor-pointer flex mt-2"
+          className="float-right mr-20  font-body underline hover:cursor-pointer flex mt-2 md:text-2xl"
           data-modal-toggle="small-modal"
           onClick={() => setShowModal(true)}
         >
-          <IoIosPeople className="relative top-1 mr-1 -z-10" />
+          <IoIosPeople className="relative top-1 mr-1 -z-10 " />
           Members
         </div>
 
