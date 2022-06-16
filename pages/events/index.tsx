@@ -125,7 +125,9 @@ function Events() {
               </div>
 
               <div className="text-center p-2 ">
-                <div className="text-2xl font-semibold">{event.name}</div>
+                <div className="text-2xl font-semibold break-all">
+                  {event.name}
+                </div>
                 <div className="text-xl">{showOnlyDate(event.date)}</div>
               </div>
 

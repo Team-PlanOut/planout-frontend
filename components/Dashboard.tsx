@@ -48,9 +48,9 @@ export default function Dashboard() {
             height={100}
           ></Image>
 
-          <div className="mt-5 font-body text-xl ml-5">
-            <div className="font-semibold"> {user.displayName} </div>
-            <div className="text-lg font-semibold"> @ {user.email} </div>
+          <div className="mt-5 font-body ml-5 whitespace-nowrap">
+            <div className="font-semibold text-xl"> {user.displayName} </div>
+            <div className="text-lg font-semibold truncate"> {user.email} </div>
           </div>
         </div>
         <div className="mt-10 text-center font-body flex justify-center">
