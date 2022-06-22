@@ -88,21 +88,22 @@ function Events() {
   return (
     <>
       <Navbar />
-      <div className="container m-auto mt-20 box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-2/3 bg-container bg-opacity-10 shadow-2xl">
+      <div className="container m-auto mt-20 box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-2/3 bg-container bg-opacity-20 shadow-2xl">
         <div className="overflow-hidden m-10 p-1">
-          <div className="mt-8 text-center text-4xl font-body font-bold">
-            EVENTS
-          </div>
           <div>
             <EventForm getEvents={getUserEvents} />
           </div>
+          <div className="mt-8 text-center text-4xl font-body font-bold">
+            EVENTS
+          </div>
+
           <div className="flex md:flex-row flex-wrap">
             {events.map((event) => (
               <div
                 key={event.id}
-                className="bg-eventBg md:w-80 m-auto mt-10 font-body shadow-lg flex flex-col "
+                className="bg-eventBg md:w-80 m-auto mt-10 font-body rounded shadow-lg flex flex-col"
               >
-                <div className="flex flex-row border-b border-gray-400 bg-nav">
+                <div className="flex flex-row border-b border-gray-400 bg-nav rounded-t-lg">
                   <div className="flex flex-row items-center">
                     <img
                       src={event.hostPhoto}

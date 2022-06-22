@@ -37,11 +37,11 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10 shadow-xl">
+    <div className="container m-auto mt-20 box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-20 shadow-xl">
       <div className="overflow-hidden m-10">
         <div className="flex flex-row md:ml-10 mt-10 md:justify-center">
           <Image
-            className="-z-10 rounded-full"
+            className="rounded-full"
             src={user.photoURL}
             alt="user image"
             width={100}
@@ -60,6 +60,7 @@ export default function Dashboard() {
           </span>
         </div>
       </div>
+
       <div>
         {sortedTasks.map((task: any, index: number) => (
           <Link

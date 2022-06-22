@@ -56,7 +56,6 @@ export default function EventForm({ getEvents }: any) {
         onClick={() => setShowModal(true)}
         className="float-right relative md:right-40 text-2xl hover:cursor-pointer hover:fill-eventsButton"
       />
-
       <div className="m-auto bg-black">
         {showModal && (
           <EventModal
