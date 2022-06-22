@@ -20,7 +20,7 @@ module.exports = {
     colors: {
       bg: "#fdba9a",
       nav: "#f2f2f2",
-      container: "#685454",
+      container: "#fcf4d9",
       friends: "#a393eb",
       events: "#8bd5cb",
       eventsButton: "#54878f",
