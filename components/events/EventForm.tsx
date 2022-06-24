@@ -50,12 +50,15 @@ export default function EventForm({ getEvents }: any) {
 
   return (
     <div>
-      <FaPlusCircle
+      <button
         title="Add event"
         data-modal-toggle="small-modal"
         onClick={() => setShowModal(true)}
-        className="float-right relative md:right-40 text-2xl hover:cursor-pointer hover:fill-eventsButton"
-      />
+        className="bg-buttonColor font-body text-xl ml-8 mt-4 font-medium px-4 py-2 rounded-md shadow-md text-white flex transition hover:bg-blue-300"
+      >
+        <FaPlusCircle className="relative top-1 mr-1" />
+        Add Event
+      </button>
       <div className="m-auto bg-black">
         {showModal && (
           <EventModal
