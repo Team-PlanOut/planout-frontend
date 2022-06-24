@@ -29,6 +29,7 @@ module.exports = {
       buttonColor: "#7692e4",
       completeButton: "#e67676",
       completedBox: "#bae2be",
+      dashboard: "#d5def5",
     },
   },
   plugins: [require("flowbite/plugin")],
