@@ -12,7 +12,7 @@ export default function CostModal({
   task: Tasks;
   getTasks: () => void;
 }) {
-  const [cost, setCost] = useState<string>(0);
+  const [cost, setCost] = useState<any>(0);
   const { token } = useAuth() as any;
 
   const submitCost = async (id: number) => {
