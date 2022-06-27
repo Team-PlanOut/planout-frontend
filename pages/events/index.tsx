@@ -104,7 +104,7 @@ function Events() {
               {events.map((event) => (
                 <div
                   key={event.id}
-                  className="bg-eventBg md:w-80 m-auto mt-10 font-body rounded shadow-lg flex flex-col ml-4 mr-4"
+                  className="bg-yellow-100 md:w-80 m-auto mt-10 font-body rounded shadow-lg flex flex-col ml-4 mr-4"
                 >
                   <div className="flex flex-row border-b border-gray-400 bg-nav rounded-t-lg">
                     <div className="flex flex-row items-center">
