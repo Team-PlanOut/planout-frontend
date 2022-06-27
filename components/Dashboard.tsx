@@ -60,7 +60,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="container m-auto box-content md:h-4/6 overflow-auto scrollbar md:w-1/2 bg-dashboard shadow-xl md:rounded-lg">
+      <div className="container m-auto box-content md:h-3/6 overflow-auto scrollbar md:w-1/2 bg-dashboard shadow-xl md:rounded-lg mb-10">
         <div className="overflow-hidden m-10">
           <div className="mt-10 text-center font-body flex justify-center">
             <FaTasks className="text-2xl -z-10  relative top-1" />
@@ -79,7 +79,7 @@ export default function Dashboard() {
             >
               <div
                 title="Click to open task"
-                className="border-2 border-white ml-10 mb-8 w-60 rounded-lg bg-yellow-100 shadow-xl font-body hover:cursor-pointer scale-100 hover:scale-110 transition-all ease-in"
+                className="border-2 border-white mr-4 ml-4 mb-8 md:w-60 rounded-lg bg-yellow-100 shadow-xl font-body hover:cursor-pointer scale-100 hover:scale-110 transition-all ease-in"
               >
                 <div>
                   <div className="flex mt-1 border-b-2 border-white pb-1">
