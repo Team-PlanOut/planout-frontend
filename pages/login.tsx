@@ -9,15 +9,15 @@ function Login({ auth }: any) {
 
     return (
       <div className="login h-screen items-center justify-center p-4 flex">
-        <div className="bg-cover bg-image flex flex-col items-center max-w-screen-lg overflow-hidden rounded-lg shadow-lg text-gray-600 w-full md:flex-row">
-          <div className="backdrop-blur-sm backdrop-filter flex flex-col justify-center items-center p-4 text-white w-full md:w-1/2">
+        <div className="bg-cover md:h-1/2 bg-image flex flex-col md:flex-row items-center max-w-screen-lg overflow-hidden rounded-lg shadow-lg text-gray-600 w-full shadow-orange-400 ">
+          <div className="backdrop-blur-sm backdrop-filter flex flex-col justify-center items-center p-4 text-white w-full md:w-2/4">
             <h1 className="font-medium text-5xl font-logo text-center ">
               PlanOut
             </h1>
             <p className="font-logo text-4xl">your HangOut!</p>
           </div>
 
-          <div className="bg-white flex flex-col items-center p-4 space-y-8 w-full md:w-1/2">
+          <div className="bg-white flex flex-col items-center p-2 space-y-8 w-full md:w-1/2 md:h-full justify-center ">
             <div className="flex flex-col items center">
               <h1 className="text-3xl font-body text-amber-600 ">
                 {" "}
@@ -47,7 +47,7 @@ function Login({ auth }: any) {
                 />
               </div>
             </form>
-            <div className="flex-flex-row">
+            <div className="flex flex-row flex-nowrap">
               <button
                 className="bg-login font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-eventsButton"
                 type="submit"
