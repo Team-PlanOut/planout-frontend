@@ -12,7 +12,7 @@ export default function MembersModal({
   checkedMembers: string[];
   setCheckedMembers: (member: string[]) => void;
   eventMembers: { firstName: string; lastName: string }[];
-  data: { first_name: string; last_name: string }[];
+  data: { friendFirstName: string; friendLastName: string }[];
   handleAddMember: (member: string[]) => void;
   setShowModal: (showModal: boolean) => void;
 }) {
@@ -53,8 +53,8 @@ export default function MembersModal({
             />
           </svg>
           <div className="flex flex-col justify-center items-center p-4">
-            <div className="font-body font-bold text-xl"> Current Members</div>
-            <ul className="overflow-y-auto font-body h-60 overflow-auto w-2/3 text-center text-lg rounded bg-opacity-40 mt-5 scrollbar pb-4 pt-4">
+            <div className="font-body font-bold text-4xl"> Current Members</div>
+            <ul className="overflow-y-auto font-body h-60 overflow-auto w-2/3 text-center md:text-3xl rounded bg-opacity-40 mt-5 scrollbar pb-2 pt-4">
               {eventMembers.length
                 ? eventMembers.map((user, index) => (
                     <li key={index}>

@@ -6,11 +6,13 @@ import { Tasks } from "../types";
 export default function CostModal({
   setShowCostModal,
   task,
+  getTasks,
 }: {
   setShowCostModal: (showModal: boolean) => void;
   task: Tasks;
+  getTasks: () => void;
 }) {
-  const [cost, setCost] = useState<string>(0);
+  const [cost, setCost] = useState<any>(0);
   const { token } = useAuth() as any;
 
   const submitCost = async (id: number) => {
@@ -19,7 +21,7 @@ export default function CostModal({
         alert("Please limit to 8 digits");
         return;
       }
-      await axios.put(
+      const response = await axios.put(
         `https://cc26-planout.herokuapp.com/tasks/${id}`,
         {
           id: id,
@@ -31,10 +33,13 @@ export default function CostModal({
           },
         }
       );
+      if (response.status === 200) {
+        getTasks();
+        setShowCostModal(false);
+      }
     } catch (error) {
       console.log(error);
     }
-    setShowCostModal(false);
   };
 
   return (

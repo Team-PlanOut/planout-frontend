@@ -28,12 +28,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       );
     });
   }, []);
-
   return (
     <AuthProvider>
       <AuthStateChanged>
         <Component {...pageProps} />
-        <ToastContainer />
+        <ToastContainer
+          style={{
+            width: "350px",
+          }}
+        />
       </AuthStateChanged>
     </AuthProvider>
   );

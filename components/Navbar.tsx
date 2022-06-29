@@ -44,7 +44,7 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="shadow-md w-full fixed top-0 left-0">
+    <div className="shadow-md w-full fixed top-0 left-0 z-50 ">
       <div className="md:flex items-center justify-around bg-nav py-4 md:px-10 px-7">
         <div className="text-4xl  cursor-pointer flex items-center align-bottom  text-gray-800 font-logo">
           <a href="https://planout-one.vercel.app/">PlanOut</a>

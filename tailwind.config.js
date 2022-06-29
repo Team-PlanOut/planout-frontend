@@ -20,7 +20,7 @@ module.exports = {
     colors: {
       bg: "#fdba9a",
       nav: "#f2f2f2",
-      container: "#685454",
+      container: "#5e87b8",
       friends: "#a393eb",
       events: "#8bd5cb",
       eventsButton: "#54878f",
@@ -29,6 +29,7 @@ module.exports = {
       buttonColor: "#7692e4",
       completeButton: "#e67676",
       completedBox: "#bae2be",
+      dashboard: "#d5def5",
     },
   },
   plugins: [require("flowbite/plugin")],

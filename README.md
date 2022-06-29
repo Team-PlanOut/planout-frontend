@@ -2,7 +2,7 @@
 
 ### A useful tool for you and your friends to create events and tasks and be notified upon their completion.
 
-![image](https://user-images.githubusercontent.com/84162315/173799061-968900a3-803d-418b-bc6d-56313e16a416.png)
+![image](https://user-images.githubusercontent.com/84162315/175869672-bfc0b8f8-f639-460f-9b81-6acfda690fb9.png)
 
 ### This is the frontend repository for PlanOut. A separate backend repository is available at 👉[PlanOut Backend](https://github.com/cc-senior-project/planout-backend).
 

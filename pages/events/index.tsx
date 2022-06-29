@@ -88,60 +88,69 @@ function Events() {
   return (
     <>
       <Navbar />
-      <div className="container m-auto mt-20 border box-content h-screen no-scrollbar overflow-y-auto pb-2 md:w-1/2 bg-container bg-opacity-10">
-        <div className="overflow-hidden m-10 p-1">
-          <div className="mt-8 text-center text-4xl font-body font-bold">
-            EVENTS
-          </div>
-          <div>
-            <EventForm getEvents={getUserEvents} />
-          </div>
-          {events.map((event) => (
-            <div
-              key={event.id}
-              className="bg-eventBg md:w-1/2 m-auto mt-10 font-body shadow-lg"
-            >
-              <div className="flex flex-row  border-b border-gray-400 bg-nav">
-                <div className="flex flex-row items-center">
-                  <img
-                    src={event.hostPhoto}
-                    className="ml-2 mt-2 mb-2 rounded-full w-16 h-16 mr-4"
-                  />
-                  <div className="text-lg">
-                    Hosted by{" "}
-                    <span className="font-semibold">
-                      {event.hostFirstName} {event.hostLastName}
-                    </span>
-                  </div>
-                </div>
-                <HiOutlineX
-                  className="ml-auto mr-1 mt-2 hover:cursor-pointer  hover:bg-gray-400 hover:text-black md:text-gray-300"
-                  onClick={() => {
-                    alert(`Deleting event ${event.name}`);
-                    deleteEvent(event.id);
-                    getUserEvents();
-                  }}
-                />
-              </div>
-
-              <div className="text-center p-2 ">
-                <div className="text-2xl font-semibold">{event.name}</div>
-                <div className="text-xl">{showOnlyDate(event.date)}</div>
-              </div>
-
-              <Link
-                href="/events/[id]"
-                as={`/events/${event.id}`}
-                key={event.id}
-              >
-                <div className="p-2">
-                  <button className="bg-buttonColor text-lg hover:bg-opacity-80 border border-gray-300 hover:border-white font-semibold flex flex-row ml-auto pl-2 pr-2 pt-1 pb-1 rounded-md">
-                    View tasks
-                  </button>
-                </div>
-              </Link>
+      <div className="h-screen">
+        <div className="mt-28">
+          <div className="text-center text-5xl font-body font-bold">
+            <div className="ml-8">EVENTS</div>
+            <div className="flex justify-center">
+              <EventForm getEvents={getUserEvents} />
             </div>
-          ))}
+          </div>
+        </div>
+
+        <div className="container m-auto mt-10 box-content md:h-4/6 scrollbar overflow-y-auto pb-2 md:w-2/3 bg-dashboard md:rounded-lg shadow-2xl">
+          <div className="overflow-hidden m-10 p-1">
+            <div className="md:flex flex-row flex-wrap justify-center">
+              {events.map((event) => (
+                <div
+                  key={event.id}
+                  className="bg-yellow-100 md:w-80 m-auto mt-10 font-body rounded shadow-lg flex flex-col ml-4 mr-4"
+                >
+                  <div className="flex flex-row border-b border-gray-400 bg-nav rounded-t-lg">
+                    <div className="flex flex-row items-center">
+                      <img
+                        src={event.hostPhoto}
+                        className="ml-2 mt-2 mb-2 rounded-full w-16 h-16 mr-4"
+                      />
+                      <div className="text-lg">
+                        Hosted by{" "}
+                        <span className="font-semibold">
+                          {event.hostFirstName} {event.hostLastName}
+                        </span>
+                      </div>
+                    </div>
+                    <HiOutlineX
+                      className="ml-auto mr-1 mt-2 hover:cursor-pointer  hover:bg-gray-400 hover:text-black md:text-gray-300"
+                      onClick={() => {
+                        alert(`Deleting event ${event.name}`);
+                        deleteEvent(event.id);
+                        getUserEvents();
+                      }}
+                    />
+                  </div>
+
+                  <div className="text-center p-2 ">
+                    <div className="text-2xl font-semibold break-all">
+                      {event.name}
+                    </div>
+                    <div className="text-xl">{showOnlyDate(event.date)}</div>
+                  </div>
+
+                  <Link
+                    href="/events/[id]"
+                    as={`/events/${event.id}`}
+                    key={event.id}
+                  >
+                    <div className="p-2">
+                      <button className="bg-blue-300 text-lg hover:bg-opacity-80 border border-gray-300 hover:border-white font-semibold flex flex-row ml-auto pl-2 pr-2 pt-1 pb-1 rounded-md">
+                        View tasks
+                      </button>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>
