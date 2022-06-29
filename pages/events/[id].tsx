@@ -152,7 +152,6 @@ function SingleEventPage() {
             },
           }
         );
-
         if (response.status === 200) {
           getTasks();
         }

@@ -15,22 +15,28 @@ export default function DeleteTask({
 }) {
   const { token } = useAuth() as any;
 
-  const deleteTask = (taskId: any) => {
-    axios
-      .delete(`https://cc26-planout.herokuapp.com/tasks/${taskId}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const deleteTask = async (taskId: any) => {
+    try {
+      const response = await axios.delete(
+        `https://cc26-planout.herokuapp.com/tasks/${taskId}`,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        getTasks();
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleDelete = () => {
-    deleteTask(task.id);
-    alert("Are you sure?");
-    getTasks();
+    if (window.confirm("Are you sure?")) {
+      deleteTask(task.id);
+    }
     setOpenMenu(false);
   };
 
