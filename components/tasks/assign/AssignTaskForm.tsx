@@ -70,7 +70,7 @@ export default function AssignTaskForm({
         className="inline-flex"
       >
         <MdOutlineAssignmentInd className="relative top-1 mr-1" />
-        Change assignee{" "}
+        Change assignee
       </button>
       <div className="m-auto bg-black">
         {showModal && (
