@@ -19,7 +19,7 @@ export default function AssignTaskForm({
   const [eventUsers, setEventUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
 
-  const { token } = useAuth() as any;
+  const { httpConfig } = useAuth() as any;
 
   const taskId = task.id;
 
@@ -31,11 +31,7 @@ export default function AssignTaskForm({
           id: taskId,
           user_id: selectedUser,
         },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
+        httpConfig
       );
       if (response.status === 200) {
         getTasks();
@@ -48,11 +44,7 @@ export default function AssignTaskForm({
   const getUsersInEvent = async (id: string) => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/eventusers/users/${id}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
 
     setEventUsers(response.data);

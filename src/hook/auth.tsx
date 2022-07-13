@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
-import { authService } from '../service/authentication';
+import { authService } from "../service/authentication";
 
 interface AuthData {
   user: object | null;
@@ -10,6 +10,7 @@ interface AuthData {
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
   error: object | null;
+  httpConfig: object;
 }
 
 const authContext = createContext<AuthData | null>(null);
@@ -33,6 +34,14 @@ export function AuthProvider(props: any) {
     await authService.logout();
     setUser(null);
   };
+
+  const httpConfig = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   const value: AuthData = {
     user,
     setUser,
@@ -41,6 +50,7 @@ export function AuthProvider(props: any) {
     loginWithGoogle,
     logout,
     error,
+    httpConfig,
   };
 
   return (
