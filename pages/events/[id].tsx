@@ -152,7 +152,6 @@ function SingleEventPage() {
             },
           }
         );
-
         if (response.status === 200) {
           getTasks();
         }
@@ -208,7 +207,7 @@ function SingleEventPage() {
             data-modal-toggle="small-modal"
             onClick={() => setShowModal(true)}
           >
-            <IoIosPeople className="relative top-1 mr-1 -z-10 " />
+            <IoIosPeople className="relative top-1 mr-1 -z-10" />
             Members
           </div>
 
