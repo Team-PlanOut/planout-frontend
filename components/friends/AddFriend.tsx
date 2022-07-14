@@ -13,7 +13,7 @@ function AddFriend({
   getFriends: () => Promise<void>;
   friends: any[];
 }) {
-  const { token, user } = useAuth() as any;
+  const { httpConfig, user } = useAuth() as any;
 
   const beginFriendship = async (findFriend: any) => {
     try {
@@ -23,21 +23,13 @@ function AddFriend({
         const userToFriend = await axios.post(
           `https://cc26-planout.herokuapp.com/friends/${user.uid}/${findFriend}`,
           {},
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
+          httpConfig
         );
 
         const friendToUser = await axios.post(
           `https://cc26-planout.herokuapp.com/friends/${findFriend}/${user.uid}`,
           {},
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
+          httpConfig
         );
 
         axios.all([userToFriend, friendToUser]);

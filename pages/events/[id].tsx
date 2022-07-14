@@ -30,7 +30,7 @@ function SingleEventPage() {
   const [eventMembers, setEventMembers] = useState<any>(null);
   const [openMenu, setOpenMenu] = useState<number | null>(null);
 
-  const { token, user } = useAuth() as any;
+  const { httpConfig, user } = useAuth() as any;
 
   const {
     query: { id },
@@ -39,11 +39,7 @@ function SingleEventPage() {
   const getEventUsers = async () => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/eventusers/users/${id}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
     setEventMembers(response.data);
     return data;
@@ -68,11 +64,7 @@ function SingleEventPage() {
             event_id: id,
             user_id: checkedPerson,
           },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
+          httpConfig
         );
       });
 
@@ -88,11 +80,7 @@ function SingleEventPage() {
     const id = user.uid;
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/friends/${id}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
     setData(response.data);
     return data;
@@ -101,11 +89,7 @@ function SingleEventPage() {
   const getEventName = async () => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/events/${id}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
     setEvent(response.data);
   };
@@ -113,11 +97,7 @@ function SingleEventPage() {
   const getTasks = async () => {
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/tasks/event/${id}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
     setTask(response.data);
   };
@@ -146,11 +126,7 @@ function SingleEventPage() {
             id: id,
             status: false,
           },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
+          httpConfig
         );
         if (response.status === 200) {
           getTasks();
@@ -166,11 +142,7 @@ function SingleEventPage() {
             id: id,
             status: true,
           },
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
+          httpConfig
         );
         if (response.status === 200) {
           getTasks();

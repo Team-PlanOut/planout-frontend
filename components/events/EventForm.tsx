@@ -11,7 +11,7 @@ export default function EventForm({ getEvents }: any) {
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [eventBudget, setEventBudget] = useState("");
-  const { token, user } = useAuth() as any;
+  const { user, httpConfig } = useAuth() as any;
 
   function newEventNotification() {
     socket.emit("eventCreated", { eventname: eventName });
@@ -33,11 +33,7 @@ export default function EventForm({ getEvents }: any) {
       const response = await axios.post(
         "https://cc26-planout.herokuapp.com/events",
         dataObj,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
+        httpConfig
       );
       if (response.status === 200) {
         getEvents();

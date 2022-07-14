@@ -4,22 +4,17 @@ import useAuth from "../src/hook/auth";
 import Image from "next/image";
 import { FaTasks } from "react-icons/fa";
 import Link from "next/link";
-import { BsCircle } from "react-icons/bs";
 
 export default function Dashboard() {
   const [task, setTasks] = useState<any>([]);
-  const { token, user } = useAuth() as any;
+  const { token, httpConfig, user } = useAuth() as any;
 
   const fetchTaskData = async () => {
     const uid = user.uid;
     try {
       const response = await axios.get(
         `https://cc26-planout.herokuapp.com/tasks/user/${uid}`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
+        httpConfig
       );
       setTasks(response.data);
     } catch (error) {
@@ -52,10 +47,7 @@ export default function Dashboard() {
 
             <div className="mt-5 font-body ml-5 whitespace-nowrap ">
               <div className="font-semibold text-xl"> {user.displayName} </div>
-              <div className="text-lg font-semibold truncate">
-                {" "}
-                {user.email}{" "}
-              </div>
+              <div className="text-lg font-semibold truncate">{user.email}</div>
             </div>
           </div>
         </div>
@@ -83,9 +75,9 @@ export default function Dashboard() {
               >
                 <div>
                   <div className="flex mt-1 border-b-2 border-white pb-1">
-                    <div className="bg-red-200 w-5 h-5 rounded-full ml-1"></div>{" "}
-                    <div className="bg-orange-300 w-5 h-5 rounded-full ml-1"></div>{" "}
-                    <div className="bg-blue-300 w-5 h-5 rounded-full ml-1"></div>{" "}
+                    <div className="bg-red-200 w-5 h-5 rounded-full ml-1"></div>
+                    <div className="bg-orange-300 w-5 h-5 rounded-full ml-1"></div>
+                    <div className="bg-blue-300 w-5 h-5 rounded-full ml-1"></div>
                   </div>
                   <div className="md:text-2xl text-center font-semibold border-b-2 border-white ">
                     {" "}

@@ -11,18 +11,14 @@ function Friends() {
   const [friends, setFriends] = useState<Friends[]>([]);
   const [addFriend, setAddFriend] = useState<boolean>(false);
 
-  const { token, user } = useAuth() as any;
+  const { httpConfig, user } = useAuth() as any;
 
   const getFriends = async () => {
     const id = user.uid;
 
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/friends/${id}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
 
     setFriends(response.data);

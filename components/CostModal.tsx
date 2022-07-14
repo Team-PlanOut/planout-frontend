@@ -13,7 +13,7 @@ export default function CostModal({
   getTasks: () => void;
 }) {
   const [cost, setCost] = useState<any>(0);
-  const { token } = useAuth() as any;
+  const { httpConfig } = useAuth() as any;
 
   const submitCost = async (id: number) => {
     try {
@@ -27,11 +27,7 @@ export default function CostModal({
           id: id,
           cost: cost,
         },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
+        httpConfig
       );
       if (response.status === 200) {
         getTasks();

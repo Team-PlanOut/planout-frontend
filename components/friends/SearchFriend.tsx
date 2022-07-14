@@ -10,17 +10,13 @@ export default function SearchFriend({
   const [input, setInput] = useState<string | null>(null);
   const [filteredFriends, setFilteredFriends] = useState([]);
   const [showResult, setShowResult] = useState<boolean>(false);
-  const { token } = useAuth() as any;
+  const { httpConfig } = useAuth() as any;
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const response = await axios.get(
       `https://cc26-planout.herokuapp.com/users/${input}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
     if (response.data.length <= 0) {
       alert("No user found");
