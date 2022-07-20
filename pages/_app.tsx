@@ -1,9 +1,8 @@
+import "tailwindcss/tailwind.css";
 import "../src/config/firebase.config";
 import "../styles/globals.css";
-import "tailwindcss/tailwind.css";
 
 import { useEffect } from "react";
-
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { io } from "socket.io-client";

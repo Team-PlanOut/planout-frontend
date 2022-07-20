@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
-import useAuth from "../../src/hook/auth";
 import { FaTrash } from "react-icons/fa";
+
 import { Tasks } from "../../types";
+import useAuth from "../../src/hook/auth";
 
 export default function DeleteTask({
   task,

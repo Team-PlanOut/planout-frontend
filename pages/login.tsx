@@ -1,7 +1,9 @@
 import React from "react";
+import { FaGoogle, FaLock, FaUser } from "react-icons/fa";
+
 import useAuth from "../src/hook/auth";
 import { withPublic } from "../src/hook/route";
-import { FaGoogle, FaLock, FaUser } from "react-icons/fa";
+
 function Login({ auth }: any) {
   auth = useAuth();
   if (auth !== null) {

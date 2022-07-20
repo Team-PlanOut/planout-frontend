@@ -1,9 +1,11 @@
 import axios from "axios";
 import React from "react";
+import { HiOutlineX } from "react-icons/hi";
+
 import useAuth from "../../src/hook/auth";
 import { withProtected } from "../../src/hook/route";
-import { HiOutlineX } from "react-icons/hi";
 import SearchFriend from "./SearchFriend";
+
 function AddFriend({
   setAddFriend,
   getFriends,

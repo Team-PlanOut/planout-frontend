@@ -1,1 +1,1 @@
-export type { Events, Tasks, Users, Friends } from "./package-1";
+export type { Events, Friends, Tasks, Users } from "./package-1";
