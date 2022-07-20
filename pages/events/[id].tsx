@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
+import JSConfetti from "js-confetti";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { AiFillEdit } from "react-icons/ai";
+import { FaCheckCircle } from "react-icons/fa";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { IoIosPeople } from "react-icons/io";
+import { io } from "socket.io-client";
+
+import CostModal from "../../components/CostModal";
+import MembersModal from "../../components/events/members/MembersModal";
 import Navbar from "../../components/Navbar";
+import StripeCheckout from "../../components/StripeCheckout";
+import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
+import DeleteTask from "../../components/tasks/DeleteTask";
 import TaskForm from "../../components/tasks/TaskForm";
 import useAuth from "../../src/hook/auth";
-import { Events, Tasks } from "../../types";
 import { withProtected } from "../../src/hook/route";
-import { FaCheckCircle } from "react-icons/fa";
-import { IoIosPeople } from "react-icons/io";
-import CostModal from "../../components/CostModal";
-import { io } from "socket.io-client";
-import DeleteTask from "../../components/tasks/DeleteTask";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import AssignTaskForm from "../../components/tasks/assign/AssignTaskForm";
-import MembersModal from "../../components/events/members/MembersModal";
-import { AiFillEdit } from "react-icons/ai";
-import StripeCheckout from "../../components/StripeCheckout";
-import JSConfetti from "js-confetti";
+import { Events, Tasks } from "../../types";
 
 function SingleEventPage() {
   const socket = io("https://cc26-planout.herokuapp.com/");

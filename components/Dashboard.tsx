@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import useAuth from "../src/hook/auth";
 import Image from "next/image";
-import { FaTasks } from "react-icons/fa";
 import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { FaTasks } from "react-icons/fa";
+
+import useAuth from "../src/hook/auth";
 
 export default function Dashboard() {
   const [task, setTasks] = useState<any>([]);

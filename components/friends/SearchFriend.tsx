@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-import useAuth from "../../src/hook/auth";
 import { MdPersonAdd } from "react-icons/md";
+
+import useAuth from "../../src/hook/auth";
+
 export default function SearchFriend({
   beginFriendship,
 }: {

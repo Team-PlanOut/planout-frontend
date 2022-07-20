@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
-import useAuth from "../../src/hook/auth";
-import EventModal from "./EventModal";
 import { io } from "socket.io-client";
 const socket = io("https://cc26-planout.herokuapp.com/");
+
+import useAuth from "../../src/hook/auth";
+import EventModal from "./EventModal";
 
 export default function EventForm({ getEvents }: any) {
   const [showModal, setShowModal] = useState(false);
