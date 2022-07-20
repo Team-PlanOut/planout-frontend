@@ -13,17 +13,13 @@ export default function DeleteTask({
   setOpenMenu: any;
   getTasks: () => void;
 }) {
-  const { token } = useAuth() as any;
+  const { httpConfig } = useAuth() as any;
 
   const deleteTask = async (taskId: any) => {
     try {
       const response = await axios.delete(
         `https://cc26-planout.herokuapp.com/tasks/${taskId}`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
+        httpConfig
       );
       if (response.status === 200) {
         getTasks();

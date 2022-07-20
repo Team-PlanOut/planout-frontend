@@ -9,17 +9,13 @@ import { withProtected } from "../../src/hook/route";
 import { HiOutlineX } from "react-icons/hi";
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
-  const { token, user } = useAuth() as any;
+  const { httpConfig, user } = useAuth() as any;
 
   const getUserEvents = async () => {
     const eventIds = {};
     const response = await axios.get(
       "https://cc26-planout.herokuapp.com/eventusers",
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
 
     let filteredResponse = response.data.filter((event: any) => {
@@ -39,11 +35,7 @@ function Events() {
     const eventIds = data;
     const response = await axios.get(
       "https://cc26-planout.herokuapp.com/events",
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
     displayEvents(response, eventIds);
   };
@@ -68,11 +60,7 @@ function Events() {
   async function deleteEvent(eventId: any) {
     const response = await axios.delete(
       `https://cc26-planout.herokuapp.com/events/${eventId}`,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
+      httpConfig
     );
     if (response.status === 200) {
       getUserEvents();

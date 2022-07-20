@@ -10,7 +10,7 @@ export default function TaskForm({ getTasks, newTaskNotification }: any) {
   const [showModal, setShowModal] = useState(false);
   const [taskDescription, setTaskDescription] = useState("");
   const [taskCost, setTaskCost] = useState("0");
-  const { token, user } = useAuth() as any;
+  const { httpConfig, user } = useAuth() as any;
 
   const createTask = () => {
     const dataObj = {
@@ -28,11 +28,7 @@ export default function TaskForm({ getTasks, newTaskNotification }: any) {
       const response = await axios.post(
         `https://cc26-planout.herokuapp.com/tasks`,
         data,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
+        httpConfig
       );
       if (response.status === 200) {
         getTasks();
