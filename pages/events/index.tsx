@@ -1,12 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { HiOutlineX } from "react-icons/hi";
+
 import EventForm from "../../components/events/EventForm";
-import { Events } from "../../types";
 import Navbar from "../../components/Navbar";
 import useAuth from "../../src/hook/auth";
 import { withProtected } from "../../src/hook/route";
-import { HiOutlineX } from "react-icons/hi";
+import { Events } from "../../types";
+
 function Events() {
   const [events, setEvents] = useState<Events[]>([]);
   const { httpConfig, user } = useAuth() as any;

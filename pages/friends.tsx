@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 
+import AddFriend from "../components/friends/AddFriend";
 import Navbar from "../components/Navbar";
 import { withProtected } from "../src/hook/route";
-import useAuth from "./../src/hook/auth";
 import { Friends } from "../types";
-import AddFriend from "../components/friends/AddFriend";
+import useAuth from "./../src/hook/auth";
 
 function Friends() {
   const [friends, setFriends] = useState<Friends[]>([]);
