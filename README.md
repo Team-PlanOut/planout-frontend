@@ -4,6 +4,9 @@
 
 ![image](https://user-images.githubusercontent.com/84162315/190036935-993bfcc5-0d7b-46e4-8563-225a4b1e2abc.png)
 
+# [Video Demo](https://drive.google.com/file/d/12lWXhbdBL1Pyvga3FIwEoM5I0QxgfQ2v/view?usp=sharing)
+
+
 ### This is the frontend repository for PlanOut. A separate backend repository is available at 👉[PlanOut Backend](https://github.com/cc-senior-project/planout-backend).
 
 ### Built With
